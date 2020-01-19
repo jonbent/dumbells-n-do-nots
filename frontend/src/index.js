@@ -8,7 +8,7 @@ import configureStore from './store/store'
 import jwt_decode from 'jwt-decode';
 import { setAuthToken } from './util/SessionApiUtil'
 
-import { logout } from './actions/SessionActions';
+import { logout, login } from './actions/SessionActions';
 
 document.addEventListener('DOMContentLoaded', () => {
     let store;
@@ -38,6 +38,8 @@ document.addEventListener('DOMContentLoaded', () => {
         store = configureStore({});
     }
     window.store = store
+    window.login = login
+    window.logout = logout
     ReactDOM.render(<Root store={store}/>, document.getElementById('root'));
 })
 
