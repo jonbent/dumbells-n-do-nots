@@ -12,13 +12,7 @@ const routines = require("./routes/api/routines");
 const users = require("./routes/api/users");
 const workouts = require("./routes/api/workouts");
 
-mongoose
-    .connect(db, {
-        useUnifiedTopology: true,
-        useNewUrlParser: true,
-    })
-    .then(() => console.log("Connected to MongoDB successfully"))
-    .catch(err => console.log(err));
+
 
 const app = express();
 
@@ -40,6 +34,12 @@ app.use("/api/users", users)
 app.use("/api/workouts", users)
 app.listen(port, () => {
 
-        
+    mongoose
+        .connect(db, {
+            useUnifiedTopology: true,
+            useNewUrlParser: true,
+        })
+        .then(() => console.log("Connected to MongoDB successfully"))
+        .catch(err => console.log(err));
 
 });
