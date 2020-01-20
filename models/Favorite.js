@@ -2,14 +2,24 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const FavoriteSchema = new Schema({
-    favoritableType: {
+    favoritable: {
+        type: Schema.Types.ObjectId,
+        required: true,
+        refPath: 'favoritableModel'
+    },
+
+    favoritableModel: {
         type: String,
+        required: true,
+        enum: ['Routine', 'Meal', 'Workout']
+    },
+
+    user:{
+        type: Schema.Types.ObjectId,
+        ref: "User",
         required: true
     },
-    favoritableId: {
-        type: Number,
-        required: true
-    },
+
     comment: {
         type: String
     }

@@ -22,8 +22,10 @@ const MealSchema = new Schema({
         type: Number,
         required: true
     },
-    userId: {
-        type: Number
+    user: {
+        type: Schema.Types.ObjectId,
+        required: true,
+        ref: "User"
     }
 })
 

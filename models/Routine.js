@@ -10,9 +10,10 @@ const RoutineSchema = new Schema({
         type: Date,
         required: true
     },
-    userId: {
-        type: Number,
-        required: true
+    user: {
+        type: Schema.Types.ObjectId,
+        required: true,
+        ref: "User"
     }
 })
 

@@ -2,13 +2,15 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const UserMealSchema = new Schema({
-    dayId: {
-        type: Number,
-        required: true
+    day: {
+        type: Schema.Types.ObjectId,
+        required: true,
+        ref: "Day"
     },
-    mealId: {
-        type: Number,
-        required: true
+    meal: {
+        type: Schema.Types.ObjectId,
+        required: true,
+        ref: "Meal"
     }
 })
 
