@@ -2,9 +2,10 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const MuscleSchema = new Schema({
-    muscleGroupId: {
-        type: Number,
-        required: true
+    muscleGroup: {
+        type: Schema.Types.ObjectId,
+        required: true,
+        ref: "MuscleGroup"
     },
     name: {
         type: String,

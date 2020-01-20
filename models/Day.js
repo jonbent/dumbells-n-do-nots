@@ -2,9 +2,10 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const DaySchema = new Schema({
-    routineId: {
-        type: Number,
-        required: true
+    routine: {
+        type: Schema.Types.ObjectId,
+        required: true,
+        ref: "Routine"
     },
     date: {
         type: Date,
