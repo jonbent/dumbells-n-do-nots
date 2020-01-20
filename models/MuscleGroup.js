@@ -6,7 +6,6 @@ const MuscleGroupSchema = new Schema({
         type: String,
         required: true
     }
-
 })
 
 module.exports = MuscleGroup = mongoose.model("MuscleGroup", MuscleGroupSchema)

@@ -1,15 +1,18 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+// const muscleGroup = require('./MuscleGroup');
 
 const ExerciseSchema = new Schema({
-    workoutId: {
-        type: Number,
-        required: true
+    workout: {
+        type: Schema.Types.ObjectId,
+        required: true,
+        ref: "Workout"
     },
-    muscleGroupIds: {
-        type: Array,
-        required: true
-    },
+
+    muscleGroups: [{
+        type: Schema.Types.ObjectId,
+        ref: 'MuscleGroup'}],
+
     estCaloriesBurned: {
         type: Number
     },
