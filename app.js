@@ -25,13 +25,13 @@ const port = process.env.PORT || 5000;
 app.get("/", (req, res) => res.send("Hello World"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use("/api/exercises", users)
-app.use("/api/favorites", users)
-app.use("/api/meals", users)
-app.use("/api/muscleGroups", users)
-app.use("/api/routines", users)
+app.use("/api/exercises", exercises)
+app.use("/api/favorites", favorites)
+app.use("/api/meals", meals)
+app.use("/api/muscleGroups", muscleGroups)
+app.use("/api/routines", routines)
 app.use("/api/users", users)
-app.use("/api/workouts", users)
+app.use("/api/workouts", workouts)
 app.listen(port, () => {
 
     mongoose
