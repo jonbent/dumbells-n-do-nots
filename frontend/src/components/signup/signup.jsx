@@ -22,6 +22,7 @@ class Signup extends React.Component {
         this.handleNext = this.handleNext.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleBirthDate = this.handleBirthDate.bind(this);
+        this.toggleDayPicker = this.toggleDayPicker.bind(this);
     }
     validateUsername(){}
     validateUsername(){}
@@ -40,6 +41,9 @@ class Signup extends React.Component {
     }
     handleBirthDate(e){
       this.setState({ birthDate: DateFormat(e, 'yyyy-mm-dd')})
+    }
+    toggleDayPicker(){
+      document.getElementById("day-picker").classList.toggle("hide");
     }
     render(){
         const {errors} = this.props;
@@ -144,11 +148,14 @@ class Signup extends React.Component {
                         value={this.state.birthDate}
                       />*/}
                       <input
+                        onClick={this.toggleDayPicker}
                         type="text"
                         value={this.state.birthDate}
                       />
                     </div> 
                       <DayPicker
+                        id="day-picker"
+                        className="hide"
                         onDayClick={e => this.handleBirthDate(e)}
                         selectedDays={this.state.birthDate}
                       />
