@@ -19,6 +19,7 @@
 }
 .signup-form-detail-label{
     color: white;
+    // font-size: 20px;
 }
 .signup-form-detail-label:focus-within{
     transition: 0.5s ease;
@@ -75,6 +76,9 @@ input:focus{
 }
 .DayPickerInput > input{
     text-align: center;
+    background: transparent;
+    color: white;
+    border: none;
 }
 .signup-form-detail-dropdown{
     margin-top: 0.5rem;
