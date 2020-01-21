@@ -6,6 +6,7 @@ module.exports = function validateExerciseInput(data) {
 
     data.name = validText(data.name) ? data.name : '';
     data.description = validText(data.description) ? data.description : '';
+    data.muscleGroup = validText(data.muscleGroup) ? data.muscleGroup : '';
     data.numSets = validText(data.numSets) ? data.numSets : '';
     data.numReps = validText(data.numReps) ? data.numReps : '';
     data.interval = validText(data.interval) ? data.interval : '';
@@ -28,6 +29,14 @@ module.exports = function validateExerciseInput(data) {
     
     if (!Validator.isInt(data.numSets)) {
         errors.numSets = 'Sets should be a number';
+    }
+
+    if (Validator.isEmpty(data.muscleGroup)) {
+        errors.muscleGroup = 'Muscle group is required';
+    }
+    
+    if (!Validator.isInt(data.muscleGroup)) {
+        errors.muscleGroup = 'Please reference the muscle group id';
     }
     
     if (!Validator.isInt(data.numReps)) {

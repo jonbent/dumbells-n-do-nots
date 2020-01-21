@@ -29,6 +29,7 @@ router.post("/", passport.authenticate("jwt", { session: false }), (req, res) =>
         user: req.user.id,
         name: req.body.name,
         description: req.body.description,
+        muscleGroup: req.body.muscleGroup,
         numSets: req.body.numSets,
         numReps: req.body.numReps,
         interval: req.body.interval
