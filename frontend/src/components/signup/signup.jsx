@@ -1,8 +1,9 @@
 import React from 'react';
 import DateFormat from 'dateformat';
-import DayPicker from "react-day-picker";
+import NavBar from '../navbar/NavBar'
+import DayPickerInput from "react-day-picker/DayPickerInput";
 import "react-day-picker/lib/style.css";
-
+import '../../scss/LoginForm.scss';
 class Signup extends React.Component {
     constructor(props){
         super(props);
@@ -23,10 +24,6 @@ class Signup extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleBirthDate = this.handleBirthDate.bind(this);
     }
-    validateUsername(){}
-    validateUsername(){}
-    validateUsername(){}
-    validateUsername(){}
     handleSubmit(e){
       e.preventDefault();
         this.props.signup(this.state);
@@ -41,6 +38,7 @@ class Signup extends React.Component {
     handleBirthDate(e){
       this.setState({ birthDate: DateFormat(e, 'yyyy-mm-dd')})
     }
+    
     render(){
         const {errors} = this.props;
         let usernameErrors;
@@ -58,7 +56,21 @@ class Signup extends React.Component {
               emailErrors = errors.email;
             }
             if (errors.password) {
-              passwordErrors = errors.password;
+              passwordErrors = "";
+              let passError = errors.password;
+              if (passError.includes("min")) {
+                passwordErrors = passwordErrors.concat("Should have min of 8 chars");
+              }
+              if (passError.includes("uppercase")) {
+                passwordErrors = passwordErrors.concat(", atleast 1 uppercase char");
+              }
+              if (passError.includes("lowercase")) {
+                passwordErrors = passwordErrors.concat(", atleast 1 lowercase char");
+              }
+              if (passError.includes("digits")) {
+                passwordErrors = passwordErrors.concat(", atleast 1 digit");
+              }
+              console.log('all errors',passwordErrors)
             }
             if (errors.password2) {
               confimrPasswordErrors = errors.password2;
@@ -80,48 +92,56 @@ class Signup extends React.Component {
                 <div className="signup-form-header">Sign up</div>
                 <div className="signup-form-detail-container">
                   <div className="signup-form-input-detail-container">
-                    <div className="signup-form-detail-label">Username</div>
-                    <div className="signup-form-detail-input">
-                      <input
-                        type="text"
-                        onChange={e => this.updateField("username", e)}
-                        value={this.state.username}
-                      />
+                    <div className="signup-form-detail-label">
+                      Username
+                      <div className="signup-form-detail-input">
+                        <input
+                          type="text"
+                          onChange={e => this.updateField("username", e)}
+                          value={this.state.username}
+                        />
+                      </div>
                     </div>
                     <div className="signup-errors">{usernameErrors}</div>
                   </div>
                   <div className="signup-form-input-detail-container">
-                    <div className="signup-form-detail-label">Email</div>
-                    <div className="signup-form-detail-input">
-                      <input
-                        type="text"
-                        onChange={e => this.updateField("email", e)}
-                        value={this.state.email}
-                      />
+                    <div className="signup-form-detail-label">
+                      Email
+                      <div className="signup-form-detail-input">
+                        <input
+                          type="text"
+                          onChange={e => this.updateField("email", e)}
+                          value={this.state.email}
+                        />
+                      </div>
                     </div>
                     <div className="signup-errors">{emailErrors}</div>
                   </div>
                   <div className="signup-form-input-detail-container">
-                    <div className="signup-form-detail-label">Password</div>
-                    <div className="signup-form-detail-input">
-                      <input
-                        type="text"
-                        onChange={e => this.updateField("password", e)}
-                        value={this.state.password}
-                      />
+                    <div className="signup-form-detail-label">
+                      Password
+                      <div className="signup-form-detail-input">
+                        <input
+                          type="text"
+                          onChange={e => this.updateField("password", e)}
+                          value={this.state.password}
+                        />
+                      </div>
                     </div>
                     <div className="signup-errors">{passwordErrors}</div>
                   </div>
                   <div className="signup-form-input-detail-container">
                     <div className="signup-form-detail-label">
                       Confirm password
-                    </div>
-                    <div className="signup-form-detail-input">
-                      <input
-                        type="text"
-                        onChange={e => this.updateField("confirm_password", e)}
-                        value={this.state.confirm_password}
-                      />
+                      <div className="signup-form-detail-input">
+                        <input
+                          type="text"
+                          onChange={e =>
+                            this.updateField("confirm_password", e)
+                          }
+                          value={this.state.confirm_password}
+                        />
+                      </div>
                     </div>
                     <div className="signup-errors">{confimrPasswordErrors}</div>
                   </div>
@@ -137,33 +157,26 @@ class Signup extends React.Component {
                 <div className="signup-form-detail-container">
                   <div className="signup-form-input-detail-container">
                     <div className="signup-form-detail-label">D.O.B</div>
-                    <div className="signup-form-detail-dropdown">
-                      {/* <input
-                        type="date"
-                        onChange={e => this.updateField("birthDate", e)}
-                        value={this.state.birthDate}
-                      />*/}
-                      <input
-                        type="text"
-                        value={this.state.birthDate}
-                      />
-                    </div> 
-                      <DayPicker
+                    <div className="signup-form-detail-input">
+                      <DayPickerInput
                         onDayClick={e => this.handleBirthDate(e)}
                         selectedDays={this.state.birthDate}
                       />
+                    </div>
 
                     <div className="signup-errors">{dobErrors}</div>
                   </div>
 
                   <div className="signup-form-input-detail-container">
-                    <div className="signup-form-detail-label">Height</div>
-                    <div className="signup-form-detail-input">
-                      <input
-                        type="text"
-                        onChange={e => this.updateField("height", e)}
-                        value={this.state.height}
-                      />
+                    <div className="signup-form-detail-label">
+                      Height
+                      <div className="signup-form-detail-input">
+                        <input
+                          type="text"
+                          onChange={e => this.updateField("height", e)}
+                          value={this.state.height}
+                        />
+                      </div>
                     </div>
                   </div>
                   <div className="signup-form-input-detail-container">
@@ -183,13 +196,15 @@ class Signup extends React.Component {
                   </div>
 
                   <div className="signup-form-input-detail-container">
-                    <div className="signup-form-detail-label">Weight</div>
-                    <div className="signup-form-detail-input">
-                      <input
-                        type="input"
-                        onChange={e => this.updateField("weightStart", e)}
-                        value={this.state.weightStart}
-                      />
+                    <div className="signup-form-detail-label">
+                      Weight
+                      <div className="signup-form-detail-input">
+                        <input
+                          type="input"
+                          onChange={e => this.updateField("weightStart", e)}
+                          value={this.state.weightStart}
+                        />
+                      </div>
                     </div>
                     <div className="signup-errors">{weightErrors}</div>
                   </div>
@@ -216,8 +231,8 @@ class Signup extends React.Component {
             );
         }
         return (
-            <div>
-                <div className="auth-navbar">Dumbells N Do-nots</div>
+            <div className="login-page">
+                <NavBar />
                 <div className="signup-form-container">
                     {form_type}
                 </div>
