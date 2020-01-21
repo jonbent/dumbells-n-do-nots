@@ -1,3 +1,26 @@
 .navbar-container{
     width: 100%;
+    display: flex;
+    justify-content: center;
+    box-shadow: 0rem 0.2rem 0.5rem black;
+    background-color: lightskyblue;
+    .navbar{
+        width: 80%;
+        height: 5rem;
+        display:flex;
+        justify-content: space-between;
+        .navbar-logo{
+            width: 100%;
+            background-size: cover;
+            background-position: 50%;
+            background-repeat: no-repeat;
+            background-image: url("/images/donut-dumbbell-full-logo.png");
+        }
+        .navbar-name{
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+            font-size: 150%;
+        }
+    }
 }

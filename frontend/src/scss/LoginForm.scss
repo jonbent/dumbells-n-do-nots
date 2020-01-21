@@ -1,0 +1,68 @@
+.login-page{
+    display: flex;
+    flex-direction: column;
+    height:100%;
+    .login-form-container{
+        height: 100%;
+        width: 100%;
+        color: lightgray;
+        display: flex;
+        justify-content: center;
+        form{
+            display: flex;
+            height: 100%;
+            width: 80%;
+            flex-direction: column;
+            justify-content: space-around;
+
+            label:focus-within{
+                font-size: 75%;
+            }
+            input:focus{
+                font-size: 200% !important;
+            }
+            label > input{
+                transition: font-size 1s ease;
+                width: 100%;
+                // background-color: rgba(0,0,0,0.1) !important;
+                border: none;
+                text-align: center;
+                font-size: 50%;
+                color:lightgray;
+            }
+            label{
+                transition: font-size 1s ease;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                align-items: center;
+                height: 4rem;
+                width: 100%;
+                font-size: 200%;
+                
+            }
+        }
+    }
+}
+
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-animation: autofill 0s forwards;
+    animation: autofill 0s forwards;
+}
+
+@keyframes autofill {
+    100% {
+        background: transparent;
+        color: inherit;
+    }
+}
+@-webkit-keyframes autofill {
+    100% {
+        background: transparent;
+        color: inherit;
+    }
+}
