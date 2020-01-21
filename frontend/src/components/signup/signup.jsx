@@ -4,6 +4,7 @@ import NavBar from '../navbar/NavBar'
 import DayPickerInput from "react-day-picker/DayPickerInput";
 import "react-day-picker/lib/style.css";
 import '../../scss/LoginForm.scss';
+import '../../scss/signup.scss'
 class Signup extends React.Component {
     constructor(props){
         super(props);
