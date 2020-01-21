@@ -23,7 +23,7 @@ require('./config/passport')(passport);
 const port = process.env.PORT || 5000;
 
 
-app.get("/", (req, res) => res.send("Hello World"));
+app.get("/", (req, res) => res.send("test"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use("/api/exercises", exercises)

@@ -4,7 +4,8 @@ import { signup } from '../../actions/SessionActions';
 import { receiveNextStep } from '../../actions/FilterActions'
 
 const mapStateToProps = (state) => ({
-    step: state.ui.filters.currentStep
+    step: state.ui.filters.currentStep,
+    errors: state.errors.session
 });
 
 const mapDispatchToProps = dispatch => ({
