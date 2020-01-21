@@ -2,6 +2,11 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const UserMealSchema = new Schema({
+    routine: {
+        type: Schema.Types.ObjectId,
+        required: true,
+        ref: "Routine"
+    },
     user: {
         type: Schema.Types.ObjectId,
         required: true,
