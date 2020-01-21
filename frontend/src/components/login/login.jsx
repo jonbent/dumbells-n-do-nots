@@ -10,12 +10,17 @@ export default class Login extends Component {
                 <NavBar/>
                 <div className="login-form-container">
                     <form>
-                        <label>Username
-                            <input type="text"/>
-                        </label>
-                        <label>Password
-                            <input type="password"/>
-                        </label>
+                        <div className="selected-field">
+                            <label>Username
+                            </label>
+                            <input type="text" id="username"/>
+
+                        </div>
+                        <div className="selected-field">
+                            <label>Password
+                            </label>
+                            <input type="password" id="password"/>
+                        </div>
                         <input type="submit"/>
                     </form>
                 </div>
