@@ -3,7 +3,7 @@ import DateFormat from 'dateformat';
 import NavBar from '../navbar/NavBar'
 import DayPickerInput from "react-day-picker/DayPickerInput";
 import "react-day-picker/lib/style.css";
-
+import '../../scss/LoginForm.scss';
 class Signup extends React.Component {
     constructor(props){
         super(props);
