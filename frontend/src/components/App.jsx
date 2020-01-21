@@ -7,7 +7,8 @@ import LoginContainer  from './login/LoginContainer';
 
 import Splash from './home/Splash';
 
-import '../scss/App.scss'
+import '../scss/App.scss';
+import '../scss/reset.scss';
 
 const App = () => (
   <Switch>
