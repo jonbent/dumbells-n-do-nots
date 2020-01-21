@@ -6,7 +6,7 @@ import SignupContainer from '../components/signup/signup_container'
 
 import Splash from './home/Splash';
 
-import '../scss/App.css'
+import '../scss/App.scss'
 
 const App = () => (
   <Switch>
