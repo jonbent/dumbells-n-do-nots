@@ -1,3 +1,11 @@
+html, body, #root{
+    height: 100%;
+}
+#root{
+    background-image: url('/images/dumbnot-background.jpg');
+    background-size: cover;
+    font-family: 'Roboto Mono', monospace;
+}
 .auth-navbar{
     text-align: center;
     border-bottom: solid 1px;
