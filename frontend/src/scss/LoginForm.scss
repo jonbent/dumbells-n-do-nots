@@ -14,17 +14,25 @@
             width: 80%;
             flex-direction: column;
             justify-content: space-around;
-
-            label:focus-within{
-                font-size: 75%;
+            .selected-field:focus-within{
+                animation: select-field 0s forwards;
+                label{
+                    font-size: 75%;
+                }
             }
             input:focus{
                 font-size: 200% !important;
             }
-            label > input{
+            input[type="submit"]{
+                background-color: lightskyblue;
+                font-size: 200%;
+                border-radius: 50px;
+                color:black;
+            }
+            input{
                 transition: font-size 1s ease;
                 width: 100%;
-                // background-color: rgba(0,0,0,0.1) !important;
+                background-color: transparent;
                 border: none;
                 text-align: center;
                 font-size: 50%;
@@ -54,6 +62,12 @@ input:-webkit-autofill:active {
     animation: autofill 0s forwards;
 }
 
+@keyframes select-field {
+    100% {
+        background: transparent;
+        color: inherit;
+    }
+}
 @keyframes autofill {
     100% {
         background: transparent;
