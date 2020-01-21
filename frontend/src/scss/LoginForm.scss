@@ -15,7 +15,6 @@
             flex-direction: column;
             justify-content: space-around;
             .selected-field:focus-within{
-                animation: select-field 0s forwards;
                 label{
                     font-size: 75%;
                 }
@@ -62,12 +61,6 @@ input:-webkit-autofill:active {
     animation: autofill 0s forwards;
 }
 
-@keyframes select-field {
-    100% {
-        background: transparent;
-        color: inherit;
-    }
-}
 @keyframes autofill {
     100% {
         background: transparent;
