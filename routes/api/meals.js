@@ -36,10 +36,10 @@ router.post("/", passport.authenticate("jwt", {session: false}), (req, res) => {
 )
 
 // get user meals
-router.get("user/:user_id", (req, res) =>{
+router.get("/user/:user_id", (req, res) => {
     Meal
-     .find({user: req.params.user_id})
-     .then(meals => res.json(meals))
+        .find({ user: req.params.user_id })
+        .then(meals => res.json(meals))
 })
 
 module.exports = router;
