@@ -1,6 +1,6 @@
 import React from 'react';
 import DateFormat from 'dateformat';
-import DayPicker from "react-day-picker";
+import NavBar from '../navbar/NavBar'
 import DayPickerInput from "react-day-picker/DayPickerInput";
 import "react-day-picker/lib/style.css";
 
@@ -231,8 +231,8 @@ class Signup extends React.Component {
             );
         }
         return (
-            <div>
-                <div className="auth-navbar">Dumbells N Do-nots</div>
+            <div className="login-page">
+                <NavBar />
                 <div className="signup-form-container">
                     {form_type}
                 </div>
