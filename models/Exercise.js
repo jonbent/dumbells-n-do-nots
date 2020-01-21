@@ -9,13 +9,22 @@ const ExerciseSchema = new Schema({
         ref: "Workout"
     },
 
-    muscleGroups: [{
+    muscleGroup: {
         type: Schema.Types.ObjectId,
-        ref: 'MuscleGroup'}],
-
-    estCaloriesBurned: {
-        type: Number
+        required: true,
+        ref: 'MuscleGroup'
     },
+
+    muscles: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Muscle'
+    }],
+
+    name:{
+        type: String,
+        required: true
+    },
+
     description: {
         type: String,
         required: true
