@@ -45,11 +45,8 @@ module.exports = function validateRegisterInput(data) {
     if (!Validator.isInt(data.weightStart)) {
         errors.weightStart = 'Starting Weight must be a valid number';
     }
-    if (!Validator.isInt(data.weightCur)) {
-        errors.weightStart = 'Current Weight must be a valid number';
-    }
     if (!Validator.isInt(data.height)) {
-        errors.weightStart = 'Height must be a valid number';
+        errors.height = 'Height must be a valid number';
     }
     if (!Validator.toDate(data.birthDate)) {
         errors.birthDate = 'Birthday must be a valid Date';
@@ -61,12 +58,8 @@ module.exports = function validateRegisterInput(data) {
         errors.password = passValid;
     }
 
-    pass2Valid = passwordSchema.validate(data.password2, { list: true })
-    if (passValid.length) {
-        errors.password2 = pass2Valid;
-    }
     if (data.password !== data.password2) {
-        errors.password2 = ["Confirmation password must match First Password."];
+        errors.password2 = "Confirmation password must match First Password.";
     }
 
     return {
