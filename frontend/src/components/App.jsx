@@ -1,9 +1,12 @@
+
 import React from 'react';
 import { AuthRoute, ProtectedRoute } from '../util/RouteUtil';
 import { Switch } from 'react-router-dom';
 import SignupContainer from '../components/signup/signup_container'
 
 import Splash from './home/Splash';
+
+import '../scss/App.css'
 
 const App = () => (
   <Switch>
