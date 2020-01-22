@@ -31,13 +31,13 @@ export default class Login extends Component {
                 <div className="login-form-container">
                     <form onSubmit={this.handleSubmit}>
                         <div className="selected-field">
-                            <label for="username">Username
+                            <label htmlFor="username">Username
                             </label>
                             <input type="text" id="username" value={username} onChange={e => this.handleUpdate("username", e)}/>
 
                         </div>
                         <div className="selected-field">
-                            <label for="password">Password
+                            <label htmlFor="password">Password
                             </label>
                             <input type="password" id="password" value={password} onChange={e => this.handleUpdate("password", e)}/>
                         </div>
