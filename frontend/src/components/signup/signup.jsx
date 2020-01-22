@@ -10,24 +10,38 @@ class Signup extends React.Component {
         super(props);
         const currentDate = new Date();
         this.state = {
+            username: '',
             email: '',
             password: '',
-            confirm_password: '',
+            password2: '',
             birthDate: DateFormat(currentDate, 'yyyy-mm-dd'),
-            height: '',
-            gender: '',
+            // height: '',
+            sex: '',
             weightStart: '',
-            goalPath: ''
+            goalPath: '',
+            height1: '',
+            height2: ''
         }
 
         this.updateField = this.updateField.bind(this);
         this.handleNext = this.handleNext.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleBirthDate = this.handleBirthDate.bind(this);
+        this.setHeight = this.setHeight.bind(this);
+    }
+    setHeight(){
+      let feet = this.state.height1;
+      let inches = this.state.height2
+      let result = parseInt(feet) * 12 + parseInt(inches);
+      return result.toString();
     }
     handleSubmit(e){
       e.preventDefault();
-        this.props.signup(this.state);
+        let final_input = this.state;
+        final_input['height'] = this.setHeight();
+        console.log('final_input', final_input);
+        
+        this.props.signup(final_input).then(this.props.history.push('/signup'));
     }
     updateField(field, e){
         this.setState({[field]: e.currentTarget.value});
@@ -71,7 +85,6 @@ class Signup extends React.Component {
               if (passError.includes("digits")) {
                 passwordErrors = passwordErrors.concat(", atleast 1 digit");
               }
-              console.log('all errors',passwordErrors)
             }
             if (errors.password2) {
               confimrPasswordErrors = errors.password2;
@@ -136,11 +149,11 @@ class Signup extends React.Component {
                       Confirm password
                       <div className="signup-form-detail-input">
                         <input
-                          type="text"
+                          type="password"
                           onChange={e =>
-                            this.updateField("confirm_password", e)
+                            this.updateField("password2", e)
                           }
-                          value={this.state.confirm_password}
+                          value={this.state.password2}
                         />
                       </div>
                     </div>
@@ -169,14 +182,21 @@ class Signup extends React.Component {
                   </div>
 
                   <div className="signup-form-input-detail-container">
-                    <div className="signup-form-detail-label">
-                      Height
-                      <div className="signup-form-detail-input">
+                    <div className="signup-form-detail-label">Height</div>
+                    <div className="signup-form-height-input">
+                      <div className="signup-form-height">
                         <input
                           type="text"
-                          onChange={e => this.updateField("height", e)}
-                          value={this.state.height}
+                          onChange={e => this.updateField("height1", e)}
+                          value={this.state.height1}
                         />
+                        <label>ft</label>
+                        <input
+                          type="text"
+                          onChange={e => this.updateField("height2", e)}
+                          value={this.state.height2}
+                        />
+                        <label>in</label>
                       </div>
                     </div>
                   </div>
@@ -186,10 +206,12 @@ class Signup extends React.Component {
                       <select
                         className="signup-form-dropdown"
                         defaultValue=""
-                        onChange={e => this.updateField("gender", e)}
+                        onChange={e => this.updateField("sex", e)}
                       >
                         <option value="">-- Select one --</option>
-                        <option value={"M"}>Male</option>
+                        <option style={{ textAlign: "center" }} value={"M"}>
+                          Male
+                        </option>
                         <option value={"F"}>Female</option>
                       </select>
                     </div>
