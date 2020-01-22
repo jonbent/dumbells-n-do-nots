@@ -4,6 +4,7 @@ import NavBar from '../navbar/NavBar'
 import DayPickerInput from "react-day-picker/DayPickerInput";
 import "react-day-picker/lib/style.css";
 import '../../scss/LoginForm.scss';
+import '../../scss/signup.scss'
 class Signup extends React.Component {
     constructor(props){
         super(props);
@@ -122,7 +123,7 @@ class Signup extends React.Component {
                       Password
                       <div className="signup-form-detail-input">
                         <input
-                          type="text"
+                          type="password"
                           onChange={e => this.updateField("password", e)}
                           value={this.state.password}
                         />
@@ -153,7 +154,7 @@ class Signup extends React.Component {
             );
         } else {
             form_type = (
-              <form>
+              <form className="signup-form">
                 <div className="signup-form-detail-container">
                   <div className="signup-form-input-detail-container">
                     <div className="signup-form-detail-label">D.O.B</div>
