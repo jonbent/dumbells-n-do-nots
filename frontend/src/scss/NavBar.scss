@@ -24,3 +24,21 @@
         }
     }
 }
+.bottom-navbar-container{
+    width: 100%;
+    position: fixed;
+    bottom: 0px;
+    background-color: lightskyblue;
+    .bottom-navbar{
+        width: 100%;
+        height: 5rem;
+        display:flex;
+        align-items: center;
+        div{
+            height: 70%;
+            a.active > svg{
+                fill: white;
+            }
+        }
+    }
+}
