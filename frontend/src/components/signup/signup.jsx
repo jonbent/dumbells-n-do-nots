@@ -123,7 +123,7 @@ class Signup extends React.Component {
                       Password
                       <div className="signup-form-detail-input">
                         <input
-                          type="text"
+                          type="password"
                           onChange={e => this.updateField("password", e)}
                           value={this.state.password}
                         />
@@ -154,7 +154,7 @@ class Signup extends React.Component {
             );
         } else {
             form_type = (
-              <form>
+              <form className="signup-form">
                 <div className="signup-form-detail-container">
                   <div className="signup-form-input-detail-container">
                     <div className="signup-form-detail-label">D.O.B</div>
