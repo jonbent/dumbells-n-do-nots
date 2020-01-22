@@ -21,7 +21,7 @@ class Signup extends React.Component {
       email: "",
       password: "",
       password2: "",
-      birthDate: DateFormat(currentDate, "yyyy-mm-dd"),
+      birthDate: '',
       sex: "",
       weightStart: "",
       goalPath: "",
@@ -83,40 +83,32 @@ class Signup extends React.Component {
     let dobErrors;
     let weightErrors;
     let sexErrors;
+    let heightErrors
     if (errors) {
+      
       if (errors.username) {
-        usernameErrors = errors.username;
+        usernameErrors = errors.username.message.slice(5);
+      }
+      if (errors.height) {
+        heightErrors = 'Height is required';
       }
       if (errors.email) {
-        emailErrors = errors.email;
+        emailErrors = errors.email.message.slice(5);
       }
       if (errors.password) {
-        passwordErrors = "";
-        let passError = errors.password;
-        if (passError.includes("min")) {
-          passwordErrors = passwordErrors.concat("Should have min of 8 chars");
-        }
-        if (passError.includes("uppercase")) {
-          passwordErrors = passwordErrors.concat(", atleast 1 uppercase char");
-        }
-        if (passError.includes("lowercase")) {
-          passwordErrors = passwordErrors.concat(", atleast 1 lowercase char");
-        }
-        if (passError.includes("digits")) {
-          passwordErrors = passwordErrors.concat(", atleast 1 digit");
-        }
+        passwordErrors = errors.password.message.slice(5);
       }
       if (errors.password2) {
-        confimrPasswordErrors = errors.password2;
+        confimrPasswordErrors = errors.password2.message;
       }
       if (errors.sex) {
-        sexErrors = errors.sex;
+        sexErrors = errors.sex.message;
       }
       if (errors.birthDate) {
-        dobErrors = errors.birthDate;
+        dobErrors = errors.birthDate.message.slice(5);
       }
       if (errors.weightStart) {
-        weightErrors = errors.weightStart;
+        weightErrors = errors.weightStart.message;
       }
     }
     let form_type;
@@ -211,6 +203,7 @@ class Signup extends React.Component {
                   />
                   <span>in</span>
                 </div>
+                <div className="signup-errors">{heightErrors}</div>
               </div>
             </div>
             <div className="signup-form-input-detail-container">
