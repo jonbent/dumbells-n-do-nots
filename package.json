@@ -21,6 +21,8 @@
     "jsonwebtoken": "^8.5.1",
     "jwt-decode": "^2.2.0",
     "mongoose": "^5.8.9",
+    "mongoose-beautiful-unique-validation": "^7.1.1",
+    "mongoose-unique-validation": "^0.1.0",
     "node-sass": "^4.13.1",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
