@@ -114,4 +114,19 @@ router.post('/login', (req, res) => {
                 })
         })
 })
+router.get('/:username', (req, res) => {
+    User.findOne({ username: req.params.username })
+        .then(user => {
+            if (!user) {
+                // Use the validations to send the error
+                errors.email = 'User not found';
+                return res.status(400).json(errors);
+            };
+            res.json({
+                user: {
+                    username: user.username,
+                }
+            });
+        })
+})
 module.exports = router;
