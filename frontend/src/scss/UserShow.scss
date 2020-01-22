@@ -1,0 +1,11 @@
+#root{
+}
+
+.user-show-container{
+    width: 100%;
+    display: flex;
+    position: relative;
+    .user-show-content{
+        margin-bottom: 5rem;
+    }
+}

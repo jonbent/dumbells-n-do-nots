@@ -62,7 +62,7 @@ class Signup extends React.Component {
         let confimrPasswordErrors;
         let dobErrors;
         let weightErrors;
-        let genderErrors;
+        let sexErrors;
         if(errors){
             if (errors.username) {
               usernameErrors = errors.username;
@@ -90,7 +90,7 @@ class Signup extends React.Component {
               confimrPasswordErrors = errors.password2;
             }
             if (errors.sex) {
-              genderErrors = errors.sex;
+              sexErrors = errors.sex;
             }
             if (errors.birthDate) {
               dobErrors = errors.birthDate;
@@ -215,7 +215,7 @@ class Signup extends React.Component {
                         <option value={"F"}>Female</option>
                       </select>
                     </div>
-                    <div className="signup-errors">{genderErrors}</div>
+                    <div className="signup-errors">{sexErrors}</div>
                   </div>
 
                   <div className="signup-form-input-detail-container">
