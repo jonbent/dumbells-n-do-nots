@@ -11,17 +11,17 @@ export default class Login extends Component {
                 <div className="login-form-container">
                     <form>
                         <div className="selected-field">
-                            <label>Username
+                            <label for="username">Username
                             </label>
                             <input type="text" id="username"/>
 
                         </div>
                         <div className="selected-field">
-                            <label>Password
+                            <label for="password">Password
                             </label>
                             <input type="password" id="password"/>
                         </div>
-                        <input type="submit"/>
+                        <input type="submit" value="Log In"/>
                     </form>
                 </div>
             </div>

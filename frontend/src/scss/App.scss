@@ -1,13 +1,16 @@
+body{
+    background-image: url('/images/dumbnot-background.jpg');
+    background-position: left top;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Roboto Mono', monospace;
+    height: 100%;
+    #root {
+        height: 100%;
+    }
+}
 html{
     height: 100%;
-    body{
-        background-image: url(/images/dumbnot-background.jpg);
-        background-size: auto 100%;
-        background-position: left top;
-        display: flex;
-        flex-direction: column;
-        font-family: 'Roboto Mono', monospace;
-    }
 }
 
 .signup-form-header{
