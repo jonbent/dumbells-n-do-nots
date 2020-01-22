@@ -19,7 +19,8 @@ export default class Login extends Component {
         this.setState({[field]: e.target.value})
     }
     handleSubmit(e){
-        e.preventDefault()
+        e.preventDefault();
+        this.props.login(this.state)
     }
     
     render() {
@@ -40,7 +41,7 @@ export default class Login extends Component {
                             </label>
                             <input type="password" id="password" value={password} onChange={e => this.handleUpdate("password", e)}/>
                         </div>
-                        <input type="submit" value="Log In" onClick={() => this.props.login(this.state)}/>
+                        <input type="submit" value="Log In"/>
                     </form>
                 </div>
             </div>
