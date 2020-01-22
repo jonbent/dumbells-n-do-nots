@@ -1,0 +1,111 @@
+
+.signup-form-header{
+    text-align: center;
+    margin: 5rem;
+    margin-top: 3rem;
+    font-size: 3.5rem;
+    font-weight: bold;
+    color: white;
+}
+.signup-form-container{
+    display: flex;
+    justify-content: center;
+}
+.signup-form-detail-container{
+    text-align: center;
+    font-size: 1.123rem;
+    margin-top: 3.7rem;
+    margin-bottom: 3.7rem;
+}
+.signup-form-detail-label{
+    color: white;
+    // font-size: 20px;
+}
+.signup-form-detail-label:focus-within{
+    transition: 0.5s ease;
+    font-size: 70%;
+}
+.signup-form-detail-input{
+    border: none;
+    margin-top: 0.5rem;
+    border-bottom: solid 1px white;
+    width: 100%;
+}
+.signup-form-detail-input:focus-within{
+    transition: 0.5s ease;
+    font-size: 150% ;
+    width: 100%
+}
+.signup-form-detail-input > input{
+    transition: 0.3s ease-in;
+    text-align: center;
+    border: none;
+    background: transparent;
+    color: white;
+    width: 100%;
+}
+.signup-form-detail-input > input:focus, DayPickerInput > input:focus{
+    transition: 0.3s ease-out;
+    font-size: 150%;
+    text-align: center;
+
+}
+.signup-form-detail-dropdown{
+
+}
+.signup-form-dropdown{
+    padding: 0.3125rem 3.5625rem;
+}
+.signup-form-input-detail-container{
+    margin-bottom: 1.5625rem;
+    max-width: 12.5rem;
+    margin: auto;
+    margin-bottom: 1.875rem;
+}
+input:focus{
+    outline: none;
+}
+.signup-form-button{
+    text-align: center;
+    font-size: 1.25rem;
+    // border: solid 1px lightgray;
+    width: 80%;
+    margin: auto;
+    box-shadow: 0 0 1rem black;
+    // margin-bottom: 1.875rem ;
+    padding: 0.335rem 0.625rem;
+    border-radius: 50px;
+    background-color: #316a95;
+}
+.signup-errors{
+    font-size: 0.7375rem;
+    padding: 0.3125rem;
+    color: rgb(185, 185, 185)
+}
+.DayPickerInput{
+    width: 100%;
+}
+.DayPickerInput > input{
+    text-align: center;
+    background: transparent;
+    color: white;
+    border: none;
+}
+.signup-form-detail-dropdown{
+    margin-top: 0.5rem;
+}
+.signup-form-dropdown:focus{
+    outline: none;
+}
+.signup-form-dropdown{
+    appearance: none;
+    color: white;
+    background-color: transparent;
+    height: 1.875rem;
+    width: 12.5rem;
+}
+.signup-form{
+    width: 100%;
+}
+
+
