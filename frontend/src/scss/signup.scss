@@ -20,19 +20,21 @@
 .signup-form-detail-label{
     color: white;
     // font-size: 20px;
+    font-size: 120%;
 }
 .signup-form-detail-label:focus-within{
     transition: 0.5s ease;
     font-size: 70%;
 }
 .signup-form-detail-input{
+    transition: 0.5s ease-in;
     border: none;
     margin-top: 0.5rem;
     border-bottom: solid 1px white;
     width: 100%;
 }
 .signup-form-detail-input:focus-within{
-    transition: 0.5s ease;
+    transition: 0.5s ease-out;
     font-size: 150% ;
     width: 100%
 }
@@ -106,6 +108,33 @@ input:focus{
 }
 .signup-form{
     width: 100%;
+}
+.signup-form-height{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    color: white;
+    input{
+        max-width: 2rem;
+        background: transparent;
+        border: none;
+        border-bottom: 1px solid white;
+        color: white;
+        text-align: center;
+    }
+}
+.signup-form-height-input{
+    transition: 0.5s ease-in;
+    border: none;
+    margin-top: 0.5rem;
+    // border-bottom: solid 1px white;
+    width: 100%;
+    font-size: 1rem;
+}
+.signup-form-height-input:focus-within{
+    transition: 0.3s ease-out;
+    font-size: 200%;
+    text-align: center;
 }
 
 
