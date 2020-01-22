@@ -51,7 +51,6 @@ const UserSchema = new Schema({
     goalPath: {
         type: Number
     }
-
 })
 
 module.exports = User = mongoose.model('User', UserSchema);
