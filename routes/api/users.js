@@ -32,7 +32,6 @@ router.post('/register', (req, res) => {
     if (!isValid) {
         return res.status(400).json(errors);
     }
-
     User.findOne({ email: req.body.email })
         .then(user => {
             if (user) {
@@ -124,7 +123,7 @@ router.get('/:username', (req, res) => {
             };
             res.json({
                 user: {
-                    username: user.username,
+                    username: user.username
                 }
             });
         })
