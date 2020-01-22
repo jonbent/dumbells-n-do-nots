@@ -12,10 +12,10 @@ class Signup extends React.Component {
         this.state = {
             email: '',
             password: '',
-            confirm_password: '',
+            password2: '',
             birthDate: DateFormat(currentDate, 'yyyy-mm-dd'),
             height: '',
-            gender: '',
+            sex: '',
             weightStart: '',
             goalPath: ''
         }
@@ -48,7 +48,7 @@ class Signup extends React.Component {
         let confimrPasswordErrors;
         let dobErrors;
         let weightErrors;
-        let genderErrors;
+        let sexErrors;
         if(errors){
             if (errors.username) {
               usernameErrors = errors.username;
@@ -77,7 +77,7 @@ class Signup extends React.Component {
               confimrPasswordErrors = errors.password2;
             }
             if (errors.sex) {
-              genderErrors = errors.sex;
+              sexErrors = errors.sex;
             }
             if (errors.birthDate) {
               dobErrors = errors.birthDate;
@@ -138,9 +138,9 @@ class Signup extends React.Component {
                         <input
                           type="text"
                           onChange={e =>
-                            this.updateField("confirm_password", e)
+                            this.updateField("password2", e)
                           }
-                          value={this.state.confirm_password}
+                          value={this.state.password2}
                         />
                       </div>
                     </div>
@@ -186,14 +186,14 @@ class Signup extends React.Component {
                       <select
                         className="signup-form-dropdown"
                         defaultValue=""
-                        onChange={e => this.updateField("gender", e)}
+                        onChange={e => this.updateField("sex", e)}
                       >
                         <option value="">-- Select one --</option>
                         <option value={"M"}>Male</option>
                         <option value={"F"}>Female</option>
                       </select>
                     </div>
-                    <div className="signup-errors">{genderErrors}</div>
+                    <div className="signup-errors">{sexErrors}</div>
                   </div>
 
                   <div className="signup-form-input-detail-container">
