@@ -18,40 +18,42 @@
     margin-bottom: 3.7rem;
 }
 .signup-form-detail-label{
+    transition: 0.3s ease-in;
     color: white;
-    // font-size: 20px;
     font-size: 120%;
 }
-.signup-form-detail-label:focus-within{
-    transition: 0.5s ease;
-    font-size: 70%;
-}
+
 .signup-form-detail-input{
     transition: 0.5s ease-in;
     border: none;
     margin-top: 0.5rem;
     border-bottom: solid 1px white;
-    width: 100%;
-}
-.signup-form-detail-input:focus-within{
-    transition: 0.5s ease-out;
-    font-size: 150% ;
-    width: 100%
-}
-.signup-form-detail-input > input{
-    transition: 0.3s ease-in;
+    input{
+        font-size: 80%;
+    // transition: 0.3s ease;
     text-align: center;
     border: none;
     background: transparent;
     color: white;
     width: 100%;
+    }
 }
-.signup-form-detail-input > input:focus, DayPickerInput > input:focus{
-    transition: 0.3s ease-out;
-    font-size: 150%;
-    text-align: center;
+.signup-form-detail-input:focus-within{
+    transition: 0.5s ease-out;
+    font-size: 150% ;
+    width: 100%;
 
+    text-align: center;
 }
+.signup-form-detail-input {
+    
+}
+// .signup-form-detail-input > input:focus, DayPickerInput > input:focus{
+//     transition: 0.3s ease-out;
+//     font-size: 150%;
+//     text-align: center;
+
+// }
 .signup-form-detail-dropdown{
 
 }
@@ -126,8 +128,7 @@ input:focus{
 .signup-form-height-input{
     transition: 0.5s ease-in;
     border: none;
-    margin-top: 0.5rem;
-    // border-bottom: solid 1px white;
+    margin-top: 1rem;
     width: 100%;
     font-size: 1rem;
 }
@@ -136,5 +137,30 @@ input:focus{
     font-size: 200%;
     text-align: center;
 }
+
+// .signup-form-height>input:focus{
+//     font-size: 100%;
+// }
+.signup-form-input-detail-container:focus-within{
+    label{
+        transition: 0.3s ease;
+        font-size: 75%;
+    }
+    input,span{
+        // transition: 0.3s ease;
+        font-size: 110%;
+        text-align: center;
+    }
+    // .signup-form-detail-input > input{
+    //     transition: 0.3s ease;
+    //     font-size: 130%;
+    //     text-align: center;
+    // }
+}
+.DayPickerInput-OverlayWrapper{
+    right: 2rem;
+}
+
+
 
 
