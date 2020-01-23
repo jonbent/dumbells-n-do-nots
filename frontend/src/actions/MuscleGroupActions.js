@@ -1,4 +1,4 @@
-import * as MuscleGroupsAPIUtil from '../util/MuscleGroupsUtil';
+import * as MuscleGroupsAPIUtil from '../util/MuscleGroupsApiUtil';
 import jwt_decode from 'jwt-decode';
 
 

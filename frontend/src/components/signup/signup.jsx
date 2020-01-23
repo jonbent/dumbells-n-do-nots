@@ -229,6 +229,7 @@ class Signup extends React.Component {
               <div className="signup-form-detail-input">
                 <input
                   type="input"
+                  placeholder="in lbs"
                   onChange={e => this.updateField("weightStart", e)}
                   value={this.state.weightStart}
                 />

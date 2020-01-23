@@ -7,7 +7,8 @@ const mSTP = (state) => ({
 })
 
 const mDTP = dispatch =>({
-    fetchMuscleGroups: () => dispatch(fetchMuscleGroups())
+    fetchMuscleGroups: () => dispatch(fetchMuscleGroups()),
+    
 })
 
 export default connect(mSTP, mDTP)(MuscleGroupsSelector);

@@ -1,4 +1,4 @@
-import {RECEIVE_MUSCLE_GROUPS} from '../actions/MuscleGroupsAction';
+import { RECEIVE_MUSCLE_GROUPS } from '../actions/MuscleGroupActions';
 
 export default (prevState = {}, action)=>{
     Object.freeze(prevState);
