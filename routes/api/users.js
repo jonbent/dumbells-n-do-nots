@@ -109,7 +109,12 @@ router.post('/login', (req, res) => {
             bcrypt.compare(password, user.password)
                 .then(isMatch => {
                     if (isMatch) {
-                        const payload = { id: user.id, username: user.username };
+                        let newUser = Object.assign({}, user.toObject());
+                        console.log(newUser);
+                        
+                        delete newUser.password;
+                        delete newUser.date;
+                        const payload = newUser;
                         jwt.sign(
                             payload,
                             keys.secretOrKey,
