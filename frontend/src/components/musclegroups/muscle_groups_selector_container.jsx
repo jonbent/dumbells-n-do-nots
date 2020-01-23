@@ -1,4 +1,4 @@
-import { connect } from 'react-redux';
+import { connect } from './node_modules/react-redux';
 import MuscleGroupsSelector from './muscle_groups_selector';
 import fetchMuscleGroups from '../../actions/MuscleGroupsAction';
 

@@ -1,6 +1,6 @@
 // import * as SessionApiUtil from '../util';
-import jwt_decode from 'jwt-decode';
-import React from 'react'
+import jwt_decode from './node_modules/jwt-decode';
+import React from './node_modules/react'
 
 
 class MuscleGroupsSelector extends React.Component{
