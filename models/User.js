@@ -57,6 +57,9 @@ const UserSchema = new Schema({
     
     goalPath: {
         type: Number
+    },
+    avatarUrl: {
+        type: String
     }
 
 })
