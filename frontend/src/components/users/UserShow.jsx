@@ -7,6 +7,7 @@ class UserShow extends Component {
         const {user} = this.props
         return(
             <div className="user-show-container">
+                <input type="file" name="" id=""/>
                 <div className="user-show-content">
                     <UserShowCard user={user}/>
                 </div>
