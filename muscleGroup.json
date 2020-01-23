@@ -1,30 +1,30 @@
 [
     {
-        "id": 8,
+        "apiId": 8,
         "name": "Arms"
     },
     {
-        "id": 9,
+        "apiId": 9,
         "name": "Legs"
     },
     {
-        "id": 10,
+        "apiId": 10,
         "name": "Abs"
     },
     {
-        "id": 11,
+        "apiId": 11,
         "name": "Chest"
     },
     {
-        "id": 12,
+        "apiId": 12,
         "name": "Back"
     },
     {
-        "id": 13,
+        "apiId": 13,
         "name": "Shoulders"
     },
     {
-        "id": 14,
+        "apiId": 14,
         "name": "Calves"
     }
 ]
