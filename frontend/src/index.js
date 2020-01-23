@@ -10,6 +10,7 @@ import { setAuthToken } from './util/SessionApiUtil'
 
 import { logout, login } from './actions/SessionActions';
 
+
 document.addEventListener('DOMContentLoaded', () => {
     window.axios = axios;
     let store;
