@@ -8,6 +8,13 @@ const jwt = require('jsonwebtoken');
 const keys = require('../../config/keys');
 const passport = require('passport');
 
+
+const multer = require("multer");
+const AWS = require("aws-sdk");
+
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
+
 router.get('/current', passport.authenticate('jwt', { session: false }), (req, res) => {
     res.json({
         id: req.user.id,
@@ -102,7 +109,12 @@ router.post('/login', (req, res) => {
             bcrypt.compare(password, user.password)
                 .then(isMatch => {
                     if (isMatch) {
-                        const payload = { id: user.id, username: user.username };
+                        let newUser = Object.assign({}, user.toObject());
+                        console.log(newUser);
+                        
+                        delete newUser.password;
+                        delete newUser.date;
+                        const payload = newUser;
                         jwt.sign(
                             payload,
                             keys.secretOrKey,
@@ -134,6 +146,39 @@ router.get('/:username', (req, res) => {
                     username: user.username,
                 }
             });
+        })
+})
+
+router.post('/:username/update', upload.single("avatarImg"), (req, res) => {
+    User.findOne({ username: req.params.username }).then(user => {
+        if (!user) return res.status(400).json({ user: { message: "User not found" } })
+        const file = req.file;
+        const s3FileURL = keys.UploadFileUrlLink;
+        let params = {
+            Bucket: keys.awsBucketName,
+            Key: file.originalname,
+            Body: file.buffer,
+            ContentType: file.mimetype,
+        }
+        new AWS.S3({
+            accessKeyId: keys.awsBucketAccessId,
+            secretAccessKey: keys.awsBucketToken,
+            region: keys.awsRegion
+        }).upload(params, (err, data) => {
+            if (err) {
+                res.status(500).json({ error: true, Message: err });
+            } else {
+                user.avatarUrl = s3FileURL + file.originalname
+                console.log(user);
+                
+                res.json({ user });
+                user.save(function (error, newFile) {
+                    if (error) {
+                        throw error;
+                    }
+                });
+            }
+        })
         })
 })
 module.exports = router;
