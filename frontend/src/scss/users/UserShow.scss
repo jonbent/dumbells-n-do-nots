@@ -5,7 +5,10 @@
     width: 100%;
     display: flex;
     position: relative;
+    justify-content: center;
     .user-show-content{
         margin-bottom: 5rem;
+        width: 90%;
+        padding-top: 3rem;
     }
 }
