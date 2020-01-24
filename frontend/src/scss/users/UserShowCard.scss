@@ -1,0 +1,13 @@
+.user-show-card{
+    height: 10rem;
+    background-color: lightskyblue;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    .user-card-avatar{
+        width: 5rem;
+        height: 5rem;
+        margin-left: 1rem;
+        border-radius: 50%;
+    }
+}
