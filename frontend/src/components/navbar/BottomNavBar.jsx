@@ -16,9 +16,9 @@ const BottomNavBar = ({user}) => {
                     </NavLink>
                 </div>
                 <div>
-                    <NavLink to={`/routines/new`}>
+                    <a onClick={`/routines/new`}>
                         <Plus/>
-                    </NavLink>
+                    </a>
                 </div>
                 <div>
                     <NavLink to={`/users/${user.username}/favorites`}>

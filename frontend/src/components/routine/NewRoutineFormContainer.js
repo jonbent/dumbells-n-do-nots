@@ -11,8 +11,6 @@ const mapStateToProps = (state) => {
     return { 
         routine: {
             user: state.session.user.id,
-            startDate: DateFormat(currentDate, 'yyyy-mm-dd'),
-            endDate: DateFormat(weekFromCurrentDate, 'yyyy-mm-dd')
         }
     }
 };
