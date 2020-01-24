@@ -8,7 +8,7 @@ const mapStateToProps = state => ({
 });
 const mapDispatchToProps = dispatch => ({
     fetchUser: () => dispatch(fetchUser()),
-    updateUser: (formData) => dispatch(updateUser(formData))
+    updateUser: (formData,username) => dispatch(updateUser(formData,username))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Settings);

@@ -11,6 +11,6 @@ export const fetchUser = (username) => dispatch => (
     UserApiUtil.fetchUserInfo(username).then(payload => dispatch(receiveUser(payload)))
 )
 
-export const updateUser = formData => dispatch =>
-    UserApiUtil.updateUserInfo(formData)
+export const updateUser = (formData,username) => dispatch =>
+    UserApiUtil.updateUserInfo(formData, username)
     .then(payload => dispatch(receiveUser(payload)))
