@@ -1,7 +1,7 @@
 import React from 'react';
 import { closeModal } from '../../actions/ModalActions';
 import { connect } from 'react-redux';
-import AddWorkoutsFormContainer from '../workouts/AddWorkoutssFormContainer';
+import AddWorkoutsFormContainer from '../workouts/AddWorkoutsFormContainer';
 import AddMealsFormContainer from '../meals/AddMealsFormContainer';
 import SampleRoutinesContainer from '../sampleRoutines/SampleRoutinesContainer';
 import '../../scss/Modal.scss'
