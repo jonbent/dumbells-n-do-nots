@@ -17,7 +17,7 @@ class NewRoutineForm extends React.Component{
         const weekFromCurrentDate = currentDate.setDate(currentDate.getDate() + 7)
         this.state = {
             month: currentDate.getMonth(),
-            startDate: DateFormat(currentDate, 'yyyy-mm-dd'),
+            startDate: currentDate,
             endDate: DateFormat(weekFromCurrentDate, 'yyyy-mm-dd')
         }
         this.handleStartDate = this.handleStartDate.bind(this);
@@ -28,6 +28,7 @@ class NewRoutineForm extends React.Component{
     }
 
     render(){
+        const startDate = this.state.startDate;
         const dayPickerProps = {
             month: this.state.month,
             fromMonth: fromMonth,
@@ -41,7 +42,6 @@ class NewRoutineForm extends React.Component{
             )
         };
         return(
-
             <div className="new-routine-form">
                 <h1 className="new-routine-header">New Routine</h1>
                 <br/>
@@ -50,8 +50,9 @@ class NewRoutineForm extends React.Component{
                 <DayPickerInput
                     dayPickerProps={dayPickerProps}
                     onDayClick={e => this.handleStartDate(e)}
-                    selectedDays={this.state.startDate}
+                    selectedDays={startDate}
                 />
+                <button onClick={() => this.props.receiveNewRoutineStartDate({startDate})}>Next</button>
                 </div>
             </div>
         )
