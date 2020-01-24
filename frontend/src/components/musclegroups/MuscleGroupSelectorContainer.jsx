@@ -2,6 +2,8 @@ import { connect } from 'react-redux';
 import MuscleGroupSelector from "./MuscleGroupSelector";
 import {fetchMuscleGroups} from '../../actions/MuscleGroupActions';
 
+
+
 const mSTP = (state) => ({
     
 })
