@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import BottomNavBar from "../navbar/BottomNavBar";
+import BottomNavBar from "../navbar/BottomNavBarContainer";
 import "../../scss/settings.scss";
 
 
