@@ -63,7 +63,11 @@ const UserSchema = new Schema({
             type: Schema.Types.ObjectId,
             ref: "Routine"
         }
-    ]
+    ],
+    avatarUrl: {
+        type: String
+    }
+
 })
 UserSchema.plugin(uniqueValidator)
 

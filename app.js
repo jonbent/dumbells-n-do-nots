@@ -12,7 +12,7 @@ const muscles = require("./routes/api/muscles");
 const routines = require("./routes/api/routines");
 const users = require("./routes/api/users");
 const workouts = require("./routes/api/workouts");
-
+const cors = require('cors');
 
 
 const app = express();
@@ -22,8 +22,7 @@ require('./config/passport')(passport);
 
 const port = process.env.PORT || 5000;
 
-
-app.get("/", (req, res) => res.send("test"));
+app.use(cors({ origin: 'http://localhost:3000' }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use("/api/exercises", exercises)
@@ -34,6 +33,7 @@ app.use("/api/muscles", muscles)
 app.use("/api/routines", routines)
 app.use("/api/users", users)
 app.use("/api/workouts", workouts)
+
 app.listen(port, () => {
 
     mongoose.connect(db, {useUnifiedTopology: true,useNewUrlParser: true,})

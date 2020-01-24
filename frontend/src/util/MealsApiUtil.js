@@ -4,10 +4,10 @@ export const getAllMeals = () => {
     return axios.get('/api/meals')
 };
 
-export const getUserRoutine = id => {
+export const getUserMeals = id => {
     return axios.get(`/api/meals/user/${id}`)
 };
 
-export const createRoutine = data => {
+export const createMeals = data => {
     return axios.post('/api/meals/', data)
 }

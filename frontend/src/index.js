@@ -3,14 +3,17 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import Root from './components/Root';
 import * as serviceWorker from './serviceWorker';
-
+import axios from 'axios';
 import configureStore from './store/store'
 import jwt_decode from 'jwt-decode';
 import { setAuthToken } from './util/SessionApiUtil'
-
+import { receiveNewRoutineStartDate } from './actions/newRoutineActions';
 import { logout, login } from './actions/SessionActions';
 
+
 document.addEventListener('DOMContentLoaded', () => {
+    window.axios = axios;
+    window.receiveNewRoutineStartDate = receiveNewRoutineStartDate;
     let store;
     let preloadedState = {ui:{
         filters: {
@@ -36,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (decodedUser.exp < currentTime) {
             // Logout the user and redirect to the login page
             store.dispatch(logout());
-            window.location.href = '/login';
+            window.location.href = '/#/login';
         }
     } else {
         // If this is a first time user, start with an empty store
