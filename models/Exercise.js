@@ -26,7 +26,6 @@ const ExerciseSchema = new Schema({
 
     description: {
         type: String,
-        required: true
     },
     numSets: {
         type: Number,
