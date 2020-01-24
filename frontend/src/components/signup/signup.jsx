@@ -1,6 +1,6 @@
 import React from 'react';
 import DateFormat from 'dateformat';
-import NavBar from '../navbar/NavBar'
+import NavBar from '../navbar/NavBar';
 import DayPickerInput from "react-day-picker/DayPickerInput";
 import YearMonthForm from './year_month_form'
 
@@ -47,7 +47,7 @@ class Signup extends React.Component {
     e.preventDefault();
     let final_input = this.state;
     final_input["height"] = this.setHeight();
-    this.props.signup(final_input).then(this.props.history.push("/signup"));
+    this.props.signup(final_input).then(this.props.history.push("/"));
   }
   updateField(field, e) {
     this.setState({ [field]: e.currentTarget.value });
@@ -57,6 +57,7 @@ class Signup extends React.Component {
     this.props.receiveNextStep(2);
   }
   handleBirthDate(e) {
+    console.log('hitting');
     this.setState({ birthDate: DateFormat(e, "yyyy-mm-dd") });
   }
   handleYearMonthChange(month) {
@@ -178,7 +179,7 @@ class Signup extends React.Component {
               <div className="signup-form-detail-input">
                 <DayPickerInput
                   dayPickerProps={dayPickerProps}
-                  onDayClick={e => this.handleBirthDate(e)}
+                  onDayChange={e => this.handleBirthDate(e)}
                   selectedDays={this.state.birthDate}
                 />
               </div>
