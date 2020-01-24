@@ -7,6 +7,7 @@ const User = require('../../models/User');
 const jwt = require('jsonwebtoken');
 const keys = require('../../config/keys');
 const passport = require('passport');
+const uuid = require('uuid');
 
 
 const multer = require("multer");
@@ -14,6 +15,15 @@ const AWS = require("aws-sdk");
 
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
+
+AWS.config.update({
+    accessKeyId: keys.awsBucketAccessId,
+    secretAccessKey: keys.awsBucketToken,
+    region: keys.awsRegion
+});
+// console.log(myConfig);
+
+
 
 router.get('/current', passport.authenticate('jwt', { session: false }), (req, res) => {
     res.json({
@@ -34,8 +44,6 @@ router.get('/current', passport.authenticate('jwt', { session: false }), (req, r
 
 
 router.post('/register', (req, res) => {
-    User.findOne({ email: req.body.email })
-        .then(user => {
             const newUser = new User({
                 username: req.body.username,
                 email: req.body.email,
@@ -88,7 +96,6 @@ router.post('/register', (req, res) => {
                     })
                 })
             // }
-        })
 })
 router.post('/login', (req, res) => {
     const { errors, isValid } = validateLoginInput(req.body);
@@ -110,8 +117,6 @@ router.post('/login', (req, res) => {
                 .then(isMatch => {
                     if (isMatch) {
                         let newUser = Object.assign({}, user.toObject());
-                        console.log(newUser);
-                        
                         delete newUser.password;
                         delete newUser.date;
                         const payload = newUser;
@@ -143,33 +148,46 @@ router.get('/:username', (req, res) => {
             };
             res.json({
                 user: {
-                    username: user.username,
+                    username: user.username
                 }
             });
         })
 })
 
 router.post('/:username/update', upload.single("avatarImg"), (req, res) => {
+    const s3 = new AWS.S3()
+    
+    
+    // AWS.config.getCredentials(function (err) {
+    //     console.log('hitting');
+    //     console.log(err);
+        
+    //     if (err) console.log(err);
+        
+    //     // credentials not loaded
+    //     else {
+    //         console.log("Access key:", AWS.config.credentials.accessKeyId);
+    //         console.log("Secret access key:", AWS.config.credentials.secretAccessKey);
+    //     }
+    // });
     User.findOne({ username: req.params.username }).then(user => {
-        if (!user) return res.status(400).json({ user: { message: "User not found" } })
+            if (!user) return res.status(400).json({ user: { message: "User not found" } })
         const file = req.file;
         const s3FileURL = keys.UploadFileUrlLink;
+        const keyname = file.originalname + uuid();
         let params = {
             Bucket: keys.awsBucketName,
-            Key: file.originalname,
+            Key: keyname,
             Body: file.buffer,
             ContentType: file.mimetype,
+            ACL: 'public-read'
         }
-        new AWS.S3({
-            accessKeyId: keys.awsBucketAccessId,
-            secretAccessKey: keys.awsBucketToken,
-            region: keys.awsRegion
-        }).upload(params, (err, data) => {
+        s3.upload(params, (err, data) => {
+            
             if (err) {
                 res.status(500).json({ error: true, Message: err });
             } else {
-                user.avatarUrl = s3FileURL + file.originalname
-                console.log(user);
+                user.avatarUrl = s3FileURL + keyname
                 
                 res.json({ user });
                 user.save(function (error, newFile) {
@@ -179,6 +197,42 @@ router.post('/:username/update', upload.single("avatarImg"), (req, res) => {
                 });
             }
         })
-        })
+    }).catch(err => res.json(err))
+    // User.findOne({ username: req.params.username }).then(user => {
+    //     if (!user) return res.status(400).json({ user: { message: "User not found" } })
+    //     const file = req.file;
+    //     const s3FileURL = keys.UploadFileUrlLink;
+    //     let params = {
+    //         Bucket: keys.awsBucketName,
+    //         Key: file.originalname,
+    //         Body: file.buffer,
+    //         ContentType: file.mimetype
+    //         // ACL: 'public-read'
+    //     }
+    //     const s3 = new AWS.S3({
+    //         accessKeyId: keys.awsBucketAccessId,
+    //         secretAccessKey: keys.awsBucketToken,
+    //         // signatureVersion: 'v4',
+    //         region: keys.awsRegion
+    //     })
+    //     const signedUrl = s3.getSignedUrl('putObject', params, (err, data) => {
+    //         if (err) {
+    //             res.status(500).json({ error: true, Message: err });
+    //         }
+    //         console.log(data);
+
+    //     })
+    //     user.avatarUrl = signedUrl;
+    //     console.log("hello");
+
+    //     console.log(signedUrl);
+
+    //     user.save(function (error, newFile) {
+    //         if (error) {
+    //             throw error;
+    //         }
+    //         res.json({ user });
+    //     });
+    // })
 })
 module.exports = router;
