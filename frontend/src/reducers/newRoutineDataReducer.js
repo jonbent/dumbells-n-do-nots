@@ -1,7 +1,7 @@
 import { RECEIVE_NEW_ROUTINE_STARTDATE,
          RECEIVE_ROUTINE_MEALS,
          RECEIVE_ROUTINE_WORKOUTS,
-         CLEAR_NEW_ROUTINE_DATA } from '../actions/newRoutineActions';
+         CLEAR_NEW_ROUTINE_DATA } from '../actions/NewRoutineActions';
 import DateFormat from 'dateformat';
 
 const NewRoutinesReducer = (state = {}, action) => {

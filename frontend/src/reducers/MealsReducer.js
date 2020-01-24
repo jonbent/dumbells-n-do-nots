@@ -1,4 +1,4 @@
-import { RECEIVE_USER_MEALS, RECEIVE_NEW_MEAL, RECEIVE_ALL_MEALS } from '../actions/MealsActions';
+import { RECEIVE_USER_MEALS, RECEIVE_NEW_MEAL, RECEIVE_ALL_MEALS } from '../actions/MealActions';
 
 const MealsReducer = (state = {}, action) => {
     Object.freeze(state);

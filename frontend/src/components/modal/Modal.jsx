@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import AddWorkoutsFormContainer from '../workouts/AddWorkoutssFormContainer';
 import AddMealsFormContainer from '../meals/AddMealsFormContainer';
 import SampleRoutinesContainer from '../sampleRoutines/SampleRoutinesContainer';
-import '../../css/Modal.css'
+import '../../scss/Modal.scss'
 
 function Modal({ modal, closeModal }) {
     if (!modal) {

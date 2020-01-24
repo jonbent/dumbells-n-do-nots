@@ -1,4 +1,4 @@
-import { RECEIVE_SAMPLE_ROUTINES } from '../actions/SampleRoutinesActions';
+import { RECEIVE_SAMPLE_ROUTINES } from '../actions/SampleRoutineActions';
 
 const SampleRoutinesReducer = (state = {}, action) => {
     Object.freeze(state);

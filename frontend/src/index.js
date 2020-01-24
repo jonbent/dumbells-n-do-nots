@@ -7,7 +7,7 @@ import axios from 'axios';
 import configureStore from './store/store'
 import jwt_decode from 'jwt-decode';
 import { setAuthToken } from './util/SessionApiUtil'
-import { receiveNewRoutineStartDate } from './actions/newRoutineActions';
+import { receiveNewRoutineStartDate } from './actions/NewRoutineActions';
 import { logout, login } from './actions/SessionActions';
 
 
