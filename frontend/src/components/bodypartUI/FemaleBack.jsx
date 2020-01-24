@@ -7,9 +7,9 @@ class FemaleFront extends React.Component {
                 <div className="female-front-selector">
                 <img id="back-female-muscle-group" src="../../../public/images/femaleUI/back/back-female-muscle-group.png"></img>
 
-                <img id="back-female-back" src="../../../public/images/femaleUI/back/back-female-back.png"></img>
+                <img id="back-female-back" src="../../../public/images/femaleUI/back/back-female-back.png" onclick=""></img>
 
-                <img id="back-female-calves" src="../../../public/images/femaleUI/back/back-female-calves.png"></img>
+                <img id="back-female-calves" src="../../../public/images/femaleUI/back/back-female-calves.png" onclick=""></img>
 
                 <div class="back-female-legs">
                     <img id="back-female-left-leg" src="../../../public/images/femaleUI/back/back-female-left-leg.png" onClick=""></img>
