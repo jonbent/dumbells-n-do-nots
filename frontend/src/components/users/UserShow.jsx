@@ -7,7 +7,9 @@ class UserShow extends Component {
         super(props);
     }
     componentDidMount() {
-        
+        if (this.props.match.params.username){
+            this.props.fetchUserInfo(this.props.match.params.username)
+        }
     }
     
     
