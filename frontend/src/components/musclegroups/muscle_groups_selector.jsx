@@ -9,10 +9,10 @@ render(){
     return(
         <div>
             <div>
-                <MaleFront />
+                {/* <MaleFront />
                 <MaleBack />
                 <FemaleFront />
-                <FemaleBack />
+                <FemaleBack /> */}
             </div>
             <div></div>
             <div>

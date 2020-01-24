@@ -5,7 +5,7 @@ import { Switch } from 'react-router-dom';
 import SignupContainer from './signup/signup_container';
 import LoginContainer  from './login/LoginContainer';
 import UserShowContainer  from './users/UserShowContainer';
-import MuscleGroupContainer from './muscleGroups/muscle_groups_selector_container';
+// import MuscleGroupsSelectorContainer from './muscleGroups/muscle_groups_selector_container';
 import { connect } from 'react-redux';
 
 import Splash from './home/Splash';
