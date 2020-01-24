@@ -38,10 +38,6 @@ module.exports = function validateExerciseInput(data) {
     if (!Validator.isInt(data.muscleGroup)) {
         errors.muscleGroup = 'Please reference the muscle group id';
     }
-    
-    if (!Validator.isInt(data.numReps)) {
-        errors.numReps = 'Reps should be a number';
-    }
 
     return {
         errors,
