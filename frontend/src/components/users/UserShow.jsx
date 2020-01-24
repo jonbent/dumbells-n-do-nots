@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import BottomNavBar from '../navbar/BottomNavBar';
 import '../../scss/users/UserShow.scss';
 import UserShowCard from './UserShowCard';
+import Modal from '../modal/Modal';
+
 class UserShow extends Component {
     constructor(props) {
         super(props);
@@ -17,6 +19,7 @@ class UserShow extends Component {
         const {user} = this.props
         return(
             <div className="user-show-container">
+                <Modal/>
                 <div className="user-show-content">
                     <UserShowCard user={user}/>
                 </div>
