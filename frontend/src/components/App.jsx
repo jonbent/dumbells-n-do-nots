@@ -15,17 +15,17 @@ import '../scss/App.scss';
 
 const App = ({ loggedIn }) => (
   <Switch>
+
+    <AuthRoute exact path="/signup" component={SignupContainer} />
+    <AuthRoute exact path="/login" component={LoginContainer} />
     {!loggedIn ? (
       <AuthRoute exact path="/" component={Splash} />
     ) : (
-      <Switch>
-        <ProtectedRoute exact path="/settings" component={SettingsContainer} />
-        <ProtectedRoute path="/" component={UserShowContainer} />
-      </Switch>
-    )}
-    <AuthRoute exact path="/signup" component={SignupContainer} />
-    <AuthRoute exact path="/login" component={LoginContainer} />
-    
+        <Switch>
+          <ProtectedRoute exact path="/settings" component={SettingsContainer} />
+          <ProtectedRoute path="/" component={UserShowContainer} />
+        </Switch>
+      )}
   </Switch>
 );
 
