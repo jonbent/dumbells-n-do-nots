@@ -7,7 +7,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    openNewRoutineModal: () => dispatch(openModal())
+    openNewRoutineModal: () => dispatch(openModal('addRoutine'))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(BottomNavBar)
