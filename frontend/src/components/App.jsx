@@ -13,19 +13,17 @@ import Splash from './home/Splash';
 import '../scss/reset.scss';
 import '../scss/App.scss';
 
-const App = ({loggedIn}) => (
+const App = ({ loggedIn }) => (
   <Switch>
-    {
-      !loggedIn ? (
-        <AuthRoute exact path="/" component={Splash} />
-      ) : (
-        <ProtectedRoute component={UserShowContainer}/>
-      )
-    }
+    {!loggedIn ? (
+      <AuthRoute exact path="/" component={Splash} />
+    ) : (
+      <ProtectedRoute component={UserShowContainer} />
+    )}
     <AuthRoute exact path="/" component={Splash} />
     <AuthRoute exact path="/signup" component={SignupContainer} />
     <AuthRoute exact path="/login" component={LoginContainer} />
-
+    />
   </Switch>
 );
 
