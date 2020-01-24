@@ -44,57 +44,65 @@ router.get('/current', passport.authenticate('jwt', { session: false }), (req, r
 
 
 router.post('/register', (req, res) => {
-            const newUser = new User({
-                username: req.body.username,
-                email: req.body.email,
-                password: req.body.password,
-                birthDate: req.body.birthDate,
-                weightStart: req.body.weightStart,
-                weightCur: req.body.weightStart,
-                height: req.body.height,
-                sex: req.body.sex,
-            })
-            let errors = newUser.validateSync();
-            if (errors){
-                errors = errors.errors
-                if (req.body.password !== req.body.password2)errors = Object.assign(errors, {password2: {
-                    message: "Password Confirmation must match",
-                    name: "ValidatorError",
-                    properties: {
-                        message: "Path `password2` must match path `password`.",
-                        type: "required",
-                        path: "password2"
-                    },
-                    kind: "required",
-                    path: "password2"
-                }})
-                return res.status(422).json(errors)
-            }
+    const newUser = new User({
+        username: req.body.username,
+        email: req.body.email,
+        password: req.body.password,
+        birthDate: req.body.birthDate,
+        weightStart: req.body.weightStart,
+        weightCur: req.body.weightStart,
+        height: req.body.height,
+        sex: req.body.sex,
+    })
+    let errors = newUser.validateSync();
+    if (errors){
+        errors = errors.errors
+        if (req.body.password !== req.body.password2) errors = Object.assign(errors, {password2: {
+            message: "Password Confirmation must match",
+            name: "ValidatorError",
+            properties: {
+                message: "Path `password2` must match path `password`.",
+                type: "required",
+                path: "password2"
+            },
+            kind: "required",
+            path: "password2"
+        }})
+        return res.status(422).json(errors)
+    }
 
-                bcrypt.genSalt(10, (err, salt) => {
-                    bcrypt.hash(newUser.password, salt, (err, hash) => {
-                        if (err) throw err;
-                        newUser.password = hash;
-                        newUser.save()
-                            .then(user => {
-                                const payload = { id: user.id, username: user.username };
-                                jwt.sign(
-                                    payload,
-                                    keys.secretOrKey,
-                                    // Tell the key to expire in one hour
-                                    { expiresIn: 3600 },
-                                    (err, token) => {
-                                        res.json({
-                                            success: true,
-                                            token: 'Bearer ' + token,
-                                            user: user
-                                        });
-                                    });
-                            })
-                            
-                            .catch(err => res.status(400).json(err.errors));
-                    })
+    if (req.body.sex === "M"){
+        newUser.avatarUrl = '/images/maleDefaultAvatar.jpg'
+    } else {
+        newUser.avatarUrl = '/images/femaleDefaultAvatar.jpg'
+    }
+
+    bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.hash(newUser.password, salt, (err, hash) => {
+            if (err) throw err;
+            newUser.password = hash;
+            newUser.save()
+                .then(user => {
+                    let payload = Object.assign({}, user.toObject());
+                    delete newUser.password;
+                    delete newUser.date;
+                    jwt.sign(
+                        payload,
+                        keys.secretOrKey,
+                        // Tell the key to expire in one hour
+                        { expiresIn: 3600 },
+                        (err, token) => {
+                            res.json({
+                                success: true,
+                                token: 'Bearer ' + token,
+                                user: payload
+                            });
+                        });
                 })
+                
+                .catch(err => res.status(400).json(err.errors));
+        })
+    })
             // }
 })
 router.post('/login', (req, res) => {
