@@ -4,51 +4,69 @@ import "../../scss/settings.scss";
 
 
 class Settings extends Component {
-    constructor(){
-        
-    }
-    render() {
-        const {user} = this.props;
-        return (
-          <div className="settings-page">
-            <div className="main-container">
-              <div className="image">
-                <div
-                  style={{ backgroundImage: `url(${user.avatarUrl})` }}
-                ></div>
-              </div>
-              <label>{user.username}</label>
-              <div className="user-details">
-                <div>
-                  <div>Email:</div>
-                  <div>{user.email}</div>
-                </div>
-                <div>
-                  <div>D.O.B:</div>
-                  <div>{Date(user.birthDate).toString().slice(4,15)}</div>
-                  <input type="text"/>
-                </div>
-                <div>
-                  <div>Weight:</div>
-                  <div>{user.currWeight}</div>
-                </div>
-                <div>
-                  <div>Height:</div>
-                  <div>{user.height}</div>
-                </div>
-                <div>
-                  <div>Sex:</div>
-                  <div>{user.sex === "M" ? "Male" : "Female"}</div>
-                </div>
-              </div>
-              <div>
-                <div>Save</div>
-              </div>
-            </div>
-            <BottomNavBar user={user} />
+  constructor(props) {
+    super(props);
+    this.state = this.props.user;
+
+    this.update = this.update.bind(this);
+  }
+  update(field) {
+    return e => {
+      this.setState({ [field]: e.currentTarget.value });
+    };
+  }
+  render() {
+    const { user } = this.props;
+    return (
+      <div className="settings-page">
+        <div className="main-container">
+          <div className="image">
+            <div style={{ backgroundImage: `url(${user.avatarUrl})` }}></div>
           </div>
-        );
-    }
+          <label>{user.username}</label>
+          <div className="user-details">
+            <div className="detail-container">
+              <div>Email:</div>
+              <input
+                type="text"
+                value={this.state.email}
+                onChange={this.update("email")}
+              />
+            </div>
+            <div className="detail-container">
+              <div>D.O.B:</div>
+              <input
+                type="text"
+                value={Date(this.state.birthDate)
+                  .toString()
+                  .slice(4, 15)}
+              />
+            </div>
+            <div className="detail-container">
+              <div>Weight:</div>
+              <input
+                type="text"
+                value={this.state.weightCur}
+                onChange={this.update("weightCur")}
+              />
+            </div>
+            <div className="detail-container">
+              <div>Height:</div>
+              <input
+                type="text"
+                value={this.state.height}
+                onChange={this.update("height")}
+              />
+            </div>
+          </div>
+          <div className="save">
+            <div>Save</div>
+          </div>
+        </div>
+        <BottomNavBar user={user} />
+      </div>
+    );
+  }
 }
 
 export default Settings;
