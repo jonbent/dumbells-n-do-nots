@@ -5,6 +5,7 @@ import AddWorkoutsFormContainer from '../workouts/AddWorkoutsFormContainer';
 import AddMealsFormContainer from '../meals/AddMealsFormContainer';
 import SampleRoutinesContainer from '../sampleRoutines/SampleRoutinesContainer';
 import '../../scss/Modal.scss'
+import AddRoutineFormContainer from '../routine/NewRoutineFormContainer'
 
 function Modal({ modal, closeModal }) {
     if (!modal) {
@@ -20,7 +21,10 @@ function Modal({ modal, closeModal }) {
             break;
         case 'sample':
             component = <SampleRoutinesContainer />;
-            break;      
+            break;
+        case 'addRoutine':
+            component = <AddRoutineFormContainer />
+            break;
         default:
             return null;
     }
