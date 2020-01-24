@@ -1,0 +1,110 @@
+.male-front-container{
+    display: flex;
+    justify-content: center;
+}
+
+.male-front-selector{
+    margin-top: 50px;
+    position: relative;
+}
+
+#front-male-muscle-group{
+    
+}
+
+#front-male-abs{
+    position: absolute;
+    top: 145px;
+    left: 120px;
+    opacity: 0;
+}
+
+#front-male-abs:hover{
+    opacity: 1;
+}
+
+.front-male-arms{
+    opacity: 0;
+}
+
+#front-male-left-arm{
+    position: absolute;
+    top: 127px;
+    left: 51px;
+}
+
+#front-male-right-arm{
+    position: absolute;
+    top: 127px;
+    left: 215px;
+}
+
+.front-male-arms:hover{
+    opacity: 1;
+}
+
+.front-male-chest{
+    opacity: 0;
+}
+
+
+.front-male-shoulder{
+    opacity: 0;
+}
+
+#front-male-top-shoulder{
+    position: absolute;
+    top: 76px;
+    left: 134px; 
+}
+
+#front-male-left-shoulder{
+    position: absolute;
+    top: 102px;
+    left: 96px;
+}
+
+#front-male-right-shoulder{
+    position: absolute;
+    top: 103px;
+    left: 193px;
+}
+.front-male-shoulder:hover{
+    opacity: 1;
+}
+
+#front-male-left-chest{
+    position: absolute;
+    top: 107px;
+    left: 115px;
+}
+
+#front-male-right-chest{
+    position: absolute;
+    top: 107px;
+    left: 170px;
+}
+
+.front-male-chest:hover{
+    opacity: 1;
+}
+
+.front-male-legs{
+  opacity: 0;  
+}
+
+#front-male-left-leg{
+    position: absolute;
+    top: 224px;
+    left: 104px;
+}
+
+#front-male-right-leg{
+    position: absolute;
+    top: 224px;
+    left: 168px;
+}
+
+.front-male-legs:hover{
+  opacity: 1;  
+}
