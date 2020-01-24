@@ -34,6 +34,7 @@
         height: 5rem;
         display:flex;
         align-items: center;
+        justify-content: space-around;
         div{
             height: 70%;
             a.active > svg{
