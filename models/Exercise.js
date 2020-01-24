@@ -32,7 +32,10 @@ const ExerciseSchema = new Schema({
         type: Number,
         required: true
     },
-    numReps: {
+    numReps: [{
+        type: Number
+    }],
+    restTime: {
         type: Number
     },
     //seconds

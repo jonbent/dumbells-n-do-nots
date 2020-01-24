@@ -5,6 +5,10 @@ const MuscleGroupSchema = new Schema({
     name: {
         type: String,
         required: true
+    },
+    apiId:{
+        type: Number,
+        required: true
     }
 })
 

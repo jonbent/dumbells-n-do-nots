@@ -15,6 +15,10 @@ const WorkoutSchema = new Schema({
     user: {
         type: Schema.Types.ObjectId,
         ref: "User"
+    },
+    timeStamp: {
+        type: Date,
+        required: true,
     }
 })
 
