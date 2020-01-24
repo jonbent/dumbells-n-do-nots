@@ -27,28 +27,35 @@ router.get('/current', passport.authenticate('jwt', { session: false }), (req, r
 
 
 router.post('/register', (req, res) => {
-    const { errors, isValid } = validateRegisterInput(req.body);
-
-    if (!isValid) {
-        return res.status(400).json(errors);
-    }
     User.findOne({ email: req.body.email })
         .then(user => {
-            if (user) {
-                // Use the validations to send the error
-                errors.email = 'Email already exists';
-                return res.status(400).json(errors);
-            } else {
-                const newUser = new User({
-                    username: req.body.username,
-                    email: req.body.email,
-                    password: req.body.password,
-                    birthDate: req.body.birthDate,
-                    weightStart: req.body.weightStart,
-                    weightCur: req.body.weightStart,
-                    height: req.body.height,
-                    sex: req.body.sex,
-                })
+            const newUser = new User({
+                username: req.body.username,
+                email: req.body.email,
+                password: req.body.password,
+                birthDate: req.body.birthDate,
+                weightStart: req.body.weightStart,
+                weightCur: req.body.weightStart,
+                height: req.body.height,
+                sex: req.body.sex,
+            })
+            let errors = newUser.validateSync();
+            if (errors){
+                errors = errors.errors
+                if (req.body.password !== req.body.password2)errors = Object.assign(errors, {password2: {
+                    message: "Password Confirmation must match",
+                    name: "ValidatorError",
+                    properties: {
+                        message: "Path `password2` must match path `password`.",
+                        type: "required",
+                        path: "password2"
+                    },
+                    kind: "required",
+                    path: "password2"
+                }})
+                return res.status(422).json(errors)
+            }
+
                 bcrypt.genSalt(10, (err, salt) => {
                     bcrypt.hash(newUser.password, salt, (err, hash) => {
                         if (err) throw err;
@@ -69,10 +76,11 @@ router.post('/register', (req, res) => {
                                         });
                                     });
                             })
-                            .catch(err => console.log(err));
+                            
+                            .catch(err => res.status(400).json(err.errors));
                     })
                 })
-            }
+            // }
         })
 })
 router.post('/login', (req, res) => {
