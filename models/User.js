@@ -58,6 +58,12 @@ const UserSchema = new Schema({
     goalPath: {
         type: Number
     },
+    routines: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "Routine"
+        }
+    ],
     avatarUrl: {
         type: String
     }

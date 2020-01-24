@@ -25,7 +25,7 @@ const App = ({ loggedIn }) => (
     )}
     <AuthRoute exact path="/signup" component={SignupContainer} />
     <AuthRoute exact path="/login" component={LoginContainer} />
-    />
+    
   </Switch>
 );
 
