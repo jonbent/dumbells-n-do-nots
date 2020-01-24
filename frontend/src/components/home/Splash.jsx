@@ -1,10 +1,9 @@
 import React from 'react'
+import { Redirect } from 'react-router-dom'
 
 const Splash = () => {
     return (
-        <div>
-            
-        </div>
+        <Redirect to="/login"/>
     )
 }
 
