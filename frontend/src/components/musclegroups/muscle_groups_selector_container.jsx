@@ -1,14 +1,10 @@
-import { connect } from './node_modules/react-redux';
+import { connect } from 'react-redux';
 import MuscleGroupsSelector from './muscle_groups_selector';
-import fetchMuscleGroups from '../../actions/MuscleGroupsAction';
+import fetchMuscleGroups from '../../actions/MuscleGroupActions';
 
 const mSTP = (state) => ({
-    
 })
-
-const mDTP = dispatch =>({
+const mDTP = dispatch => ({
     fetchMuscleGroups: () => dispatch(fetchMuscleGroups()),
-    
 })
-
 export default connect(mSTP, mDTP)(MuscleGroupsSelector);
