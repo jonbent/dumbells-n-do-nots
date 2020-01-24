@@ -23,7 +23,7 @@ const App = ({ loggedIn }) => (
     <AuthRoute exact path="/" component={Splash} />
     <AuthRoute exact path="/signup" component={SignupContainer} />
     <AuthRoute exact path="/login" component={LoginContainer} />
-    />
+    
   </Switch>
 );
 
