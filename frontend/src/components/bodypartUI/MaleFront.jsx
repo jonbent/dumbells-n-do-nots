@@ -3,7 +3,9 @@ class MaleFront extends React.Component{
 
     render(){
         return(
-            <div className="male-body-selector" onclick="">
+            <div className= "male-front-container">
+            <div className="male-front-selector">
+                
                 <img id="front-male-muscle-group" src="../../../public/images/maleUI/front/front-male-muscle-group.png" ></img>
 
                 <img id="front-male-abs" src="../../../public/images/maleUI/front/front-abs.png"></img>
@@ -28,6 +30,7 @@ class MaleFront extends React.Component{
                     <img id="front-male-left-leg" src="../../../public/images/maleUI/front/front-left-leg.png"></img>
                     <img id="front-male-right-leg" src="../../../public/images/maleUI/front/front-right-leg.png"></img>
                 </div>        
+            </div>
             </div>
         )
     }

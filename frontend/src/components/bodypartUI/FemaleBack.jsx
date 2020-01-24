@@ -3,7 +3,8 @@ class FemaleFront extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="female-front-container">
+                <div className="female-front-selector">
                 <img id="back-female-muscle-group" src="../../../public/images/femaleUI/back/back-female-muscle-group.png"></img>
 
                 <img id="back-female-back" src="../../../public/images/femaleUI/back/back-female-back.png"></img>
@@ -25,6 +26,7 @@ class FemaleFront extends React.Component {
                     <img id="back-female-left-arm" src="../../../public/images/femaleUI/back/back-female-left-arm.png" onClick=""></img>
                     <img id="back-female-right-arm" src="i../../../public/images/femaleUI/back/back-female-right-arm.png" onClick=""></img>
                 </div>
+            </div>
             </div>
         )
     }
