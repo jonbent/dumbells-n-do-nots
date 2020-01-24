@@ -1,14 +1,20 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const uniqueValidator = require('mongoose-beautiful-unique-validation');
 
 const UserSchema = new Schema({
     username: {
         type: String,
-        required: true
+        required: true,
+        unique: true, 
+        uniqueCaseInsensitive: true
+        
     },
     email: {
         type: String,
-        required: true
+        required: true,
+        unique: true, 
+        uniqueCaseInsensitive: true
     },
     password: {
         type: String,
@@ -21,7 +27,8 @@ const UserSchema = new Schema({
     },
 
     birthDate: {
-        type: Date
+        type: Date,
+        required: true
     },
     // pounds
     weightStart: {
@@ -50,7 +57,14 @@ const UserSchema = new Schema({
     
     goalPath: {
         type: Number
-    }
+    },
+    routines: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "Routine"
+        }
+    ]
 })
+UserSchema.plugin(uniqueValidator)
 
 module.exports = User = mongoose.model('User', UserSchema);

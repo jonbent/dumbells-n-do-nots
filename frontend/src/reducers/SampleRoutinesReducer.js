@@ -1,6 +1,6 @@
 import { RECEIVE_SAMPLE_ROUTINES } from '../actions/SampleRoutinesActions';
 
-const SampleRoutinesReducer = (state = { all: {}, user: {}, new: undefined }, action) => {
+const SampleRoutinesReducer = (state = {}, action) => {
     Object.freeze(state);
     let newState = Object.assign({}, state);
     switch (action.type) {
