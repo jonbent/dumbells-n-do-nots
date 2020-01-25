@@ -22,9 +22,7 @@ export const updateUser = (formData, username) => dispatch =>
              localStorage.setItem("jwtToken", token);
              SessionApiUtil.setAuthToken(token);
              const decoded = jwt_decode(token);
-             dispatch(receiveCurrentUser(decoded));
-            // console.log('res',res);
-            
+             dispatch(receiveCurrentUser(decoded));            
            })
            .catch(err => {
              dispatch(receiveErrors(err.response.data));
