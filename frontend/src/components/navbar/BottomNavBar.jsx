@@ -32,9 +32,9 @@ export default class BottomNavBar extends React.Component{
                         </NavLink>
                     </div>
                     <div>
-                        <NavLink to={`/users/${user.username}/history`}>
+                        <a onClick={() => this.props.testMuscleGroupsSelector()}>
                             <History/>
-                        </NavLink>
+                        </a>
                     </div>
                 </div>
             </div>

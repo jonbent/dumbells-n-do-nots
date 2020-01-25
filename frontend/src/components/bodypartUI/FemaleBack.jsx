@@ -1,4 +1,4 @@
-import React from 'React';
+import React, { Component } from 'react';
 class FemaleFront extends React.Component {
 
     render() {
