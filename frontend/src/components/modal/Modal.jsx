@@ -28,6 +28,7 @@ function Modal({ modal, closeModal }) {
             break;
         case 'bodyUI':
             component = <MuscleGroupSelector />;
+            break;
         default:
             return null;
     }
