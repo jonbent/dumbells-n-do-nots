@@ -8,10 +8,14 @@ router.get("/test", (req, res) => res.json({ msg: "This is the users route" }));
 
 // get all availabe workouts
 router.get("/", (req, res) => {
-    Workout
-        .find()
-        .sort({ name: 1 })
-        .then(workouts => res.json(workouts))
+    if (req.body.muscleGroupIds){
+        const request = new XMLHttpRequest();
+    } else {
+        Workout
+            .find()
+            .sort({ name: 1 })
+            .then(workouts => res.json(workouts))
+    }
 })
 
 // post a customized workout by the user
@@ -40,5 +44,6 @@ router.get("/user/:user_id", (req, res) => {
         .find({ user: req.params.user_id })
         .then(workouts => res.json(workouts))
 })
+
 
 module.exports = router;
