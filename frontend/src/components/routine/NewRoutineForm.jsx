@@ -4,11 +4,12 @@ import DayPickerInput from "react-day-picker/DayPickerInput";
 import YearMonthForm from '../signup/year_month_form';
 import DateFormat from 'dateformat'
 import "react-day-picker/lib/style.css";
+import "../../scss/newRoutineForm.scss"
 
 const currentYear = new Date().getFullYear();
-
 const toMonth = new Date(currentYear, 0);
 const fromMonth = new Date(currentYear - 80)
+
 
 class NewRoutineForm extends React.Component{
     constructor(props){
@@ -48,11 +49,11 @@ class NewRoutineForm extends React.Component{
                 <div className="start-date-label">Start Date</div>
                 <div className="start-date-input">
                 <DayPickerInput
-                    dayPickerProps={dayPickerProps}
-                    onDayClick={e => this.handleStartDate(e)}
-                    selectedDays={startDate}
+                        dayPickerProps={dayPickerProps}
+                        onDayChange={e => this.handleStartDate(e)}
+                        selectedDays={this.state.startDate}
                 />
-                <button onClick={() => this.props.receiveNewRoutineStartDate({startDate})}>Next</button>
+                <button className="next-button" onClick={() => this.props.receiveNewRoutineStartDate({startDate})}>Next</button>
                 </div>
             </div>
         )
