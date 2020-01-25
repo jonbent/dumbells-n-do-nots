@@ -31,9 +31,10 @@ class Settings extends Component {
     }
     
     this.props.updateUser(formData,this.state.username).then(
-    post => this.props.history.push('/'),
-    error => {
-        this.setState({ errors: error.responseJSON });
+    post => {
+      if(!this.props.errors){
+        this.props.history.push('/')
+      } 
     }
     );
     
@@ -58,7 +59,7 @@ class Settings extends Component {
   }
 
   render() {
-      const { user } = this.props;
+      const { user, errors } = this.props;
       let profilePic;
     if (this.state.photoUrl) {
         profilePic = (
@@ -68,6 +69,20 @@ class Settings extends Component {
         profilePic = (
           <div style={{ backgroundImage: `url(${user.avatarUrl})` }}></div>
         );
+    }
+    let emailError;
+    let weightError;
+    let heightError;
+    if(errors){
+       if (errors.email) {
+         emailError = errors.email.message;
+       }
+       if (errors.weightCur) {
+         weightError = 'Weight'.concat(errors.weightCur.message.slice(16));
+       }
+       if (errors.height) {
+         heightError = errors.height.message;
+       }
     }
     return (
       <div className="settings-page">
@@ -92,9 +107,11 @@ class Settings extends Component {
                 onChange={this.update("email")}
               />
             </div>
+            <span>{emailError}</span>
             <div className="detail-container">
               <div>D.O.B:</div>
               <input
+                disabled
                 type="date"
                 value={this.state.birthDate.slice(0, 10)}
                 max={DateFormat(this.currDate, "yyyy-mm-dd")}
@@ -109,6 +126,7 @@ class Settings extends Component {
                 onChange={this.update("weightCur")}
               />
             </div>
+            <span>{weightError}</span>
             <div className="detail-container">
               <div>Height:</div>
               <input
@@ -117,6 +135,7 @@ class Settings extends Component {
                 onChange={this.update("height")}
               />
             </div>
+            <span>{heightError}</span>
           </div>
           <div onClick={this.handleSave} className="save">
             <div>Save</div>

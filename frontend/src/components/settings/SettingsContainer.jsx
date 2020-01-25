@@ -4,7 +4,8 @@ import {fetchUser} from '../../actions/UserActions';
 import {updateUser} from '../../actions/UserActions'
 
 const mapStateToProps = state => ({
-  user: state.session.user
+  user: state.session.user,
+  errors: state.errors.session
 });
 const mapDispatchToProps = dispatch => ({
     fetchUser: () => dispatch(fetchUser()),
