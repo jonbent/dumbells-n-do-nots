@@ -25,12 +25,9 @@ class Settings extends Component {
     formData.append("sex", this.state.sex);
     formData.append("username", this.state.username);
     formData.append("weightStart", this.state.weightStart);
-    console.log(this.state.photoFile);
     
     if (this.state.photoUrl) {
         formData.append("avatarUrl", this.state.photoFile);
-    } else {
-        formData.append("avatarUrl", this.state.avatarUrl);
     }
     
     this.props.updateUser(formData,this.state.username).then(
