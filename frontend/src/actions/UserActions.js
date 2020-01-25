@@ -25,5 +25,5 @@ export const updateUser = (formData, username) => dispatch =>
              dispatch(receiveCurrentUser(decoded));            
            })
            .catch(err => {
-             dispatch(receiveErrors(err.response.data));
+             return dispatch(receiveErrors(err.response.data));
            });

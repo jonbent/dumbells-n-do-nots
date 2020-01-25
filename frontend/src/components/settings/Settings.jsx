@@ -29,14 +29,15 @@ class Settings extends Component {
     if (this.state.photoUrl) {
         formData.append("avatarUrl", this.state.photoFile);
     }
-    
-    this.props.updateUser(formData,this.state.username).then(
-    post => {
-      if(!this.props.errors){
-        this.props.history.push('/')
-      } 
-    }
-    );
+    this.props
+      .updateUser(formData, this.state.username)
+      .then(post => {
+          if(typeof post !== 'object'){
+          this.props.history.push("/");
+          }
+        }
+      )
+      
     
   }
   handleFile(e) {
