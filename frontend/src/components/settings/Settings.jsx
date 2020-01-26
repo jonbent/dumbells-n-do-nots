@@ -58,6 +58,9 @@ class Settings extends Component {
   handleBirthDate(e) {
     this.setState({ birthDate: e.currentTarget.value });
   }
+  logout(){
+    this.props.logout().then(() => this.props.history.push('/login'))
+  }
 
   render() {
       const { user, errors } = this.props;
@@ -140,6 +143,9 @@ class Settings extends Component {
           </div>
           <div onClick={this.handleSave} className="save">
             <div>Save</div>
+          </div>
+          <div onClick={this.logout} className="logout">
+            <div>Logout</div>
           </div>
         </div>
         <BottomNavBar user={user} />
