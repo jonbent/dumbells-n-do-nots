@@ -95,7 +95,6 @@ router.post('/register', (req, res) => {
                             res.json({
                                 success: true,
                                 token: 'Bearer ' + token,
-                                user: payload
                             });
                         });
                 })

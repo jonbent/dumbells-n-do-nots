@@ -24,6 +24,7 @@ class NewRoutineForm extends React.Component{
     }
     
     handleStartDate(e) {
+        console.log(e)
         this.setState({ startDate: DateFormat(e, "yyyy-mm-dd") });
     }
 
@@ -43,6 +44,7 @@ class NewRoutineForm extends React.Component{
         };
         return(
             <div className="new-routine-form">
+                <form>
                 <h1 className="new-routine-header">New Routine</h1>
                 <br/>
                 <div className="start-date-label">Start Date</div>
@@ -54,6 +56,7 @@ class NewRoutineForm extends React.Component{
                 />
                 <button onClick={() => this.props.receiveNewRoutineStartDate({startDate})}>Next</button>
                 </div>
+                </form>
             </div>
         )
     }
