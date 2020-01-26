@@ -21,9 +21,9 @@ const NewRoutinesReducer = (state = {}, action) => {
             }
             return nextState
         case RECEIVE_ROUTINE_MEALS:
-            return Object.assign({}, state, action.payload.day)
+            return Object.assign({}, state, action.payload.days)
         case RECEIVE_ROUTINE_WORKOUTS:
-            return Object.assign({}, state, action.payload.day)
+            return Object.assign({}, state, action.payload.days)
         case CLEAR_NEW_ROUTINE_DATA:
             return {}
         default:
