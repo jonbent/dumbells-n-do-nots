@@ -22,16 +22,26 @@ class NewRoutineForm extends React.Component{
             endDate: DateFormat(weekFromCurrentDate, 'yyyy-mm-dd')
         }
         this.handleStartDate = this.handleStartDate.bind(this);
+        this.handleYearMonthChange = this.handleYearMonthChange.bind(this);
+        this.handleNextClick = this.handleNextClick.bind(this);
     }
     
     handleStartDate(e) {
         this.setState({ startDate: DateFormat(e, "yyyy-mm-dd") });
     }
 
+    handleYearMonthChange(month) {
+        this.setState({ month });
+    }
+
+    handleNextClick(){
+    this.props.receiveNewRoutineStartDate(this.props.startDate)
+    }
+
     render(){
         const startDate = this.state.startDate;
         const dayPickerProps = {
-            month: this.state.month,
+            // month: this.state.month,
             fromMonth: fromMonth,
             toMonth: toMonth,
             captionElement: ({ date, localeUtils }) => (
@@ -50,7 +60,7 @@ class NewRoutineForm extends React.Component{
                 <div className="start-date-input">
                 <DayPickerInput
                         dayPickerProps={dayPickerProps}
-                        onDayChange={e => this.handleStartDate(e)}
+                        onDayClick={e => this.handleStartDate(e)}
                         selectedDays={this.state.startDate}
                 />
                 <button className="next-button" onClick={() => this.props.receiveNewRoutineStartDate({startDate})}>Next</button>
