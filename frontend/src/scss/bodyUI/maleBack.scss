@@ -1,0 +1,94 @@
+.male-back-container{
+    display: flex;
+    justify-content: center;
+}
+
+.male-back-selector{
+    margin-top: 50px;
+    position: relative;
+}
+
+#back-male-muscle-group{
+
+}
+
+
+#back-male-back{
+    position:absolute;
+    top: 83px;
+    left: 115px;
+    opacity: 0;
+}
+
+#back-male-back:hover{
+    opacity: 1;
+}
+
+#back-male-calves{
+    position:absolute;
+    top: 362px;
+    left: 94px;
+    opacity: 0;
+}
+
+#back-male-calves:hover{
+    opacity: 1;
+}
+
+.back-male-arms{
+    opacity: 0;
+}
+
+
+#back-male-left-arm{
+    position: absolute;
+    top: 122px;
+    left: 45px;
+}
+
+#back-male-right-arm{
+    position: absolute;
+    top: 120px;
+    left: 218px;
+}
+
+.back-male-arms:hover{
+    opacity: 1;
+}
+
+.back-male-shoulder{
+   opacity: 0; 
+}
+
+#back-male-top-shoulder{
+    position: absolute;
+    top: 66px;
+    left: 137px;
+}
+
+#back-male-left-shoulder{
+    position: absolute;
+    top: 90px;
+    left: 90px;
+}
+
+#back-male-right-shoulder{
+    position: absolute;
+    top: 90px;
+    left: 199px;
+}
+
+.back-male-shoulder:hover{
+    opacity: 1;
+}
+
+#back-male-legs{
+    position: absolute;
+    top: 219px;
+    left: 108px;
+    opacity: 0;
+}
+
+#back-male-legs:hover{
+    opacity: 1;
+}

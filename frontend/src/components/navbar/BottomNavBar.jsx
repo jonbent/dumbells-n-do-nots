@@ -4,12 +4,12 @@ import Plus from '../svg/Plus'
 import HeartOutline from '../svg/HeartOutline'
 import History from '../svg/History'
 
-import {NavLink, withRouter} from 'react-router-dom'
+import {NavLink} from 'react-router-dom'
 
 export default class BottomNavBar extends React.Component{
-    constructor(props){
-        super(props)
-    }
+    // constructor(props){
+    //     super(props)
+    // }
 
     render(){
         const {user} = this.props
@@ -22,9 +22,9 @@ export default class BottomNavBar extends React.Component{
                         </NavLink>
                     </div>
                     <div>
-                        <a onClick={() => this.props.openNewRoutineModal()}>
+                        <button onClick={() => this.props.openNewRoutineModal()}>
                             <Plus/>
-                        </a>
+                        </button>
                     </div>
                     <div>
                         <NavLink to={`/users/${user.username}/favorites`}>
@@ -32,9 +32,9 @@ export default class BottomNavBar extends React.Component{
                         </NavLink>
                     </div>
                     <div>
-                        <NavLink to={`/users/${user.username}/history`}>
+                        <button onClick={() => this.props.testMuscleGroupsSelector()}>
                             <History/>
-                        </NavLink>
+                        </button>
                     </div>
                 </div>
             </div>
