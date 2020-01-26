@@ -5,7 +5,7 @@ import {fetchAllExercisesByMuscleGroup} from '../../actions/ExerciseActions';
 
 
 const mSTP = (state) => ({
-    
+        sex: state.session.user.sex
 })
 
 const mDTP = dispatch =>({

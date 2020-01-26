@@ -6,7 +6,7 @@ import AddMealsFormContainer from '../meals/AddMealsFormContainer';
 import SampleRoutinesContainer from '../sampleRoutines/SampleRoutinesContainer';
 import '../../scss/Modal.scss'
 import AddRoutineFormContainer from '../routine/NewRoutineFormContainer'
-import MuscleGroupSelector from '../muscleGroups/MuscleGroupSelectorContainer';
+import ExerciseSelector from '../exercises/ExerciseSelectorContainer';
 
 function Modal({ modal, closeModal }) {
     if (!modal) {
@@ -27,7 +27,7 @@ function Modal({ modal, closeModal }) {
             component = <AddRoutineFormContainer />;
             break;
         case 'bodyUI':
-            component = <MuscleGroupSelector />;
+            component = <ExerciseSelector />;
             break;
         default:
             return null;
