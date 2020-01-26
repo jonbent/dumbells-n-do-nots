@@ -26,7 +26,6 @@
     "mongoose-beautiful-unique-validation": "^7.1.1",
     "mongoose-unique-validation": "^0.1.0",
     "multer": "^1.4.2",
-    "node-sass": "^4.13.1",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
     "password-validator": "^5.0.3",

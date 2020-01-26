@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import {fetchMuscleGroups} from '../../actions/MuscleGroupActions';
 
 
-class MaleBack extends React.Component {
+class MaleBack extends Component {
 
     constructor(props){
         super(props);
@@ -73,24 +73,24 @@ class MaleBack extends React.Component {
         return (
             <div className="male-back-container">
             <div className="male-back-selector">
-                <img id="back-male-muscle-group" src="/images/maleUI/back/back-male-muscle-group.png"></img>
+                <img id="back-male-muscle-group" src="/images/maleUI/back/back-male-muscle-group.png" alt="back-male-muscle-group"></img>
 
-                <img id="back-male-back" src="/images/maleUI/back/back-back.png" onClick={this.handleBackClick} onMouseLeave={()=>this.handleMouseLeave('hoverBack')} onMouseEnter={()=>this.handleMouseEnter('hoverBack')} style= {this.state.Back || this.state.hoverBack ? {opacity:1} : {opacity:0}}></img>
+                <img id="back-male-back" src="/images/maleUI/back/back-back.png" alt="back-back" onClick={this.handleBackClick} onMouseLeave={()=>this.handleMouseLeave('hoverBack')} onMouseEnter={()=>this.handleMouseEnter('hoverBack')} style= {this.state.Back || this.state.hoverBack ? {opacity:1} : {opacity:0}}></img>
 
-                <img id="back-male-calves" src="/images/maleUI/back/back-calves.png" onClick={this.handleCalvesClick} onMouseLeave={()=>this.handleMouseLeave('hoverCalves')} onMouseEnter={()=>this.handleMouseEnter('hoverCalves')} style= {this.state.Calves || this.state.hoverCalves ? {opacity:1} : {opacity:0}}></img>
+                <img id="back-male-calves" src="/images/maleUI/back/back-calves.png" alt="back-calves" onClick={this.handleCalvesClick} onMouseLeave={()=>this.handleMouseLeave('hoverCalves')} onMouseEnter={()=>this.handleMouseEnter('hoverCalves')} style= {this.state.Calves || this.state.hoverCalves ? {opacity:1} : {opacity:0}}></img>
 
                 <div className="back-male-arms" onClick={this.handleArmsClick} onMouseLeave={()=>this.handleMouseLeave('hoverArms')} onMouseEnter={()=>this.handleMouseEnter('hoverArms')} style= {this.state.Arms || this.state.hoverArms ? {opacity:1} : {opacity:0}}>
-                        <img id="back-male-left-arm" src="/images/maleUI/back/back-left-arm.png"></img>
-                        <img id="back-male-right-arm" src="/images/maleUI/back/back-right-arm.png"></img>
+                        <img id="back-male-left-arm" src="/images/maleUI/back/back-left-arm.png" alt="back-left-arm"></img>
+                        <img id="back-male-right-arm" src="/images/maleUI/back/back-right-arm.png" alt="back-right-arm"></img>
                 </div>
 
-                <div className="back-male-shoulder" onClick={this.handleShouldersClick} onClick={this.handleShouldersClick} onMouseLeave={()=>this.handleMouseLeave('hoverShoulders')} onMouseEnter={()=>this.handleMouseEnter('hoverShoulders')} style= {this.state.Shoulders || this.state.hoverShoulders ? {opacity:1} : {opacity:0}}>
-                        <img id="back-male-top-shoulder" src="/images/maleUI/back/back-top-shoulder.png"></img>
-                        <img id="back-male-left-shoulder" src="/images/maleUI/back/back-left-shoulder.png"></img>
-                        <img id="back-male-right-shoulder" src="/images/maleUI/back/back-right-shoulder.png"></img>
+                <div className="back-male-shoulder" onClick={this.handleShouldersClick} onMouseLeave={()=>this.handleMouseLeave('hoverShoulders')} onMouseEnter={()=>this.handleMouseEnter('hoverShoulders')} style= {this.state.Shoulders || this.state.hoverShoulders ? {opacity:1} : {opacity:0}}>
+                        <img id="back-male-top-shoulder" src="/images/maleUI/back/back-top-shoulder.png" alt="back-top-shoulder"></img>
+                        <img id="back-male-left-shoulder" src="/images/maleUI/back/back-left-shoulder.png" alt="back-left-shoulder"></img>
+                        <img id="back-male-right-shoulder" src="/images/maleUI/back/back-right-shoulder.png" alt="back-right-shoulder"></img>
                 </div>
 
-                <img id="back-male-legs" src="/images/maleUI/back/back-legs.png" onClick={this.handleLegsClick} onClick={this.handleLegsClick} onMouseLeave={()=>this.handleMouseLeave('hoverLegs')} onMouseEnter={()=>this.handleMouseEnter('hoverLegs')} style= {this.state.Legs || this.state.hoverLegs ? {opacity:1} : {opacity:0}}></img>
+                <img id="back-male-legs" src="/images/maleUI/back/back-legs.png" alt="back-legs" onClick={this.handleLegsClick} onMouseLeave={()=>this.handleMouseLeave('hoverLegs')} onMouseEnter={()=>this.handleMouseEnter('hoverLegs')} style= {this.state.Legs || this.state.hoverLegs ? {opacity:1} : {opacity:0}}></img>
             </div>
             </div>
         )
