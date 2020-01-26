@@ -1,24 +1,22 @@
-// import { connect } from 'react-redux';
-// import AddUserMealsForm from './AddUserMealsForm';
-// import { createRoutine } from '../../actions/RoutineActions';
-// import { receiveDayUserMeal } from '../../actions/UserMealActions'
-// import DateFormat from 'dateformat';
+import { connect } from 'react-redux';
+import AddUserMealsForm from './AddUserMealsForm';
+import { createDayUserMeal } from '../../actions/UserMealActions'
+import DateFormat from 'dateformat';
 
 
-// const mapStateToProps = (state) => {
-//     return {
-//         userMeal: {
-//             user: state.session.user.id,
-//         }
-//     }
-// };
+const mapStateToProps = (state, ownProps) => {
+    // const date = new Date()
+    // startDate = 
+    return {
+        routine: 
+    }
+};
 
-// const mapDispatchToProps = dispatch => ({
-//     createRoutine: routine => dispatch(createRoutine(routine)),
-//     receiveNewRoutineStartDate: routineStartDate => dispatch(receiveNewRoutineStartDate(routineStartDate))
-// });
+const mapDispatchToProps = dispatch => ({
+    createDayUserMeal: meal => dispatch(createDayUserMeal(meal))
+});
 
-// export default connect(
-//     mapStateToProps,
-//     mapDispatchToProps
-// )(NewRoutineForm);
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(AddUserMealsForm);
