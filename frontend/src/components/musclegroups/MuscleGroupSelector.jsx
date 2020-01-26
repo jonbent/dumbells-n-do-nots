@@ -3,6 +3,7 @@ import MaleFront from '../bodypartUI/MaleFront'
 import MaleBack from '../bodypartUI/MaleBack'
 import FemaleBack from '../bodypartUI/FemaleBack'
 import FemaleFront from '../bodypartUI/FemaleFront'
+import '../../scss/MuscleGroupsSelector.scss'
 class MuscleGroupSelector extends Component {
 
     constructor(props){
@@ -30,11 +31,15 @@ class MuscleGroupSelector extends Component {
         this.handleClick = this.handleClick.bind(this);
     }
     handleMouseEnter(field){
-        this.setState({[field]: true})
+        if (!window.mobileAndTabletcheck()){
+            this.setState({[field]: true})
+        }
     }
 
     handleMouseLeave(field){
-        this.setState({[field]: false})
+        if (!window.mobileAndTabletcheck()){
+            this.setState({[field]: false})
+        }
     }
 
     handleClick(field){
@@ -65,7 +70,7 @@ class MuscleGroupSelector extends Component {
         }
         return (
           <div>
-            <div className="okay">
+            <div className="muscle-group-selector-container">
               <div>{bodySide}</div>
               <div>
                 <div onClick={this.handleSide}>

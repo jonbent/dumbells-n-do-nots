@@ -25,7 +25,7 @@ export default class FemaleFront extends Component {
                     <img id="front-female-right-shoulder" alt="front-female-right-shoulder" src="/images/femaleUI/front/front-female-right-shoulder.png"></img>
                 </div>
 
-                <div className="front-female-legs" onClick={() => this.props.handleClick("hoverLegs")} onMouseLeave={()=>this.props.handleMouseLeave('hoverLegs')} onMouseEnter={()=>this.props.handleMouseEnter('hoverLegs')} style= {this.props.Legs || this.props.hoverLegs ? {opacity:1} : {opacity:0}}>
+                <div className="front-female-legs" onClick={() => this.props.handleClick("Legs")} onMouseLeave={()=>this.props.handleMouseLeave('hoverLegs')} onMouseEnter={()=>this.props.handleMouseEnter('hoverLegs')} style= {this.props.Legs || this.props.hoverLegs ? {opacity:1} : {opacity:0}}>
                     <img id="front-female-left-leg" alt="front-female-left-leg" src="/images/femaleUI/front/front-female-left-leg.png"></img>
                     <img id="front-female-right-leg" alt="front-female-right-leg" src="/images/femaleUI/front/front-female-right-leg.png"></img>
                 </div> 
