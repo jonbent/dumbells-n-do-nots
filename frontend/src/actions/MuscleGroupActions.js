@@ -10,7 +10,7 @@ const receiveMuscleGroups = (payload) => ({
 });
 
 export const fetchMuscleGroups = () => dispatch =>(
-    MuscleGroupsAPIUtil.fetchMuscleGroupsUtil()
+    MuscleGroupsAPIUtil.fetchMuscleGroups()
         .then(res =>{
             dispatch(receiveMuscleGroups(res))
         })
