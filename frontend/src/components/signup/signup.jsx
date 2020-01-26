@@ -57,7 +57,6 @@ class Signup extends React.Component {
     this.props.receiveNextStep(2);
   }
   handleBirthDate(e) {
-    console.log('hitting');
     this.setState({ birthDate: DateFormat(e, "yyyy-mm-dd") });
   }
   handleYearMonthChange(month) {
