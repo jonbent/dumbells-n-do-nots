@@ -13,8 +13,10 @@ const NewRoutinesReducer = (state = {}, action) => {
             let newStartDate = new Date(startDate);
             for(let i = 0; i < 7; i++){
                 let formattedDate;
+
                 newStartDate.setDate(newStartDate.getDate() + 1);
                 formattedDate = DateFormat(newStartDate, 'yyyy-mm-dd')
+
                 nextState[formattedDate] = {}
             }
             return nextState
