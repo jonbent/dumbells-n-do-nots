@@ -12,12 +12,12 @@ export default class BottomNavBar extends React.Component{
     // }
 
     render(){
-        const {user} = this.props
+        const {user, location} = this.props;
         return (
             <div className="bottom-navbar-container">
                 <div className="bottom-navbar">
                     <div>
-                        <NavLink exact to={`/users/${user.username}`}>
+                        <NavLink exact to={location.pathname === "/settings" ? "/" : `/settings`} className={location.pathname === "/settings" ? "active" : ``}>
                             <Settings/>
                         </NavLink>
                     </div>
