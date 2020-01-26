@@ -11,10 +11,11 @@ router.get("/day/:dayId", (req, res) => {
 })
 
 // post a meals for a day in the routine
-router.post("/day/:day_id/new", (req, res) => {
+router.post("/day/:dayId/", (req, res) => {
     const newUserMeal = new UserMeal({
         day: req.body.dayId,
-        meal: req.body.mealId
+        meal: req.body.mealId,
+        timeStamp: req.body.timeStamp
     })
 
     newUserMeal

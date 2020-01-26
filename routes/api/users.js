@@ -162,21 +162,8 @@ router.get('/:username', (req, res) => {
 })
 
 router.post('/:username/update', upload.single("avatarImg"), (req, res) => {
+    // console.log(eq.file);
     const s3 = new AWS.S3()
-    
-    
-    // AWS.config.getCredentials(function (err) {
-    //     console.log('hitting');
-    //     console.log(err);
-        
-    //     if (err) console.log(err);
-        
-    //     // credentials not loaded
-    //     else {
-    //         console.log("Access key:", AWS.config.credentials.accessKeyId);
-    //         console.log("Secret access key:", AWS.config.credentials.secretAccessKey);
-    //     }
-    // });
     User.findOne({ username: req.params.username }).then(user => {
             if (!user) return res.status(400).json({ user: { message: "User not found" } })
         const file = req.file;
@@ -195,12 +182,19 @@ router.post('/:username/update', upload.single("avatarImg"), (req, res) => {
                 res.status(500).json({ error: true, Message: err });
             } else {
                 user.avatarUrl = s3FileURL + keyname
-                
-                res.json({ user });
+                user.email = req.body.email
+                user.weightCur = req.body.weightCur
+                user.height = req.body.height
+                user.birthdate = req.body.birthdate
+                user.sex = req.body.sex
+                user.username = req.body.username
+                user.weightStart = req.body.weightStart
+            
                 user.save(function (error, newFile) {
                     if (error) {
                         throw error;
                     }
+                    res.json({ user });
                 });
             }
         })

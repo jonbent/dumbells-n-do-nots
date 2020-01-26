@@ -4,7 +4,7 @@
   bottom: 0;
   right: 0;
   left: 0;
-  background: lightskyblue;
+  background: url(/images/dumbnot-background.jpg);
   z-index: 10;
 }
 
@@ -13,4 +13,10 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.close-modal-button{
+    color: lightskyblue;
+    background: none;
+    border: none;
 }

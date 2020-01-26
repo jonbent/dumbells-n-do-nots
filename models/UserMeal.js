@@ -11,7 +11,11 @@ const UserMealSchema = new Schema({
         type: Schema.Types.ObjectId,
         required: true,
         ref: "Meal"
-    }
+    },
+    timeStamp: {
+        type: Date
+    },
+
 })
 
 module.exports = UserMeal = mongoose.model("UserMeal", UserMealSchema)
