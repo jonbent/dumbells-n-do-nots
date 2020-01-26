@@ -16,10 +16,10 @@ const NewRoutinesReducer = (state = {}, action) => {
                 
                 if(i === 0){
                     formattedDate = DateFormat(newStartDate, "yyyy-mm-dd");
-                } else {newStartDate);
-                    newStartDate.setDate(newStartDate.getDate() + 1);;
+                } else {
+                    newStartDate.setDate(newStartDate.getDate() + 1);
                     
-                    formattedDate = DateFormat(newStartDate, 'yyyy-mm-dd')
+                    formattedDate = DateFormat(newStartDate, 'yyyy-mm-dd');
                 }
                 nextState[formattedDate] = {}
             }
