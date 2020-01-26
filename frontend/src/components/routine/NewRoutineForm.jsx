@@ -14,6 +14,7 @@ const fromMonth = new Date(currentYear - 80)
 class NewRoutineForm extends React.Component {
   constructor(props) {
     super(props);
+    // const date = new Date();
     const currentDate = new Date();
     console.log("currentDate", typeof Date(currentDate.getMonth()));
 
