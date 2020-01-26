@@ -5,7 +5,11 @@ export default (prevState = {}, action)=>{
     let nextState = {}
     switch (action.type) {
         case RECEIVE_MUSCLE_GROUPS:
-            nextState= Object.assign(nextState, prevState, action.payload);
+            const muscleGroup = {};
+            action.payload.data.forEach(element => {
+                muscleGroup[element.name] = element;
+            });
+            nextState= Object.assign(nextState, prevState, muscleGroup);
             return nextState; 
         default:
             return prevState;

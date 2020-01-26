@@ -7,7 +7,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    openNewRoutineModal: () => dispatch(openModal('addRoutine'))
+    openNewRoutineModal: () => dispatch(openModal('addRoutine')),
+    testMuscleGroupsSelector: () => dispatch(openModal('bodyUI'))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(BottomNavBar)
