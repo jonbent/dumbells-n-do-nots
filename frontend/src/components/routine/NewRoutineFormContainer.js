@@ -2,12 +2,12 @@ import { connect } from 'react-redux';
 import NewRoutineForm from './NewRoutineForm';
 import { createRoutine } from '../../actions/RoutineActions';
 import { receiveNewRoutineStartDate } from '../../actions/NewRoutineActions'
-import DateFormat from 'dateformat';
+// import DateFormat from 'dateformat';
 
 
 const mapStateToProps = (state) => {
-    const currentDate = new Date();
-    const weekFromCurrentDate = currentDate.setDate(currentDate.getDate() + 7)
+    // const currentDate = new Date();
+    // const weekFromCurrentDate = currentDate.setDate(currentDate.getDate() + 7)
     return { 
         routine: {
             user: state.session.user.id,
