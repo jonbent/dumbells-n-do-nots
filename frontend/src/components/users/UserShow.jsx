@@ -5,9 +5,9 @@ import UserShowCard from './UserShowCard';
 import Modal from '../modal/Modal';
 
 class UserShow extends Component {
-    constructor(props) {
-        super(props);
-    }
+    // constructor(props) {
+    //     super(props);
+    // }
     componentDidMount() {
         if (this.props.match.params.username){
             this.props.fetchUserInfo(this.props.match.params.username)
