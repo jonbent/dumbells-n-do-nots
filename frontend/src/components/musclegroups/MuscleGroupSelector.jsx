@@ -48,13 +48,17 @@ class MuscleGroupSelector extends Component {
             bodySide = <FemaleBack/>
         }
         return (
-            <div>
-                <div className="okay">
-                    <div onClick={this.handleSide}>{this.state.side === "front" ? "Back" : "Front"}</div> 
-                    <div>{bodySide}</div> 
+          <div>
+            <div className="okay">
+              <div>{bodySide}</div>
+              <div>
+                <div onClick={this.handleSide}>
+                  {this.state.side === "front" ? "Back" : "Front"}
                 </div>
+              </div>
             </div>
-        )
+          </div>
+        );
     }
 }
 export default MuscleGroupSelector;
