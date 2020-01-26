@@ -13,21 +13,17 @@ const NewRoutinesReducer = (state = {}, action) => {
             let newStartDate = new Date(startDate);
             for(let i = 0; i < 7; i++){
                 let formattedDate;
-                
-                if(i === 0){
-                    formattedDate = DateFormat(newStartDate, "yyyy-mm-dd");
-                } else{
-                    newStartDate.setDate(newStartDate.getDate() + 1);
-                    
-                    formattedDate = DateFormat(newStartDate, 'yyyy-mm-dd')
-                }
+
+                newStartDate.setDate(newStartDate.getDate() + 1);
+                formattedDate = DateFormat(newStartDate, 'yyyy-mm-dd')
+
                 nextState[formattedDate] = {}
             }
             return nextState
         case RECEIVE_ROUTINE_MEALS:
-            return Object.assign({}, state, action.payload.day)
+            return Object.assign({}, state, action.payload.days)
         case RECEIVE_ROUTINE_WORKOUTS:
-            return Object.assign({}, state, action.payload.day)
+            return Object.assign({}, state, action.payload.days)
         case CLEAR_NEW_ROUTINE_DATA:
             return {}
         default:

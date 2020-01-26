@@ -1,4 +1,4 @@
-import {connect} from 'react-redux';
-import AddMealsForm from './AddMealsForm';
+// import {connect} from 'react-redux';
+// import AddMealsForm from './AddMealsForm';
 
-export default connect()(AddMealsForm);
+// export default connect()(AddMealsForm);
