@@ -97,7 +97,7 @@ class Signup extends React.Component {
         heightErrors = 'Height is required';
       }
       if (errors.email) {
-        emailErrors = errors.email.message.slice(5);
+        emailErrors = errors.email.message
       }
       if (errors.password) {
         passwordErrors = errors.password.message.slice(5);
