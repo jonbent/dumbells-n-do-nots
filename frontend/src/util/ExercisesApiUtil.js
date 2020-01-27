@@ -5,8 +5,8 @@ export const getAllExercises = () => {
 };
 
 
-export const getAllExercisesByMuscleGroup = id => {
-    return axios.get(`/api/muscleGroups/${id}`)
+export const getAllExercisesByMuscleGroup = ids => {
+    return axios.post(`/api/exercises/`, ids)
 };
 
 export const getUserExercises = id => {
