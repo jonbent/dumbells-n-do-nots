@@ -8,8 +8,8 @@ export const receiveDayUserMeal = meal => ({
     meal
 })
 
-export const receiveNewUserMeal = meal => ({
-    type: RECEIVE_NEW_MEAL,
+export const receiveNewUserMeals = meal => ({
+    type: RECEIVE_DAY_MEALS,
     meal
 })
 
