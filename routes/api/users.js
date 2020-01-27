@@ -8,6 +8,7 @@ const jwt = require('jsonwebtoken');
 const keys = require('../../config/keys');
 const passport = require('passport');
 const uuid = require('uuid');
+const Validator = require('validator');
 
 
 const multer = require("multer");
@@ -54,10 +55,8 @@ router.post('/register', (req, res) => {
         height: req.body.height,
         sex: req.body.sex,
     })
-    let errors = newUser.validateSync();
-    if (errors){
-        errors = errors.errors
-        if (req.body.password !== req.body.password2) errors = Object.assign(errors, {password2: {
+    let errors = {};
+    if (req.body.password !== req.body.password2) errors = Object.assign(errors, {password2: {
             message: "Password Confirmation must match",
             name: "ValidatorError",
             properties: {
@@ -68,8 +67,24 @@ router.post('/register', (req, res) => {
             kind: "required",
             path: "password2"
         }})
-        return res.status(422).json(errors)
+    if (!Validator.isEmail(req.body.email)) {
+        errors.email = {
+            message: "Invalid Email",
+            name: "ValidatorError",
+            properties: {
+                message: "Path `email` must be a valid email.",
+                type: "not valid",
+                path: "email"
+            },
+            kind: "not valid",
+            path: "email"
+        };
     }
+    let validatorErrors = newUser.validateSync();
+    if (validatorErrors){
+        errors = Object.assign(errors, validatorErrors.errors)
+    }
+    if (Object.keys(errors)) return res.status(422).json(errors)
 
     if (req.body.sex === "M"){
         newUser.avatarUrl = '/images/maleDefaultAvatar.jpg'
