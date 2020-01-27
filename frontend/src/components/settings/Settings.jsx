@@ -109,7 +109,7 @@ class Settings extends Component {
               <input
                 type="text"
                 value={this.state.email}
-                onChange={this.update("email")}
+                onChange={() => this.update("email")}
               />
             </div>
             <span>{emailError}</span>
@@ -128,7 +128,7 @@ class Settings extends Component {
               <input
                 type="text"
                 value={this.state.weightCur}
-                onChange={this.update("weightCur")}
+                onChange={() => this.update("weightCur")}
               />
             </div>
             <span>{weightError}</span>
@@ -137,7 +137,7 @@ class Settings extends Component {
               <input
                 type="text"
                 value={this.state.height}
-                onChange={this.update("height")}
+                onChange={() => this.update("height")}
               />
             </div>
             <span>{heightError}</span>
