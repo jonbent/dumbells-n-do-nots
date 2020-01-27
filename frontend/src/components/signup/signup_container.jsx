@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Signup from './signup';
-import { signup } from '../../actions/SessionActions';
+import { signup, resetErrors } from '../../actions/SessionActions';
 import { receiveNextStep } from '../../actions/FilterActions'
 
 const mapStateToProps = (state) => ({
@@ -10,8 +10,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = dispatch => ({
     signup: userForm => dispatch(signup(userForm)),
-    receiveNextStep: num => dispatch(receiveNextStep(num))
-
+    receiveNextStep: num => dispatch(receiveNextStep(num)),
+    resetErrors: () => dispatch(resetErrors())
 });
 
 export default connect(
