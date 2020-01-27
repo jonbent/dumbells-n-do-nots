@@ -15,6 +15,7 @@ class Settings extends Component {
     this.handleSave = this.handleSave.bind(this);
     this.handleFile = this.handleFile.bind(this);
     this.handleBirthDate = this.handleBirthDate.bind(this);
+    this.logout = this.logout.bind(this);
   }
   handleSave(e) {
     const formData = new FormData();
@@ -59,7 +60,7 @@ class Settings extends Component {
     this.setState({ birthDate: e.currentTarget.value });
   }
   logout(){
-    this.props.logout().then(() => this.props.history.push('/login'))
+    this.props.logout()
   }
 
   render() {
