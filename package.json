@@ -9,11 +9,7 @@
     "dev": "concurrently \"yarn run server\" \"yarn --cwd ./frontend/ start\"",
     "start": "node app.js",
     "server": "nodemon app.js",
-<<<<<<< HEAD
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
-=======
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false yarn --prefix frontend && yarn --cwd ./frontend/ build"
->>>>>>> a3dead216c754f1071a10c1811e5dcdc8fea6966
   },
   "author": "",
   "license": "ISC",
