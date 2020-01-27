@@ -32,11 +32,10 @@ export default class Login extends Component {
         let passwordError;
         if(this.state.errors){
             if(this.state.errors.username){
-                console.log(this.state.errors.username)
-                usernameError=this.state.errors.username.message;
+                usernameError=this.state.errors.username;
             }
             if(this.state.errors.password){
-                passwordError=this.state.errors.password.message;
+                passwordError=this.state.errors.password;
             }
         }
         return (
