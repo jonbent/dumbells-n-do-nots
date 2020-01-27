@@ -3,7 +3,7 @@ import DateFormat from 'dateformat';
 import NavBar from '../navbar/NavBar';
 import DayPickerInput from "react-day-picker/DayPickerInput";
 import YearMonthForm from './year_month_form'
-
+import {Link} from 'react-router-dom'
 import "react-day-picker/lib/style.css";
 import '../../scss/LoginForm.scss';
 import '../../scss/signup.scss';
@@ -44,10 +44,9 @@ class Signup extends React.Component {
     return result.toString();
   }
   handleSubmit(e) {
-    e.preventDefault();
     let final_input = this.state;
     final_input["height"] = this.setHeight();
-    this.props.signup(final_input).then(this.props.history.push("/"));
+    this.props.signup(final_input)
   }
   updateField(field, e) {
     this.setState({ [field]: e.currentTarget.value });
@@ -261,7 +260,16 @@ class Signup extends React.Component {
     return (
       <div className="login-page">
         <NavBar />
-        <div className="signup-form-container">{form_type}</div>
+        <div className="signup-form-container">
+          {form_type}
+        <div className="separator-container">
+            <span className="separator"></span>
+            <span>OR</span>
+            <span className="separator"></span>
+        </div>
+          <Link onClick={this.props.resetErrors} to="/login" className="sign-up-link">Login</Link>
+        </div>
+
       </div>
     );
   }
