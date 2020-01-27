@@ -47,7 +47,11 @@ class Signup extends React.Component {
     e.preventDefault();
     let final_input = this.state;
     final_input["height"] = this.setHeight();
-    this.props.signup(final_input).then(this.props.history.push("/"));
+    this.props.signup(final_input).then((post) => {
+      if (typeof post !== 'object') {
+        this.props.history.push("/");
+      }
+    });
   }
   updateField(field, e) {
     this.setState({ [field]: e.currentTarget.value });
@@ -93,7 +97,7 @@ class Signup extends React.Component {
         heightErrors = 'Height is required';
       }
       if (errors.email) {
-        emailErrors = errors.email.message.slice(5);
+        emailErrors = errors.email.message
       }
       if (errors.password) {
         passwordErrors = errors.password.message.slice(5);
