@@ -5,10 +5,9 @@ import DateFormat from 'dateformat';
 
 
 const mapStateToProps = (state, ownProps) => {
-    // const date = new Date()
-    // startDate = 
+    const date = new Date()
     return {
-        routine: 
+        daySelect: state.ui.NewRoutineData
     }
 };
 

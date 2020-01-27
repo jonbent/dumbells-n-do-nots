@@ -7,6 +7,7 @@ import SampleRoutinesContainer from '../sampleRoutines/SampleRoutinesContainer';
 import '../../scss/Modal.scss'
 import AddRoutineFormContainer from '../routine/NewRoutineFormContainer'
 import ExerciseSelector from '../exercises/ExerciseSelectorContainer';
+import AddUserMealsFormContainer from '../userMeals/AddUserMealsFormContainer'
 
 function Modal({ modal, closeModal }) {
     if (!modal) {
@@ -28,6 +29,9 @@ function Modal({ modal, closeModal }) {
             break;
         case 'bodyUI':
             component = <ExerciseSelector />;
+            break;
+        case 'addUserMeals':
+            component = <AddUserMealsFormContainer />
             break;
         default:
             return null;
