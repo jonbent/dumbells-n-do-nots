@@ -1,8 +1,19 @@
-import React, { Component } from 'react'
-import BottomNavBar from '../navbar/BottomNavBar'
-import '../../scss/UserShow.scss'
-import UserShowCard from './UserShowCard'
+import React, { Component } from 'react';
+import BottomNavBar from '../navbar/BottomNavBarContainer';
+import '../../scss/users/UserShow.scss';
+import UserShowCard from './UserShowCard';
+
 class UserShow extends Component {
+    // constructor(props) {
+    //     super(props);
+    // }
+    componentDidMount() {
+        if (this.props.match.params.username){
+            this.props.fetchUserInfo(this.props.match.params.username)
+        }
+    }
+    
+    
     render(){
         const {user} = this.props
         return(
