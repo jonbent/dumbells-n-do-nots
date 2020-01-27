@@ -2,7 +2,7 @@
     display: flex;
     justify-content: center;
 }
-.felmale-front-selector{
+.female-front-selector{
     margin-top: 50px;
     position: relative;
 }
@@ -18,9 +18,6 @@
     opacity: 0;
 }
 
-#front-female-abs:hover{
-    opacity: 1;
-}
 
 .front-female-arms{
     opacity: 0;
@@ -38,19 +35,12 @@
     top: 104px;
     left: 155px;
 }
-.front-female-arms:hover{
-    opacity: 1;
-}
 
 #front-female-chest{
     position: absolute;
     top: 84px;
     left: 88px;
     opacity: 0;
-}
-
-#front-female-chest:hover{
-    opacity: 1;
 }
 
 .front-female-shoulder{
@@ -75,10 +65,6 @@
     left: 103px;
 }
 
-.front-female-shoulder:hover{
-    opacity: 1;
-}
-
 .front-female-legs{
     opacity: 0;
 }
@@ -93,8 +79,4 @@
     position: absolute;
     top: 182px;
     left: 129px;
-}
-
-.front-female-legs:hover{
-    opacity: 1;
 }

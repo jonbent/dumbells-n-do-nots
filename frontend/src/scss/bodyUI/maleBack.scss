@@ -4,7 +4,7 @@
 }
 
 .male-back-selector{
-    margin-top: 50px;
+    margin-top: 10px;
     position: relative;
 }
 
@@ -20,21 +20,12 @@
     opacity: 0;
 }
 
-#back-male-back:hover{
-    opacity: 1;
-}
-
 #back-male-calves{
     position:absolute;
     top: 362px;
     left: 94px;
     opacity: 0;
 }
-
-#back-male-calves:hover{
-    opacity: 1;
-}
-
 .back-male-arms{
     opacity: 0;
 }
@@ -50,10 +41,6 @@
     position: absolute;
     top: 120px;
     left: 218px;
-}
-
-.back-male-arms:hover{
-    opacity: 1;
 }
 
 .back-male-shoulder{
@@ -78,17 +65,9 @@
     left: 199px;
 }
 
-.back-male-shoulder:hover{
-    opacity: 1;
-}
-
 #back-male-legs{
     position: absolute;
     top: 219px;
     left: 108px;
     opacity: 0;
-}
-
-#back-male-legs:hover{
-    opacity: 1;
 }

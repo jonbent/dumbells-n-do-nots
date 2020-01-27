@@ -37,6 +37,9 @@
         justify-content: space-around;
         div{
             height: 70%;
+            button{
+                height: 100%
+            }
             a.active > svg{
                 fill: white;
             }
