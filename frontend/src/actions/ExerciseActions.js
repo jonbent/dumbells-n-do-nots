@@ -31,8 +31,8 @@ export const fetchAllExercises = () => dispatch => (
         .catch(err => console.log(err))
 )
 
-export const fetchAllExercisesByMuscleGroup = id => dispatch =>(
-    ExerciseApiUtil.getAllExercisesByMuscleGroup()
+export const fetchAllExercisesByMuscleGroup = ids => dispatch =>(
+    ExerciseApiUtil.getAllExercisesByMuscleGroup(ids)
         .then(exercises => dispatch(receiveAllExercisesByMuscleGroup(exercises)))
         .catch(err => console.log(err))
 )

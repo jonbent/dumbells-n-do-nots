@@ -21,21 +21,18 @@ export default class Login extends Component {
     }
     handleSubmit(e){
         e.preventDefault();
-        this.props.login(this.state).then(
-            () => this.props.history.push('/'),
-            () => this.props.history.push('/')
-        )
+        this.props.login(this.state)
     }
     render() {
         const {username, password} = this.state;
         let usernameError;
         let passwordError;
-        if(this.state.errors){
-            if(this.state.errors.username){
-                usernameError=this.state.errors.username;
+        if(this.props.errors){
+            if(this.props.errors.username){
+                usernameError=this.props.errors.username;
             }
-            if(this.state.errors.password){
-                passwordError=this.state.errors.password;
+            if(this.props.errors.password){
+                passwordError=this.props.errors.password;
             }
         }
         return (
