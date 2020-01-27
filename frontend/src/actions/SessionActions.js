@@ -25,9 +25,13 @@ export const logoutUser = () => ({
 });
 
 export const signup = user => dispatch => (
-    SessionApiUtil.signup(user).then(() => (
-        dispatch(receiveUserSignIn())
-    ), err => (
+    SessionApiUtil.signup(user).then((res) => {
+        const { token } = res.data;
+        localStorage.setItem('jwtToken', token);
+        SessionApiUtil.setAuthToken(token);
+        const decoded = jwt_decode(token);
+        return dispatch(receiveCurrentUser(decoded))
+    }, err => (
         dispatch(receiveErrors(err.response.data))
     ))
 );
