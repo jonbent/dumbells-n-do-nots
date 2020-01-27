@@ -148,6 +148,9 @@ router.post('/login', (req, res) => {
                             // Tell the key to expire in one hour
                             { expiresIn: 3600 },
                             (err, token) => {
+                                if (err){
+                                    return res.status(400).json(errors);
+                                }
                                 res.json({
                                     success: true,
                                     token: 'Bearer ' + token
