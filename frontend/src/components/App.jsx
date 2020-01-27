@@ -18,14 +18,9 @@ const App = ({ loggedIn }) => (
 
     <AuthRoute exact path="/signup" component={SignupContainer} />
     <AuthRoute exact path="/login" component={LoginContainer} />
-    {!loggedIn ? (
-      <AuthRoute exact path="/" component={Splash} />
-    ) : (
-        <Switch>
-          <ProtectedRoute exact path="/settings" component={SettingsContainer} />
-          <ProtectedRoute path="/" component={UserShowContainer} />
-        </Switch>
-      )}
+    {!loggedIn && <AuthRoute exact path="/" component={Splash} />}
+    <ProtectedRoute exact path="/settings" component={SettingsContainer} />}
+    {loggedIn &&  <ProtectedRoute path="/" component={UserShowContainer} />}
   </Switch>
 );
 
