@@ -170,6 +170,7 @@ class Signup extends React.Component {
           <div onClick={this.handleNext} className="signup-form-button">
             Next
           </div>
+          <Link to="/login">Login</Link>
         </form>
       );
     } else {
