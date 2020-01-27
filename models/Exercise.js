@@ -26,13 +26,15 @@ const ExerciseSchema = new Schema({
 
     description: {
         type: String,
-        required: true
     },
     numSets: {
         type: Number,
         required: true
     },
-    numReps: {
+    numReps: [{
+        type: Number
+    }],
+    restTime: {
         type: Number
     },
     //seconds

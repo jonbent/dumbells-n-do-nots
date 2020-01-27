@@ -34,8 +34,14 @@
         height: 5rem;
         display:flex;
         align-items: center;
+        justify-content: space-around;
         div{
             height: 70%;
+            button{
+                height: 100%;
+                background-color: lightskyblue;
+                border: none;
+            }
             a.active > svg{
                 fill: white;
             }

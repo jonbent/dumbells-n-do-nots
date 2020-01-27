@@ -1,0 +1,83 @@
+.female-back-container{
+    display: flex;
+    justify-content: center;
+}
+.felmale-back-selector{
+    margin-top: 50px;
+    position: relative;
+}
+
+#back-female-muscle-group{
+    // position:absolute;
+    // top: 0px;
+    // left: 0px;
+}
+
+#back-female-back{
+    position: absolute;
+    top: 73px;
+    left: 93px;
+    opacity: 0;
+}
+
+
+
+#back-female-calves{
+    position: absolute;
+    top: 284px;
+    left: 91px;
+    opacity: 0;
+}
+
+.back-female-legs{
+    opacity: 0;
+}
+
+#back-female-left-leg{
+    position: absolute;
+    top: 178px;
+    left: 86px;
+}
+
+#back-female-right-leg{
+    position: absolute;
+    top: 178px;
+    left: 127px;
+}
+
+.back-female-shoulder{
+    opacity: 0;
+}
+
+#back-female-right-shoulder{
+    position: absolute;
+    top: 75px;
+    left: 150px;
+}
+
+#back-female-left-shoulder{
+    position: absolute;
+    top: 77px;
+    left: 78px;
+}
+
+#back-female-top-shoulder{
+    position: absolute;
+    top: 65px;
+    left: 107px;
+}
+
+.back-female-arms{
+    opacity: 0;
+}
+
+#back-female-left-arm{
+    position: absolute;
+    top: 101px;
+    left: 58px;
+}
+#back-female-right-arm{
+    position: absolute;
+    top: 101px;
+    left: 161px;
+}

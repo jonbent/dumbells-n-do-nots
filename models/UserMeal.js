@@ -2,16 +2,6 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const UserMealSchema = new Schema({
-    routine: {
-        type: Schema.Types.ObjectId,
-        required: true,
-        ref: "Routine"
-    },
-    user: {
-        type: Schema.Types.ObjectId,
-        required: true,
-        ref: "User"
-    },
     day: {
         type: Schema.Types.ObjectId,
         required: true,
@@ -21,7 +11,11 @@ const UserMealSchema = new Schema({
         type: Schema.Types.ObjectId,
         required: true,
         ref: "Meal"
-    }
+    },
+    timeStamp: {
+        type: Date
+    },
+
 })
 
 module.exports = UserMeal = mongoose.model("UserMeal", UserMealSchema)

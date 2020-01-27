@@ -12,6 +12,14 @@ router.get('muscleGroups/:muscleGroupId', (req, res) => {
         .find({ muscleGroup: req.params.muscleGroupId })
         .then(exercises => res.json(exercises))
 })
+router.get('/', (req, res) => {
+    let findQuery = {};
+    if (req.body.muscleGroupIds) findQuery = { muscleGroup: { $in: req.body.muscleGroupIds } }
+    Exercise
+        .find(findQuery)
+        .then(exercises => res.json(exercises))
+
+})
 // get all available exercises foa a muscle
 router.get('muscle/:muscleId', (req, res) => {
     Exercise
@@ -29,7 +37,7 @@ router.post("/", passport.authenticate("jwt", { session: false }), (req, res) =>
         user: req.user.id,
         name: req.body.name,
         description: req.body.description,
-        muscleGroup: req.body.muscleGroup,
+        muscleGroup: req.body.muscleGroupId,
         numSets: req.body.numSets,
         numReps: req.body.numReps,
         interval: req.body.interval
