@@ -1,0 +1,80 @@
+#root > div{
+    height: 100%;
+}
+.login-page{
+    display: flex;
+    flex-direction: column;
+    height:100%;
+    .login-form-container{
+        height: 100%;
+        width: 100%;
+        color: lightgray;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-bottom: 3rem;
+        .sign-up-link{
+            width: 80%;
+            background-color: lightpink;
+            font-size: 200%;
+            border-radius: 50px;
+            color: black;
+            box-shadow: 0rem 0rem 0.5rem black;
+            text-decoration: none;
+            display: flex;
+            justify-content: center;
+            padding: 1px 7px 2px;
+            margin-top: 2rem;
+            height: 3.5rem;
+            align-items: center;
+        }
+        form{
+            display: flex;
+            height: 100%;
+            width: 80%;
+            flex-direction: column;
+            justify-content: space-around;
+            .selected-field{
+                border-bottom: 1px solid lightgray
+            }
+            .selected-field:focus-within{
+                label{
+                    font-size: 75%;
+                }
+            }
+            input:focus{
+                font-size: 200% !important;
+            }
+            input[type="submit"]{
+                background-color: lightskyblue;
+                font-size: 200%;
+                border-radius: 50px;
+                color:black;
+                box-shadow: 0rem 0rem 0.5rem black;
+                cursor: pointer;
+            }
+            input{
+                transition: font-size 1s ease;
+                width: 100%;
+                background-color: transparent;
+                border: none;
+                text-align: center;
+                font-size: 100%;
+                color:lightgray;
+            }
+            label{
+                transition: font-size 1s ease;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                align-items: center;
+                height: 4rem;
+                width: 100%;
+                font-size: 200%;
+                
+            }
+        }
+    }
+}
+
+

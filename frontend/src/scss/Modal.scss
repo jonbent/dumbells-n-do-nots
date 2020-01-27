@@ -1,0 +1,46 @@
+.modal-background {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: url(/images/dumbnot-background.jpg);
+  z-index: 10;
+}
+
+.modal-child-container {
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+.modal-child {
+  background-color: lightskyblue;
+  text-align: center;
+  border-radius: 1rem;
+  width: 80vw;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  justify-content: center;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  overflow-wrap: break-word;
+}
+}
+
+.close-modal-button{
+    color: black;
+    background-color: lightpink;
+    border: none;
+    width: 80vw;
+    height: 3rem;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    display: flex;
+   align-items: center;
+    justify-content: center;
+  cursor: pointer;
+
+}

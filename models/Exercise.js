@@ -3,28 +3,38 @@ const Schema = mongoose.Schema;
 // const muscleGroup = require('./MuscleGroup');
 
 const ExerciseSchema = new Schema({
-    workout: {
+    muscleGroup: {
         type: Schema.Types.ObjectId,
         required: true,
-        ref: "Workout"
+        ref: 'MuscleGroup'
     },
 
-    muscleGroups: [{
+    user: {
         type: Schema.Types.ObjectId,
-        ref: 'MuscleGroup'}],
-
-    estCaloriesBurned: {
-        type: Number
+        ref: "User"
     },
-    description: {
+
+    muscles: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Muscle'
+    }],
+
+    name:{
         type: String,
         required: true
+    },
+
+    description: {
+        type: String,
     },
     numSets: {
         type: Number,
         required: true
     },
-    numReps: {
+    numReps: [{
+        type: Number
+    }],
+    restTime: {
         type: Number
     },
     //seconds
