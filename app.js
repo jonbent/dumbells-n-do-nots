@@ -1,5 +1,6 @@
-const mongoose = require('mongoose')
-const express = require("express")
+const path = require('path');
+const mongoose = require('mongoose');
+const express = require("express");
 const db = require('./config/keys').mongoURI;
 const bodyParser = require('body-parser');
 const passport = require('passport');
@@ -25,14 +26,21 @@ const port = process.env.PORT || 5000;
 app.use(cors({ origin: 'http://localhost:3000' }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use("/api/exercises", exercises)
-app.use("/api/favorites", favorites)
-app.use("/api/meals", meals)
-app.use("/api/muscleGroups", muscleGroups)
-app.use("/api/muscles", muscles)
-app.use("/api/routines", routines)
-app.use("/api/users", users)
-app.use("/api/workouts", workouts)
+app.use("/api/exercises", exercises);
+app.use("/api/favorites", favorites);
+app.use("/api/meals", meals);
+app.use("/api/muscleGroups", muscleGroups);
+app.use("/api/muscles", muscles);
+app.use("/api/routines", routines);
+app.use("/api/users", users);
+app.use("/api/workouts", workouts);
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('frontend/build'));
+  app.get('/', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
+  })
+}
 
 app.listen(port, () => {
 
