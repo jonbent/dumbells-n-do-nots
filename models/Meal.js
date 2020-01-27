@@ -15,8 +15,7 @@ const MealSchema = new Schema({
         required: true
     },
     photoUrl: {
-        type: String,
-        required: true
+        type: String
     },
     prepTime: {
         type: Number,
@@ -24,7 +23,6 @@ const MealSchema = new Schema({
     },
     user: {
         type: Schema.Types.ObjectId,
-        required: true,
         ref: "User"
     }
 })

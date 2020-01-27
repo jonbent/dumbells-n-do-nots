@@ -17,7 +17,6 @@ const UserWorkoutSchema = new Schema({
     },
     workout: {
         type: Schema.Types.ObjectId,
-        required: true,
         ref: "Workout"
     }
 })

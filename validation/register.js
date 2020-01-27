@@ -1,6 +1,7 @@
 const Validator = require('validator');
 const validText = require('./valid-text');
 const passwordValidator = require('password-validator');
+const User = require('../models/User');
 
 module.exports = function validateRegisterInput(data) {
     let errors = {};
@@ -45,28 +46,21 @@ module.exports = function validateRegisterInput(data) {
     if (!Validator.isInt(data.weightStart)) {
         errors.weightStart = 'Starting Weight must be a valid number';
     }
-    if (!Validator.isInt(data.weightCur)) {
-        errors.weightStart = 'Current Weight must be a valid number';
-    }
     if (!Validator.isInt(data.height)) {
-        errors.weightStart = 'Height must be a valid number';
+        errors.height = 'Height must be a valid number';
     }
     if (!Validator.toDate(data.birthDate)) {
         errors.birthDate = 'Birthday must be a valid Date';
     }
 
-
+    
     passValid = passwordSchema.validate(data.password, { list: true })
     if (passValid.length) {
         errors.password = passValid;
     }
 
-    pass2Valid = passwordSchema.validate(data.password2, { list: true })
-    if (passValid.length) {
-        errors.password2 = pass2Valid;
-    }
     if (data.password !== data.password2) {
-        errors.password2 = ["Confirmation password must match First Password."];
+        errors.password2 = "Confirmation password must match First Password.";
     }
 
     return {

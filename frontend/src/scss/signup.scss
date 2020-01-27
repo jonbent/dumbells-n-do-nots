@@ -1,0 +1,188 @@
+
+.signup-form-header{
+    text-align: center;
+    margin: 5rem;
+    margin-top: 3rem;
+    font-size: 3.5rem;
+    font-weight: bold;
+    color: white;
+}
+.signup-form-container{
+    display: flex;
+    justify-content: center;
+    padding-bottom: 4rem;
+    flex-direction: column;
+    align-items: center;
+    .sign-up-link{
+        width: 80%;
+        background-color: lightpink;
+        font-size: 200%;
+        border-radius: 50px;
+        color: black;
+        box-shadow: 0rem 0rem 0.5rem black;
+        text-decoration: none;
+        display: flex;
+        justify-content: center;
+        padding: 1px 7px 2px;
+        margin-top: 2rem;
+        height: 2.5rem;
+        align-items: center;
+    }
+    form{
+        padding-bottom: 4rem;
+    }
+}
+.signup-form-detail-container{
+    text-align: center;
+    font-size: 1.123rem;
+    margin-top: 3.7rem;
+    margin-bottom: 3.7rem;
+}
+.signup-form-detail-label{
+    transition: 0.3s ease-in;
+    color: white;
+    font-size: 120%;
+}
+
+.signup-form-detail-input{
+    transition: 0.5s ease-in;
+    border: none;
+    margin-top: 0.5rem;
+    border-bottom: solid 1px white;
+    input{
+        font-size: 80%;
+    // transition: 0.3s ease;
+    text-align: center;
+    border: none;
+    background: transparent;
+    color: white;
+    width: 100%;
+    }
+}
+.signup-form-detail-input:focus-within{
+    transition: 0.5s ease-out;
+    font-size: 150% ;
+    width: 100%;
+
+    text-align: center;
+}
+.signup-form-detail-input {
+    
+}
+// .signup-form-detail-input > input:focus, DayPickerInput > input:focus{
+//     transition: 0.3s ease-out;
+//     font-size: 150%;
+//     text-align: center;
+
+// }
+.signup-form-detail-dropdown{
+
+}
+.signup-form-dropdown{
+    padding: 0.3125rem 3.5625rem;
+}
+.signup-form-input-detail-container{
+    margin-bottom: 1.5625rem;
+    max-width: 12.5rem;
+    margin: auto;
+    margin-bottom: 1.875rem;
+}
+input:focus{
+    outline: none;
+}
+.signup-form-button{
+    text-align: center;
+    font-size: 1.25rem;
+    // border: solid 1px lightgray;
+    width: 80%;
+    margin: auto;
+    box-shadow: 0 0 1rem black;
+    // margin-bottom: 1.875rem ;
+    padding: 0.335rem 0.625rem;
+    border-radius: 50px;
+    background-color: #316a95;
+}
+.signup-errors{
+    font-size: 0.7375rem;
+    padding: 0.3125rem;
+    color: rgb(185, 185, 185)
+}
+.DayPickerInput{
+    width: 100%;
+}
+.DayPickerInput > input{
+    text-align: center;
+    background: transparent;
+    color: white;
+    border: none;
+}
+.signup-form-detail-dropdown{
+    margin-top: 0.5rem;
+}
+.signup-form-dropdown:focus{
+    outline: none;
+}
+.signup-form-dropdown{
+    appearance: none;
+    color: white;
+    background-color: transparent;
+    height: 1.875rem;
+    width: 12.5rem;
+}
+.signup-form{
+    width: 100%;
+}
+.signup-form-height{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    border-bottom: 1px solid white;
+    color: white;
+    input{
+        max-width: 2rem;
+        background: transparent;
+        border: none;
+        // border-bottom: 1px solid white;
+        color: white;
+        text-align: center;
+    }
+}
+.signup-form-height-input{
+    transition: 0.5s ease-in;
+    border: none;
+    margin-top: 1rem;
+    width: 100%;
+    font-size: 1rem;
+}
+.signup-form-height-input:focus-within{
+    transition: 0.3s ease-out;
+    font-size: 200%;
+    text-align: center;
+}
+
+// .signup-form-height>input:focus{
+//     font-size: 100%;
+// }
+.signup-form-input-detail-container:focus-within{
+    label{
+        transition: 0.3s ease;
+        font-size: 75%;
+    }
+    input,span{
+        // transition: 0.3s ease;
+        font-size: 110%;
+        text-align: center;
+    }
+    // .signup-form-detail-input > input{
+    //     transition: 0.3s ease;
+    //     font-size: 130%;
+    //     text-align: center;
+    // }
+}
+.DayPickerInput-OverlayWrapper{
+    right: 2rem;
+}
+
+
+
+
