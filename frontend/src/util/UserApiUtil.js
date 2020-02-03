@@ -6,6 +6,6 @@ export const fetchUserInfo = (username) => (
 
 export const updateUserInfo = (formData,username) => {
     return(
-    axios.post(`/api/users/${username}/update`, formData)
+    axios({method:"post", url: `/api/users/${username}/update`, data: formData, headers: {'Content-Type': 'multipart/form-data' }})
     );
 }
