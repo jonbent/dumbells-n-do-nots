@@ -1,5 +1,5 @@
 import * as MuscleGroupsAPIUtil from '../util/MuscleGroupsApiUtil';
-import jwt_decode from 'jwt-decode';
+// import jwt_decode from 'jwt-decode';
 
 
 export const RECEIVE_MUSCLE_GROUPS = 'RECEIVE_MUSCLE_GROUPS';

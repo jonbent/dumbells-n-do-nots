@@ -12,6 +12,14 @@ router.get('muscleGroups/:muscleGroupId', (req, res) => {
         .find({ muscleGroup: req.params.muscleGroupId })
         .then(exercises => res.json(exercises))
 })
+router.get('/', (req, res) => {
+    let findQuery = {};
+    if (req.body.muscleGroupIds) findQuery = { muscleGroup: { $in: req.body.muscleGroupIds } }
+    Exercise
+        .find(findQuery)
+        .then(exercises => res.json(exercises))
+
+})
 // get all available exercises foa a muscle
 router.get('muscle/:muscleId', (req, res) => {
     Exercise

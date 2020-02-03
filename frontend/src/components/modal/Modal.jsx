@@ -5,7 +5,7 @@ import AddWorkoutsFormContainer from '../workouts/AddWorkoutsFormContainer';
 import AddMealsFormContainer from '../meals/AddMealsFormContainer';
 import SampleRoutinesContainer from '../sampleRoutines/SampleRoutinesContainer';
 import '../../scss/Modal.scss'
-import AddRoutineFormContainer from '../routine/NewRoutineFormContainer'
+import AddRoutineFormContainer from '../routine/NewRoutineFormContainer';
 import MuscleGroupSelector from '../musclegroups/MuscleGroupSelector';
 
 function Modal({ modal, closeModal }) {
