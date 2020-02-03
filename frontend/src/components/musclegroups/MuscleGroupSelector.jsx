@@ -3,6 +3,7 @@ import MaleFront from '../bodypartUI/MaleFront'
 import MaleBack from '../bodypartUI/MaleBack'
 import FemaleBack from '../bodypartUI/FemaleBack'
 import FemaleFront from '../bodypartUI/FemaleFront'
+import '../../scss/MuscleGroupsSelector.scss'
 class MuscleGroupSelector extends Component {
 
     constructor(props){
@@ -28,13 +29,18 @@ class MuscleGroupSelector extends Component {
         this.handleMouseEnter = this.handleMouseEnter.bind(this);
         this.handleMouseLeave = this.handleMouseLeave.bind(this);
         this.handleClick = this.handleClick.bind(this);
+        this.selectedBodyGroups = this.selectedBodyGroups.bind(this);
     }
     handleMouseEnter(field){
-        this.setState({[field]: true})
+        if (!window.mobileAndTabletcheck()){
+            this.setState({[field]: true})
+        }
     }
 
     handleMouseLeave(field){
-        this.setState({[field]: false})
+        if (!window.mobileAndTabletcheck()){
+            this.setState({[field]: false})
+        }
     }
 
     handleClick(field){
@@ -42,6 +48,7 @@ class MuscleGroupSelector extends Component {
     }
     componentDidMount(){
         this.props.fetchMuscleGroups();
+        this.props.fetchAllExercisesByMuscleGroup();
     }
     handleSide(){
         if (this.state.side === "front") {
@@ -49,6 +56,16 @@ class MuscleGroupSelector extends Component {
         } else {
             this.setState({side: "front"})
         }
+    }
+
+    selectedBodyGroups(){
+        let arr = []
+        for(let i=1; i< 8; i++){
+            if(Object.values(this.state)[i] === true){
+                arr.push(Object.keys(this.state)[i])
+            }
+        }
+        return arr
     }
 
     render() {
@@ -63,9 +80,11 @@ class MuscleGroupSelector extends Component {
         } else if(this.state.side === "back" && sex=== "F"){
             bodySide = <FemaleBack handleClick={this.handleClick} handleMouseEnter={this.handleMouseEnter} handleMouseLeave={this.handleMouseLeave} {...this.state}/>
         }
+        // debugger
         return (
           <div>
-            <div className="okay">
+            <div className="selected-muscle-groups">Selected Muscles: {this.selectedBodyGroups().map(muscle => muscle + " ")} </div>
+            <div className="muscle-group-selector-container">
               <div>{bodySide}</div>
               <div>
                 <div onClick={this.handleSide}>

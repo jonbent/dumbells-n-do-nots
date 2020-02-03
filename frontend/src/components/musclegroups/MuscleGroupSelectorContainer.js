@@ -5,12 +5,13 @@ import {fetchAllExercisesByMuscleGroup} from '../../actions/ExerciseActions';
 
 
 const mSTP = (state) => ({
-        sex: state.session.user.sex
+        sex: state.session.user.sex,
+        muscleGroups: state.entities.MuscleGroups
 })
 
 const mDTP = dispatch =>({
     fetchMuscleGroups: () => dispatch(fetchMuscleGroups()),
-    fetchAllExercisesByMuscleGroup: () =>dispatch(fetchAllExercisesByMuscleGroup())
+    fetchAllExercisesByMuscleGroup: ids => dispatch(fetchAllExercisesByMuscleGroup(ids))
 })
 
 export default connect(mSTP, mDTP)(MuscleGroupSelector);
