@@ -18,14 +18,15 @@ export const fetchUser = (username) => dispatch => (
 export const updateUser = (formData, username) => dispatch =>
          UserApiUtil.updateUserInfo(formData, username)
            .then(res => {
-               console.log(res)
+               console.log('success res', res)
              const { token } = res.data;
              localStorage.setItem("jwtToken", token);
              SessionApiUtil.setAuthToken(token);
              const decoded = jwt_decode(token);
-             dispatch(receiveCurrentUser(decoded));            
+             dispatch(receiveCurrentUser(decoded));
            })
            .catch(err => {
-               console.log(err)
-             return dispatch(receiveErrors(err.response.data));
+               console.log('failure res', err)
+               // console.log(err.data)
+             return dispatch(receiveErrors(err));
            });

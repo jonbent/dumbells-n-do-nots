@@ -98,8 +98,9 @@ router.post('/register', (req, res) => {
             newUser.save()
                 .then(user => {
                     let payload = Object.assign({}, user.toObject());
-                    delete newUser.password;
-                    delete newUser.date;
+                    delete payload.password;
+                    delete payload.date;
+
                     jwt.sign(
                         payload,
                         keys.secretOrKey,
@@ -131,7 +132,7 @@ router.post('/login', (req, res) => {
         .then(user => {
             if (!user) {
                 // Use the validations to send the error
-                errors.email = 'User not found';
+                errors.username = 'User not found';
                 return res.status(400).json(errors);
             };
             bcrypt.compare(password, user.password)
@@ -157,7 +158,7 @@ router.post('/login', (req, res) => {
                             });
                     } else {
                         // And here:
-                        return res.status(400).json(errors);
+                        return res.status(400).json({password: 'Invalid credentials'});
                     }
                 })
         })
@@ -177,9 +178,10 @@ router.get('/:username', (req, res) => {
             });
         })
 })
-upload.single("avatarImg")
-router.post('/:username/update', passport.authenticate('jwt', { session: false }), (req, res) => {
-    const s3 = new AWS.S3()
+
+router.post('/:username/update', passport.authenticate('jwt', { session: false }), upload.single("avatarUrl"), (req, res) => {
+    console.log(req)
+    const s3 = new AWS.S3();
     User.findOne({ username: req.params.username }).then(user => {
         if (!user) return res.status(400).json({ user: { message: "User not found" } })
         const file = req.file;
@@ -188,7 +190,9 @@ router.post('/:username/update', passport.authenticate('jwt', { session: false }
             user.height = req.body.height;
             user.username = req.body.username;
             user.save(function (error, newFile) {
-                if (error) return res.json(error)
+                // console.log(error)
+                // console.log(!!error)
+                if (error) return res.status(422).json(error);
                 let newUser = Object.assign({}, user.toObject());
                 delete newUser.password;
                 delete newUser.date;
@@ -207,7 +211,6 @@ router.post('/:username/update', passport.authenticate('jwt', { session: false }
                     });
             });
         };
-        console.log(file);
         if (file){
             const s3FileURL = keys.UploadFileUrlLink;
             const keyname = file.originalname + uuid();
