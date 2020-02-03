@@ -8,11 +8,13 @@
   z-index: 10;
 }
 
-.modal-child {
+.modal-child-container {
+
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+.modal-child {
   background-color: lightskyblue;
   text-align: center;
   border-radius: 1rem;
@@ -22,12 +24,23 @@
   flex-direction: column;
   position: relative;
   justify-content: center;
-  overflow: scroll;
+  overflow-y: scroll;
+  overflow-x: hidden;
   overflow-wrap: break-word;
+}
 }
 
 .close-modal-button{
-    color: lightskyblue;
-    background: none;
+    color: black;
+    background-color: lightpink;
     border: none;
+    width: 80vw;
+    height: 3rem;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    display: flex;
+   align-items: center;
+    justify-content: center;
+  cursor: pointer;
+
 }

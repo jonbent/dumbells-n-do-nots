@@ -15,7 +15,7 @@ const NewRoutinesReducer = (state = {}, action) => {
                 let formattedDate;
                 newStartDate.setDate(newStartDate.getDate() + 1);
                 formattedDate = DateFormat(newStartDate, 'yyyy-mm-dd')
-                nextState[formattedDate] = {}
+                nextState[formattedDate] = {meals:{}, workouts:{}}
             }
             return nextState
         case RECEIVE_ROUTINE_MEALS:

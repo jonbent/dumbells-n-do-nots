@@ -2,13 +2,14 @@
     color: white;
     display: flex;
     justify-content: center;
+    padding-bottom: 7rem;
     .main-container{
         display: flex;
         flex-direction: column;
         margin-top: 3rem;
         align-items: center;
         .save{
-                margin-top: 80px;
+                margin-top: 2rem;
                 box-shadow: 0 0 0.2rem black;
                 background-color: lightskyblue;
                 color: black;
@@ -17,6 +18,19 @@
                 padding: 5px 0;
                 font-size: 30px;
                 border-radius: 5px;
+            cursor: pointer;
+        }
+        .logout{
+                margin-top: 2rem;
+                box-shadow: 0 0 0.2rem black;
+                background-color: black;
+                color: lightgray;
+                width: 100%;
+                text-align: center;
+                padding: 5px 0;
+                font-size: 30px;
+                border-radius: 5px;
+            cursor: pointer;
         }
         .save:hover{
             background-color: rgb(114, 178, 218);

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import NavBar from '../navbar/NavBar'
-
+import {Link} from 'react-router-dom'
 import '../../scss/LoginForm.scss'
 
 export default class Login extends Component {
@@ -21,26 +21,22 @@ export default class Login extends Component {
     }
     handleSubmit(e){
         e.preventDefault();
-        this.props.login(this.state).then(
-            () => this.props.history.push('/'),
-            () => this.props.history.push('/')
-        )
+        this.props.login(this.state)
     }
     render() {
         const {username, password} = this.state;
         let usernameError;
         let passwordError;
-        if(this.state.errors){
-            if(this.state.errors.username){
-                usernameError=this.state.errors.username;
+        if(this.props.errors){
+            if(this.props.errors.username){
+                usernameError=this.props.errors.username;
             }
-            if(this.state.errors.password){
-                passwordError=this.state.errors.password;
+            if(this.props.errors.password){
+                passwordError=this.props.errors.password;
             }
         }
         return (
           <div className="login-page">
-            l
             <NavBar />
             <div className="login-form-container">
               <form onSubmit={this.handleSubmit}>
@@ -66,6 +62,12 @@ export default class Login extends Component {
                 {passwordError}
                 <input type="submit" value="Log In" />
               </form>
+                <div className="separator-container">
+                    <span className="separator"></span>
+                    <span>OR</span>
+                    <span className="separator"></span>
+                </div>
+            <Link to="/signup" className="sign-up-link">Sign Up</Link>
             </div>
           </div>
         );

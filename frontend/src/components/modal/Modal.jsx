@@ -5,8 +5,10 @@ import AddWorkoutsFormContainer from '../workouts/AddWorkoutsFormContainer';
 import AddMealsFormContainer from '../meals/AddMealsFormContainer';
 import SampleRoutinesContainer from '../sampleRoutines/SampleRoutinesContainer';
 import '../../scss/Modal.scss'
-import AddRoutineFormContainer from '../routine/NewRoutineFormContainer';
-import MuscleGroupSelector from '../musclegroups/MuscleGroupSelector';
+
+import AddRoutineFormContainer from '../routine/NewRoutineFormContainer'
+import ExerciseSelector from '../exercises/ExerciseSelectorContainer';
+import AddUserMealsFormContainer from '../userMeals/AddUserMealsFormContainer'
 
 function Modal({ modal, closeModal }) {
     if (!modal) {
@@ -27,16 +29,26 @@ function Modal({ modal, closeModal }) {
             component = <AddRoutineFormContainer />;
             break;
         case 'bodyUI':
-            component = <MuscleGroupSelector />;
+            component = <ExerciseSelector />;
+            break;
+        case 'addUserMeals':
+            component = <AddUserMealsFormContainer />
             break;
         default:
             return null;
     }
     return (
         <div className="modal-background">
-            <button className="close-modal-button" onClick={closeModal}>X</button>
-            <div className="modal-child" onClick={e => e.stopPropagation()}>
-                {component}
+
+            <div className="modal-child-container">
+                <div className="close-modal-button" onClick={closeModal}>
+                    <div>
+                        Close
+                    </div>
+                </div>
+                <div className="modal-child" onClick={e => e.stopPropagation()}>
+                    {component}
+                </div>
             </div>
         </div>
     );

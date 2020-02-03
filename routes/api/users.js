@@ -8,6 +8,7 @@ const jwt = require('jsonwebtoken');
 const keys = require('../../config/keys');
 const passport = require('passport');
 const uuid = require('uuid');
+const Validator = require('validator');
 
 
 const multer = require("multer");
@@ -54,10 +55,8 @@ router.post('/register', (req, res) => {
         height: req.body.height,
         sex: req.body.sex,
     })
-    let errors = newUser.validateSync();
-    if (errors){
-        errors = errors.errors
-        if (req.body.password !== req.body.password2) errors = Object.assign(errors, {password2: {
+    let errors = {};
+    if (req.body.password !== req.body.password2) errors = Object.assign(errors, {password2: {
             message: "Password Confirmation must match",
             name: "ValidatorError",
             properties: {
@@ -68,9 +67,24 @@ router.post('/register', (req, res) => {
             kind: "required",
             path: "password2"
         }})
-        return res.status(422).json(errors)
+    if (!Validator.isEmail(req.body.email)) {
+        errors.email = {
+            message: "Invalid Email",
+            name: "ValidatorError",
+            properties: {
+                message: "Path `email` must be a valid email.",
+                type: "not valid",
+                path: "email"
+            },
+            kind: "not valid",
+            path: "email"
+        };
     }
-
+    let validatorErrors = newUser.validateSync();
+    if (validatorErrors){
+        errors = Object.assign(errors, validatorErrors.errors)
+    }
+    if (Object.keys(errors).length === 0) return res.status(422).json(errors)
     if (req.body.sex === "M"){
         newUser.avatarUrl = '/images/maleDefaultAvatar.jpg'
     } else {
@@ -133,6 +147,9 @@ router.post('/login', (req, res) => {
                             // Tell the key to expire in one hour
                             { expiresIn: 3600 },
                             (err, token) => {
+                                if (err){
+                                    return res.status(400).json(errors);
+                                }
                                 res.json({
                                     success: true,
                                     token: 'Bearer ' + token
@@ -160,44 +177,62 @@ router.get('/:username', (req, res) => {
             });
         })
 })
-
-router.post('/:username/update', upload.single("avatarImg"), (req, res) => {
-    // console.log(eq.file);
+upload.single("avatarImg")
+router.post('/:username/update', passport.authenticate('jwt', { session: false }), (req, res) => {
     const s3 = new AWS.S3()
     User.findOne({ username: req.params.username }).then(user => {
-            if (!user) return res.status(400).json({ user: { message: "User not found" } })
+        if (!user) return res.status(400).json({ user: { message: "User not found" } })
         const file = req.file;
-        const s3FileURL = keys.UploadFileUrlLink;
-        const keyname = file.originalname + uuid();
-        let params = {
-            Bucket: keys.awsBucketName,
-            Key: keyname,
-            Body: file.buffer,
-            ContentType: file.mimetype,
-            ACL: 'public-read'
+        const callback = () => {
+            user.weightCur = req.body.weightCur;
+            user.height = req.body.height;
+            user.username = req.body.username;
+            user.save(function (error, newFile) {
+                if (error) return res.json(error)
+                let newUser = Object.assign({}, user.toObject());
+                delete newUser.password;
+                delete newUser.date;
+                const payload = newUser;
+                jwt.sign(
+                    payload,
+                    keys.secretOrKey,
+                    // Tell the key to expire in one hour
+                    { expiresIn: 3600 },
+                    (err, token) => {
+                        if (err) return res.json(err)
+                        return res.json({
+                            success: true,
+                            token: 'Bearer ' + token
+                        });
+                    });
+            });
+        };
+        console.log(file);
+        if (file){
+            const s3FileURL = keys.UploadFileUrlLink;
+            const keyname = file.originalname + uuid();
+            let params = {
+                Bucket: keys.awsBucketName,
+                Key: keyname,
+                Body: file.buffer,
+                ContentType: file.mimetype,
+                ACL: 'public-read'
+            };
+            s3.upload(params, (err, data) => {
+
+                if (err) {
+                    res.status(500).json({ error: true, Message: err });
+                } else {
+                    user.avatarUrl = s3FileURL + keyname;
+                    callback();
+                    console.log(req)
+
+                }
+            })
+        } else {
+            callback();
         }
-        s3.upload(params, (err, data) => {
-            
-            if (err) {
-                res.status(500).json({ error: true, Message: err });
-            } else {
-                user.avatarUrl = s3FileURL + keyname
-                user.email = req.body.email
-                user.weightCur = req.body.weightCur
-                user.height = req.body.height
-                user.birthdate = req.body.birthdate
-                user.sex = req.body.sex
-                user.username = req.body.username
-                user.weightStart = req.body.weightStart
-            
-                user.save(function (error, newFile) {
-                    if (error) {
-                        throw error;
-                    }
-                    res.json({ user });
-                });
-            }
-        })
+
     }).catch(err => res.json(err))
     // User.findOne({ username: req.params.username }).then(user => {
     //     if (!user) return res.status(400).json({ user: { message: "User not found" } })
