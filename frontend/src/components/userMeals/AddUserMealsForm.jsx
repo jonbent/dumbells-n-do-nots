@@ -7,11 +7,15 @@ class AddUserMealsForm extends React.Component{
         this.state = {
             day: Object.keys(this.props.daySelect)[dayStr],
             numMeals: 0,
-            toggleShowMeals: false
+            toggleShowMeals: false,
         }
         this.updateField = this.updateField.bind(this);
         this.handleSetDate = this.handleSetDate.bind(this)
         this.handleSetNumMeals = this.handleSetNumMeals.bind(this)
+    }
+
+    componentDidMount(){
+        this.props.fetchApiFilteredMeals(400, 500)
     }
 
     updateField(field, e) {
@@ -34,7 +38,7 @@ class AddUserMealsForm extends React.Component{
             let numMealsArray = [...Array(numMeals).keys()]
             meals = (
                 <ul>
-                    {numMealsArray.map(mealIdx => <li>Meal {mealIdx + 1}</li>)}
+                    {/* {Object.keys(this.props.fetchApiFilteredMeals(400,500)).map(meal => <li>{meal.title}</li>)} */}
                 </ul>
             );
             } else {
