@@ -38,7 +38,7 @@ class AddUserMealsForm extends React.Component{
             let numMealsArray = [...Array(numMeals).keys()]
             meals = (
                 <ul>
-                    {/* {Object.keys(this.props.fetchApiFilteredMeals(400,500)).map(meal => <li>{meal.title}</li>)} */}
+                    {this.props.meals.data.map(meal => <li><img src={meal.image}/><div>{meal.title}{meal.calories}{meal.fat}{meal.carbs}{meal.protein}</div></li>)}
                 </ul>
             );
             } else {
