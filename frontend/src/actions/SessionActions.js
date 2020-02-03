@@ -42,10 +42,12 @@ export const signup = user => dispatch => (
 
 export const login = user => dispatch => (
     SessionApiUtil.login(user).then(res => {
+
         const { token } = res.data;
         localStorage.setItem('jwtToken', token);
         SessionApiUtil.setAuthToken(token);
         const decoded = jwt_decode(token);
+        console.log(decoded)
         dispatch(receiveCurrentUser(decoded))
     })
         .catch(err => {
