@@ -27,7 +27,7 @@ class Signup extends React.Component {
       goalPath: "",
       height1: "",
       height2: "",
-      month: currentDate.getMonth()
+      month: currentDate
     };
 
     this.updateField = this.updateField.bind(this);
@@ -170,7 +170,6 @@ class Signup extends React.Component {
           <div onClick={this.handleNext} className="signup-form-button">
             Next
           </div>
-          <Link to="/login">Login</Link>
         </form>
       );
     } else {

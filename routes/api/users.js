@@ -84,8 +84,7 @@ router.post('/register', (req, res) => {
     if (validatorErrors){
         errors = Object.assign(errors, validatorErrors.errors)
     }
-    if (Object.keys(errors)) return res.status(422).json(errors)
-
+    if (Object.keys(errors).length === 0) return res.status(422).json(errors)
     if (req.body.sex === "M"){
         newUser.avatarUrl = '/images/maleDefaultAvatar.jpg'
     } else {
