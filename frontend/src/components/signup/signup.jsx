@@ -27,7 +27,7 @@ class Signup extends React.Component {
       goalPath: "",
       height1: "",
       height2: "",
-      month: currentDate.getMonth()
+      month: currentDate
     };
 
     this.updateField = this.updateField.bind(this);

@@ -18,6 +18,7 @@ export const fetchUser = (username) => dispatch => (
 export const updateUser = (formData, username) => dispatch =>
          UserApiUtil.updateUserInfo(formData, username)
            .then(res => {
+               console.log(res)
              const { token } = res.data;
              localStorage.setItem("jwtToken", token);
              SessionApiUtil.setAuthToken(token);
@@ -25,5 +26,6 @@ export const updateUser = (formData, username) => dispatch =>
              dispatch(receiveCurrentUser(decoded));            
            })
            .catch(err => {
+               console.log(err)
              return dispatch(receiveErrors(err.response.data));
            });
