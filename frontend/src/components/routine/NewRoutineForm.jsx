@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+// import {Link} from 'react-router-dom';
 import DayPickerInput from "react-day-picker/DayPickerInput";
 import YearMonthForm from '../signup/year_month_form';
 import DateFormat from 'dateformat'
@@ -14,6 +14,7 @@ const fromMonth = new Date(currentYear - 80)
 class NewRoutineForm extends React.Component {
   constructor(props) {
     super(props);
+    // const date = new Date();
     const currentDate = new Date();
     console.log("currentDate", typeof Date(currentDate.getMonth()));
 
@@ -40,7 +41,7 @@ class NewRoutineForm extends React.Component {
   }
 
   render() {
-    const startDate = this.state.startDate;
+    // const startDate = this.state.startDate;
     const dayPickerProps = {
       month: this.state.month,
       fromMonth: fromMonth,
