@@ -15,17 +15,15 @@ const users = require("./routes/api/users");
 const workouts = require("./routes/api/workouts");
 const cors = require('cors');
 
-
 const app = express();
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 app.use(passport.initialize());
 require('./config/passport')(passport);
 
 const port = process.env.PORT || 5000;
 
-app.use(cors({ origin: 'http://localhost:3000' }));
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
 app.use("/api/exercises", exercises);
 app.use("/api/favorites", favorites);
 app.use("/api/meals", meals);
