@@ -132,7 +132,7 @@ router.post('/login', (req, res) => {
         .then(user => {
             if (!user) {
                 // Use the validations to send the error
-                errors.email = 'User not found';
+                errors.username = 'User not found';
                 return res.status(400).json(errors);
             };
             bcrypt.compare(password, user.password)
@@ -158,7 +158,7 @@ router.post('/login', (req, res) => {
                             });
                     } else {
                         // And here:
-                        return res.status(400).json(errors);
+                        return res.status(400).json({password: 'Invalid credentials'});
                     }
                 })
         })
