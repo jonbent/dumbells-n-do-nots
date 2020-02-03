@@ -1,5 +1,6 @@
 import { RECEIVE_USER_MEALS, RECEIVE_NEW_MEAL, RECEIVE_ALL_MEALS } from '../actions/MealActions';
-
+import { RECEIVE_API_FILTERED_MEALS} from '../actions/UserMealActions'
+ 
 const MealsReducer = (state = {}, action) => {
     Object.freeze(state);
     let newState = Object.assign({}, state);
@@ -12,6 +13,9 @@ const MealsReducer = (state = {}, action) => {
             return newState;
         case RECEIVE_NEW_MEAL:
             Object.assign(newState, { [action.meal.id]: action.meal })
+            return newState;
+        case RECEIVE_API_FILTERED_MEALS:
+            newState = action.meals;
             return newState;
         default:
             return state;
