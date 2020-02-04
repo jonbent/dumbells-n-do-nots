@@ -11,3 +11,4 @@ export const getUserMeals = id => {
 export const createMeals = data => {
     return axios.post('/api/meals/', data)
 }
+
