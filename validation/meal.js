@@ -4,13 +4,16 @@ const validText = require('./valid-text');
 module.exports = function validateMealInput(data) {
     let errors = {};
 
-    data.name = validText(data.name) ? data.name : '';
+    data.title = validText(data.title) ? data.title : '';
     data.description = validText(data.description) ? data.description : '';
-    data.nutrients = validText(data.nutrients) ? data.nutrients : '';
+    data.calories = validText(data.calories) ? data.calories : '';
+    data.protein = validText(data.protein) ? data.protein : '';
+    data.carbs = validText(data.carbs) ? data.carbs : '';
+    data.fat = validText(data.fat) ? data.fat : '';
     data.prepTime = validText(data.prepTime) ? data.prepTime : '';
 
-    if (Validator.isEmpty(data.name)) {
-        errors.name = 'Meal name is required';
+    if (Validator.isEmpty(data.title)) {
+        errors.title = 'Meal name is required';
     }
 
     if (!Validator.isLength(data.description, {min: 5, max: 250})) {
@@ -21,8 +24,20 @@ module.exports = function validateMealInput(data) {
         errors.description = 'Description is required';
     }
 
-    if (Validator.isEmpty(data.nutrients)) {
-        errors.nutrients = 'Nutrients field is required';
+    if (Validator.isEmpty(data.calories)) {
+        errors.calories = 'calories field is required';
+    }
+
+    if (Validator.isEmpty(data.protein)) {
+        errors.protein = 'protein field is required';
+    }
+
+    if (Validator.isEmpty(data.fat)) {
+        errors.fat = 'fat field is required';
+    }
+    
+    if (Validator.isEmpty(data.carbs)) {
+        errors.carbs = 'carbs field is required';
     }
 
     if (Validator.isEmpty(data.prepTime)) {
