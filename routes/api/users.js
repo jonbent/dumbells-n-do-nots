@@ -9,6 +9,8 @@ const keys = require('../../config/keys');
 const passport = require('passport');
 const uuid = require('uuid');
 const Validator = require('validator');
+const passwordValidator = require('password-validator');
+
 
 
 const multer = require("multer");
@@ -45,6 +47,8 @@ router.get('/current', passport.authenticate('jwt', { session: false }), (req, r
 
 
 router.post('/register', (req, res) => {
+    console.log('hitting method');
+    
     const newUser = new User({
         username: req.body.username,
         email: req.body.email,
@@ -54,8 +58,30 @@ router.post('/register', (req, res) => {
         weightCur: req.body.weightStart,
         height: req.body.height,
         sex: req.body.sex,
-    })
+    });
+
     let errors = {};
+    const passwordSchema = new passwordValidator();
+    passwordSchema
+        .is().min(8)
+        .is().max(75)
+        .has().uppercase()
+        .has().lowercase()
+        .has().digits()
+        .has().not().spaces()
+    passValid = passwordSchema.validate(req.body.password, { list: true })
+    if (passValid.length) {
+        errors.password = {
+            message: 'Required atleast 1 number and 8 characters.',
+            name: 'ValidatorError',
+            properties: {
+                message: "Required atleast 1 number and 8 characters.",
+                type: "not valid",
+                path: "password"
+            }
+        };
+    }
+
     if (req.body.password !== req.body.password2) errors = Object.assign(errors, {password2: {
             message: "Password Confirmation must match",
             name: "ValidatorError",
@@ -67,8 +93,12 @@ router.post('/register', (req, res) => {
             kind: "required",
             path: "password2"
         }})
+    console.log('email valid', !Validator.isEmail(req.body.email));
+    
     if (!Validator.isEmail(req.body.email)) {
-        errors.email = {
+        console.log('inside validator');
+        
+        errors = Object.assign(errors,{email:{
             message: "Invalid Email",
             name: "ValidatorError",
             properties: {
@@ -78,11 +108,15 @@ router.post('/register', (req, res) => {
             },
             kind: "not valid",
             path: "email"
-        };
+        }});
     }
+    console.log('errors',errors);
+    
     let validatorErrors = newUser.validateSync();
     if (validatorErrors){
-        errors = Object.assign(errors, validatorErrors.errors)
+        console.log('v error', validatorErrors.errors);
+        
+        errors = Object.assign(validatorErrors.errors, errors)
     }
     if (Object.keys(errors).length === 0) return res.status(422).json(errors)
     if (req.body.sex === "M"){
