@@ -47,7 +47,7 @@ router.get('/current', passport.authenticate('jwt', { session: false }), (req, r
 
 
 router.post('/register', (req, res) => {
-    console.log('hitting method');
+    // console.log('hitting method');
     
     const newUser = new User({
         username: req.body.username,
