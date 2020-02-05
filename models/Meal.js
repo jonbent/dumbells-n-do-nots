@@ -2,16 +2,28 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const MealSchema = new Schema({
-    name: {
+    title: {
         type: String,
         required: true
     },
     description: {
         type: String,
+        required: false
+    },
+    calories: {
+        type: Number,
         required: true
     },
-    nutrients: {
-        type: Object,
+    protein: {
+        type: String,
+        required: true
+    },
+    fat: {
+        type: String,
+        required: true
+    },
+    carbs: {
+        type: String,
         required: true
     },
     photoUrl: {
@@ -19,11 +31,12 @@ const MealSchema = new Schema({
     },
     prepTime: {
         type: Number,
-        required: true
+        required: false
     },
     user: {
         type: Schema.Types.ObjectId,
-        ref: "User"
+        ref: "User",
+        required: false
     }
 })
 
