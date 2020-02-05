@@ -5,6 +5,7 @@ import AddWorkoutsFormContainer from '../workouts/AddWorkoutsFormContainer';
 import AddMealsFormContainer from '../meals/AddMealsFormContainer';
 import SampleRoutinesContainer from '../sampleRoutines/SampleRoutinesContainer';
 import '../../scss/Modal.scss'
+
 import AddRoutineFormContainer from '../routine/NewRoutineFormContainer'
 import ExerciseSelector from '../exercises/ExerciseSelectorContainer';
 import AddUserMealsFormContainer from '../userMeals/AddUserMealsFormContainer'

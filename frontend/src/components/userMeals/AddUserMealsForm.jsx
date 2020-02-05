@@ -22,7 +22,8 @@ class AddUserMealsForm extends React.Component{
     }
 
     componentDidMount(){
-        this.props.fetchApiFilteredMeals(400, 500)
+        // this.props.fetchApiFilteredMeals(400, 500)
+        this.props.fetchAllMeals()
     }
 
     updateField(field, e) {
@@ -41,7 +42,7 @@ class AddUserMealsForm extends React.Component{
         let meals;
         if (this.state.toggleShowMeals){
             let numMeals = parseInt(this.state.numMeals)
-            if(numMeals){
+            if(numMeals && this.props.meals.length > 0){
             let numMealsArray = [...Array(numMeals).keys()]
             meals = (
                 <div>
