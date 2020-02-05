@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import AddUserMealsForm from './AddUserMealsForm';
-import { createDayUserMeal, fetchApiFilteredMeals } from '../../actions/UserMealActions'
+import { createDayUserMeal, fetchApiFilteredMeals } from '../../actions/UserMealActions';
+import { fetchAllMeals } from '../../actions/MealActions'
 import DateFormat from 'dateformat';
 
 
@@ -14,7 +15,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => ({
     createDayUserMeal: meal => dispatch(createDayUserMeal(meal)),
-    fetchApiFilteredMeals: (minCals, maxCals) => dispatch(fetchApiFilteredMeals(minCals,maxCals))
+    fetchApiFilteredMeals: (minCals, maxCals) => dispatch(fetchApiFilteredMeals(minCals,maxCals)),
+    fetchAllMeals: () => dispatch(fetchAllMeals())
 });
 
 export default connect(
