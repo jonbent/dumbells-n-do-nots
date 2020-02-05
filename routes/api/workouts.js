@@ -20,7 +20,6 @@ router.get("/", (req, res) => {
 
 // post a customized workout by the user
 router.post("/", passport.authenticate("jwt", { session: false }), (req, res) => {
-    console.log(Object.keys(req))
     const { isValid, errors } = validateWorkoutInput(req.body);
     if (!isValid) {
         return res.status(400).json(errors);
