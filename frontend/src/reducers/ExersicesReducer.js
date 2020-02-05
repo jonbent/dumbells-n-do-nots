@@ -5,9 +5,10 @@ const ExercisesReducer = (state={}, action) =>{
     let newState = Object.assign({}, state);
     switch (action.type) {
         case RECEIVE_ALL_EXERCISES_BY_MUSCLE_GROUP:
-            return Object.assign(newState, action.exercises);
+            newState = action.exercises.data;
+            return newState;
         case RECEIVE_ALL_EXERCISES:
-            newState = action.exercises;
+            newState = action.exercises.data;
             return newState;
         case RECEIVE_USER_EXERCISES:
             Object.assign(newState, { [action.exercises.id]: action.exercises })

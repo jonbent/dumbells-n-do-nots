@@ -12,5 +12,5 @@ export default combineReducers({
     routines,
     meals,
     muscleGroups: MuscleGroupReducer,
-    Exersices: ExersicesReducer,
+    exercises: ExersicesReducer,
 })
