@@ -25,6 +25,12 @@ export const fetchAllMeals = () => dispatch => (
      .catch(err => console.log(err))
 )
 
+export const fetchMeals = (options) => dispatch => (
+    MealsApiUtil.getMeals(options)
+        .then(meals => dispatch(receiveAllMeals(meals)))
+        .catch(err => console.log(err))
+)
+
 export const fetchUserMeals = id => dispatch => (
     MealsApiUtil.getUserMeals(id)
         .then(meal => dispatch(receiveUserMeals(meal)))
