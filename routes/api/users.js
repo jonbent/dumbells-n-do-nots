@@ -24,7 +24,6 @@ AWS.config.update({
     secretAccessKey: keys.awsBucketToken,
     region: keys.awsRegion
 });
-// console.log(myConfig);
 
 
 
@@ -47,8 +46,7 @@ router.get('/current', passport.authenticate('jwt', { session: false }), (req, r
 
 
 router.post('/register', (req, res) => {
-    // console.log('hitting method');
-    
+
     const newUser = new User({
         username: req.body.username,
         email: req.body.email,
@@ -69,36 +67,34 @@ router.post('/register', (req, res) => {
         .has().lowercase()
         .has().digits()
         .has().not().spaces()
-    passValid = passwordSchema.validate(req.body.password, { list: true })
-    if (passValid.length) {
-        errors.password = {
-            message: 'Required atleast 1 number and 8 characters.',
-            name: 'ValidatorError',
-            properties: {
-                message: "Required atleast 1 number and 8 characters.",
-                type: "not valid",
-                path: "password"
-            }
-        };
-    }
 
-    if (req.body.password !== req.body.password2) errors = Object.assign(errors, {password2: {
-            message: "Password Confirmation must match",
-            name: "ValidatorError",
-            properties: {
-                message: "Path `password2` must match path `password`.",
-                type: "required",
-                path: "password2"
-            },
-            kind: "required",
-            path: "password2"
-        }})
-    console.log('email valid', !Validator.isEmail(req.body.email));
+
+    // if (req.body.password !== req.body.password2) errors = Object.assign(errors, {password2: {
+    //         message: "Password Confirmation must match",
+    //         name: "ValidatorError",
+    //         properties: {
+    //             message: "Path `password2` must match path `password`.",
+    //             type: "required",
+    //             path: "password2"
+    //         },
+    //         kind: "required",
+    //         path: "password2"
+    //     }})
     
+
+
+    let validatorErrors = newUser.validateSync();
+    if (validatorErrors){
+
+        errors = Object.assign(validatorErrors.errors, errors)
+    }
+    if (req.body.sex === "M"){
+        newUser.avatarUrl = '/images/maleDefaultAvatar.jpg'
+    } else {
+        newUser.avatarUrl = '/images/femaleDefaultAvatar.jpg'
+    }
     if (!Validator.isEmail(req.body.email)) {
-        console.log('inside validator');
-        
-        errors = Object.assign(errors,{email:{
+        errors.email = {
             message: "Invalid Email",
             name: "ValidatorError",
             properties: {
@@ -108,23 +104,33 @@ router.post('/register', (req, res) => {
             },
             kind: "not valid",
             path: "email"
-        }});
+        };
     }
-    console.log('errors',errors);
-    
-    let validatorErrors = newUser.validateSync();
-    if (validatorErrors){
-        console.log('v error', validatorErrors.errors);
-        
-        errors = Object.assign(validatorErrors.errors, errors)
-    }
-    if (Object.keys(errors).length === 0) return res.status(422).json(errors)
-    if (req.body.sex === "M"){
-        newUser.avatarUrl = '/images/maleDefaultAvatar.jpg'
-    } else {
-        newUser.avatarUrl = '/images/femaleDefaultAvatar.jpg'
+    if (req.body.password !== req.body.password2) errors.password2 = {
+        message: "Password Confirmation must match",
+        name: "ValidatorError",
+        properties: {
+            message: "Path `password2` must match path `password`.",
+            type: "required",
+            path: "password2"
+        },
+        kind: "required",
+        path: "password2"
+    };
+    const passValid = passwordSchema.validate(req.body.password, { list: true });
+    if (passValid.length) {
+        errors.password = {
+            message: 'Path `password` must have at least 1 number, 8 chars, and one capital letter.',
+            name: 'ValidatorError',
+            properties: {
+                message: "Path `password` must have at least 1 number, 8 chars, and one capital letter.",
+                type: "not valid",
+                path: "password"
+            }
+        };
     }
 
+    if (Object.keys(errors).length !== 0) return res.status(422).json(errors)
     bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(newUser.password, salt, (err, hash) => {
             if (err) throw err;
@@ -214,7 +220,6 @@ router.get('/:username', (req, res) => {
 })
 
 router.post('/:username/update', passport.authenticate('jwt', { session: false }), upload.single("avatarUrl"), (req, res) => {
-    console.log(req)
     const s3 = new AWS.S3();
     User.findOne({ username: req.params.username }).then(user => {
         if (!user) return res.status(400).json({ user: { message: "User not found" } })
@@ -224,8 +229,6 @@ router.post('/:username/update', passport.authenticate('jwt', { session: false }
             user.height = req.body.height;
             user.username = req.body.username;
             user.save(function (error, newFile) {
-                // console.log(error)
-                // console.log(!!error)
                 if (error) return res.status(422).json(error);
                 let newUser = Object.assign({}, user.toObject());
                 delete newUser.password;
@@ -262,7 +265,6 @@ router.post('/:username/update', passport.authenticate('jwt', { session: false }
                 } else {
                     user.avatarUrl = s3FileURL + keyname;
                     callback();
-                    console.log(req)
 
                 }
             })
@@ -292,13 +294,10 @@ router.post('/:username/update', passport.authenticate('jwt', { session: false }
     //         if (err) {
     //             res.status(500).json({ error: true, Message: err });
     //         }
-    //         console.log(data);
 
     //     })
     //     user.avatarUrl = signedUrl;
-    //     console.log("hello");
 
-    //     console.log(signedUrl);
 
     //     user.save(function (error, newFile) {
     //         if (error) {
