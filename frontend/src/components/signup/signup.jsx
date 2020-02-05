@@ -149,6 +149,7 @@ class Signup extends React.Component {
                   type="password"
                   onChange={e => this.updateField("password", e)}
                   value={this.state.password}
+                  autoComplete="new-password"
                 />
               </div>
               <div className="signup-errors">{passwordErrors}</div>
@@ -162,6 +163,7 @@ class Signup extends React.Component {
                   type="password"
                   onChange={e => this.updateField("password2", e)}
                   value={this.state.password2}
+                  autoComplete="new-password"
                 />
               </div>
               <div className="signup-errors">{confimrPasswordErrors}</div>
