@@ -9,9 +9,9 @@ export const receiveNewRoutineStartDate = payload => ({
     payload
 }) 
 
-export const receiveRoutineMeals = payload => ({
+export const receiveRoutineMeals = newRoutine => ({
     type: RECEIVE_ROUTINE_MEALS,
-    payload
+    newRoutine
 }) 
 
 export const receiveRoutineWorkouts = payload => ({

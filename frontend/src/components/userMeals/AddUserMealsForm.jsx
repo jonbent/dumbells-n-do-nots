@@ -1,9 +1,10 @@
 import React from 'react';
 import Pagination from '../pagination/Pagination'
 import '../../scss/UserMealsModal.scss'
+import NextArrow from "../svg/NextArrow";
 class AddUserMealsForm extends React.Component{
     constructor(props){
-        super(props)
+        super(props);
         let dayStr = 0;
         this.state = {
             day: Object.keys(this.props.daySelect)[dayStr],
@@ -11,12 +12,14 @@ class AddUserMealsForm extends React.Component{
             curPage: 1,
             pageSize: 10,
             itemsAmount: 100,
-            numMeals: 0
+            numMeals: "",
+            selectedMeals: {}
         }
         this.updateField = this.updateField.bind(this);
         this.handleSetDate = this.handleSetDate.bind(this)
         this.handleSetNumMeals = this.handleSetNumMeals.bind(this)
         this.handlePageChange = this.handlePageChange.bind(this)
+        this.handleSelectMeal = this.handleSelectMeal.bind(this)
     }
     handlePageChange(page){
         this.setState({curPage: page}, () => {
@@ -42,16 +45,38 @@ class AddUserMealsForm extends React.Component{
             .then(() => this.setState({toggleShowMeals: true}))
 
     }
+    handleSelectMeal(mealId, num = 0){
+        const routine = this.props.daySelect;
+        let sumMeals = Object.values(routine[this.state.day].meals).reduce((acc, el) => acc + el, 0);
+        if (num + sumMeals > this.state.numMeals) return null;
+        if (!routine[this.state.day].meals[mealId]){
+            if (num <= 0) return null;
+            routine[this.state.day].meals[mealId] = num;
+        } else {
+            if (num + routine[this.state.day].meals[mealId] < 0) return null;
+            routine[this.state.day].meals[mealId] += num;
+        }
+        this.props.saveRoutine(routine)
+    }
 
     render(){
         let meals;
+        const {daySelect} = this.props
         if (this.state.toggleShowMeals){
             meals = this.props.meals.length > 0 ? (
                 <div className="meal-list">
                     {this.props.meals.map(meal => (
-                        <div className="meal-item">
+                        <div className="meal-item" key={meal._id}>
                             {/*<img src={meal.photoUrl}/>*/}
-                            <div className="meal-image" style={{backgroundImage: `url(${meal.photoUrl})`}}></div>
+                            <div className="meal-image-and-quantity">
+                                <div className="meal-image" style={{backgroundImage: `url(${meal.photoUrl})`}}></div>
+                                <div className="actions">
+                                    <NextArrow onClick={() => this.handleSelectMeal(meal._id, -1)}/>
+                                    {daySelect[this.state.day].meals[meal._id] ? daySelect[this.state.day].meals[meal._id] : 0 }
+                                    <NextArrow onClick={() => this.handleSelectMeal(meal._id, 1)}/>
+                                </div>
+
+                            </div>
                             <div className="meal-info">
                                 <div>{meal.title}</div>
                                 <div className="meal-nutrients">
