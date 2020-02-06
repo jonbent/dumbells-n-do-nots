@@ -4,6 +4,7 @@ import { RECEIVE_NEW_ROUTINE_STARTDATE,
          CLEAR_NEW_ROUTINE_DATA } from '../actions/NewRoutineActions';
 import DateFormat from 'dateformat';
 import { RECEIVE_DAY_SELECTED } from '../actions/RoutineFilterActions'
+import {CLOSE_MODAL} from "../actions/ModalActions";
 
 const NewRoutinesReducer = (state = {}, action) => {
     let nextState = {};
@@ -29,6 +30,8 @@ const NewRoutinesReducer = (state = {}, action) => {
             nextState = Object.assign(nextState, state)
             Object.values(nextState).forEach(day => day.meals = {})
             return nextState
+        case CLOSE_MODAL:
+            return {};
         default:
             return state
     }

@@ -4,7 +4,7 @@ import '../../scss/UserMealsModal.scss'
 import NextArrow from "../svg/NextArrow";
 class AddUserMealsForm extends React.Component{
     constructor(props){
-        super(props)
+        super(props);
         let dayStr = 0;
         this.state = {
             day: Object.keys(this.props.daySelect)[dayStr],
