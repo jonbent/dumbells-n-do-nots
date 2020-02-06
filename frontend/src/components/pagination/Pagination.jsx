@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import {Link} from 'react-router-dom';
 import NextArrow from '../svg/NextArrow';
 import BackButton from '../svg/BackButton'
 import DropDownArrow from '../svg/DropDownArrow'
@@ -28,9 +27,9 @@ export default class Pagination extends Component {
         const { openDropDown } = this.state;
         return (
             <nav className="pagination">
-                <a onClick={() => changePage(curPage < 2 ? curPage : curPage - 1)} disabled={curPage === 1 ? true : false} className="back-button">
+                <button onClick={() => changePage(curPage < 2 ? curPage : curPage - 1)} disabled={curPage === 1 ? true : false} className="back-button">
                     <BackButton />
-                </a>
+                </button>
                 <div>
                     <button onMouseUp={this.toggleDropDown}>
                         <span>
@@ -41,20 +40,23 @@ export default class Pagination extends Component {
                         </div>
                     </button>
                     {openDropDown &&
-                        <OutsideClickHandler action={this.toggleDropDown} className="drop-down">
-                            {[...Array(Math.ceil(itemsAmount / pageSize)).keys()].map(i => {
-                                return (
-                                        <a key={i} onClick={() => {this.toggleDropDown(); changePage(i + 1)}} className={`${curPage === i + 1 ? "active" : ""}`}>
-                                            Page {i + 1} of {Math.ceil(itemsAmount / pageSize)}
-                                        </a>
-                                )
-                            })}
-                        </OutsideClickHandler>
+                    <OutsideClickHandler action={this.toggleDropDown} className="drop-down">
+                        {[...Array(Math.ceil(itemsAmount / pageSize)).keys()].map(i => {
+                            return (
+                                <button key={i} onClick={() => {
+                                    this.toggleDropDown();
+                                    changePage(i + 1)
+                                }} className={`${curPage === i + 1 ? "active" : ""}`}>
+                                    Page {i + 1} of {Math.ceil(itemsAmount / pageSize)}
+                                </button>
+                            )
+                        })}
+                    </OutsideClickHandler>
                     }
                 </div>
-                <a onClick={() => changePage(Math.ceil(itemsAmount / pageSize) === curPage ? curPage : curPage + 1)} disabled={curPage === Math.ceil(itemsAmount / pageSize) ? true : false} className="next-button">
+                <button onClick={() => changePage(Math.ceil(itemsAmount / pageSize) === curPage ? curPage : curPage + 1)} disabled={curPage === Math.ceil(itemsAmount / pageSize) ? true : false} className="next-button">
                     <NextArrow />
-                </a>
+                </button>
             </nav>
         )
     }
