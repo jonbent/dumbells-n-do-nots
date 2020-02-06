@@ -16,10 +16,11 @@ class AddUserMealsForm extends React.Component{
             selectedMeals: {}
         }
         this.updateField = this.updateField.bind(this);
-        this.handleSetDate = this.handleSetDate.bind(this)
-        this.handleSetNumMeals = this.handleSetNumMeals.bind(this)
-        this.handlePageChange = this.handlePageChange.bind(this)
-        this.handleSelectMeal = this.handleSelectMeal.bind(this)
+        this.handleSetDate = this.handleSetDate.bind(this);
+        this.handleSetNumMeals = this.handleSetNumMeals.bind(this);
+        this.handlePageChange = this.handlePageChange.bind(this);
+        this.handleSelectMeal = this.handleSelectMeal.bind(this);
+        this.handleSubmitWeekMeals = this.handleSubmitWeekMeals.bind(this);
     }
     handlePageChange(page){
         this.setState({curPage: page}, () => {
@@ -46,6 +47,7 @@ class AddUserMealsForm extends React.Component{
 
     }
     handleSelectMeal(mealId, num = 0){
+        console.log("hitting")
         const routine = this.props.daySelect;
         let sumMeals = Object.values(routine[this.state.day].meals).reduce((acc, el) => acc + el, 0);
         if (num + sumMeals > this.state.numMeals) return null;
@@ -58,10 +60,17 @@ class AddUserMealsForm extends React.Component{
         }
         this.props.saveRoutine(routine)
     }
+    handleSubmitWeekMeals(allMeals){
+        if (allMeals === this.state.numMeals * 7 ){
+            this.props.openExercises()
+        }
+    }
 
     render(){
         let meals;
-        const {daySelect} = this.props
+        const {daySelect} = this.props;
+        let sumAllMeals = 0;
+        Object.values(this.props.daySelect).forEach((day) => Object.values(day.meals).forEach(mealVal => sumAllMeals += mealVal));
         if (this.state.toggleShowMeals){
             meals = this.props.meals.length > 0 ? (
                 <div className="meal-list">
@@ -96,7 +105,9 @@ class AddUserMealsForm extends React.Component{
                             pageSize={this.state.pageSize}
                             itemsAmount={this.state.itemsAmount}
                         />
-
+                    </div>
+                    <div className={`submit-meals ${sumAllMeals === this.state.numMeals * 7 ? "" : "disabled"}`} onClick={() => this.handleSubmitWeekMeals(sumAllMeals)}>
+                        Confirm Week's Meals
                     </div>
                 </div>
             ) : (

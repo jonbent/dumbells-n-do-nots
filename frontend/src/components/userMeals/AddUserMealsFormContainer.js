@@ -4,6 +4,7 @@ import { createDayUserMeal, fetchApiFilteredMeals } from '../../actions/UserMeal
 import { fetchAllMeals, fetchMeals } from '../../actions/MealActions'
 import {receiveRoutineMeals} from "../../actions/NewRoutineActions";
 import DateFormat from 'dateformat';
+import {openModal} from "../../actions/ModalActions";
 
 
 const mapStateToProps = (state, ownProps) => {
@@ -19,7 +20,8 @@ const mapDispatchToProps = dispatch => ({
     fetchApiFilteredMeals: (minCals, maxCals) => dispatch(fetchApiFilteredMeals(minCals,maxCals)),
     fetchAllMeals: () => dispatch(fetchAllMeals()),
     fetchMeals: (options) => dispatch(fetchMeals(options)),
-    saveRoutine: (routine) => dispatch(receiveRoutineMeals(routine))
+    saveRoutine: (routine) => dispatch(receiveRoutineMeals(routine)),
+    openExercises: () => dispatch(openModal('bodyUI'))
 });
 
 export default connect(
