@@ -8,9 +8,14 @@ router.get("/test", (req, res) => res.json({ msg: "This is the users route" }));
 
 // get all availabe meals
 router.get("/", (req, res) => {
+    const pageSize = parseInt(req.query.pageSize);
+    const pageNum = parseInt(req.query.pageNum);
+    const {maxCals, minCals} = req.query;
     Meal
      .find()
-     .sort({name: 1})
+     .sort({title: 1})
+     .limit(pageSize)
+     .skip(pageSize * pageNum)
      .then(meals => res.json(meals))
 })
 
@@ -23,9 +28,12 @@ router.post("/", passport.authenticate("jwt", {session: false}), (req, res) => {
 
     const newMeal = new Meal({
         user: req.user.id,
-        name: req.body.name,
+        title: req.body.title,
         description: req.body.description,
-        nutrients: req.body.nutrients,
+        calories: req.body.calories,
+        protein: req.body.protein,
+        fat: req.body.fat,
+        carbs: req.body.carbs,
         prepTime: req.body.prepTime,
     })
 

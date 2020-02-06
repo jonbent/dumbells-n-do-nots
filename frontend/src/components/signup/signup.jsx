@@ -27,7 +27,7 @@ class Signup extends React.Component {
       goalPath: "",
       height1: "",
       height2: "",
-      month: currentDate.getMonth()
+      month: currentDate
     };
 
     this.updateField = this.updateField.bind(this);
@@ -43,6 +43,7 @@ class Signup extends React.Component {
     let result = parseInt(feet) * 12 + parseInt(inches);
     return result.toString();
   }
+  //handle submission of the details
   handleSubmit(e) {
     let final_input = this.state;
     final_input["height"] = this.setHeight();
@@ -149,6 +150,7 @@ class Signup extends React.Component {
                   type="password"
                   onChange={e => this.updateField("password", e)}
                   value={this.state.password}
+                  autoComplete="new-password"
                 />
               </div>
               <div className="signup-errors">{passwordErrors}</div>
@@ -162,6 +164,7 @@ class Signup extends React.Component {
                   type="password"
                   onChange={e => this.updateField("password2", e)}
                   value={this.state.password2}
+                  autoComplete="new-password"
                 />
               </div>
               <div className="signup-errors">{confimrPasswordErrors}</div>
@@ -170,7 +173,6 @@ class Signup extends React.Component {
           <div onClick={this.handleNext} className="signup-form-button">
             Next
           </div>
-          <Link to="/login">Login</Link>
         </form>
       );
     } else {

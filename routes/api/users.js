@@ -9,6 +9,8 @@ const keys = require('../../config/keys');
 const passport = require('passport');
 const uuid = require('uuid');
 const Validator = require('validator');
+const passwordValidator = require('password-validator');
+
 
 
 const multer = require("multer");
@@ -22,7 +24,6 @@ AWS.config.update({
     secretAccessKey: keys.awsBucketToken,
     region: keys.awsRegion
 });
-// console.log(myConfig);
 
 
 
@@ -45,6 +46,7 @@ router.get('/current', passport.authenticate('jwt', { session: false }), (req, r
 
 
 router.post('/register', (req, res) => {
+
     const newUser = new User({
         username: req.body.username,
         email: req.body.email,
@@ -54,19 +56,43 @@ router.post('/register', (req, res) => {
         weightCur: req.body.weightStart,
         height: req.body.height,
         sex: req.body.sex,
-    })
+    });
+
     let errors = {};
-    if (req.body.password !== req.body.password2) errors = Object.assign(errors, {password2: {
-            message: "Password Confirmation must match",
-            name: "ValidatorError",
-            properties: {
-                message: "Path `password2` must match path `password`.",
-                type: "required",
-                path: "password2"
-            },
-            kind: "required",
-            path: "password2"
-        }})
+    const passwordSchema = new passwordValidator();
+    passwordSchema
+        .is().min(8)
+        .is().max(75)
+        .has().uppercase()
+        .has().lowercase()
+        .has().digits()
+        .has().not().spaces()
+
+
+    // if (req.body.password !== req.body.password2) errors = Object.assign(errors, {password2: {
+    //         message: "Password Confirmation must match",
+    //         name: "ValidatorError",
+    //         properties: {
+    //             message: "Path `password2` must match path `password`.",
+    //             type: "required",
+    //             path: "password2"
+    //         },
+    //         kind: "required",
+    //         path: "password2"
+    //     }})
+    
+
+
+    let validatorErrors = newUser.validateSync();
+    if (validatorErrors){
+
+        errors = Object.assign(validatorErrors.errors, errors)
+    }
+    if (req.body.sex === "M"){
+        newUser.avatarUrl = '/images/maleDefaultAvatar.jpg'
+    } else {
+        newUser.avatarUrl = '/images/femaleDefaultAvatar.jpg'
+    }
     if (!Validator.isEmail(req.body.email)) {
         errors.email = {
             message: "Invalid Email",
@@ -80,18 +106,31 @@ router.post('/register', (req, res) => {
             path: "email"
         };
     }
-    let validatorErrors = newUser.validateSync();
-    if (validatorErrors){
-        errors = Object.assign(errors, validatorErrors.errors)
+    if (req.body.password !== req.body.password2) errors.password2 = {
+        message: "Password Confirmation must match",
+        name: "ValidatorError",
+        properties: {
+            message: "Path `password2` must match path `password`.",
+            type: "required",
+            path: "password2"
+        },
+        kind: "required",
+        path: "password2"
+    };
+    const passValid = passwordSchema.validate(req.body.password, { list: true });
+    if (passValid.length) {
+        errors.password = {
+            message: 'Path `password` must have at least 1 number, 8 chars, and one capital letter.',
+            name: 'ValidatorError',
+            properties: {
+                message: "Path `password` must have at least 1 number, 8 chars, and one capital letter.",
+                type: "not valid",
+                path: "password"
+            }
+        };
     }
-    if (Object.keys(errors)) return res.status(422).json(errors)
 
-    if (req.body.sex === "M"){
-        newUser.avatarUrl = '/images/maleDefaultAvatar.jpg'
-    } else {
-        newUser.avatarUrl = '/images/femaleDefaultAvatar.jpg'
-    }
-
+    if (Object.keys(errors).length !== 0) return res.status(422).json(errors)
     bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(newUser.password, salt, (err, hash) => {
             if (err) throw err;
@@ -99,8 +138,9 @@ router.post('/register', (req, res) => {
             newUser.save()
                 .then(user => {
                     let payload = Object.assign({}, user.toObject());
-                    delete newUser.password;
-                    delete newUser.date;
+                    delete payload.password;
+                    delete payload.date;
+
                     jwt.sign(
                         payload,
                         keys.secretOrKey,
@@ -132,7 +172,7 @@ router.post('/login', (req, res) => {
         .then(user => {
             if (!user) {
                 // Use the validations to send the error
-                errors.email = 'User not found';
+                errors.username = 'User not found';
                 return res.status(400).json(errors);
             };
             bcrypt.compare(password, user.password)
@@ -158,7 +198,7 @@ router.post('/login', (req, res) => {
                             });
                     } else {
                         // And here:
-                        return res.status(400).json(errors);
+                        return res.status(400).json({password: 'Invalid credentials'});
                     }
                 })
         })
@@ -178,9 +218,9 @@ router.get('/:username', (req, res) => {
             });
         })
 })
-upload.single("avatarImg")
-router.post('/:username/update', passport.authenticate('jwt', { session: false }), (req, res) => {
-    const s3 = new AWS.S3()
+
+router.post('/:username/update', passport.authenticate('jwt', { session: false }), upload.single("avatarUrl"), (req, res) => {
+    const s3 = new AWS.S3();
     User.findOne({ username: req.params.username }).then(user => {
         if (!user) return res.status(400).json({ user: { message: "User not found" } })
         const file = req.file;
@@ -189,7 +229,7 @@ router.post('/:username/update', passport.authenticate('jwt', { session: false }
             user.height = req.body.height;
             user.username = req.body.username;
             user.save(function (error, newFile) {
-                if (error) return res.json(error)
+                if (error) return res.status(422).json(error);
                 let newUser = Object.assign({}, user.toObject());
                 delete newUser.password;
                 delete newUser.date;
@@ -208,7 +248,6 @@ router.post('/:username/update', passport.authenticate('jwt', { session: false }
                     });
             });
         };
-        console.log(file);
         if (file){
             const s3FileURL = keys.UploadFileUrlLink;
             const keyname = file.originalname + uuid();
@@ -226,7 +265,6 @@ router.post('/:username/update', passport.authenticate('jwt', { session: false }
                 } else {
                     user.avatarUrl = s3FileURL + keyname;
                     callback();
-                    console.log(req)
 
                 }
             })
@@ -256,13 +294,10 @@ router.post('/:username/update', passport.authenticate('jwt', { session: false }
     //         if (err) {
     //             res.status(500).json({ error: true, Message: err });
     //         }
-    //         console.log(data);
 
     //     })
     //     user.avatarUrl = signedUrl;
-    //     console.log("hello");
 
-    //     console.log(signedUrl);
 
     //     user.save(function (error, newFile) {
     //         if (error) {
