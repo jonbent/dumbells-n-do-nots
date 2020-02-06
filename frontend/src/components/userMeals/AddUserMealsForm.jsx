@@ -47,7 +47,6 @@ class AddUserMealsForm extends React.Component{
 
     }
     handleSelectMeal(mealId, num = 0){
-        console.log("hitting")
         const routine = this.props.daySelect;
         let sumMeals = Object.values(routine[this.state.day].meals).reduce((acc, el) => acc + el, 0);
         if (num + sumMeals > this.state.numMeals) return null;
