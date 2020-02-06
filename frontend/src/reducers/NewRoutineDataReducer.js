@@ -3,7 +3,7 @@ import { RECEIVE_NEW_ROUTINE_STARTDATE,
          RECEIVE_ROUTINE_WORKOUTS,
          CLEAR_NEW_ROUTINE_DATA } from '../actions/NewRoutineActions';
 import DateFormat from 'dateformat';
-import { RECEIVE_DAY_SELECTED } from '../actions/RoutineFilterActions'
+import { RECEIVE_NUM_MEALS } from '../actions/RoutineFilterActions'
 import {CLOSE_MODAL} from "../actions/ModalActions";
 
 const NewRoutinesReducer = (state = {}, action) => {
@@ -26,14 +26,14 @@ const NewRoutinesReducer = (state = {}, action) => {
             return Object.assign({}, state, action.payload.days)
         case CLEAR_NEW_ROUTINE_DATA:
             return {}
-        case RECEIVE_DAY_SELECTED:
+        case RECEIVE_NUM_MEALS:
             nextState = Object.assign(nextState, state)
             Object.values(nextState).forEach(day => day.meals = {})
             return nextState
         case CLOSE_MODAL:
             return {};
         default:
-            return state
+            return state;
     }
 };
 

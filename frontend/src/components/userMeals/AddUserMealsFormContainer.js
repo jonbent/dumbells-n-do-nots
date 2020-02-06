@@ -3,8 +3,8 @@ import AddUserMealsForm from './AddUserMealsForm';
 import { createDayUserMeal, fetchApiFilteredMeals } from '../../actions/UserMealActions';
 import { fetchAllMeals, fetchMeals } from '../../actions/MealActions'
 import {receiveRoutineMeals} from "../../actions/NewRoutineActions";
+import {openModal} from "../../actions/ModalActions";
 import {receiveNumMeals, receiveDaySelected} from "../../actions/RoutineFilterActions"
-import DateFormat from 'dateformat';
 
 
 const mapStateToProps = (state, ownProps) => {
@@ -23,6 +23,7 @@ const mapDispatchToProps = dispatch => ({
     fetchAllMeals: () => dispatch(fetchAllMeals()),
     fetchMeals: (options) => dispatch(fetchMeals(options)),
     saveRoutine: (routine) => dispatch(receiveRoutineMeals(routine)),
+    openExercises: () => dispatch(openModal('bodyUI')),
     receiveNumMeals: (num) => dispatch(receiveNumMeals(num)),
     receiveDaySelected: (day) => dispatch(receiveDaySelected(day))
 });
