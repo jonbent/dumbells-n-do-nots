@@ -37,7 +37,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Create a preconfigured state we can immediately add to our store
         preloadedState = { session: { isAuthenticated: true, user: decodedUser }, entities: { users: { [decodedUser.username]: decodedUser}} };
-
         store = configureStore(preloadedState);
 
         const currentTime = Date.now() / 1000;
@@ -45,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // If the user's token has expired
         if (decodedUser.exp < currentTime) {
             // Logout the user and redirect to the login page
-            store.dispatch(logout());
+            store.store.dispatch(logout());
             window.location.href = '/#/login';
         }
     } else {
