@@ -3,6 +3,7 @@ import { RECEIVE_NEW_ROUTINE_STARTDATE,
          RECEIVE_ROUTINE_WORKOUTS,
          CLEAR_NEW_ROUTINE_DATA } from '../actions/NewRoutineActions';
 import DateFormat from 'dateformat';
+import { RECEIVE_DAY_SELECTED } from '../actions/RoutineFilterActions'
 
 const NewRoutinesReducer = (state = {}, action) => {
     let nextState = {};
@@ -24,8 +25,12 @@ const NewRoutinesReducer = (state = {}, action) => {
             return Object.assign({}, state, action.payload.days)
         case CLEAR_NEW_ROUTINE_DATA:
             return {}
+        case RECEIVE_DAY_SELECTED:
+            nextState = Object.assign(nextState, state)
+            Object.values(nextState).forEach(day => day.meals = {})
+            return nextState
         default:
-            return state;
+            return state
     }
 };
 

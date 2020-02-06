@@ -34,10 +34,12 @@ class AddUserMealsForm extends React.Component{
     updateField(field, e) {
         if(e.target.value[e.target.value.length - 1] === ".") return null
         this.setState({ [field]: e.currentTarget.value });
+        this.props.receiveNumMeals(e.currentTarget.value)
     }
 
     handleSetDate(e){
         this.setState({ day: Object.keys(this.props.daySelect)[e.currentTarget.value] })
+        this.props.receiveDaySelected(Object.keys(this.props.daySelect)[e.currentTarget.value])
     }
 
     handleSetNumMeals(e){
@@ -49,7 +51,7 @@ class AddUserMealsForm extends React.Component{
     handleSelectMeal(mealId, num = 0){
         const routine = this.props.daySelect;
         let sumMeals = Object.values(routine[this.state.day].meals).reduce((acc, el) => acc + el, 0);
-        if (num + sumMeals > this.props.numMeals) return null;
+        if (num + sumMeals > this.state.numMeals) return null;
         if (!routine[this.state.day].meals[mealId]){
             if (num <= 0) return null;
             routine[this.state.day].meals[mealId] = num;
@@ -122,12 +124,12 @@ class AddUserMealsForm extends React.Component{
                                 <input
                                     type="number"
                                     onChange={e => this.updateField("numMeals", e)}
-                                    value={this.props.numMeals}
+                                    value={this.state.numMeals}
                                 />
                             </div>
                         <input
                             type="submit"
-                            onChange={this.handleSetNumMeals}
+                            onClick={this.handleSetNumMeals}
                             value="Submit"
                             />
                     </form>
