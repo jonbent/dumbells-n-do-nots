@@ -32,19 +32,22 @@ class AddUserMealsForm extends React.Component{
     }
 
     updateField(field, e) {
+        if(e.target.value[e.target.value.length - 1] === ".") return null
         this.setState({ [field]: e.currentTarget.value });
+        this.props.receiveNumMeals(e.currentTarget.value)
     }
 
     handleSetDate(e){
         this.setState({ day: Object.keys(this.props.daySelect)[e.currentTarget.value] })
+        this.props.receiveDaySelected(Object.keys(this.props.daySelect)[e.currentTarget.value])
     }
 
     handleSetNumMeals(e){
         e.preventDefault();
         this.props.fetchMeals({pageSize: this.state.pageSize, pageNum: this.state.curPage})
             .then(() => this.setState({toggleShowMeals: true}))
-
     }
+    
     handleSelectMeal(mealId, num = 0){
         const routine = this.props.daySelect;
         let sumMeals = Object.values(routine[this.state.day].meals).reduce((acc, el) => acc + el, 0);
@@ -119,7 +122,7 @@ class AddUserMealsForm extends React.Component{
                     <form>
                             <div className="add-user-meals-numofmeals-input">
                                 <input
-                                    type="text"
+                                    type="number"
                                     onChange={e => this.updateField("numMeals", e)}
                                     value={this.state.numMeals}
                                 />
