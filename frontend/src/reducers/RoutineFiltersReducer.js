@@ -1,8 +1,25 @@
 import { RECEIVE_DAY_SELECTED, RECEIVE_NUM_MEALS } from '../actions/RoutineFilterActions'
 import { RECEIVE_NEW_ROUTINE_STARTDATE } from '../actions/NewRoutineActions';
 import {CLOSE_MODAL} from "../actions/ModalActions";
-
-export default function (state = {}, action) {
+import {RECEIVE_SELECTED_MUSCLE_GROUP, RECEIVE_SIDE} from "../actions/RoutineFilterActions";
+const _nullState = {
+    side: "front",
+    Arms: false,
+    Legs: false,
+    Shoulders: false,
+    Calves: false,
+    Abs: false,
+    Chest: false,
+    Back: false,
+    hoverArms: false,
+    hoverLegs: false,
+    hoverShoulders: false,
+    hoverCalves: false,
+    hoverAbs: false,
+    hoverChest: false,
+    hoverBack: false,
+}
+export default function (state = _nullState, action) {
     Object.freeze(state);
     switch (action.type) {
         case RECEIVE_DAY_SELECTED:
@@ -13,6 +30,10 @@ export default function (state = {}, action) {
             return Object.assign({}, state, { daySelected: action.payload });
         case CLOSE_MODAL:
             return {};
+        case RECEIVE_SELECTED_MUSCLE_GROUP:
+            return Object.assign({}, state, { [action.muscleGroup]: !state[action.muscleGroup] });
+        case RECEIVE_SIDE:
+            return Object.assign({}, state, { side: action.side });
         default:
             return state;
     }
