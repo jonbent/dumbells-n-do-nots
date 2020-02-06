@@ -12,7 +12,7 @@ class AddUserMealsForm extends React.Component{
             curPage: 1,
             pageSize: 10,
             itemsAmount: 100,
-            numMeals: 0,
+            numMeals: "",
             selectedMeals: {}
         }
         this.updateField = this.updateField.bind(this);
