@@ -6,5 +6,6 @@ import NewRoutineData from './NewRoutineDataReducer';
 export default combineReducers({
     filters: filterReducer,
     modal: modalReducer,
-    NewRoutineData
+    NewRoutineData,
+    numMeals: ""
 });

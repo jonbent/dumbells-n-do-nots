@@ -11,6 +11,7 @@ const mapStateToProps = (state, ownProps) => {
     return {
         daySelect: state.ui.NewRoutineData,
         meals: state.entities.meals,
+        numMeals: state.ui.numMeals
     }
 };
 
