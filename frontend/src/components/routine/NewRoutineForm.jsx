@@ -37,8 +37,7 @@ class NewRoutineForm extends React.Component {
   }
   handleNext(e) {
     e.preventDefault();
-    this.props.receiveNewRoutineStartDate(this.state.startDate) 
-    this.props.closeRoutineModal();
+    this.props.receiveNewRoutineStartDate(this.state.startDate);
     this.props.openAddMealsFormModal();
   }
 
