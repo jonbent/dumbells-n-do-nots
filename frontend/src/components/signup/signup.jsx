@@ -43,6 +43,7 @@ class Signup extends React.Component {
     let result = parseInt(feet) * 12 + parseInt(inches);
     return result.toString();
   }
+  //handle submission of the details
   handleSubmit(e) {
     let final_input = this.state;
     final_input["height"] = this.setHeight();
