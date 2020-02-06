@@ -13,7 +13,7 @@ const persistConfig = {
     storage,
     blacklist: ['entities', 'session', 'errors'],
     transforms: [
-        createBlacklistFilter('UIReducer', ['filters']),
+        createBlacklistFilter('ui', ['filters']),
   ],
 }
 
