@@ -6,10 +6,15 @@ import logger from 'redux-logger';
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
 import rootReducer from '../reducers/RootReducer';
+import { createBlacklistFilter } from 'redux-persist-transform-filter';
 
 const persistConfig = {
-  key: 'root',
-  storage,
+    key: 'root',
+    storage,
+    blacklist: ['entities', 'session', 'errors'],
+    transforms: [
+        createBlacklistFilter('UIReducer', ['filters']),
+  ],
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
