@@ -29,7 +29,10 @@ export default function (state = _nullState, action) {
         case RECEIVE_NEW_ROUTINE_STARTDATE:
             return Object.assign({}, state, { daySelected: action.payload });
         case CLOSE_MODAL:
-            return {};
+            let nextState = Object.assign({}, state);
+            delete nextState.daySelected;
+            delete nextState.numMeals;
+            return nextState;
         case RECEIVE_SELECTED_MUSCLE_GROUP:
             return Object.assign({}, state, { [action.muscleGroup]: !state[action.muscleGroup] });
         case RECEIVE_SIDE:

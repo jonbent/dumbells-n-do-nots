@@ -1,3 +1,15 @@
 .exercise-selector-container{
   height: 100%;
+  .exercise-list{
+    display: flex;
+    flex-direction: column;
+    .exercise-item{
+      background-color: rgba(0, 0, 0, 0.5);
+      border-radius: 5px;
+      display: flex;
+      padding: 1rem;
+      margin: 0.5rem;
+      text-align: start;
+    }
+  }
 }

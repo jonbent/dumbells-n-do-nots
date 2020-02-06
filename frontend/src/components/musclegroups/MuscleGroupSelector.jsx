@@ -27,10 +27,15 @@ class MuscleGroupSelector extends Component {
     }
 
     handleClick(field){
-        this.props.selectMuscleGroup(field)
+        Promise.resolve(this.props.selectMuscleGroup(field)).then(() => {
+            this.props.fetchExercisesByMuscleGroups(this.props.selectedMuscleGroupIds)
+        })
+
     }
     componentDidMount(){
-        this.props.fetchMuscleGroups();
+        this.props.fetchMuscleGroups().then(() => {
+            this.props.fetchExercisesByMuscleGroups(this.props.selectedMuscleGroupIds)
+        })
     }
     handleSide(){
         if (this.props.side === "front") {
@@ -40,7 +45,7 @@ class MuscleGroupSelector extends Component {
         }
     }
     handleAllExercisesByMuscleGroups(ids){
-        this.props.fetchAllExercisesByMuscleGroup1(ids)
+        this.props.fetchExercisesByMuscleGroups(ids)
     }
 
     render() {

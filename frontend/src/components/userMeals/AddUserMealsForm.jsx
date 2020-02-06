@@ -131,7 +131,6 @@ class AddUserMealsForm extends React.Component{
                     <form>
                             <div className="add-user-meals-numofmeals-input">
                                 <input
-                                    type="text"
                                     type="number"
                                     onChange={e => this.updateField("numMeals", e)}
                                     value={this.props.numMeals}

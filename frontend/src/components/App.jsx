@@ -7,7 +7,6 @@ import LoginContainer  from './login/LoginContainer';
 import UserShowContainer  from './users/UserShowContainer';
 import SettingsContainer  from './settings/SettingsContainer';
 import { connect } from 'react-redux';
-import Modal from './modal/Modal';
 
 import Splash from './home/Splash';
 
