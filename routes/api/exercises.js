@@ -14,7 +14,7 @@ router.get('muscleGroups/:muscleGroupId', (req, res) => {
 })
 router.get('/', (req, res) => {
     let findQuery = {};
-    if (req.body.muscleGroupIds) findQuery = { muscleGroup: { $in: req.body.muscleGroupIds } }
+    if (req.body.muscleGroupIds) findQuery = { muscleGroup: { $in: JSON.parse(req.body.muscleGroupIds) } }
     
     Exercise
         .find(findQuery)
