@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import MuscleGroupSelector from "./MuscleGroupSelector";
 import {fetchMuscleGroups} from '../../actions/MuscleGroupActions';
-import {fetchAllExercises} from '../../actions/ExerciseActions';
+import {fetchAllExercises, fetchAllExercisesByMuscleGroup} from '../../actions/ExerciseActions';
 
 
 const mSTP = (state) => ({
@@ -13,7 +13,8 @@ const mSTP = (state) => ({
 
 const mDTP = dispatch =>({
     fetchMuscleGroups: () => dispatch(fetchMuscleGroups()),
-    fetchAllExercisesByMuscleGroup: () => dispatch(fetchAllExercises())
+    fetchAllExercisesByMuscleGroup: () => dispatch(fetchAllExercises()),
+    fetchAllExercisesByMuscleGroup1: ids => dispatch(fetchAllExercisesByMuscleGroup(ids))
 })
 
 export default connect(mSTP, mDTP)(MuscleGroupSelector);
