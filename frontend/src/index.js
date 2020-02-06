@@ -52,10 +52,10 @@ document.addEventListener('DOMContentLoaded', () => {
         // If this is a first time user, start with an empty store
         store = configureStore(preloadedState);
     }
-    window.store = store
+    window.store = store.store
     window.login = login
     window.logout = logout
-    ReactDOM.render(<Root store={store}/>, document.getElementById('root'));
+    ReactDOM.render(<Root store={store.store} persistor={store.persistor}/>, document.getElementById('root'));
 })
 
 
