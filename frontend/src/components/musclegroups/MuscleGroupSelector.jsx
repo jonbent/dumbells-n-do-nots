@@ -47,12 +47,9 @@ class MuscleGroupSelector extends Component {
 
     handleClick(field){
         this.setState({[field]: !this.state[field]} )
-        // this.setState({selectedMuscleGroups: this.state.selectedMuscleGroups.concat([])});
     }
     componentDidMount(){
         this.props.fetchMuscleGroups();
-        
-        // this.props.fetchAllExercisesByMuscleGroup();
     }
     handleSide(){
         if (this.state.side === "front") {
@@ -62,7 +59,9 @@ class MuscleGroupSelector extends Component {
         }
     }
     handleAllExercisesByMuscleGroups(ids){
+        console.log("ids",ids);
         this.props.fetchAllExercisesByMuscleGroup1(ids)
+        console.log(this.props.fetchAllExercisesByMuscleGroup1(ids));
     }
 
     selectedBodyGroups(){
@@ -83,7 +82,17 @@ class MuscleGroupSelector extends Component {
         if (muscleGroups && exercises){
             Object.values(muscleGroups).forEach(muscleGroup => {
                 if(muscleGroup.name === "Chest"){
-                    chest =  muscleGroup._id;  
+                    chest =  muscleGroup._id;
+                    if (this.state.Chest && !this.state.selectedMuscleGroups.includes(chest)) {
+                        this.state.selectedMuscleGroups.push(chest)
+                        this.handleAllExercisesByMuscleGroups(this.state.selectedMuscleGroups)
+                    } else if (!this.state.Chest) {
+                        for(let i = 0; i < this.state.selectedMuscleGroups.length; i++){
+                            if (this.state.selectedMuscleGroups[i] === chest) {
+                                this.state.selectedMuscleGroups.splice(i, 1);
+                            }
+                        }
+                    }  
                 }
                 if(muscleGroup.name === "Abs"){
                     abs =  muscleGroup._id;
@@ -208,7 +217,6 @@ class MuscleGroupSelector extends Component {
         } else if(this.state.side === "back" && sex=== "F"){
             bodySide = <FemaleBack handleClick={this.handleClick} handleMouseEnter={this.handleMouseEnter} handleMouseLeave={this.handleMouseLeave} {...this.state}/>
         }
-        
         return (
           <div>
             <div className="selected-muscle-groups">Selected Muscles: {this.selectedBodyGroups().map(muscle => muscle + " ")} </div>
