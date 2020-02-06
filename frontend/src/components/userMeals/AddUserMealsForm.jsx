@@ -33,34 +33,36 @@ class AddUserMealsForm extends React.Component{
     }
 
     updateField(field, e) {
+        if(e.target.value[e.target.value.length - 1] === ".") return null
         this.setState({ [field]: e.currentTarget.value });
+        this.props.receiveNumMeals(e.currentTarget.value)
     }
 
     handleSetDate(e){
         this.setState({ day: Object.keys(this.props.daySelect)[e.currentTarget.value] })
+        this.props.receiveDaySelected(Object.keys(this.props.daySelect)[e.currentTarget.value])
     }
 
-    handleSetNumMeals(e){
+    handleSetNumMeals(e) {
         e.preventDefault();
         this.props.fetchMeals({pageSize: this.state.pageSize, pageNum: this.state.curPage})
             .then(() => this.setState({toggleShowMeals: true}))
-
     }
     handleSelectMeal(mealId, num = 0){
         const routine = this.props.daySelect;
-        let sumMeals = Object.values(routine[this.state.day].meals).reduce((acc, el) => acc + el, 0);
-        if (num + sumMeals > this.state.numMeals) return null;
-        if (!routine[this.state.day].meals[mealId]){
+        let sumMeals = Object.values(routine[this.props.day].meals).reduce((acc, el) => acc + el, 0);
+        if (num + sumMeals > this.props.numMeals) return null;
+        if (!routine[this.props.day].meals[mealId]){
             if (num <= 0) return null;
-            routine[this.state.day].meals[mealId] = num;
+            routine[this.props.day].meals[mealId] = num;
         } else {
-            if (num + routine[this.state.day].meals[mealId] < 0) return null;
-            routine[this.state.day].meals[mealId] += num;
+            if (num + routine[this.props.day].meals[mealId] < 0) return null;
+            routine[this.props.day].meals[mealId] += num;
         }
         this.props.saveRoutine(routine)
     }
     handleSubmitWeekMeals(allMeals){
-        if (allMeals === this.state.numMeals * 7 ){
+        if (allMeals === this.props.numMeals * 7 ){
             this.props.openExercises()
         }
     }
@@ -80,7 +82,7 @@ class AddUserMealsForm extends React.Component{
                                 <div className="meal-image" style={{backgroundImage: `url(${meal.photoUrl})`}}></div>
                                 <div className="actions">
                                     <NextArrow onClick={() => this.handleSelectMeal(meal._id, -1)}/>
-                                    {daySelect[this.state.day].meals[meal._id] ? daySelect[this.state.day].meals[meal._id] : 0 }
+                                    {daySelect[this.props.day].meals[meal._id] ? daySelect[this.props.day].meals[meal._id] : 0 }
                                     <NextArrow onClick={() => this.handleSelectMeal(meal._id, 1)}/>
                                 </div>
 
@@ -105,7 +107,7 @@ class AddUserMealsForm extends React.Component{
                             itemsAmount={this.state.itemsAmount}
                         />
                     </div>
-                    <div className={`submit-meals ${sumAllMeals === this.state.numMeals * 7 ? "" : "disabled"}`} onClick={() => this.handleSubmitWeekMeals(sumAllMeals)}>
+                    <div className={`submit-meals ${sumAllMeals === this.props.numMeals * 7 ? "" : "disabled"}`} onClick={() => this.handleSubmitWeekMeals(sumAllMeals)}>
                         Confirm Week's Meals
                     </div>
                 </div>
@@ -120,18 +122,19 @@ class AddUserMealsForm extends React.Component{
             <div className="meal-selector">
                 <div className="day-select">
                     <h1>Select Day</h1>
-                    <select defaultValue={this.state.day} onChange={this.handleSetDate}>
+                    <select defaultValue={this.props.day} onChange={this.handleSetDate}>
                         {Object.keys(this.props.daySelect).map((date, idx) => <option key={date} value={idx}>{date}</option>)}
                     </select>
                 </div>
                 <div className="num-meals-select">
-                    <div className="add-user-meals-numofmeals-label">Number of meals for {this.state.day}</div>
+                    <div className="add-user-meals-numofmeals-label">Number of meals for {this.props.day}</div>
                     <form>
                             <div className="add-user-meals-numofmeals-input">
                                 <input
                                     type="text"
+                                    type="number"
                                     onChange={e => this.updateField("numMeals", e)}
-                                    value={this.state.numMeals}
+                                    value={this.props.numMeals}
                                 />
                             </div>
                         <input

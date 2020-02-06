@@ -16,8 +16,6 @@ import '../scss/App.scss';
 
 const App = ({ loggedIn }) => (
     <div>
-
-
         <Switch>
             <AuthRoute exact path="/signup" component={SignupContainer} />
             <AuthRoute exact path="/login" component={LoginContainer} />
