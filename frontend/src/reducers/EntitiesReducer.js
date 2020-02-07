@@ -4,7 +4,7 @@ import sampleRoutines from './SampleRoutinesReducer';
 import routines from './RoutinesReducer';
 import meals from './MealsReducer'
 import MuscleGroupReducer from './MuscleGroupsReducer'
-import ExersicesReducer from './ExersicesReducer'
+import ExersicesReducer from './ExercisesReducer'
 
 export default combineReducers({
     users: UsersReducer,

@@ -29,7 +29,7 @@ const NewRoutinesReducer = (state = {}, action) => {
         case RECEIVE_NUM_MEALS:
             nextState = Object.assign(nextState, state)
             Object.values(nextState).forEach(day => day.meals = {})
-            return nextState
+            return nextState;
         case CLOSE_MODAL:
             return {};
         default:

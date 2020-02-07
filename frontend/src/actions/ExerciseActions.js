@@ -1,6 +1,6 @@
 import * as ExerciseApiUtil from '../util/ExercisesApiUtil';
 
-export const RECEIVE_ALL_EXERCISES_BY_MUSCLE_GROUP = "RECEIVE_ALL_EXERCISES_BY_MUSCLE_GROUP"; 
+export const RECEIVE_EXERCISES_BY_MUSCLE_GROUPS = "RECEIVE_EXERCISES_BY_MUSCLE_GROUPS";
 export const RECEIVE_ALL_EXERCISES = "RECEIVE_ALL_EXERCISES";
 export const RECEIVE_USER_EXERCISES = "RECEIVE_USER_EXERCISES";
 export const RECEIVE_NEW_EXERCISE = "RECEIVE_NEW_EXERCISE";
@@ -10,8 +10,8 @@ export const receiveAllExercises = exercises =>({
     exercises
 });
 
-export const receiveAllExercisesByMuscleGroup = exercises => ({
-    type: RECEIVE_ALL_EXERCISES_BY_MUSCLE_GROUP,
+export const receiveExercisesByMuscleGroups = exercises => ({
+    type: RECEIVE_EXERCISES_BY_MUSCLE_GROUPS,
     exercises
 });
 
@@ -31,9 +31,9 @@ export const fetchAllExercises = () => dispatch => (
         .catch(err => console.log(err))
 )
 
-export const fetchAllExercisesByMuscleGroup = ids => dispatch =>(
+export const fetchExercisesByMuscleGroups = ids => dispatch =>(
     ExerciseApiUtil.getAllExercisesByMuscleGroup(ids)
-        .then(exercises => dispatch(receiveAllExercisesByMuscleGroup(exercises)))
+        .then(exercises => dispatch(receiveExercisesByMuscleGroups(exercises)))
         .catch(err => console.log(err))
 )
 

@@ -8,7 +8,6 @@ import {receiveNumMeals, receiveDaySelected} from "../../actions/RoutineFilterAc
 
 
 const mapStateToProps = (state, ownProps) => {
-    const date = new Date()
     return {
         daySelect: state.ui.newRoutineData,
         meals: state.entities.meals,
