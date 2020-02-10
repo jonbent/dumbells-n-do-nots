@@ -11,10 +11,7 @@ import { createBlacklistFilter } from 'redux-persist-transform-filter';
 const persistConfig = {
     key: 'root',
     storage,
-    blacklist: ['entities', 'session', 'errors'],
-    transforms: [
-        createBlacklistFilter('ui', ['filters']),
-  ],
+    blacklist: ['entities', 'session', 'errors']
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

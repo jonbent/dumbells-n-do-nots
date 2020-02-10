@@ -52,7 +52,7 @@ const Splash = () => {
                     </div>
 
                     <div className="developer-name">Jonathan Bent</div>
-                    <p>front-end developer</p>
+                    <p>Project Lead</p>
                      <div className="links">
                          <a href="https://www.linkedin.com/in/jon-bent/">
                             <img src="/images/linkedin-logo.png"></img>
@@ -71,7 +71,7 @@ const Splash = () => {
                     </div>
 
                     <div className="developer-name">Mohammed Mustafa</div>
-                     <p>front-end developer</p>
+                     <p>Back-end Lead</p>
                      <div className="links">
                          <a href="https://www.linkedin.com/in/mohammed-mustafa-96469a167/">
                          <img src="/images/linkedin-logo.png"></img>
@@ -90,7 +90,7 @@ const Splash = () => {
                     </div>
 
                     <div className="developer-name">Manraj Singh</div>
-                    <p>front-end developer</p>
+                    <p>Full-stack Lead</p>
                      <div className="links">
                          <a href="https://www.linkedin.com/in/manraj-singh-01366710a/">
                          <img src="/images/linkedin-logo.png"></img>
@@ -109,7 +109,7 @@ const Splash = () => {
                     </div>
 
                     <div className="developer-name">Julius Wu</div>
-                    <p>front-end developer</p>
+                    <p>Front-end Lead</p>
                      <div className="links">
                         <a href="https://www.linkedin.com/in/juliuswu/">
                         <img src="/images/linkedin-logo.png"></img>
