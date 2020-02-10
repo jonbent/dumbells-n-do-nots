@@ -6,43 +6,126 @@ import '../../scss/Splash.scss';
 
 const Splash = () => {
     return (
-        <Redirect to="/login"/>
+        // <Redirect to="/login"/>
+        <div className="warpper">
+        <div className="Info"> 
+            <h1>Fitness starts with a plan...</h1>
+            <p>New Year, New Me! Start taking control of your goals.
+                Let us find you the perfect meal and your custom exercise routine.
+            </p>
+            <a href="/#/signup">
+            <button className="Sign-up-btn">signup for free</button>
+            </a>
+            <p>aready have an account? 
+                <a href="/#/login" > Login</a>
+            </p>
+        </div>
+             <div className="demo-feature">
+                <img className="selector-demo" src="/images/meal-selector-demo.png"></img>
+                <div className="demo-text">
+                <h2>
+                    Select your meals from our Database
+                </h2>
+                <p>
+                   What's in your food? Learn about calories, fats, carbs and poteins in your meal.
+                </p>
+                </div>
+            </div>
 
-        // <div className="Info"> 
-        //     <h1>Fitness starts with a plan...</h1>
-        //     <p>New Year, New Me! Start taking control of your goals.
-        //         Let us find you the perfect meal and your custom exercise routine.
-        //     </p>
-        //     <button classname="Sign-up-btn">signup for free</button>
-        //     <p>aready have an account? 
-        //         <a href="/account/login" > Login</a>
-        //     </p>
-        // </div>
+            <div className="exercise-demo-feature">
+                <img className="exercise-selector-demo" src="/images/exercise-selector-demo.png"></img>
+                <div className="exercise-demo-text">
+                <h2>
+                    Customize your work-out routine
+                </h2>
+                <p>
+                    Select your work-out routine based on your desire muscle groups
 
-        // <div className="developer-info">
-        //     <h3>Meet your developer</h3>
-        //     <div className="Jonathan-Bent-profile">
-        //         <div className="Jonathan-container">
-        //             <div className="Jonathan-photo">
-        //                 <img src="/images/Jonathan_Bent.jpg"></img>
-        //             </div>
-        //             <div className="Info">
-        //                 <div className="Jon-name">Jonathan Bent</div>
-        //                 <div className="links">
-        //                     {/* <img src="/images/linkedin-logo.png"></img>
-        //                     <img src="/images/github-logo.png"></img>
-        //                     <img src="/images/angellist.png"></img> */}
-        //                 </div>
-        //             </div>
-        //         </div>
-        //     </div>
-        //     <div className="Manraj-Singh-profile">
+                </p>
+                </div>
+            </div>
+            <div className="developer-info">
+                <div className="developer-profile">
+                    <div className="developer-photo">
+                       <img src="/images/Jonathan_Bent.jpg"></img>
+                    </div>
+
+                        <div className="developer-name">Jonathan Bent</div>
+                        <p>front-end developer</p>
+                         <div className="links">
+                             <a href="https://www.linkedin.com/in/jon-bent/">
+                             <img src="/images/linkedin-logo.png"></img>
+                            </a>
+                             <a href="https://github.com/jonbent">
+                             <img src="/images/github-logo.png"></img>
+                             </a>
+                             <a href="https://angel.co/jon-bent-1">
+                             <img src="/images/angellist.png"></img>
+                             </a>
+                        </div>
+                        </div>
+                    <div className="developer-profile">
+                    <div className="developer-photo">
+                       <img src="/images/Muhammed_Mustafa.jpg"></img>
+                    </div>
+
+                        <div className="developer-name">Mohammed Mustafa</div>
+                         <p>front-end developer</p>
+                         <div className="links">
+                             <a href="https://www.linkedin.com/in/mohammed-mustafa-96469a167/">
+                             <img src="/images/linkedin-logo.png"></img>
+                             </a>
+                             <a href="https://github.com/mmmymustafa">
+                             <img src="/images/github-logo.png"></img>
+                             </a>
+                             <a href="https://angel.co/mohammed-mustafa-9">
+                             <img src="/images/angellist.png"></img>
+                             </a>
+                        </div>
+                        </div>
+                    <div className="developer-profile">
+                    <div className="developer-photo">
+                       <img src="/images/Manraj_Singh.jpg"></img>
+                    </div>
+
+                        <div className="developer-name">Manraj Singh</div>
+                        <p>front-end developer</p>
+                         <div className="links">
+                             <a href="https://www.linkedin.com/in/manraj-singh-01366710a/">
+                             <img src="/images/linkedin-logo.png"></img>
+                             </a>
+                             <a href="https://github.com/mmmymustafa">
+                             <img src="/images/github-logo.png"></img>
+                             </a>
+                             <a href="https://angel.co/manraj-singh-10">
+                             <img src="/images/angellist.png"></img>
+                             </a>
+                        </div>
+                        </div>
+                    <div className="developer-profile">
+                    <div className="developer-photo">
+                       <img src="/images/Julius_Wu.jpg"></img>
+                    </div>
+
+                        <div className="developer-name">Julius Wu</div>
+                        <p>front-end developer</p>
+                         <div className="links">
+                            <a href="https://www.linkedin.com/in/juliuswu/">
+                            <img src="/images/linkedin-logo.png"></img>
+                            </a>
+                            <a href="https://github.com/juliuswuwu">
+                            <img src="/images/github-logo.png"></img>
+                            </a>
+                            <a href="https://angel.co/julius-wu">
+                             <img src="/images/angellist.png"></img>
+                            </a>
+                        </div>
+                        </div>
+                </div>
                 
-        //     </div>
-        //     <div className="Muhammed-Mustafa-profile">
-                
-        //     </div>
-        // </div>
+            </div>
+
+        
     )
 }
 

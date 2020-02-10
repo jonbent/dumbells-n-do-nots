@@ -6,11 +6,12 @@
     position: flex;
     min-width: 320px;
     padding: 3em 1em;
-    padding-bottom: 150px;
+    padding-bottom: 160px;
 }
 
 .Info h1{
     font-weight: bold;
+    text-shadow: 3px 2px black;
     color: white;
     font-size: 3em;
 }
@@ -21,7 +22,7 @@
     margin-block-end: 1em;
     margin-inline-start: 0px;
     margin-inline-end: 0px;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     line-height: 1.70em;
     color: white ;
     max-width: 24em;
@@ -48,32 +49,108 @@ a{
     cursor: pointer;
 }
 
-// .developer-info{
-//     display: flex;
-//     flex-direction: column;
-// }
+.demo-feature{
+    padding: 30px;
+    text-align: center;
+    justify-content: center;
+    background-image: url("/images/meal-background.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 
-// .Jonathan-Bent-profile{
+.demo-feature h2{
+    text-shadow: 3px 2px black;
+    color: white;
+    display: block;
+    font-size: 2.3em;
+    margin-block-start: 0.83em;
+    margin-block-end: 0.83em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
 
-// }
+.demo-feature p{
+    text-shadow: 1px 1px black;
+    color: white;
+    display: block;
+    margin-block-start: 1.5em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-size: 1.2rem;
+    line-height: 1.71em;
+}
 
-// .Jonathan-container{
-//     display: flex;
-//     flex-direction:row;
-// }
+.selector-demo{
+    height: 37%;
+    width: 37%;
+}
+
+.exercise-demo-feature{
+    padding: 30px;
+    text-align: center;
+    justify-content: center;
+    background-image: url("/images/gym-background.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.exercise-demo-feature h2{
+    text-shadow: 3px 2px black;
+    color: white;
+    display: block;
+    font-size: 2.3em;
+    margin-block-start: 0.83em;
+    margin-block-end: 0.83em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+
+.exercise-demo-feature p{
+    text-shadow: 1px 1px black;
+    color: white;
+    display: block;
+    margin-block-start: 1.5em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-size: 1.2rem;
+    line-height: 1.71em;
+}
+
+.exercise-selector-demo{
+    height: 37%;
+    width: 37%;
+}
+
+.developer-info{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    background-color: orange;
+    padding: 30px;
+}
 
 
-// .Jonathan-photo{
-//     width: 300px;
-//     height: 300px;
-//     position: relative;
-//     overflow: hidden;
-//     border-radius: 50%;
-// }
 
-// img{
-//     display: inline;
-//     margin: 0 auto;
-//     height: 100%;
-//     width: auto;
-// }
+.developer-container{
+    display: flex;
+    flex-direction:row;
+    padding: 10px;
+}
+
+
+.developer-photo img{
+    border-radius: 50%;
+    width:120px;
+    padding: 10px;
+
+}
+
+.links img{
+    padding: 15px;
+    width: 40px;
+}
