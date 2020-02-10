@@ -11,10 +11,10 @@
         justify-content: space-between;
         .navbar-logo{
             width: 100%;
-            background-size: cover;
+            background-size: contain;
             background-position: 50%;
             background-repeat: no-repeat;
-            background-image: url("/images/donut-dumbbell-full-logo.png");
+            background-image: url("/images/donut-dumbbell.png");
         }
         .navbar-name{
             display: flex;
