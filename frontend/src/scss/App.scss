@@ -53,4 +53,7 @@ input:-webkit-autofill:active {
         margin: 0 1.5em;
     }
 }
+::-webkit-scrollbar {
+    display: none;
+}
 

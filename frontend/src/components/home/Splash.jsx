@@ -22,7 +22,7 @@ const Splash = () => {
                 </p>
             </div>
              <div className="demo-feature">
-                <img className="selector-demo" src="/images/meal-selector-demo.png"></img>
+                <div className="selector-demo" style={{backgroundImage: "url(/images/meal-selector-demo.png)"}}></div>
                 <div className="demo-text">
                     <h2>
                         Select your meals from our Database
@@ -34,7 +34,7 @@ const Splash = () => {
             </div>
 
             <div className="exercise-demo-feature">
-                <img className="exercise-selector-demo" src="/images/exercise-selector-demo.png"></img>
+                <div className="exercise-selector-demo" style={{backgroundImage: "url(/images/exercise-selector-demo.png)"}}></div>
                 <div className="exercise-demo-text">
                     <h2>
                         Customize your work-out routine
