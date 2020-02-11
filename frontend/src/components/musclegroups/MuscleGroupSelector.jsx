@@ -65,6 +65,12 @@ class MuscleGroupSelector extends Component {
         }
         return (
           <div className="muscle-group-selector-container">
+              <div className="day-select">
+                    <h1>Select Day</h1>
+                    <select defaultValue={this.props.day} onChange={this.handleSetDate}>
+                        {Object.keys(this.props.daySelect).map((date, idx) => <option key={date} value={idx}>{date}</option>)}
+                    </select>
+              </div>
             <div className="selected-muscle-groups">Selected Muscles: {selectedMuscles.length !== 0 ? selectedMuscles.map((name) => name + " ") : "None"} </div>
             <div className="muscle-group-selector">
                 <div>{bodySide}</div>
