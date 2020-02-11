@@ -1,7 +1,9 @@
 import { RECEIVE_SESSION_ERRORS } from '../actions/SessionActions';
 import { RECEIVE_NEXT_STEP } from '../actions/FilterActions'
-
-export default function(state = {}, action) {
+const _nullState = {
+    currentStep: 1
+}
+export default function(state = _nullState, action) {
     Object.freeze(state);
 
     switch (action.type) {
