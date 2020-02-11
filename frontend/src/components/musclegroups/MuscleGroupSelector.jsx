@@ -13,6 +13,7 @@ class MuscleGroupSelector extends Component {
         this.handleMouseLeave = this.handleMouseLeave.bind(this);
         this.handleClick = this.handleClick.bind(this);
         this.handleAllExercisesByMuscleGroups = this.handleAllExercisesByMuscleGroups.bind(this);
+        this.handleSetDate = this.handleSetDate.bind(this);
     }
     handleMouseEnter(field){
         if (!window.mobileAndTabletcheck()){
@@ -46,6 +47,10 @@ class MuscleGroupSelector extends Component {
     }
     handleAllExercisesByMuscleGroups(ids){
         this.props.fetchExercisesByMuscleGroups(ids)
+    }
+
+    handleSetDate(e){
+        this.props.receiveDaySelected(Object.keys(this.props.daySelect)[e.currentTarget.value])
     }
 
     render() {
