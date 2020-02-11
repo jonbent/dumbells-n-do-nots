@@ -34,7 +34,7 @@ const Splash = () => {
             </div>
 
             <div className="exercise-demo-feature">
-                <img className="exercise-selector-demo" src="/images/exercise-selector-demo.png"></img>
+                <div className="exercise-selector-demo" style={{backgroundImage: "url(/images/exercise-selector-demo.png)"}}></div>
                 <div className="exercise-demo-text">
                     <h2>
                         Customize your work-out routine
