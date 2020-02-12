@@ -7,7 +7,7 @@ export default (prevState = {}, action)=>{
         case RECEIVE_MUSCLE_GROUPS:
             const muscleGroup = {};
             action.payload.data.forEach(element => {
-                muscleGroup[element.name] = element;
+                muscleGroup[element._id] = element;
             });
             nextState= Object.assign(nextState, prevState, muscleGroup);
             return nextState; 

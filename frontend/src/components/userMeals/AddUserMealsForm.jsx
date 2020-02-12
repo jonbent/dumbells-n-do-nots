@@ -33,8 +33,7 @@ class AddUserMealsForm extends React.Component{
     }
 
     updateField(field, e) {
-        if(e.target.value[e.target.value.length - 1] === ".") return null
-        this.setState({ [field]: e.currentTarget.value });
+        if(e.target.value[e.target.value.length - 1] === ".") return null;
         this.props.receiveNumMeals(e.currentTarget.value)
     }
 
@@ -133,7 +132,7 @@ class AddUserMealsForm extends React.Component{
                                 <input
                                     type="number"
                                     onChange={e => this.updateField("numMeals", e)}
-                                    value={this.props.numMeals}
+                                    value={this.props.numMeals || ""}
                                 />
                             </div>
                         <input

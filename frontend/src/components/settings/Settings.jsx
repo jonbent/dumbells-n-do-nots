@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import BottomNavBar from "../navbar/BottomNavBarContainer";
 import "../../scss/settings.scss";
 import DateFormat from "dateformat";
+import Modal from "../modal/Modal";
 
 
 
@@ -91,6 +92,7 @@ class Settings extends Component {
     }
     return (
       <div className="settings-page">
+        <Modal/>
         <div className="main-container">
           <div className="image">
             {profilePic}
