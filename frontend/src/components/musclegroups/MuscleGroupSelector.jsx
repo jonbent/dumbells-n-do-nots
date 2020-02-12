@@ -52,8 +52,7 @@ class MuscleGroupSelector extends Component {
 
     render() {
         
-        let {sex, selectableMuscleGroups} = this.props;
-        let selectedMuscles = Object.keys(selectableMuscleGroups).filter(groupName => selectableMuscleGroups[groupName] === true)
+        let {sex} = this.props;
 
         let bodySide;
         if (this.props.side === "front" && sex=== "M") {
