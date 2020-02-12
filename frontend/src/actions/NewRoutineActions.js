@@ -2,6 +2,7 @@ export const RECEIVE_NEW_ROUTINE_STARTDATE = "RECEIVE_NEW_ROUTINE_STARTDATE";
 export const RECEIVE_ROUTINE_MEALS = "RECEIVE_ROUTINE_MEALS";
 export const RECEIVE_ROUTINE_WORKOUTS = "RECEIVE_ROUTINE_WORKOUTS";
 export const CLEAR_NEW_ROUTINE_DATA = "CLEAR_NEW_ROUTINE_DATA";
+export const RECEIVE_DAY_EXERCISE = "RECEIVE_DAY_EXERCISE";
 
 
 export const receiveNewRoutineStartDate = payload => ({
@@ -12,7 +13,11 @@ export const receiveNewRoutineStartDate = payload => ({
 export const receiveRoutineMeals = newRoutine => ({
     type: RECEIVE_ROUTINE_MEALS,
     newRoutine
-}) 
+})
+export const receiveRoutineExercise = payload => ({
+    type: RECEIVE_DAY_EXERCISE,
+    payload
+})
 
 export const receiveRoutineWorkouts = payload => ({
     type: RECEIVE_ROUTINE_WORKOUTS,

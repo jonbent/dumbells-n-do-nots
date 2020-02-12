@@ -8,17 +8,18 @@
     flex-direction: column;
     position: relative;
     justify-content: center;
+    .next-button{
+        margin-top: 15rem;
+        background: lightskyblue;
+        border: none;
+        font-size: large;
+        position: sticky;
+    }
 }
 
 .start-date-label{
     margin-top: 5rem;
 }
 
-.next-button{
-    margin-top: 15rem;
-    background: lightskyblue;
-    border: none;
-    font-size: large;
-    position: sticky;
-}
+
 
