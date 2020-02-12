@@ -1,5 +1,4 @@
 import React, { Component} from 'react'
-import {Link } from 'react-router-dom'
 import OptionCarousel from './OptionCarousel'
 import Arrow from '../svg/arrow_down'
 export default class OptionCarouselHolder extends Component {

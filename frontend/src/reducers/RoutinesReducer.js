@@ -5,7 +5,7 @@ const RoutinesReducer = (state = {}, action) => {
     let newState = Object.assign({}, state);
     switch (action.type) {
         case RECEIVE_USER_ROUTINE:
-            Object.assign(newState, {[action.routine.id] : action.routine})
+            newState = Object.assign(newState, {[action.payload.routine._id] : action.payload.routine})
             return newState;
         case RECEIVE_NEW_ROUTINE:
             Object.assign(newState, { [action.routine.id]: action.routine })

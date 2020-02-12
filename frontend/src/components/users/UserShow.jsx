@@ -3,6 +3,7 @@ import BottomNavBar from '../navbar/BottomNavBarContainer';
 import '../../scss/users/UserShow.scss';
 import UserShowCard from './UserShowCard';
 import Modal from "../modal/Modal";
+import RoutineShow from "../routine/RoutineShowContainer";
 class UserShow extends Component {
     // constructor(props) {
     //     super(props);
@@ -11,16 +12,20 @@ class UserShow extends Component {
         if (this.props.match.params.username){
             this.props.fetchUserInfo(this.props.match.params.username)
         }
+        this.props.fetchRoutineData(this.props.user._id);
     }
     
     
     render(){
-        const {user} = this.props
+        const {user} = this.props;
         return(
             <div className="user-show-container">
                 <Modal/>
                 <div className="user-show-content">
                     <UserShowCard user={user}/>
+                    <div className="routine-info-container">
+                        <RoutineShow/>
+                    </div>
                 </div>
                 <BottomNavBar user={user}/>
             </div>

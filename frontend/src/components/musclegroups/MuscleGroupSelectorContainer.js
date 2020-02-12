@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import MuscleGroupSelector from "./MuscleGroupSelector";
 import {fetchMuscleGroups} from '../../actions/MuscleGroupActions';
 import {fetchExercisesByMuscleGroups} from '../../actions/ExerciseActions';
-import {receiveDaySelected, receiveSelectedMuscleGroups, receiveSide} from "../../actions/RoutineFilterActions";
+import {receiveSelectedMuscleGroups, receiveSide} from "../../actions/RoutineFilterActions";
 
 const mSTP = (state) => ({
         daySelect: state.ui.newRoutineData,
