@@ -97,7 +97,7 @@ router.post("/", passport.authenticate("jwt", { session: false }), async (req, r
                     const mealPromise = UserMeal.insertMany(weekMeals);
                     const workoutPromise = UserWorkout.insertMany(weekWorkouts).then(res => console.log('res', res));
                     Promise.all([workoutPromise, mealPromise]).then(() => {
-                        return res.json({routine: newRoutine });
+                        return res.redirect(`${routine._id}`);
                         // console.log(newRoutine);
                     })
                 });

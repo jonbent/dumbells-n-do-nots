@@ -31,11 +31,11 @@ export default class BottomNavBar extends React.Component{
                             <HeartOutline/>
                         </NavLink>
                     </div>
-                    <div>
-                        <button onClick={() => this.props.testMuscleGroupsSelector()}>
-                            <History/>
-                        </button>
-                    </div>
+                    {/*<div>*/}
+                    {/*    <button onClick={() => this.props.testMuscleGroupsSelector()}>*/}
+                    {/*        <History/>*/}
+                    {/*    </button>*/}
+                    {/*</div>*/}
                 </div>
             </div>
         )

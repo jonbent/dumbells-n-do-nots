@@ -35,5 +35,5 @@ export const clearNewRoutineData = payload => ({
 
 export const submitRoutine = routine => dispatch => (
     createRoutine(routine).then(res => {
-        console.log(res); dispatch(receiveUserRoutine(res)); return dispatch(closeModal())})
+        console.log(res); dispatch(receiveUserRoutine(res.data)); return dispatch(closeModal())})
 );

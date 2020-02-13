@@ -12,7 +12,7 @@ class AddUserMealsForm extends React.Component{
             curPage: 1,
             pageSize: 10,
             itemsAmount: 100,
-            numMeals: "",
+            numMeals: this.props.numMeals || 0,
             selectedMeals: {}
         }
         this.updateField = this.updateField.bind(this);
@@ -33,8 +33,11 @@ class AddUserMealsForm extends React.Component{
     }
 
     updateField(field, e) {
-        if(e.target.value[e.target.value.length - 1] === ".") return null;
-        this.props.receiveNumMeals(e.currentTarget.value)
+        this.setState({
+            numMeals: e.target.value
+        })
+        // if(e.target.value.include(".")) return null;
+        //
     }
 
     handleSetDate(e){
@@ -45,7 +48,7 @@ class AddUserMealsForm extends React.Component{
     handleSetNumMeals(e) {
         e.preventDefault();
         this.props.fetchMeals({pageSize: this.state.pageSize, pageNum: this.state.curPage})
-            .then(() => this.setState({toggleShowMeals: true}))
+            .then(() => {this.setState({toggleShowMeals: true}); this.props.receiveNumMeals(this.state.numMeals)})
     }
     handleSelectMeal(mealId, num = 0){
         const routine = this.props.daySelect;
@@ -106,6 +109,11 @@ class AddUserMealsForm extends React.Component{
                             itemsAmount={this.state.itemsAmount}
                         />
                     </div>
+                    {
+                        sumAllMeals !== this.props.numMeals * 7 && (
+                            <div className="info">Please Select {this.props.numMeals} meal(s) for each day</div>
+                        )
+                    }
                     <div className={`submit-meals ${sumAllMeals === this.props.numMeals * 7 ? "" : "disabled"}`} onClick={() => this.handleSubmitWeekMeals(sumAllMeals)}>
                         Confirm Week's Meals
                     </div>
@@ -126,13 +134,13 @@ class AddUserMealsForm extends React.Component{
                     </select>
                 </div>
                 <div className="num-meals-select">
-                    <div className="add-user-meals-numofmeals-label">Number of meals for {this.props.day}</div>
+                    <div className="add-user-meals-numofmeals-label">Select number of meals for {this.props.day}</div>
                     <form>
                             <div className="add-user-meals-numofmeals-input">
                                 <input
                                     type="number"
                                     onChange={e => this.updateField("numMeals", e)}
-                                    value={this.props.numMeals || ""}
+                                    value={this.state.numMeals}
                                 />
                             </div>
                         <input
