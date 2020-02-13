@@ -1,9 +1,8 @@
 import { RECEIVE_USER_MEALS, RECEIVE_NEW_MEAL, RECEIVE_ALL_MEALS } from '../actions/MealActions';
 import { RECEIVE_API_FILTERED_MEALS} from '../actions/UserMealActions'
  
-const MealsReducer = (state = {}, action) => {
-    Object.freeze(state);
-    let newState = Object.assign({}, state);
+const MealsReducer = (state = [], action) => {
+    let newState = [];
     switch (action.type) {
         case RECEIVE_ALL_MEALS:
             newState = action.meals.data;

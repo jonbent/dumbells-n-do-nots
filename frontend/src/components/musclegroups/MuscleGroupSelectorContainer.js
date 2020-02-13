@@ -5,6 +5,8 @@ import {fetchExercisesByMuscleGroups} from '../../actions/ExerciseActions';
 import {receiveSelectedMuscleGroups, receiveSide} from "../../actions/RoutineFilterActions";
 
 const mSTP = (state) => ({
+        daySelect: state.ui.newRoutineData,
+        day: state.ui.routineFilters.daySelected,
         sex: state.session.user.sex,
         muscleGroups: state.entities.muscleGroups,
         exercises: state.entities.exercises,
@@ -18,7 +20,6 @@ const mSTP = (state) => ({
             Chest: state.ui.routineFilters.Chest,
             Back: state.ui.routineFilters.Back,
         },
-        selectedMuscleGroupIds: Object.keys(state.entities.muscleGroups).filter(groupName => state.ui.routineFilters[groupName] === true).map(name => state.entities.muscleGroups[name]._id),
         hoverArms: state.ui.routineFilters.hoverArms,
         hoverLegs: state.ui.routineFilters.hoverLegs,
         hoverShoulders: state.ui.routineFilters.hoverShoulders,
@@ -33,7 +34,7 @@ const mDTP = dispatch =>({
     fetchMuscleGroups: () => dispatch(fetchMuscleGroups()),
     fetchExercisesByMuscleGroups: ids => dispatch(fetchExercisesByMuscleGroups(ids)),
     selectMuscleGroup: muscleGroup => dispatch(receiveSelectedMuscleGroups(muscleGroup)),
-    selectSide: side => dispatch(receiveSide(side))
+    selectSide: side => dispatch(receiveSide(side)),
 })
 
 export default connect(mSTP, mDTP)(MuscleGroupSelector);

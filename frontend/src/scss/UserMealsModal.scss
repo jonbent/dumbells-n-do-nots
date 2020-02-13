@@ -4,6 +4,12 @@
   flex-direction: column;
   .meal-list{
     flex-direction: column;
+    .info{
+      padding: 1rem;
+      margin-bottom: 1rem;
+      font-style: italic;
+      color: red;
+    }
     .submit-meals.disabled{
       opacity: 0.2;
       cursor: default;

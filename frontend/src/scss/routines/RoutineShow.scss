@@ -1,0 +1,20 @@
+.RoutineShow{
+  margin-top: 3rem;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  //align-items: stretch;
+  background-color: lightskyblue;
+  border-radius: 10px;
+  .RoutineDay{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+    margin: 1rem 1rem;
+    border-radius: 10px;
+    background-color: black;
+    color: silver;
+    box-shadow: 3px 3px 6px black;
+  }
+}

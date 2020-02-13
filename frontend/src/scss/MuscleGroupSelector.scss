@@ -1,0 +1,35 @@
+.muscle-group-selector-container {
+    background-color: rgba(0, 0, 0, 0.5);
+    margin: 1rem;
+    padding: 1rem;
+    box-shadow: 3px 3px 6px;
+    border-radius: 5px;
+  overflow: hidden;
+  .muscle-group-selector {
+    .side-choice{
+        padding: 1rem;
+        margin: 0 1rem;
+        display: flex;
+        justify-content: center;
+      div{
+          background-color: pink;
+          border-radius: 5px;
+          width: fit-content;
+          padding: 1rem 10rem;
+          box-shadow: 3px 3px 6px black;
+          cursor: pointer;
+        }
+      }
+    img{
+      -webkit-user-select:none;
+      -webkit-touch-callout:none;
+      -webkit-user-select: none; /* Safari */
+       -khtml-user-select: none; /* Konqueror HTML */
+         -moz-user-select: none; /* Old versions of Firefox */
+          -ms-user-select: none; /* Internet Explorer/Edge */
+              user-select: none;
+      cursor:'pointer';
+    }
+  }
+}
+

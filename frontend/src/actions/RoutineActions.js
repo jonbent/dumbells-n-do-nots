@@ -3,9 +3,9 @@ import * as RoutineApiUtil from '../util/RoutineApiUtil';
 export const RECEIVE_USER_ROUTINE = "RECEIVE_USER_ROUTINE";
 export const RECEIVE_NEW_ROUTINE = "RECEIVE_NEW_ROUTINE";
 
-export const receiveUserRoutine = routine => ({
+export const receiveUserRoutine = payload => ({
     type: RECEIVE_USER_ROUTINE,
-    routine
+    payload
 });
 
 export const receiveNewRoutine = routine => ({
@@ -15,7 +15,7 @@ export const receiveNewRoutine = routine => ({
 
 export const fetchUserRoutine = id => dispatch => (
     RoutineApiUtil.getUserRoutine(id)
-        .then(routine => dispatch(receiveUserRoutine(routine)))
+        .then(res => dispatch(receiveUserRoutine(res.data)))
         .catch(err => console.log(err))
 );
 

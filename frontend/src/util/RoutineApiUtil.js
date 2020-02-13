@@ -9,5 +9,5 @@ export const getUserRoutine = id => {
 };
 
 export const createRoutine = data => {
-    return axios.post('/api/routines/new', data)
+    return axios.post('/api/routines/', data)
 }

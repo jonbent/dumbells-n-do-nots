@@ -1,12 +1,10 @@
 import React from 'react'
-import { Redirect } from 'react-router-dom'
 import '../../scss/Splash.scss';
 import NavBar from "../navbar/NavBar";
 
 
 const Splash = () => {
     return (
-        // <Redirect to="/login"/>
         <div className="wrapper">
             <NavBar/>
             <div className="Info">
@@ -22,7 +20,7 @@ const Splash = () => {
                 </p>
             </div>
              <div className="demo-feature">
-                <img className="selector-demo" src="/images/meal-selector-demo.png"></img>
+                <div className="selector-demo" style={{backgroundImage: "url(/images/meal-selector-demo.png)"}}></div>
                 <div className="demo-text">
                     <h2>
                         Select your meals from our Database
@@ -34,7 +32,7 @@ const Splash = () => {
             </div>
 
             <div className="exercise-demo-feature">
-                <img className="exercise-selector-demo" src="/images/exercise-selector-demo.png"></img>
+                <div className="exercise-selector-demo" style={{backgroundImage: "url(/images/exercise-selector-demo.png)"}}></div>
                 <div className="exercise-demo-text">
                     <h2>
                         Customize your work-out routine
@@ -48,77 +46,77 @@ const Splash = () => {
             <div className="developer-info">
                 <div className="developer-profile">
                     <div className="developer-photo">
-                       <img src="/images/Jonathan_Bent.jpg"></img>
+                       <img src="/images/Jonathan_Bent.jpg" alt="Jon Bent"></img>
                     </div>
 
                     <div className="developer-name">Jonathan Bent</div>
                     <p>Project Lead</p>
                      <div className="links">
                          <a href="https://www.linkedin.com/in/jon-bent/">
-                            <img src="/images/linkedin-logo.png"></img>
+                            <img src="/images/linkedin-logo.png" alt="Jon Bent's LinkedIn"></img>
                          </a>
                          <a href="https://github.com/jonbent">
-                            <img src="/images/github-logo.png"></img>
+                            <img src="/images/github-logo.png" alt="Jon Bent's Github"></img>
                          </a>
                          <a href="https://angel.co/jon-bent-1">
-                             <img src="/images/angellist.png"></img>
+                             <img src="/images/angellist.png" alt="Jon Bent's Angelist"></img>
                          </a>
                     </div>
                 </div>
                 <div className="developer-profile">
                     <div className="developer-photo">
-                       <img src="/images/Muhammed_Mustafa.jpg"></img>
+                       <img src="/images/Muhammed_Mustafa.jpg" alt="Mohammed Mustafa"></img>
                     </div>
 
                     <div className="developer-name">Mohammed Mustafa</div>
                      <p>Back-end Lead</p>
                      <div className="links">
                          <a href="https://www.linkedin.com/in/mohammed-mustafa-96469a167/">
-                         <img src="/images/linkedin-logo.png"></img>
+                         <img src="/images/linkedin-logo.png" alt="Mohammed Mustafa's LinkedIn"></img>
                          </a>
                          <a href="https://github.com/mmmymustafa">
-                         <img src="/images/github-logo.png"></img>
+                         <img src="/images/github-logo.png" alt="Mohammed Mustafa's Github"></img>
                          </a>
                          <a href="https://angel.co/mohammed-mustafa-9">
-                         <img src="/images/angellist.png"></img>
+                         <img src="/images/angellist.png" alt="Mohammed Mustafa's Angelist"></img>
                          </a>
                     </div>
                 </div>
                 <div className="developer-profile">
                     <div className="developer-photo">
-                       <img src="/images/Manraj_Singh.jpg"></img>
+                       <img src="/images/Manraj_Singh.jpg" alt="Manraj Singh"></img>
                     </div>
 
                     <div className="developer-name">Manraj Singh</div>
                     <p>Full-stack Lead</p>
                      <div className="links">
                          <a href="https://www.linkedin.com/in/manraj-singh-01366710a/">
-                         <img src="/images/linkedin-logo.png"></img>
+                         <img src="/images/linkedin-logo.png" alt="Manraj Singh's LinkedIn"></img>
                          </a>
                          <a href="https://github.com/mmmymustafa">
-                         <img src="/images/github-logo.png"></img>
+                         <img src="/images/github-logo.png" alt="Manraj Singh's Github"></img>
                          </a>
                          <a href="https://angel.co/manraj-singh-10">
-                         <img src="/images/angellist.png"></img>
+                         <img src="/images/angellist.png" alt="Manraj Singh's Angelist"></img>
                          </a>
                     </div>
                 </div>
                 <div className="developer-profile">
                     <div className="developer-photo">
-                       <img src="/images/Julius_Wu.jpg"></img>
+                       <img src="/images/Julius_Wu.jpg" alt="Julius Wu"></img>
                     </div>
 
                     <div className="developer-name">Julius Wu</div>
                     <p>Front-end Lead</p>
                      <div className="links">
                         <a href="https://www.linkedin.com/in/juliuswu/">
-                        <img src="/images/linkedin-logo.png"></img>
+                        <img src="/images/linkedin-logo.png" alt="Julius Wu's LinkedIn"></img>
                         </a>
                         <a href="https://github.com/juliuswuwu">
-                        <img src="/images/github-logo.png"></img>
+                        <img src="/images/github-logo.png" alt="Julius Wu's Github"></img>
                         </a>
                         <a href="https://angel.co/julius-wu">
-                         <img src="/images/angellist.png"></img>
+                         <img src="/images/angellist.png" alt="Julius Wu's Angelist"></img>
                         </a>
                     </div>
                 </div>

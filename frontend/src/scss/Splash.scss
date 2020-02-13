@@ -2,7 +2,8 @@
     .Info{
         background-color: #C0C3C9;
         background-image: url("https://media.giphy.com/media/26BRq9PYFLeJl3WLu/giphy.gif");
-        background-repeat-y: no-repeat;
+        background-repeat: no-repeat;
+        background-position: 100%;
         background-size: auto;
         position: flex;
         min-width: 320px;
@@ -84,8 +85,10 @@
     }
 
     .selector-demo{
-        height: 37%;
-        width: 37%;
+        height: 40rem;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: 50%;
     }
 
     .exercise-demo-feature{
@@ -122,8 +125,10 @@
     }
 
     .exercise-selector-demo{
-        height: 37%;
-        width: 37%;
+        height: 40rem;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: 50%;
     }
 
     .developer-info{

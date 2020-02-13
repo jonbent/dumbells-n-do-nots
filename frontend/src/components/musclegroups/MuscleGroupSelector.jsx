@@ -3,7 +3,7 @@ import MaleFront from '../bodypartUI/MaleFront'
 import MaleBack from '../bodypartUI/MaleBack'
 import FemaleBack from '../bodypartUI/FemaleBack'
 import FemaleFront from '../bodypartUI/FemaleFront'
-import '../../scss/MuscleGroupsSelector.scss'
+import '../../scss/MuscleGroupSelector.scss'
 class MuscleGroupSelector extends Component {
 
     constructor(props){
@@ -48,10 +48,11 @@ class MuscleGroupSelector extends Component {
         this.props.fetchExercisesByMuscleGroups(ids)
     }
 
+
+
     render() {
         
-        let {sex, selectableMuscleGroups} = this.props;
-        let selectedMuscles = Object.keys(selectableMuscleGroups).filter(groupName => selectableMuscleGroups[groupName] === true)
+        let {sex} = this.props;
 
         let bodySide;
         if (this.props.side === "front" && sex=== "M") {
@@ -64,15 +65,18 @@ class MuscleGroupSelector extends Component {
             bodySide = <FemaleBack handleClick={this.handleClick} handleMouseEnter={this.handleMouseEnter} handleMouseLeave={this.handleMouseLeave} {...this.props}/>
         }
         return (
-          <div className="muscle-group-selector-container">
-            <div className="selected-muscle-groups">Selected Muscles: {selectedMuscles.length !== 0 ? selectedMuscles.map((name) => name + " ") : "None"} </div>
-            <div className="muscle-group-selector">
-                <div>{bodySide}</div>
-                <div onClick={this.handleSide}>
-                    {this.props.side === "front" ? "Back" : "Front"}
-                </div>
-            </div>
-          </div>
+              <div className="muscle-group-selector-container">
+
+                  <div className="muscle-group-selector">
+                      <div>{bodySide}</div>
+                      <div className="side-choice">
+                          <div onClick={this.handleSide} >
+                              {this.props.side === "front" ? "Back" : "Front"}
+                          </div>
+                      </div>
+                  </div>
+
+              </div>
         );
     }
 }
