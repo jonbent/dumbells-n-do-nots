@@ -1,0 +1,61 @@
+.meal-item{
+    background-color: rgba(0,0,0,0.5);
+    border-radius: 5px;
+    display: flex;
+    padding: 1rem;
+    .meal-info{
+      padding-left: 1rem;
+      display: flex;
+      flex-direction: column;
+      height: fit-content;
+      .meal-nutrients{
+        margin-top: 1rem;
+        flex-wrap: wrap;
+        display: flex;
+        height: 100%;
+        flex-direction: column;
+        text-align: start;
+      }
+    }
+    .meal-image-and-quantity{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      width: 5rem;
+      .actions{
+        display: flex;
+        margin-top: 1rem;
+        justify-content: space-between;
+        align-items: center;
+        svg{
+          background-color: black;
+          fill: pink;
+          padding: 0.5rem;
+          border-radius: 50%;
+        }
+        svg:nth-of-type(1){
+          transform: rotate(90deg);
+        }
+        svg:nth-of-type(2){
+          transform: rotate(270deg);
+        }
+
+      }
+      .meal-image{
+        border-radius: 5px;
+        height: 5rem;
+        width: 5rem;
+        min-width: 5rem;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+      }
+
+    }
+  }
+  .meal-list .meal-item:not(:nth-of-type(1)){
+    margin-top: 1rem;
+  }
+  .RoutineDay .meal-item{
+    margin-top: 1rem;
+  }

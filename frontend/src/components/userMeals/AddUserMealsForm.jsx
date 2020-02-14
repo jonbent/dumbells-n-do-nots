@@ -1,7 +1,8 @@
 import React from 'react';
 import Pagination from '../pagination/Pagination'
 import '../../scss/UserMealsModal.scss'
-import NextArrow from "../svg/NextArrow";
+
+import MealItem from "../meals/MealItem";
 class AddUserMealsForm extends React.Component{
     constructor(props){
         super(props);
@@ -78,28 +79,8 @@ class AddUserMealsForm extends React.Component{
             meals = this.props.meals.length > 0 ? (
                 <div className="meal-list">
                     {this.props.meals.map(meal => (
-                        <div className="meal-item" key={meal._id}>
-                            {/*<img src={meal.photoUrl}/>*/}
-                            <div className="meal-image-and-quantity">
-                                <div className="meal-image" style={{backgroundImage: `url(${meal.photoUrl})`}}></div>
-                                <div className="actions">
-                                    <NextArrow onClick={() => this.handleSelectMeal(meal._id, -1)}/>
-                                    {daySelect[this.props.day].meals[meal._id] ? daySelect[this.props.day].meals[meal._id] : 0 }
-                                    <NextArrow onClick={() => this.handleSelectMeal(meal._id, 1)}/>
-                                </div>
-
-                            </div>
-                            <div className="meal-info">
-                                <div>{meal.title}</div>
-                                <div className="meal-nutrients">
-                                    <div>cals: {meal.calories}</div>
-                                    <div>fat: {meal.fat}</div>
-                                    <div>carbs: {meal.carbs}</div>
-                                    <div>protein: {meal.protein}</div>
-
-                                </div>
-                            </div>
-                        </div>)
+                        <MealItem meal={meal} key={meal._id} daySelect={daySelect} handleSelectMeal={this.handleSelectMeal} day={this.props.day}/>
+                        )
                     )}
                     <div className="pagination-container">
                         <Pagination
