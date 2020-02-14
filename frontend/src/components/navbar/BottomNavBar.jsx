@@ -1,7 +1,7 @@
 import React from 'react'
 import Settings from '../svg/Settings'
 import Plus from '../svg/Plus'
-import HeartOutline from '../svg/HeartOutline'
+// import HeartOutline from '../svg/HeartOutline'
 import History from '../svg/History'
 
 import {NavLink} from 'react-router-dom'
@@ -27,8 +27,8 @@ export default class BottomNavBar extends React.Component{
                         </button>
                     </div>
                     <div>
-                        <NavLink to={`/users/${user.username}/favorites`}>
-                            <HeartOutline/>
+                        <NavLink to={`/users/${user.username}/history`}>
+                            <History/>
                         </NavLink>
                     </div>
                     {/*<div>*/}

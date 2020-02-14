@@ -33,7 +33,9 @@ module.exports = async (data) => {
         Object.assign(allMeals, data[days[i]].meals);
         allExercises = allExercises.concat(data[days[i]].workout);
     }
-
+    const allExercisesHash = {};
+    allExercises.forEach(el => allExercisesHash[el] = true);
+    allExercises = Object.keys(allExercisesHash);
     allMeals = Object.keys(allMeals);
     const foundMeals = await Meal.find({_id: { $in: allMeals}});
     const foundExercises = await Exercise.find({_id: { $in: allExercises}});
