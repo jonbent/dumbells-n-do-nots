@@ -1,12 +1,12 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react';
+
 import NextArrow from '../svg/NextArrow';
 import BackButton from '../svg/BackButton'
 import DropDownArrow from '../svg/DropDownArrow'
-import OutsideClickHandler from './OutsideClickHandler'
-import '../../scss/Pagination.scss';
+import OutsideClickHandler from "../pagination/OutsideClickHandler";
+import '../../scss/Pagination.scss'
 
-
-export default class Pagination extends Component {
+class RoutinePage extends Component {
     constructor(props) {
         super(props);
 
@@ -20,20 +20,19 @@ export default class Pagination extends Component {
             openDropDown: !this.state.openDropDown
         })
     }
-
     render() {
-        const { pageSize, itemsAmount, changePage } = this.props;
-        const curPage = Number.parseInt(this.props.curPage);
-        const { openDropDown } = this.state;
+        const {changeDay, curDay,dayAmount, dayValues } = this.props;
+        const {openDropDown} = this.state;
+        if (dayAmount === 0) return null;
         return (
-            <nav className="pagination">
-                <button onClick={() => changePage(curPage < 2 ? curPage : curPage - 1)} disabled={curPage === 1 ? true : false} className="back-button">
+            <nav className="pagination routine-pagination">
+                <button onClick={() => changeDay(curDay === 0 ? curDay : curDay - 1)} disabled={curDay === 0 ? true : false} className="back-button">
                     <BackButton />
                 </button>
                 <div>
                     <button onMouseUp={this.toggleDropDown}>
                         <span>
-                            Page {curPage} of {Math.ceil(itemsAmount / pageSize)}
+                            {dayValues[curDay]}
                         </span>
                         <div>
                             <DropDownArrow />
@@ -41,23 +40,25 @@ export default class Pagination extends Component {
                     </button>
                     {openDropDown &&
                     <OutsideClickHandler action={this.toggleDropDown} className="drop-down">
-                        {[...Array(Math.ceil(itemsAmount / pageSize)).keys()].map(i => {
+                        {[...Array(dayAmount).keys()].map(i => {
                             return (
                                 <button key={i} onClick={() => {
                                     this.toggleDropDown();
-                                    changePage(i + 1)
-                                }} className={`${curPage === i + 1 ? "active" : ""}`}>
-                                    Page {i + 1} of {Math.ceil(itemsAmount / pageSize)}
+                                    changeDay(i)
+                                }} className={`${curDay === i ? "active" : ""}`}>
+                                    {dayValues[i]}
                                 </button>
                             )
                         })}
                     </OutsideClickHandler>
                     }
                 </div>
-                <button onClick={() => changePage(Math.ceil(itemsAmount / pageSize) === curPage ? curPage : curPage + 1)} disabled={curPage === Math.ceil(itemsAmount / pageSize) ? true : false} className="next-button">
+                <button onClick={() => changeDay(curDay === dayAmount - 1 ? curDay : curDay + 1)} disabled={curDay === dayAmount - 1 ? true : false} className="next-button">
                     <NextArrow />
                 </button>
             </nav>
-        )
+        );
     }
 }
+
+export default RoutinePage;

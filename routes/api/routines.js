@@ -83,7 +83,9 @@ router.post("/", passport.authenticate("jwt", { session: false }), async (req, r
         .then(routine => {
             const dayStrings = Object.keys(req.body)
             dayStrings.forEach(dayString => {
-                newDays.push({date: new Date(dayString), routine: routine._id});
+                let routineDay = new Date(dayString);
+                routineDay.setDate(routineDay.getDate() + 1);
+                newDays.push({date: routineDay, routine: routine._id});
             });
             Day.insertMany(newDays).then((days) => {
                 dayStrings.forEach((dayString, idx) => {

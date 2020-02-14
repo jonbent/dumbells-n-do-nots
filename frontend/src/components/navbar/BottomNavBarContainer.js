@@ -9,7 +9,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     openNewRoutineModal: () => dispatch(openModal('addRoutine')),
-    testMuscleGroupsSelector: () => dispatch(openModal('bodyUI'))
 })
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(BottomNavBar))

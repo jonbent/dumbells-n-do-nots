@@ -7,14 +7,51 @@
   background-color: lightskyblue;
   border-radius: 10px;
   .RoutineDay{
+    .day-title{
+      display: flex;
+      justify-content: center;
+      text-align: center;
+    }
     flex: 1;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     padding: 1rem;
     margin: 1rem 1rem;
     border-radius: 10px;
-    background-color: black;
-    color: silver;
+    background-color: rgba(0,0,0, 0.5);
+    color: pink;
     box-shadow: 3px 3px 6px black;
+    .day-meals{
+      margin-top: 1rem;
+      background-color: rgba(0,0,0, 0.5);
+      padding: 1rem 0.5rem;
+      border-radius: 10px;
+      box-shadow: 3px 3px 6px black;
+      .meal-item{
+        box-shadow: 3px 3px 6px black;
+      }
+    }
+    .day-workout{
+      margin-top: 1rem;
+      border-radius: 10px;
+      background-color: rgba(0,0,0, 0.5);
+      padding: 1rem 0.5rem;
+      box-shadow: 3px 3px 6px black;
+      .workout-title{
+        display: flex;
+        justify-content: space-between;
+      }
+      .day-exercise{
+        padding: 1rem 0;
+        margin: 1rem 0;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        background-color: rgba(0,0,0, 0.75);
+        border-radius: 5px;
+        box-shadow: 3px 3px 6px black;
+      }
+    }
   }
 }

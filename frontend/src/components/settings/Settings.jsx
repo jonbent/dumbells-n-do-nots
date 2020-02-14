@@ -119,7 +119,7 @@ class Settings extends Component {
               <div>D.O.B:</div>
               <input
                 disabled
-                type="date"
+                type="text"
                 value={this.state.birthDate.slice(0, 10)}
                 max={DateFormat(this.currDate, "yyyy-mm-dd")}
                 onChange={this.handleBirthDate}
