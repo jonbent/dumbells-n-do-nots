@@ -5,6 +5,7 @@ import YearMonthForm from '../signup/year_month_form';
 import DateFormat from 'dateformat'
 import "react-day-picker/lib/style.css";
 import "../../scss/newRoutineForm.scss"
+import {fetchRoutineByStartDate} from "../../util/RoutineApiUtil";
 
 const currentYear = new Date().getFullYear();
 const toMonth = new Date(currentYear, 0);
@@ -14,15 +15,14 @@ const fromMonth = new Date(currentYear - 80)
 class NewRoutineForm extends React.Component {
   constructor(props) {
     super(props);
-    // const date = new Date();
     const currentDate = new Date();
-    console.log("currentDate", typeof Date(currentDate.getMonth()));
 
     const weekFromCurrentDate = currentDate.setDate(currentDate.getDate() + 7);
     this.state = {
       month: currentDate,
       startDate: currentDate,
-      endDate: DateFormat(weekFromCurrentDate, "yyyy-mm-dd")
+      endDate: DateFormat(weekFromCurrentDate, "yyyy-mm-dd"),
+      dateError: "Select A date"
     };
     this.handleStartDate = this.handleStartDate.bind(this);
     this.handleYearMonthChange = this.handleYearMonthChange.bind(this);
@@ -30,12 +30,23 @@ class NewRoutineForm extends React.Component {
   }
 
   handleStartDate(e) {
-    this.setState({ startDate: DateFormat(e, "yyyy-mm-dd") });
+    this.setState({ startDate: DateFormat(e, "yyyy-mm-dd") }, () => {
+      fetchRoutineByStartDate(this.state.startDate).then(res => {
+        let dateError = null;
+        if (res.data.datesFound){
+          dateError = "Routine already found for that week.";
+        }
+        this.setState({
+            dateError
+        })
+      });
+    });
   }
   handleYearMonthChange(month) {
     this.setState({ month });
   }
   handleNext(e) {
+    if (this.state.dateError) return null;
     e.preventDefault();
     this.props.receiveNewRoutineStartDate(this.state.startDate);
     this.props.openAddMealsFormModal();
@@ -43,8 +54,9 @@ class NewRoutineForm extends React.Component {
 
   render() {
     // const startDate = this.state.startDate;
+    const {dateError, month, startDate} = this.state;
     const dayPickerProps = {
-      month: this.state.month,
+      month,
       fromMonth: fromMonth,
       toMonth: toMonth,
       captionElement: ({ date, localeUtils }) => (
@@ -58,23 +70,22 @@ class NewRoutineForm extends React.Component {
     return (
       <form className="new-routine-form">
         <h1 className="new-routine-header">New Routine</h1>
-        <br />
-        <div className="start-date-label">Start Date</div>
+
         <div className="start-date-input">
-          <DayPickerInput
-            dayPickerProps={dayPickerProps}
-            onDayChange={e => this.handleStartDate(e)}
-            selectedDays={this.state.startDate}
-          />
-          {/* <input
-            type="date"
-            value={startDate}
-            onChange={(e) => this.handleStartDate(e)}
-          /> */}
-          <button className="next-button" onClick={this.handleNext}>
-            Next
-          </button>
+          <label className="start-date-label">Select Start Date
+            <DayPickerInput
+              dayPickerProps={dayPickerProps}
+              onDayChange={e => this.handleStartDate(e)}
+              selectedDays={startDate}
+            />
+          </label>
         </div>
+        <div className="date-error">
+            {dateError}
+          </div>
+        <button className={`next-button ${dateError ? "disabled" : ""}`} onClick={this.handleNext}>
+            <div>Next</div>
+        </button>
       </form>
     );
   }
