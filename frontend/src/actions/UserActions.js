@@ -12,7 +12,7 @@ const receiveUser = (payload) => ({
 })
 
 export const fetchUser = (username) => dispatch => (
-    UserApiUtil.fetchUserInfo(username).then(payload => dispatch(receiveUser(payload)))
+    UserApiUtil.fetchUserInfo(username).then(res => dispatch(receiveUser(res.data)))
 )
 
 export const updateUser = (formData, username) => dispatch =>

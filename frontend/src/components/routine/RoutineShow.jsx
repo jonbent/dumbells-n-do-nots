@@ -25,8 +25,9 @@ class RoutineShow extends Component {
         const dayValues = Object.values(days);
         return (
             <div className="RoutineShow">
-                {!dayValues && <div className="not-found">
-                    Current Routine not found.
+                {dayValues.length === 0 && <div className="not-found">
+                    <div className="title">Current Routine not found.</div>
+                    <div className="create"><div onClick={this.props.openNewRoutineModal}>Create New Routine</div></div>
                 </div>}
                 {!!dayValues && <div className="routine-day-container">
                     <RoutineDay day={dayValues[curDay]}/>

@@ -13,6 +13,7 @@ export default class BottomNavBar extends React.Component{
 
     render(){
         const {user, location} = this.props;
+        const splitLocation = location.pathname.split('/')
         return (
             <div className="bottom-navbar-container">
                 <div className="bottom-navbar">
@@ -27,7 +28,7 @@ export default class BottomNavBar extends React.Component{
                         </button>
                     </div>
                     <div>
-                        <NavLink to={`/users/${user.username}/history`}>
+                        <NavLink to={splitLocation[3] === "history" ? "/" : `/users/${user.username}/history`} className={splitLocation[3] === "history" ? "active" : ""}>
                             <History/>
                         </NavLink>
                     </div>
