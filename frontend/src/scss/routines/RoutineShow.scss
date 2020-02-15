@@ -6,11 +6,35 @@
   //align-items: stretch;
   background-color: lightskyblue;
   border-radius: 10px;
+  box-shadow: 3px 3px 6px black;
+  .not-found{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    .title{
+      margin-top: 1rem;
+    }
+    .create{
+      display:flex;
+      justify-content: center;
+      div{
+        background-color: pink;
+        padding: 0.5rem 3rem;
+        margin-top: 1rem;
+        width: fit-content;
+        border-radius: 5px;
+        cursor: pointer;
+        box-shadow: 3px 3px 6px black;
+      }
+    }
+  }
   .RoutineDay{
     .day-title{
       display: flex;
       justify-content: center;
       text-align: center;
+
     }
     flex: 1;
     display: flex;

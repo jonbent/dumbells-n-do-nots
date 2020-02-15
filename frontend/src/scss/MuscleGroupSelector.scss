@@ -2,7 +2,7 @@
     background-color: rgba(0, 0, 0, 0.5);
     margin: 1rem;
     padding: 1rem;
-    box-shadow: 3px 3px 6px;
+    box-shadow: 3px 3px 6px black;
     border-radius: 5px;
   overflow: hidden;
   .muscle-group-selector {
@@ -11,6 +11,7 @@
         margin: 0 1rem;
         display: flex;
         justify-content: center;
+        color: black;
       div{
           background-color: pink;
           border-radius: 5px;

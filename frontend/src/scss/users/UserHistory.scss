@@ -1,0 +1,36 @@
+.UserHistory{
+  display: flex;
+  position: fixed;
+  left: 2rem;
+  right: 2rem;
+  top: 0;
+  bottom: 8rem;
+  justify-content: center;
+  .routine-history{
+    margin-top: 5rem;
+    background-color: lightskyblue;
+    display: flex;
+    flex-direction: column;
+    padding: 3rem;
+    border-radius: 10px;
+    width: 80%;
+    color: pink;
+    text-shadow: 2px 2px 4px black;
+    overflow-y: scroll;
+    .history-title{
+      margin-bottom: 1rem;
+      font-size: 200%;
+      text-align: center;
+    }
+    .routine-item{
+      border-radius: 5px;
+      display: flex;
+      justify-content: space-between;
+      padding: 1rem;
+      background-color: rgba(0,0,0,0.5);
+      box-shadow: 3px 3px 6px black;
+      margin-bottom: 1rem;
+    }
+  }
+
+}
