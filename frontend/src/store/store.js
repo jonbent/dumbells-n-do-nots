@@ -16,11 +16,14 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 
+const middleware = [thunk];
+if (process.env.NODE_ENV === "development") middleware.push(logger);
+
 const configureStore = (preloadedState = {}) => {
     let store = createStore(
         persistedReducer,
         preloadedState,
-        applyMiddleware(thunk, logger)
+        applyMiddleware(...middleware)
     )
     let persistor = persistStore(store);
     return {store, persistor}

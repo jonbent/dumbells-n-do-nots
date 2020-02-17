@@ -6,7 +6,7 @@ export default class CarouselItemHolder extends Component {
         return (
             <div className="carousel-items" style={{transform: transformX}}>
                     {items.map(item => {
-                        return <CarouselItem key={item.id} item={item} selected={selectedItems[item._id] ? 'selected' : ""} rendered={rendered} onClick={() => onClick(item._id)}/>
+                        return <CarouselItem key={item._id} item={item} selected={selectedItems[item._id] ? 'selected' : ""} rendered={rendered} onClick={() => onClick(item._id)}/>
                     })}
             </div>
         )
