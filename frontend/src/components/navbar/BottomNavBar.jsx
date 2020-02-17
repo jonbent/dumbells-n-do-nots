@@ -1,7 +1,7 @@
 import React from 'react'
 import Settings from '../svg/Settings'
 import Plus from '../svg/Plus'
-import HeartOutline from '../svg/HeartOutline'
+// import HeartOutline from '../svg/HeartOutline'
 import History from '../svg/History'
 
 import {NavLink} from 'react-router-dom'
@@ -13,6 +13,7 @@ export default class BottomNavBar extends React.Component{
 
     render(){
         const {user, location} = this.props;
+        const splitLocation = location.pathname.split('/')
         return (
             <div className="bottom-navbar-container">
                 <div className="bottom-navbar">
@@ -27,15 +28,15 @@ export default class BottomNavBar extends React.Component{
                         </button>
                     </div>
                     <div>
-                        <NavLink to={`/users/${user.username}/favorites`}>
-                            <HeartOutline/>
+                        <NavLink to={splitLocation[3] === "history" ? "/" : `/users/${user.username}/history`} className={splitLocation[3] === "history" ? "active" : ""}>
+                            <History/>
                         </NavLink>
                     </div>
-                    <div>
-                        <button onClick={() => this.props.testMuscleGroupsSelector()}>
-                            <History/>
-                        </button>
-                    </div>
+                    {/*<div>*/}
+                    {/*    <button onClick={() => this.props.testMuscleGroupsSelector()}>*/}
+                    {/*        <History/>*/}
+                    {/*    </button>*/}
+                    {/*</div>*/}
                 </div>
             </div>
         )

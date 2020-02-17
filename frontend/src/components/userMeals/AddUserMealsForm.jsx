@@ -1,7 +1,8 @@
 import React from 'react';
 import Pagination from '../pagination/Pagination'
 import '../../scss/UserMealsModal.scss'
-import NextArrow from "../svg/NextArrow";
+
+import MealItem from "../meals/MealItem";
 class AddUserMealsForm extends React.Component{
     constructor(props){
         super(props);
@@ -14,9 +15,7 @@ class AddUserMealsForm extends React.Component{
             curPage: 1,
             pageSize: 10,
             itemsAmount: 100,
-            minCals,
-            maxCals,
-            numMeals: "",
+            numMeals: this.props.numMeals || 0,
             selectedMeals: {}
         }
         this.updateField = this.updateField.bind(this);
@@ -37,9 +36,11 @@ class AddUserMealsForm extends React.Component{
     }
 
     updateField(field, e) {
-        if(e.target.value[e.target.value.length - 1] === ".") return null
-        this.setState({ [field]: e.currentTarget.value });
-        this.props.receiveNumMeals(e.currentTarget.value)
+        this.setState({
+            numMeals: e.target.value
+        })
+        // if(e.target.value.include(".")) return null;
+        //
     }
 
     handleSetDate(e){
@@ -49,8 +50,8 @@ class AddUserMealsForm extends React.Component{
 
     handleSetNumMeals(e) {
         e.preventDefault();
-        this.props.fetchMeals({pageSize: this.state.pageSize, pageNum: this.state.curPage, minCals: "500", maxCals: "700"})
-            .then(() => this.setState({toggleShowMeals: true}))
+        this.props.fetchMeals({pageSize: this.state.pageSize, pageNum: this.state.curPage})
+            .then(() => {this.setState({toggleShowMeals: true}); this.props.receiveNumMeals(this.state.numMeals)})
     }
     handleSelectMeal(mealId, num = 0){
         const routine = this.props.daySelect;
@@ -80,28 +81,8 @@ class AddUserMealsForm extends React.Component{
             meals = this.props.meals.length > 0 ? (
                 <div className="meal-list">
                     {this.props.meals.map(meal => (
-                        <div className="meal-item" key={meal._id}>
-                            {/*<img src={meal.photoUrl}/>*/}
-                            <div className="meal-image-and-quantity">
-                                <div className="meal-image" style={{backgroundImage: `url(${meal.photoUrl})`}}></div>
-                                <div className="actions">
-                                    <NextArrow onClick={() => this.handleSelectMeal(meal._id, -1)}/>
-                                    {daySelect[this.props.day].meals[meal._id] ? daySelect[this.props.day].meals[meal._id] : 0 }
-                                    <NextArrow onClick={() => this.handleSelectMeal(meal._id, 1)}/>
-                                </div>
-
-                            </div>
-                            <div className="meal-info">
-                                <div>{meal.title}</div>
-                                <div className="meal-nutrients">
-                                    <div>cals: {meal.calories}</div>
-                                    <div>fat: {meal.fat}</div>
-                                    <div>carbs: {meal.carbs}</div>
-                                    <div>protein: {meal.protein}</div>
-
-                                </div>
-                            </div>
-                        </div>)
+                        <MealItem meal={meal} key={meal._id} daySelect={daySelect} handleSelectMeal={this.handleSelectMeal} day={this.props.day}/>
+                        )
                     )}
                     <div className="pagination-container">
                         <Pagination
@@ -111,6 +92,11 @@ class AddUserMealsForm extends React.Component{
                             itemsAmount={this.state.itemsAmount}
                         />
                     </div>
+                    {
+                        sumAllMeals !== this.props.numMeals * 7 && (
+                            <div className="info">Please Select {this.props.numMeals} meal(s) for each day</div>
+                        )
+                    }
                     <div className={`submit-meals ${sumAllMeals === this.props.numMeals * 7 ? "" : "disabled"}`} onClick={() => this.handleSubmitWeekMeals(sumAllMeals)}>
                         Confirm Week's Meals
                     </div>
@@ -131,13 +117,13 @@ class AddUserMealsForm extends React.Component{
                     </select>
                 </div>
                 <div className="num-meals-select">
-                    <div className="add-user-meals-numofmeals-label">Number of meals for {this.props.day}</div>
+                    <div className="add-user-meals-numofmeals-label">Select number of meals for {this.props.day}</div>
                     <form>
                             <div className="add-user-meals-numofmeals-input">
                                 <input
                                     type="number"
                                     onChange={e => this.updateField("numMeals", e)}
-                                    value={this.props.numMeals}
+                                    value={this.state.numMeals}
                                 />
                             </div>
                         <input

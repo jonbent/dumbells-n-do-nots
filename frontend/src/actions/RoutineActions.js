@@ -1,11 +1,16 @@
 import * as RoutineApiUtil from '../util/RoutineApiUtil';
-
+import {resetSelectedMuscleGroups} from '../actions/MuscleGroupActions'
+export const RECEIVE_USER_ROUTINES = "RECEIVE_USER_ROUTINES";
 export const RECEIVE_USER_ROUTINE = "RECEIVE_USER_ROUTINE";
 export const RECEIVE_NEW_ROUTINE = "RECEIVE_NEW_ROUTINE";
 
-export const receiveUserRoutine = routine => ({
+export const receiveUserRoutine = payload => ({
     type: RECEIVE_USER_ROUTINE,
-    routine
+    payload
+});
+export const receiveUserRoutines = payload => ({
+    type: RECEIVE_USER_ROUTINES,
+    payload
 });
 
 export const receiveNewRoutine = routine => ({
@@ -15,12 +20,17 @@ export const receiveNewRoutine = routine => ({
 
 export const fetchUserRoutine = id => dispatch => (
     RoutineApiUtil.getUserRoutine(id)
-        .then(routine => dispatch(receiveUserRoutine(routine)))
+        .then(res => dispatch(receiveUserRoutine(res.data)))
+        .catch(err => console.log(err))
+);
+export const fetchUserRoutines = id => dispatch => (
+    RoutineApiUtil.getUserRoutines(id)
+        .then(res => dispatch(receiveUserRoutines(res.data)))
         .catch(err => console.log(err))
 );
 
 export const createRoutine = data => dispatch => (
     RoutineApiUtil.createRoutine(data)
-        .then(routine => dispatch(receiveNewRoutine(routine)))
+        .then(routine => {dispatch(receiveNewRoutine(routine)); dispatch(resetSelectedMuscleGroups())})
         .catch(err => console.log(err))
 );

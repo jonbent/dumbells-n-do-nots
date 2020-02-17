@@ -3,7 +3,8 @@ import NextArrow from '../svg/NextArrow';
 import BackButton from '../svg/BackButton'
 import DropDownArrow from '../svg/DropDownArrow'
 import OutsideClickHandler from './OutsideClickHandler'
-import '../../scss/Pagination.scss'
+import '../../scss/Pagination.scss';
+
 
 export default class Pagination extends Component {
     constructor(props) {
@@ -22,7 +23,6 @@ export default class Pagination extends Component {
 
     render() {
         const { pageSize, itemsAmount, changePage } = this.props;
-        console.log(Math.ceil(itemsAmount / pageSize))
         const curPage = Number.parseInt(this.props.curPage);
         const { openDropDown } = this.state;
         return (

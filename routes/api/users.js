@@ -226,7 +226,8 @@ router.get('/:username', (req, res) => {
             };
             res.json({
                 user: {
-                    username: user.username
+                    username: user.username,
+                    _id: user._id
                 }
             });
         })

@@ -7,18 +7,22 @@ const UserWorkoutSchema = new Schema({
         required: true,
         ref: "Day"
     },
-    startTime: {
-        type: Date,
-        required: true
-    },
-    endTime: {
-        type: Date,
-        required: true
-    },
-    workout: {
+    exercises: [{
         type: Schema.Types.ObjectId,
-        ref: "Workout"
-    }
+        ref: 'Exercise'
+    }]
+    // startTime: {
+    //     type: Date,
+    //     required: true
+    // },
+    // endTime: {
+    //     type: Date,
+    //     required: true
+    // },
+    // workout: {
+    //     type: Schema.Types.ObjectId,
+    //     ref: "Workout"
+    // }
 })
 
 module.exports = UserWorkout = mongoose.model("UserWorkout", UserWorkoutSchema)

@@ -1,29 +1,46 @@
 const Validator = require('validator');
 const validText = require('./valid-text');
+const Meal = require('../models/Meal')
+const Exercise = require('../models/Exercise')
+module.exports = async (data) => {
+    if (!data) return {
+        errors: {routine: "Must be provided"},
+        isValid: false
+    };
+    const days = Object.keys(data);
+    if (days.length !== 7) return {
+        errors: {routine: "Must have 7 valid dates"},
+        isValid: false
+    };
 
-module.exports = (data) => {
     let errors = {};
 
-    data.user = validText(data.user) ? data.user : '';
-    data.startDate = validText(data.startDate) ? data.startDate : '';
-    data.endDate = validText(data.endDate) ? data.endDate : '';
-    
-    if (Validator.isEmpty(data.startDate)) {
-        errors.startDate = 'Start date is required';
+    let allMeals = {};
+    let allExercises = [];
+    const mealAmount = Object.values(data[days[0]].meals).reduce((acc, mealAmount) => {
+        return acc + mealAmount;
+    }, 0);
+    let prevDate = new Date(days[0]);
+    for(let i = 0; i < days.length; i++){
+        if (!Validator.toDate(days[i])) errors.dates = "Keys must be valid date strings.";
+        if (i > 0){
+            prevDate.setDate(prevDate.getDate() + 1);
+            const curDate = new Date(days[i]);
+            if (prevDate.getDate() !== curDate.getDate() && prevDate.getMonth() !== curDate.getMonth() && prevDate.getFullYear() !== curDate.getFullYear()) errors.routine = "Dates must be consecutive."
+        }
+        if (Object.values(data[days[i]].meals).reduce((acc, mealAmount) => acc + mealAmount, 0) !== mealAmount) errors.meals = "User must specify same amount of meals each day";
+        data[days[i]].workout = Object.keys(data[days[i]].workout).filter(ex => data[days[i]].workout[ex] === true);
+        Object.assign(allMeals, data[days[i]].meals);
+        allExercises = allExercises.concat(data[days[i]].workout);
     }
-
-    if (!Validator.toDate(data.startDate)) {
-        errors.startDate = 'Start date must be a valid Date';
-    }
-    
-    if (Validator.isEmpty(data.endDate)) {
-        errors.endDate = 'End date is required';
-    }
-
-    if (!Validator.toDate(data.endDate)) {
-        errors.endDate = 'End date must be a valid Date';
-    }
-
+    const allExercisesHash = {};
+    allExercises.forEach(el => allExercisesHash[el] = true);
+    allExercises = Object.keys(allExercisesHash);
+    allMeals = Object.keys(allMeals);
+    const foundMeals = await Meal.find({_id: { $in: allMeals}});
+    const foundExercises = await Exercise.find({_id: { $in: allExercises}});
+    if (allMeals.length !== foundMeals.length) errors.meals = "Invalid meals have been inserted";
+    if (allExercises.length !== foundExercises.length) errors.exercises = "Invalid exercises have been inserted";
 
     return {
         errors,

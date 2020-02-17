@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import MuscleGroupSelector from "./MuscleGroupSelector";
 import {fetchMuscleGroups} from '../../actions/MuscleGroupActions';
 import {fetchExercisesByMuscleGroups} from '../../actions/ExerciseActions';
-import {receiveDaySelected, receiveSelectedMuscleGroups, receiveSide} from "../../actions/RoutineFilterActions";
+import {receiveSelectedMuscleGroups, receiveSide} from "../../actions/RoutineFilterActions";
 
 const mSTP = (state) => ({
         daySelect: state.ui.newRoutineData,
@@ -20,7 +20,6 @@ const mSTP = (state) => ({
             Chest: state.ui.routineFilters.Chest,
             Back: state.ui.routineFilters.Back,
         },
-        selectedMuscleGroupIds: Object.keys(state.entities.muscleGroups).filter(groupName => state.ui.routineFilters[groupName] === true).map(name => state.entities.muscleGroups[name]._id),
         hoverArms: state.ui.routineFilters.hoverArms,
         hoverLegs: state.ui.routineFilters.hoverLegs,
         hoverShoulders: state.ui.routineFilters.hoverShoulders,
@@ -36,7 +35,6 @@ const mDTP = dispatch =>({
     fetchExercisesByMuscleGroups: ids => dispatch(fetchExercisesByMuscleGroups(ids)),
     selectMuscleGroup: muscleGroup => dispatch(receiveSelectedMuscleGroups(muscleGroup)),
     selectSide: side => dispatch(receiveSide(side)),
-    receiveDaySelected: (day) => dispatch(receiveDaySelected(day))
 })
 
 export default connect(mSTP, mDTP)(MuscleGroupSelector);

@@ -12,6 +12,11 @@ const UserMealSchema = new Schema({
         required: true,
         ref: "Meal"
     },
+    quantity: {
+        type: Number,
+        required: true,
+        default: 1
+    },
     timeStamp: {
         type: Date
     },

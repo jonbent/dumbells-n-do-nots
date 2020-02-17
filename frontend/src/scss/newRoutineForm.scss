@@ -1,24 +1,65 @@
+
 .new-routine-form{
-    background: lightskyblue;
+    background: rgba(0,0,0,0.5);
     text-align: center;
     border-radius: 0.5rem;
-    width: 80vw;
+    margin: 0 1rem;
     height: 30rem;
     display: flex;
     flex-direction: column;
     position: relative;
-    justify-content: center;
+    justify-content: space-evenly;
+    text-shadow: 2px 2px 4px black;
+    color:pink;
+    .date-error{
+        color: red;
+        font-style: italic;
+    }
+    .new-routine-header{
+        font-size: 200%;
+    }
+    .start-date-input > label{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .DayPickerInput{
+            width: fit-content;
+            input{
+                cursor: pointer;
+                color: pink;
+                text-shadow: 1px 1px 3px black;
+            }
+        }
+        .DayPickerInput-OverlayWrapper{
+            color: black;
+            text-shadow: none;
+            right: 5rem;
+        }
+    }
+    .next-button.disabled{
+        div{
+            background-color: rgba(0,0,0,0.1);
+            cursor: default;
+        }
+    }
+    .next-button{
+        cursor: pointer;
+        outline: none;
+        border: none;
+        font-size: large;
+        position: sticky;
+        background: none;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        div{
+            padding: 0.5rem 3rem;
+            background: pink;
+            border-radius: 5px;
+            box-shadow: 2px 2px 6px black;
+        }
+    }
 }
 
-.start-date-label{
-    margin-top: 5rem;
-}
 
-.next-button{
-    margin-top: 15rem;
-    background: lightskyblue;
-    border: none;
-    font-size: large;
-    position: sticky;
-}
 
