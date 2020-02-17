@@ -25,7 +25,7 @@ export default class CarouselItem extends Component {
     render() {
         const { item, onClick, selected } = this.props;
         if (this.state.shouldRender) return (
-        <div key={item._id} className={`exercise-item ${selected}`} onClick={() => onClick(item._id)}>
+        <div className={`exercise-item ${selected}`} onClick={() => onClick(item._id)}>
             {item.name}
         </div>
         );

@@ -4,9 +4,6 @@ import BottomNavBar from "../navbar/BottomNavBarContainer";
 import Modal from "../modal/Modal";
 import DateFormat from 'dateformat'
 class UserHistory extends Component {
-    constructor(props) {
-        super(props);
-    }
     componentDidMount() {
         this.props.fetchUserInfo().then(() => this.props.fetchUserRoutines(this.props.user._id));
     }
@@ -16,7 +13,7 @@ class UserHistory extends Component {
     }
 
     render(){
-        const {user, currentUser, fetchUserRoutines, routines, days} = this.props;
+        const {currentUser, routines, days} = this.props;
         return (
             <div className="UserHistory">
                 <Modal/>

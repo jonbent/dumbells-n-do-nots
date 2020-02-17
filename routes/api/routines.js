@@ -131,8 +131,7 @@ router.post("/", passport.authenticate("jwt", { session: false }), async (req, r
                     const workoutPromise = UserWorkout.insertMany(weekWorkouts);
                     Promise.all([workoutPromise, mealPromise]).then(() => {
                         return res.redirect(`${routine._id}`);
-                        // console.log(newRoutine);
-                    })
+                    }).catch(err => console.log(err));
                 });
             });
         });

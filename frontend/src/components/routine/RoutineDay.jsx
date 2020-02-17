@@ -31,13 +31,9 @@ const RoutineDay = ({day, routine, userMeals, meals, exercises}) => {
                 })}
             </div>
             {exercises.length > 0 && <div className="day-workout">
-                <div className="workout-title"><span>Workout</span>{/*<span>{readableDay}</span>*/}</div>
-                {exercises.map(ex => {
-                    return <div className="day-exercise">{ex.name}</div>
-                    // const meal = meals[userMeal.meal];
-                    // return (
-                    //     <MealItem meal={meal} key={userMeal._id}/>
-                    // )
+                <div className="workout-title"><span>Workout</span></div>
+                {exercises.map((ex, idx) => {
+                    return <div key={idx} className="day-exercise">{ex.name}</div>
                 })}
             </div>}
         </div>
