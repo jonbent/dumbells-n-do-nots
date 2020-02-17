@@ -35,15 +35,15 @@ export default class ExerciseSelector extends Component {
                 {exerciseDays.length !== 0 && <div className="scheduled-days-container">
                     <div>Scheduled Workouts:</div>
                     <div className="scheduled-days">
-                        {exerciseDays.map((date, idx) => (
-                            <div className={ day === date ? "selected" : ""} onClick={e => this.handleSetDate(date)}>{date}</div>
+                        {exerciseDays.map((date) => (
+                            <div key={date} className={ day === date ? "selected" : ""} onClick={e => this.handleSetDate(date)}>{date}</div>
                         ))}
                     </div>
                 </div>}
                 <div className="day-select">
                     <h1>Select Day</h1>
                     <select value={day} onChange={e => this.handleSetDate(e.currentTarget.value)}>
-                        {days.map((date, idx) => <option key={date} value={date} selected={day === date}>{date}</option>)}
+                        {days.map((date, idx) => <option key={date} value={date}>{date}</option>)}
                     </select>
                 </div>
                 {selectedMuscleGroupIds.length !== 0 && <div className="group-exercises-container">
