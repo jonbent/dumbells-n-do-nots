@@ -4,7 +4,7 @@ import { createDayUserMeal, fetchApiFilteredMeals } from '../../actions/UserMeal
 import { fetchAllMeals, fetchMeals } from '../../actions/MealActions'
 import {receiveRoutineMeals} from "../../actions/NewRoutineActions";
 import {openModal} from "../../actions/ModalActions";
-import {receiveNumMeals, receiveDaySelected} from "../../actions/RoutineFilterActions"
+import {receiveNumMeals, receiveDaySelected, receiveGoalPath} from "../../actions/RoutineFilterActions"
 
 
 const mapStateToProps = (state, ownProps) => {
@@ -12,7 +12,10 @@ const mapStateToProps = (state, ownProps) => {
         daySelect: state.ui.newRoutineData,
         meals: state.entities.meals,
         day: state.ui.routineFilters.daySelected,
-        numMeals: state.ui.routineFilters.numMeals
+        numMeals: state.ui.routineFilters.numMeals,
+        curUser: state.session.user
+        // minCals: state.ui.routineFilters.minCals,
+        // maxCals: state.ui.routineFilters.maxCals,
     }
 };
 
@@ -24,7 +27,8 @@ const mapDispatchToProps = dispatch => ({
     saveRoutine: (routine) => dispatch(receiveRoutineMeals(routine)),
     openExercises: () => dispatch(openModal('bodyUI')),
     receiveNumMeals: (num) => dispatch(receiveNumMeals(num)),
-    receiveDaySelected: (day) => dispatch(receiveDaySelected(day))
+    receiveDaySelected: (day) => dispatch(receiveDaySelected(day)),
+    // receiveGoalPath: (cals) => dispatch(receiveGoalPath(cals))
 });
 
 export default connect(

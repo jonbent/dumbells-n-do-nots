@@ -10,10 +10,14 @@ router.get("/test", (req, res) => res.json({ msg: "This is the users route" }));
 router.get("/", (req, res) => {
     const pageSize = parseInt(req.query.pageSize);
     const pageNum = parseInt(req.query.pageNum);
-    const {maxCals, minCals} = req.query;
+    const minCals = parseInt(req.query.minCals);
+    const maxCals = parseInt(req.query.maxCals);
     Meal
      .find()
      .sort({title: 1})
+     .gt('calories', minCals - 1)
+     .gt('protein', 29)
+     .lt('calories', maxCals + 1)
      .limit(pageSize)
      .skip(pageSize * pageNum)
      .then(meals => res.json(meals))

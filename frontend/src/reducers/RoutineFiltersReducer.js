@@ -1,7 +1,7 @@
 import { RECEIVE_DAY_SELECTED, RECEIVE_NUM_MEALS } from '../actions/RoutineFilterActions'
 import { RECEIVE_NEW_ROUTINE_STARTDATE } from '../actions/NewRoutineActions';
 import {CLOSE_MODAL} from "../actions/ModalActions";
-import {RECEIVE_SELECTED_MUSCLE_GROUP, RECEIVE_SIDE} from "../actions/RoutineFilterActions";
+import {RECEIVE_SELECTED_MUSCLE_GROUP, RECEIVE_SIDE, RECEIVE_GOAL_PATH} from "../actions/RoutineFilterActions";
 const _nullState = {
     side: "front",
     Arms: false,
@@ -24,6 +24,8 @@ export default function (state = _nullState, action) {
     switch (action.type) {
         case RECEIVE_DAY_SELECTED:
             return Object.assign({}, state, { daySelected: action.day });
+        case RECEIVE_GOAL_PATH:
+            return Object.assign({}, state, { minCals: action.cals - 500, maxCals: action.cals });
         case RECEIVE_NUM_MEALS:
             return Object.assign({}, state, { numMeals: action.num });
         case RECEIVE_NEW_ROUTINE_STARTDATE:

@@ -6,12 +6,16 @@ class AddUserMealsForm extends React.Component{
     constructor(props){
         super(props);
         let dayStr = 0;
+        let minCals;
+        let maxCals;
         this.state = {
             day: Object.keys(this.props.daySelect)[dayStr],
             toggleShowMeals: false,
             curPage: 1,
             pageSize: 10,
             itemsAmount: 100,
+            minCals,
+            maxCals,
             numMeals: "",
             selectedMeals: {}
         }
@@ -24,7 +28,7 @@ class AddUserMealsForm extends React.Component{
     }
     handlePageChange(page){
         this.setState({curPage: page}, () => {
-            this.props.fetchMeals({pageSize: this.state.pageSize, pageNum: this.state.curPage})
+            this.props.fetchMeals({ pageSize: this.state.pageSize, pageNum: this.state.curPage, minCals: "500", maxCals: "700"})
         });
     }
 
@@ -45,7 +49,7 @@ class AddUserMealsForm extends React.Component{
 
     handleSetNumMeals(e) {
         e.preventDefault();
-        this.props.fetchMeals({pageSize: this.state.pageSize, pageNum: this.state.curPage})
+        this.props.fetchMeals({pageSize: this.state.pageSize, pageNum: this.state.curPage, minCals: "500", maxCals: "700"})
             .then(() => this.setState({toggleShowMeals: true}))
     }
     handleSelectMeal(mealId, num = 0){

@@ -2,6 +2,7 @@ export const RECEIVE_DAY_SELECTED = "RECEIVE_DAY_SELECTED";
 export const RECEIVE_NUM_MEALS = "RECEIVE_NUM_MEALS";
 export const RECEIVE_SIDE = "RECEIVE_SIDE";
 export const RECEIVE_SELECTED_MUSCLE_GROUP = 'RECEIVE_SELECTED_MUSCLE_GROUP';
+export const RECEIVE_GOAL_PATH = 'RECEIVE_GOAL_PATH'
 
 export const receiveDaySelected = day => ({
     type: RECEIVE_DAY_SELECTED,
@@ -21,4 +22,9 @@ export const receiveSide = side => ({
 export const receiveSelectedMuscleGroups = (muscleGroup) => ({
     type: RECEIVE_SELECTED_MUSCLE_GROUP,
     muscleGroup
+});
+
+export const receiveGoalPath = (cals) => ({
+    type: RECEIVE_GOAL_PATH,
+    cals
 });
