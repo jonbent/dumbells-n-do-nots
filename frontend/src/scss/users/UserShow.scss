@@ -4,8 +4,13 @@
     display: flex;
     position: relative;
     justify-content: center;
+    height:100%;
+    .routine-info-container{
+        margin-bottom: 3rem;
+    }
     .user-show-content{
-        margin-bottom: 8rem;
+        margin-bottom: 5rem;
+        overflow: scroll;
         width: 90%;
         padding-top: 3rem;
     }
