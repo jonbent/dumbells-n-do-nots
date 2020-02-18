@@ -12,8 +12,14 @@ const mapStateToProps = ({entities}, ownProps) => {
     }
 }
 
-
 const RoutineDay = ({day, routine, userMeals, meals, exercises}) => {
+    function checkMeal(id) {
+        if (userMeals[id].doneCheck === false){
+            userMeals[id].doneCheck = true
+        } else {
+            userMeals[id].doneCheck = false
+        }
+    }
     if (!day) return null;
     const readableDay = DateFormat(new Date(day.date), 'yyyy-mm-dd');
     return (
@@ -23,10 +29,10 @@ const RoutineDay = ({day, routine, userMeals, meals, exercises}) => {
             </div>
             <div className="day-meals">
                 <div className="meal-title">Meals</div>
-                {userMeals.map(userMeal => {
+                {userMeals.map((userMeal, idx)=> {
                     const meal = meals[userMeal.meal];
                     return (
-                        <MealItem meal={meal} key={userMeal._id}/>
+                        <MealItem meal={meal} key={userMeal._id} handleMealCheck={() => checkMeal(idx)}/>
                     )
                 })}
             </div>

@@ -20,7 +20,11 @@ const UserMealSchema = new Schema({
     timeStamp: {
         type: Date
     },
-
+    doneCheck: {
+        type: Boolean,
+        default: false,
+        required: true
+    }
 })
 
 module.exports = UserMeal = mongoose.model("UserMeal", UserMealSchema)

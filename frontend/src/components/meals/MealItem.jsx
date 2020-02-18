@@ -1,9 +1,9 @@
 import React from 'react';
 import NextArrow from "../svg/NextArrow";
 import '../../scss/meals/MealItem.scss';
-const MealItem = ({meal, daySelect, handleSelectMeal, day}) => {
+const MealItem = ({meal, daySelect, handleSelectMeal, day, handleMealCheck}) => {
     return (
-        <div className="meal-item" >
+        <div className="meal-item" onClick={() => handleMealCheck()}>
                             {/*<img src={meal.photoUrl}/>*/}
             <div className="meal-image-and-quantity">
                 <div className="meal-image" style={{backgroundImage: `url(${meal.photoUrl})`}}></div>
@@ -21,7 +21,6 @@ const MealItem = ({meal, daySelect, handleSelectMeal, day}) => {
                     <div>fat: {meal.fat}</div>
                     <div>carbs: {meal.carbs}</div>
                     <div>protein: {meal.protein}</div>
-
                 </div>
             </div>
         </div>

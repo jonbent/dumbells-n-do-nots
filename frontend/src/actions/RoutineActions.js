@@ -23,6 +23,13 @@ export const fetchUserRoutine = id => dispatch => (
         .then(res => dispatch(receiveUserRoutine(res.data)))
         .catch(err => console.log(err))
 );
+
+// export const updateRoutine = id => dispatch => (
+//     RoutineApiUtil.getUserRoutine(id)
+//         .then(res => dispatch(updateCurRoutine(res.data)))
+//         .catch(err => console.log(err))
+// );
+
 export const fetchUserRoutines = id => dispatch => (
     RoutineApiUtil.getUserRoutines(id)
         .then(res => dispatch(receiveUserRoutines(res.data)))
@@ -34,3 +41,4 @@ export const createRoutine = data => dispatch => (
         .then(routine => {dispatch(receiveNewRoutine(routine)); dispatch(resetSelectedMuscleGroups())})
         .catch(err => console.log(err))
 );
+

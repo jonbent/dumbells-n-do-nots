@@ -25,6 +25,7 @@ class AddUserMealsForm extends React.Component{
         this.handleSelectMeal = this.handleSelectMeal.bind(this);
         this.handleSubmitWeekMeals = this.handleSubmitWeekMeals.bind(this);
     }
+
     handlePageChange(page){
         this.setState({curPage: page}, () => {
             this.props.fetchMeals({ pageSize: this.state.pageSize, pageNum: this.state.curPage, minCals: "500", maxCals: "700"})
@@ -66,6 +67,7 @@ class AddUserMealsForm extends React.Component{
         }
         this.props.saveRoutine(routine)
     }
+    
     handleSubmitWeekMeals(allMeals){
         if (allMeals === this.props.numMeals * 7 ){
             this.props.openExercises()

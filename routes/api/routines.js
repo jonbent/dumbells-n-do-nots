@@ -87,6 +87,17 @@ router.get('/:routineId', async (req, res) => {
     await res.json(response);
 })
 
+// update routine to checkDone meals and workout
+// router.patch("/:routineId", passport.authenticate("jwt", { session: false }), async (req, res) => {
+//     const { isValid, errors } = await validateRoutineInput(req.body);
+
+//     if (!isValid) {
+//         return res.status(400).json(errors);
+//     }
+
+//     let curRoutine = await (Routine.find({ _id: req.params.routineId }))
+// })
+
 
 //let user create a routine
 router.post("/", passport.authenticate("jwt", { session: false }), async (req, res) => {
@@ -124,7 +135,7 @@ router.post("/", passport.authenticate("jwt", { session: false }), async (req, r
                     const weekMeals = [];
                     const weekWorkouts = [];
                     Object.keys(req.body[dayString].meals).forEach((mealId) => {
-                        weekMeals.push({meal: mealId, quantity: req.body[dayString].meals[mealId], day: days[idx]._id});
+                        weekMeals.push({ meal: mealId, quantity: req.body[dayString].meals[mealId], checkDone: req.body[dayString].meals[mealId], day: days[idx]._id});
                     });
                     if ( req.body[dayString].workout.length !== 0 ) weekWorkouts.push({day: days[idx]._id, exercises: req.body[dayString].workout});
                     const mealPromise = UserMeal.insertMany(weekMeals);

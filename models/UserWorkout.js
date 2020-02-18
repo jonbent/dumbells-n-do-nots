@@ -10,7 +10,12 @@ const UserWorkoutSchema = new Schema({
     exercises: [{
         type: Schema.Types.ObjectId,
         ref: 'Exercise'
-    }]
+    }],
+    doneCheck: {
+        type: Boolean,
+        default: false,
+        required: true
+    }
     // startTime: {
     //     type: Date,
     //     required: true

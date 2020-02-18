@@ -7,6 +7,7 @@ export const getSampleRoutines = () => {
 export const getUserRoutine = id => {
     return axios.get(`/api/routines/user/${id}/single`)
 };
+
 export const getUserRoutines = id => {
     return axios.get(`/api/routines/user/${id}`)
 };

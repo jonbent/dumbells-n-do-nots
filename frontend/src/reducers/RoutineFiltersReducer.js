@@ -26,8 +26,6 @@ export default function (state = _nullState, action) {
     switch (action.type) {
         case RECEIVE_DAY_SELECTED:
             return Object.assign({}, state, { daySelected: action.day });
-        case RECEIVE_GOAL_PATH:
-            return Object.assign({}, state, { minCals: action.cals - 500, maxCals: action.cals });
         case RECEIVE_NUM_MEALS:
             return Object.assign({}, state, { numMeals: action.num });
         case RECEIVE_NEW_ROUTINE_STARTDATE:
