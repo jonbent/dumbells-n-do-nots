@@ -1,3 +1,11 @@
+html{
+    height: 100%;
+}
+*:not(html) {
+    //-webkit-transform: translate3d(0, 0, 0);
+    //-webkit-transform-style: flat;
+    //transform-style: flat;
+}
 body{
     background-image: url('/images/dumbnot-background.jpg');
     background-position: left top;
@@ -5,8 +13,14 @@ body{
     flex-direction: column;
     font-family: 'Roboto Mono', monospace;
     height: 100%;
+    -webkit-transform: translate3d(0, 0, 0);
+    -webkit-backface-visibility: hidden;
+    -webkit-perspective: 1000;
+    -webkit-overflow-scrolling: auto;
     #root {
         height: 100%;
+        overflow: scroll;
+        position: relative;
     }
 }
 html{

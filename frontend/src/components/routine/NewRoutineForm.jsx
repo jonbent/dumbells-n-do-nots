@@ -1,9 +1,9 @@
 import React from 'react';
 // import {Link} from 'react-router-dom';
-import DayPickerInput from "react-day-picker/DayPickerInput";
+import DatePicker from "react-date-picker";
 import YearMonthForm from '../signup/year_month_form';
 import DateFormat from 'dateformat'
-import "react-day-picker/lib/style.css";
+// import "react-day-picker/lib/style.css";
 import "../../scss/newRoutineForm.scss"
 import {fetchRoutineByStartDate} from "../../util/RoutineApiUtil";
 
@@ -16,8 +16,7 @@ class NewRoutineForm extends React.Component {
   constructor(props) {
     super(props);
     const currentDate = new Date();
-
-    const weekFromCurrentDate = currentDate.setDate(currentDate.getDate() + 7);
+    const weekFromCurrentDate = new Date().setDate(currentDate.getDate() + 7);;
     this.state = {
       month: currentDate,
       startDate: currentDate,
@@ -29,8 +28,9 @@ class NewRoutineForm extends React.Component {
     this.handleNext = this.handleNext.bind(this);
   }
 
-  handleStartDate(e) {
-    this.setState({ startDate: DateFormat(e, "yyyy-mm-dd") }, () => {
+  handleStartDate(date) {
+    console.log(date);
+    this.setState({ startDate: date }, () => {
       fetchRoutineByStartDate(this.state.startDate).then(res => {
         let dateError = null;
         if (res.data.datesFound){
@@ -39,7 +39,7 @@ class NewRoutineForm extends React.Component {
         this.setState({
             dateError
         })
-      });
+      }).catch(err => console.log(err));
     });
   }
   handleYearMonthChange(month) {
@@ -48,35 +48,40 @@ class NewRoutineForm extends React.Component {
   handleNext(e) {
     if (this.state.dateError) return null;
     e.preventDefault();
-    this.props.receiveNewRoutineStartDate(this.state.startDate);
+    this.props.receiveNewRoutineStartDate(DateFormat(this.state.startDate, 'yyyy-mm-dd'));
     this.props.openAddMealsFormModal();
+  }
+  componentDidMount() {
+    // document.querySelector('.DayPickerInput > input').setAttribute('readonly', true)
   }
 
   render() {
     // const startDate = this.state.startDate;
     const {dateError, month, startDate} = this.state;
-    const dayPickerProps = {
-      month,
-      fromMonth: fromMonth,
-      toMonth: toMonth,
-      captionElement: ({ date, localeUtils }) => (
-        <YearMonthForm
-          date={date}
-          localeUtils={localeUtils}
-          onChange={this.handleYearMonthChange}
-        />
-      )
-    };
+    // const dayPickerProps = {
+    //   fromMonth: fromMonth,
+    //   toMonth: toMonth,
+    //   captionElement: ({ date, localeUtils }) => (
+    //     <YearMonthForm
+    //       date={date}
+    //       localeUtils={localeUtils}
+    //       onChange={this.handleYearMonthChange}
+    //       selectedDays={startDate}
+    //     />
+    //   )
+    // };
     return (
       <form className="new-routine-form">
         <h1 className="new-routine-header">New Routine</h1>
 
         <div className="start-date-input">
           <label className="start-date-label">Select Start Date
-            <DayPickerInput
-              dayPickerProps={dayPickerProps}
-              onDayChange={e => this.handleStartDate(e)}
-              selectedDays={startDate}
+            <DatePicker
+              // dayPickerProps={dayPickerProps}
+              onChange={this.handleStartDate}
+              value={this.state.startDate}
+              // selectedDays={startDate}
+              // keepFocus={false}
             />
           </label>
         </div>
