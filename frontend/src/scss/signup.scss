@@ -111,6 +111,7 @@ input:focus{
     text-align: center;
     background: transparent;
     border: none;
+
 }
 .signup-form-detail-dropdown{
     margin-top: 0.5rem;
@@ -177,6 +178,7 @@ input:focus{
 }
 .DayPickerInput-OverlayWrapper{
     right: 2rem;
+    z-index: 40;
 }
 
 
