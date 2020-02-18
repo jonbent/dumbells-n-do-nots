@@ -17,12 +17,14 @@ router.get("/startDate", passport.authenticate("jwt", { session: false }), async
     const dateRange = [];
     for(let i = 0; i < 7; i++){
         curDate.setDate(curDate.getDate() + 1);
-        const newDate = new Date(curDate);
+        const newDate = new Date(DateFormat(curDate, 'yyyy-mm-dd'));
         dateRange.push(newDate);
     }
+    console.log(dateRange)
     const routines = await Routine.find({user: req.user._id});
     const routineIds = routines.map(r => r._id);
     let dates = await Day.find({date: {$in: dateRange}, routine: {$in: routineIds}});
+    console.log(dates)
     const datesFound = dates.length ? true : false;
     return res.json({datesFound});
 })

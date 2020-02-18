@@ -3,7 +3,7 @@
     background: rgba(0,0,0,0.5);
     text-align: center;
     border-radius: 0.5rem;
-    margin: 0 1rem;
+    margin: 1rem;
     height: 30rem;
     display: flex;
     flex-direction: column;
@@ -22,19 +22,20 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        .DayPickerInput{
-            width: fit-content;
-            input{
-                cursor: pointer;
-                color: pink;
-                text-shadow: 1px 1px 3px black;
+        .react-date-picker__wrapper{
+            border: none;
+        }
+        .react-date-picker__calendar{
+            left: -3rem !important;
+            .react-calendar__month-view__weekdays__weekday{
+                color: lightskyblue;
+                text-shadow: 1px 1px 2px;
+                abbr{
+                    text-decoration: none;
+                }
             }
         }
-        .DayPickerInput-OverlayWrapper{
-            color: black;
-            text-shadow: none;
-            right: 5rem;
-        }
+
     }
     .next-button.disabled{
         div{

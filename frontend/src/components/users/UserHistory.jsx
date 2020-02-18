@@ -15,23 +15,25 @@ class UserHistory extends Component {
     render(){
         const {currentUser, routines, days} = this.props;
         return (
-            <div className="UserHistory">
+            <div className="user-history-container">
                 <Modal/>
-                <div className="routine-history">
-                    <div className="history-title">
-                        History
+                <div className="UserHistory">
+                    <div className="routine-history">
+                        <div className="history-title">
+                            History
+                        </div>
+                        {routines.length === 0 && <div>
+                            No Routines Found
+                        </div>}
+                        {routines.map(r => {
+                            return (
+                                <div key={r._id} className="routine-item">
+                                    <div>{DateFormat(new Date(days[r._id][0].date), 'yyyy-mm-dd')}</div>
+                                    <div>{DateFormat(new Date(days[r._id][days[r._id].length - 1].date), 'yyyy-mm-dd')}</div>
+                                </div>
+                            )
+                        })}
                     </div>
-                    {routines.length === 0 && <div>
-                        No Routines Found
-                    </div>}
-                    {routines.map(r => {
-                        return (
-                            <div key={r._id} className="routine-item">
-                                <div>{DateFormat(new Date(days[r._id][0].date), 'yyyy-mm-dd')}</div>
-                                <div>{DateFormat(new Date(days[r._id][days[r._id].length - 1].date), 'yyyy-mm-dd')}</div>
-                            </div>
-                        )
-                    })}
                 </div>
                 <BottomNavBar user={currentUser}/>
             </div>
