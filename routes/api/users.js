@@ -167,8 +167,7 @@ router.post('/login', (req, res) => {
     if (!isValid) {
         return res.status(400).json(errors);
     }
-
-    User.findOne({ username })
+    User.findOne({ username: new RegExp(`^${username}$`, 'i')})
         .then(user => {
             if (!user) {
                 // Use the validations to send the error
@@ -201,7 +200,7 @@ router.post('/login', (req, res) => {
                         return res.status(400).json({password: 'Invalid credentials'});
                     }
                 })
-        })
+        }).catch(err => console.log(err))
 })
 router.get('/:username', (req, res) => {
     User.findOne({ username: req.params.username })

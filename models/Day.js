@@ -10,7 +10,15 @@ const DaySchema = new Schema({
     date: {
         type: Date,
         required: true
+    },
+    meals: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Meal'
+    }],
+    workout: {
+        type: Schema.Types.ObjectId,
+        ref: 'Workout'
     }
-})
+});
 
 module.exports = Day = mongoose.model("Day", DaySchema)

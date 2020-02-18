@@ -4,6 +4,7 @@ import MealItem from "../meals/MealItem";
 import DateFormat from 'dateformat'
 const mapStateToProps = ({entities}, ownProps) => {
     const workout = Object.values(entities.workouts).find(el => el.day === ownProps.day._id)
+    console.log(ownProps.day)
     return {
         meals: entities.routineMeals,
         userMeals: Object.values(entities.userMeals).filter(meal => meal.day === ownProps.day._id),

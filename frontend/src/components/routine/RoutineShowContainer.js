@@ -4,6 +4,8 @@ import { openModal } from '../../actions/ModalActions';
 import dateFormat from 'dateformat'
 const mapStateToProps = ({entities, session}) => {
     let curDate = new Date(dateFormat(new Date(), 'yyyy-mm-dd'));
+    curDate.setDate(curDate.getDate() + 1);
+
     const dayValues = Object.values(entities.days);
     curDate = dayValues.find(day => new Date(day.date).getTime() === curDate.getTime());
     let curDates = [];
