@@ -34,3 +34,9 @@ export const createRoutine = data => dispatch => (
         .then(routine => {dispatch(receiveNewRoutine(routine)); dispatch(resetSelectedMuscleGroups())})
         .catch(err => console.log(err))
 );
+
+export const fetchRoutineById = id => dispatch => {
+    return RoutineApiUtil.getRoutineById(id)
+        .then(res => dispatch(receiveUserRoutine(res.data)))
+        .catch(err => console.log(err))
+}
