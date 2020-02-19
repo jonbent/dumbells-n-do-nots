@@ -90,15 +90,19 @@ router.get('/:routineId', async (req, res) => {
 })
 
 // update routine to checkDone meals and workout
-// router.patch("/:routineId", passport.authenticate("jwt", { session: false }), async (req, res) => {
-//     const { isValid, errors } = await validateRoutineInput(req.body);
-
-//     if (!isValid) {
-//         return res.status(400).json(errors);
-//     }
-
-//     let curRoutine = await (Routine.find({ _id: req.params.routineId }))
-// })
+router.put("/days/:dayId/:completableType/:completableId", passport.authenticate("jwt", { session: false }), async (req, res) => {
+    const day = await Day.findOne({_id: req.params.dayId})
+    switch(req.params.completableType){
+        case "workout":
+            const workout = await UserWorkout.findOne({_id: req.params.completableId})
+            workout.doneCheck = true
+            workout.save()
+        case "meal":
+            const meal = await UserMeal.findOne({_id: req.params.completableId})
+            meal.doneAmount += req.body.doneAmount
+            meal.save()
+    }
+})
 
 
 //let user create a routine
@@ -133,20 +137,47 @@ router.post("/", passport.authenticate("jwt", { session: false }), async (req, r
                 newDays.push({date, routine: routine._id});
             });
             Day.insertMany(newDays).then((days) => {
-                dayStrings.forEach((dayString, idx) => {
-                    const weekMeals = [];
-                    const weekWorkouts = [];
+                routine.days = days.map(day => day._id);
+                routine.save();
+                const weeksWorkouts = [];
+                let weeksMeals = [];
+                dayStrings.forEach(async (dayString, idx) => {
+                    const dayMeals = [];
+                    let dayWorkout;
+
                     Object.keys(req.body[dayString].meals).forEach((mealId) => {
-                        weekMeals.push({ meal: mealId, quantity: req.body[dayString].meals[mealId], checkDone: req.body[dayString].meals[mealId], day: days[idx]._id});
+                        dayMeals.push({meal: mealId, quantity: req.body[dayString].meals[mealId], day: days[idx]._id});
                     });
-                    if ( req.body[dayString].workout.length !== 0 ) weekWorkouts.push({day: days[idx]._id, exercises: req.body[dayString].workout});
-                    const mealPromise = UserMeal.insertMany(weekMeals);
-                    const workoutPromise = UserWorkout.insertMany(weekWorkouts);
-                    Promise.all([workoutPromise, mealPromise]).then(() => {
-                        return res.redirect(`${routine._id}`);
-                    }).catch(err => console.log(err));
+                    if ( req.body[dayString].workout.length !== 0 ) dayWorkout = {day: days[idx]._id, exercises: req.body[dayString].workout};
+                    let meals;
+                    let newWorkout;
+                    let workout;
+                    try {
+                        if ( req.body[dayString].workout.length !== 0 ){
+                            newWorkout = new UserWorkout(dayWorkout);
+                            workout = await newWorkout.save();
+                            weeksWorkouts.push(workout);
+                        }
+
+                         meals = await UserMeal.insertMany(dayMeals);
+                         weeksMeals = weeksMeals.concat(meals);
+
+                    } catch(e) {
+                        UserWorkout.deleteMany({_id: {$in: weeksWorkouts.map(w => w._id)}}).catch(err => console.log(err));
+                        UserMeal.deleteMany({_id: {$in: weeksMeals.map(m => m._id)}}).catch(err => console.log(err));
+                        Day.deleteMany({routine: routine._id}).catch(err => console.log(err));
+                        Routine.deleteOne({_id: routine._id}).catch(err => console.log(err));
+                        return res.status(422).json({dates: "Unable to insert with given information"})
+
+                    }
+                    days[idx].meals = meals.map(meal => meal._id);
+                    if ( req.body[dayString].workout.length !== 0 ) days[idx].workout = workout._id;
+                    days[idx].save();
+
+
                 });
             });
+            return res.redirect(`${routine._id}`);
         });
 });
 

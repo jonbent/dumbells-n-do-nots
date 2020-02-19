@@ -24,11 +24,11 @@ export const fetchUserRoutine = id => dispatch => (
         .catch(err => console.log(err))
 );
 
-// export const updateRoutine = id => dispatch => (
-//     RoutineApiUtil.getUserRoutine(id)
-//         .then(res => dispatch(updateCurRoutine(res.data)))
-//         .catch(err => console.log(err))
-// );
+export const updateRoutine = id => dispatch => (
+    RoutineApiUtil.updateRoutine(id)
+        .then(res => dispatch(receiveUserRoutine(res.data)))
+        .catch(err => console.log(err))
+);
 
 export const fetchUserRoutines = id => dispatch => (
     RoutineApiUtil.getUserRoutines(id)
@@ -42,3 +42,8 @@ export const createRoutine = data => dispatch => (
         .catch(err => console.log(err))
 );
 
+export const fetchRoutineById = id => dispatch => {
+    return RoutineApiUtil.getRoutineById(id)
+        .then(res => dispatch(receiveUserRoutine(res.data)))
+        .catch(err => console.log(err))
+}

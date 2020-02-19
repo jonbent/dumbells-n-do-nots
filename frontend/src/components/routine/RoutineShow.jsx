@@ -29,10 +29,10 @@ class RoutineShow extends Component {
                     <div className="title">Current Routine not found.</div>
                     <div className="create"><div onClick={this.props.openNewRoutineModal}>Create New Routine</div></div>
                 </div>}
-                {!!dayValues && <div className="routine-day-container">
+                {!!dayValues.length && <div className="routine-day-container">
                     <RoutineDay day={dayValues[curDay]}/>
                 </div>}
-                {!!dayValues && <div className="pagination-container">
+                {!!dayValues.length && <div className="pagination-container">
                     <RoutinePage curDay={curDay} dayAmount={dayValues.length} dayValues={dayValues.map(el => DateFormat(el.date, "yyyy-mm-dd"))} changeDay={this.changeDay}/>
                 </div>}
             </div>

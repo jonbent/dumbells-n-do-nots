@@ -2,8 +2,10 @@ import React from 'react';
 import {connect} from "react-redux";
 import MealItem from "../meals/MealItem";
 import DateFormat from 'dateformat'
+import { updateRoutine } from '../../actions/RoutineActions'
 const mapStateToProps = ({entities}, ownProps) => {
     const workout = Object.values(entities.workouts).find(el => el.day === ownProps.day._id)
+    console.log(ownProps.day)
     return {
         meals: entities.routineMeals,
         userMeals: Object.values(entities.userMeals).filter(meal => meal.day === ownProps.day._id),
@@ -12,13 +14,18 @@ const mapStateToProps = ({entities}, ownProps) => {
     }
 }
 
-const RoutineDay = ({day, routine, userMeals, meals, exercises}) => {
+const mapDispatchToProps = (dispatch, ownProps) => ({
+    updateRoutine: id => dispatch(updateRoutine(id)),
+})
+
+const RoutineDay = ({day, routine, userMeals, meals, exercises, updateRoutine}) => {
     function checkMeal(id) {
-        if (userMeals[id].doneCheck === false){
-            userMeals[id].doneCheck = true
+        if (userMeals[id].doneAmount === false){
+            userMeals[id].doneAmount = true
         } else {
-            userMeals[id].doneCheck = false
+            userMeals[id].doneAmount = false
         }
+        updateRoutine(day.routine)
     }
     if (!day) return null;
     const readableDay = DateFormat(new Date(day.date), 'yyyy-mm-dd');
@@ -46,4 +53,4 @@ const RoutineDay = ({day, routine, userMeals, meals, exercises}) => {
     );
 };
 
-export default connect(mapStateToProps, null)(RoutineDay);
+export default connect(mapStateToProps, mapDispatchToProps)(RoutineDay);

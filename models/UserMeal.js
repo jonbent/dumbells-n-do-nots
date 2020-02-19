@@ -20,9 +20,9 @@ const UserMealSchema = new Schema({
     timeStamp: {
         type: Date
     },
-    doneCheck: {
-        type: Boolean,
-        default: false,
+    doneAmount: {
+        type: Number,
+        default: 0,
         required: true
     }
 })
