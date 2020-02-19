@@ -6,9 +6,7 @@ import MealItem from "../meals/MealItem";
 class AddUserMealsForm extends React.Component{
     constructor(props){
         super(props);
-        let dayStr = 0;
         this.state = {
-            day: Object.keys(this.props.daySelect)[dayStr],
             toggleShowMeals: false,
             curPage: 1,
             pageSize: 10,
