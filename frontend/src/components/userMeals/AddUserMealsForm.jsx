@@ -10,7 +10,6 @@ class AddUserMealsForm extends React.Component{
         let minCals;
         let maxCals;
         this.state = {
-            day: Object.keys(this.props.daySelect)[dayStr],
             toggleShowMeals: false,
             curPage: 1,
             pageSize: 10,
@@ -67,7 +66,7 @@ class AddUserMealsForm extends React.Component{
         }
         this.props.saveRoutine(routine)
     }
-    
+
     handleSubmitWeekMeals(allMeals){
         if (allMeals === this.props.numMeals * 7 ){
             this.props.openExercises()

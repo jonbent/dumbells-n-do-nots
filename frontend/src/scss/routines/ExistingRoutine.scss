@@ -1,0 +1,36 @@
+.existing-days-container{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    .title{
+        color: pink;
+        text-shadow: 1px 1px 3px black;
+        margin-top: 1rem;
+        font-size: 150%;
+    }
+    .meal-title{
+      text-align: start;
+    }
+    .date-error{
+        margin-top: 1rem;
+        color: red;
+        font-style: italic;
+    }
+    .react-date-picker{
+        margin: 2rem 3rem 0 3rem;
+    }
+    .submit{
+        margin: 2rem 1rem;
+        background-color: pink;
+        padding: 2rem;
+        border-radius: 5px;
+        font-size: 150%;
+        text-shadow: 1px 1px 3px lightskyblue;
+        box-shadow: 2px 2px 6px black;
+        cursor: pointer;
+    }
+    .submit.disabled{
+        background-color: rgba(0,0,0,0.5);
+        cursor: default;
+    }
+}

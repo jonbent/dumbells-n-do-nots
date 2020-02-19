@@ -36,7 +36,7 @@ function Modal({ modal, closeModal }) {
             component = <ExistingRoutineContainer/>;
             break;
         case 'addUserMeals':
-            component = <AddUserMealsFormContainer />
+            component = <AddUserMealsFormContainer />;
             break;
         default:
             return null;
