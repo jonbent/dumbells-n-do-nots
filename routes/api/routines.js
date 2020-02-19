@@ -98,8 +98,8 @@ router.put("/days/:dayId/:completableType/:completableId", passport.authenticate
             workout.doneCheck = true
             workout.save()
         case "meal":
-            const meal = await UserMeal.findOne({_id: req.params.completableId})
-            meal.doneAmount += req.body.doneAmount
+            const meal = await UserMeal.findOne({ _id: req.params.completableId})
+            meal.doneAmount += parseInt(req.body.doneAmount)
             meal.save()
     }
 })

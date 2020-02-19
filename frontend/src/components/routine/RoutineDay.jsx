@@ -15,17 +15,21 @@ const mapStateToProps = ({entities}, ownProps) => {
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    updateRoutine: id => dispatch(updateRoutine(id)),
+    updateRoutine: data => dispatch(updateRoutine(data)),
 })
 
-const RoutineDay = ({ editable, day, routine, userMeals, meals, exercises, modal = false, idx, editDay = null }) => {
-    function checkMeal(id) {
-        if (userMeals[id].doneAmount ){
-            userMeals[id].doneAmount = true
+const RoutineDay = ({updateRoutine, workout, editable, day, routine, userMeals, meals, exercises, modal = false, idx, editDay = null }) => {
+    function check(id, value) {
+        if(!id){
+            if (workout.doneCheck === false){
+                workout.doneCheck = true
+            } else {
+                workout.doneCheck = false
+            }
+            updateRoutine({dayId: day._id, completableType: 'workout', completableId: workout._id})
         } else {
-            userMeals[id].doneAmount = false
+            updateRoutine({dayId: day._id, completableType: 'meal', completableId: id, doneAmount: value})
         }
-        updateRoutine(day.routine)
     }
     if (!day) return null;
     const readableDay = !modal ? DateFormat(new Date(day.date), 'yyyy-mm-dd'): `Day ${idx + 1}`;
@@ -40,8 +44,8 @@ const RoutineDay = ({ editable, day, routine, userMeals, meals, exercises, modal
                     const meal = meals[userMeal.meal];
                     return (
                         <div key={userMeal._id}>
-                            {Object.keys([...new Array(userMeal.quantity)]).map((key) => {
-                                return <MealItem meal={meal} key={key} handleMealCheck={() => checkMeal(idx)}/>
+                            {Object.keys([...new Array(userMeal.quantity)]).map((key, idx) => {
+                                return <MealItem meal={meal} key={key} handleMealCheck={() => check(userMeal._id, idx + 1 <= meal.doneAmount ? -1 : 1)}/>
                             })}
                         </div>
                     )
