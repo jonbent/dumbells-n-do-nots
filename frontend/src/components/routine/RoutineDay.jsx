@@ -41,6 +41,7 @@ const RoutineDay = ({updateRoutine, workout, editable, day, routine, userMeals, 
             <div className="day-meals">
                 <div className="meal-title">Meals</div>
                 {userMeals.map((userMeal) => {
+                    if (!userMeal) return null;
                     const meal = meals[userMeal.meal];
                     return (
                         <div key={userMeal._id}>
