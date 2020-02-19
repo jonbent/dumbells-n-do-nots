@@ -1,22 +1,22 @@
 import React from 'react';
 import {connect} from "react-redux";
 import MealItem from "../meals/MealItem";
-import DateFormat from 'dateformat'
+import DateFormat from 'dateformat';
+import "../../scss/routines/RoutineDay.scss"
 const mapStateToProps = ({entities}, ownProps) => {
-    const workout = Object.values(entities.workouts).find(el => el.day === ownProps.day._id)
-    console.log(ownProps.day)
+    const workout = entities.workouts[ownProps.day.workout];
     return {
-        meals: entities.routineMeals,
-        userMeals: Object.values(entities.userMeals).filter(meal => meal.day === ownProps.day._id),
+        meals: entities.meals,
+        userMeals: ownProps.day.meals.map(d => entities.userMeals[d]),
         workout,
         exercises: workout ? workout.exercises.map(id => entities.exercises[id]) : []
     }
-}
+};
 
 
-const RoutineDay = ({day, routine, userMeals, meals, exercises}) => {
+const RoutineDay = ({editable, day, routine, userMeals, meals, exercises, modal = false, idx, editDay = null}) => {
     if (!day) return null;
-    const readableDay = DateFormat(new Date(day.date), 'yyyy-mm-dd');
+    const readableDay = !modal ? DateFormat(new Date(day.date), 'yyyy-mm-dd'): `Day ${idx + 1}`;
     return (
         <div className="RoutineDay">
             <div className="day-title">
@@ -24,10 +24,14 @@ const RoutineDay = ({day, routine, userMeals, meals, exercises}) => {
             </div>
             <div className="day-meals">
                 <div className="meal-title">Meals</div>
-                {userMeals.map(userMeal => {
+                {userMeals.map((userMeal) => {
                     const meal = meals[userMeal.meal];
                     return (
-                        <MealItem meal={meal} key={userMeal._id}/>
+                        <div key={userMeal._id}>
+                            {Object.keys([...new Array(userMeal.quantity)]).map((key) => {
+                                return <MealItem meal={meal} key={key}/>
+                            })}
+                        </div>
                     )
                 })}
             </div>
@@ -37,6 +41,7 @@ const RoutineDay = ({day, routine, userMeals, meals, exercises}) => {
                     return <div key={idx} className="day-exercise">{ex.name}</div>
                 })}
             </div>}
+            {!!editable && <div className="edit-day" onClick={() => editDay(day)}>Edit Day</div>}
         </div>
     );
 };
