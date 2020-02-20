@@ -53,5 +53,5 @@ export const submitRoutine = routine => dispatch => (
 
 export const submitRoutineAndCloseModal = routine => dispatch => (
     createRoutine(routine).then(res => {
-        dispatch(receiveUserRoutine(res.data)); return dispatch(closeModal())})
+    dispatch(receiveUserRoutine(res.data)); return dispatch(closeModal())})
 );

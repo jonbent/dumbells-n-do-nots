@@ -15,15 +15,15 @@ const MealSchema = new Schema({
         required: true
     },
     protein: {
-        type: String,
+        type: Number,
         required: true
     },
     fat: {
-        type: String,
+        type: Number,
         required: true
     },
     carbs: {
-        type: String,
+        type: Number,
         required: true
     },
     photoUrl: {

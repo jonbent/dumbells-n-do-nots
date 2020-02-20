@@ -6,6 +6,7 @@ const MealsReducer = (state = {}, action) => {
     let newState = {};
     switch (action.type) {
         case RECEIVE_ALL_MEALS:
+            // newState = Object.assign({}, state)
             action.meals.data.forEach(el => newState[el._id] = el);
             return newState;
         case RECEIVE_USER_MEALS:

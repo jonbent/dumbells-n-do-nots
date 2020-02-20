@@ -1,7 +1,8 @@
 import React from 'react';
 import {connect} from "react-redux";
 import MealItem from "../meals/MealItem";
-import DateFormat from 'dateformat';
+import DateFormat from 'dateformat'
+import { updateRoutineChecks } from '../../actions/RoutineActions'
 import "../../scss/routines/RoutineDay.scss"
 const mapStateToProps = ({entities, ui}, ownProps) => {
     const workout = entities.workouts[ownProps.day.workout];
@@ -14,8 +15,24 @@ const mapStateToProps = ({entities, ui}, ownProps) => {
     }
 };
 
+const mapDispatchToProps = (dispatch, ownProps) => ({
+    updateRoutineChecks: data => {
+        return dispatch(updateRoutineChecks(data))
+    },
+})
 
-const RoutineDay = ({editable, day, routine, userMeals, meals, exercises, idx, editDayWorkout = null, editDayMeals = null, newRoutineData}) => {
+const RoutineDay = ({ updateRoutineChecks, workout, editable, day, routine, userMeals, meals, exercises, modal = false, idx, editDayWorkout = null, editDayMeals = null, newRoutineData }) => {
+    function check(id, value) {
+        if(!id){
+            let doneCheck = false
+            if (workout.doneCheck === false){
+                doneCheck = true
+            }
+            updateRoutineChecks({dayId: day._id, completableType: 'workout', completableId: workout._id, doneCheck})
+        } else {
+            updateRoutineChecks({dayId: day._id, completableType: 'meal', completableId: id, doneAmount: value})
+        }
+    }
     if (!day) return null;
     const readableDay = editable ? Object.keys(newRoutineData)[idx]  : idx ? `Day ${idx + 1}`: DateFormat(new Date(day.date), "yyyy-mm-dd");
     return (
@@ -30,17 +47,17 @@ const RoutineDay = ({editable, day, routine, userMeals, meals, exercises, idx, e
                     const meal = meals[userMeal.meal];
                     return (
                         <div key={userMeal._id}>
-                            {Object.keys([...new Array(userMeal.quantity)]).map((key) => {
-                                return <MealItem meal={meal} key={key}/>
+                            {Object.keys([...new Array(userMeal.quantity)]).map((key, idx) => {
+                                return <MealItem meal={meal} key={key} selected={idx + 1 <= userMeal.doneAmount ? true : false} handleMealCheck={() => check(userMeal._id, idx + 1 <= userMeal.doneAmount ? -1 : 1)}/>
                             })}
                         </div>
                     )
                 })}
             </div>
-            {exercises.length > 0 && <div className="day-workout">
+            {exercises.length > 0 && <div className="day-workout" onClick={() => check()}>
                 <div className="workout-title"><span>Workout</span></div>
                 {exercises.map((ex, idx) => {
-                    return <div key={idx} className="day-exercise">{ex.name}</div>
+                    return <div key={idx} className={workout.doneCheck === true ? "workout-done" : "day-exercise"}>{ex.name}</div>
                 })}
             </div>}
             {!!editable && <div className="edit-day" onClick={() => editDayMeals(day)}>Edit Meals</div>}
@@ -49,4 +66,4 @@ const RoutineDay = ({editable, day, routine, userMeals, meals, exercises, idx, e
     );
 };
 
-export default connect(mapStateToProps, null)(RoutineDay);
+export default connect(mapStateToProps, mapDispatchToProps)(RoutineDay);

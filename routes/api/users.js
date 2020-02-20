@@ -56,6 +56,7 @@ router.post('/register', (req, res) => {
         weightCur: req.body.weightStart,
         height: req.body.height,
         sex: req.body.sex,
+        goalPath: parseInt(req.body.goalPath)
     });
 
     let errors = {};
@@ -126,6 +127,18 @@ router.post('/register', (req, res) => {
                 message: "Path `password` must have at least 1 number, 8 chars, and one capital letter.",
                 type: "not valid",
                 path: "password"
+            }
+        };
+    }
+
+    if ([1,2].includes(req.body.goalPath)) {
+        errors.goalPath = {
+            message: 'Path `goal path` must be selected.',
+            name: 'ValidatorError',
+            properties: {
+                message: 'goal path must be selected.',
+                type: "not valid",
+                path: "goalPath"
             }
         };
     }

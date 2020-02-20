@@ -23,6 +23,15 @@ export const fetchUserRoutine = id => dispatch => (
         .then(res => dispatch(receiveUserRoutine(res.data)))
         .catch(err => console.log(err))
 );
+
+export const updateRoutineChecks = data => dispatch => (
+    RoutineApiUtil.updateRoutineChecks(data)
+        .then(res => {
+            console.log(res)
+            return dispatch(receiveUserRoutine(res.data))})
+        .catch(err => console.log(err))
+);
+
 export const fetchUserRoutines = id => dispatch => (
     RoutineApiUtil.getUserRoutines(id)
         .then(res => dispatch(receiveUserRoutines(res.data)))
