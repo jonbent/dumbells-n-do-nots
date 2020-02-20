@@ -3,58 +3,72 @@ import RoutineDay from "./RoutineDay";
 import DatePicker from "react-date-picker"
 import "../../scss/routines/ExistingRoutine.scss";
 import {fetchRoutineByStartDate} from "../../util/RoutineApiUtil";
-import EditDay from "../days/EditDay";
+import EditWorkout from "../days/EditWorkout";
 
 class ExistingRoutine extends Component {
     constructor(props) {
         super(props);
+        let setDate = new Date(props.daySelected);
+        setDate.setDate(setDate.getDate() + 1);
         this.state = {
-            startDate: null,
-            dateError: "Select Start Date",
-            selectedDay: null,
+            startDate: props.daySelected ? setDate : new Date(),
+            selectedWorkoutDay: null,
             editable: false
-        }
+        };
+
         this.handleStartDate = this.handleStartDate.bind(this);
-        this.handleDaySelect = this.handleDaySelect.bind(this);
+        this.handleDayWorkoutSelect = this.handleDayWorkoutSelect.bind(this);
+        this.closeSelector = this.closeSelector.bind(this);
+        this.callback = this.callback.bind(this);
     }
     componentDidMount() {
-        this.props.fetchRoutine(this.props.routine._id);
+        this.props.fetchRoutine(this.props.routine._id).then(() => this.handleStartDate(new Date()));
     }
-    handleDaySelect(day){
-        this.setState({selectedDay: day});
+    handleDayWorkoutSelect(day, idx){
+        this.props.receiveDaySelected(this.props.dayKeys[idx]);
+        this.setState({selectedWorkoutDay: day});
     }
     handleStartDate(date){
         this.setState({ startDate: date }, () => {
-          fetchRoutineByStartDate(this.state.startDate).then(res => {
-            let dateError = null;
-            if (res.data.datesFound){
-              dateError = "Routine already found for that week.";
-            } else {
-                const {days, userMeals, workouts} = this.props;
-                this.props.receiveNewRoutineStartDateWithData(date, {days, userMeals, workouts});
-            }
-            this.setState({
-                dateError
-            })
-          }).catch(err => console.log(err));
+          return this.props.fetchRoutineByStartDate(this.state.startDate, this.callback)
         });
+    }
+    callback(date){
+        const {days, userMeals, workouts} = this.props;
+        this.props.receiveNewRoutineStartDateWithData(date, {days, userMeals, workouts});
     }
 
     handleEditSubmit(){
 
     }
-
+    closeSelector(){
+        this.setState({
+            selectedWorkoutDay: null
+        })
+    }
     constructNewRoutine(){
-
+        if (this.props.routineError.message || !this.props.daySelected) return null;
+        return this.props.submitRoutine(this.props.submitableRoutine).then(() => {
+            return this.setState({editable: true})
+        })
     }
 
     render() {
-        const {days, userMeals, meals, workouts, exercises, submitableRoutine} = this.props;
-        const {dateError, selectedDay, editable} = this.state;
-        if (!!selectedDay) {
-            const dayUserMeals = selectedDay.meals.map(mealId => userMeals[mealId]);
+
+        const {days, userMeals, meals, workouts, exercises, daySelected, routineError, receiveDaySelected, submitableRoutine} = this.props;
+        if (!days.length) return null;
+        const {selectedWorkoutDay, editable} = this.state;
+        if (!!selectedWorkoutDay) {
+            const dayUserMeals = selectedWorkoutDay.meals.map(mealId => userMeals[mealId]);
             return (
-                <EditDay day={selectedDay} userMeals={dayUserMeals} meals={meals} workout={workouts[selectedDay.workout]} exercises={workouts[selectedDay.workout].exercises.map(eId => exercises[eId])}/>
+                <EditWorkout
+                    closeSelector={this.closeSelector}
+                    day={selectedWorkoutDay}
+                    userMeals={dayUserMeals}
+                    meals={meals}
+                    workout={workouts[selectedWorkoutDay.workout]}
+                    exercises={selectedWorkoutDay.workout ? workouts[selectedWorkoutDay.workout].exercises.map(eId => exercises[eId]) : []}
+                />
             );
         }
         return (
@@ -67,15 +81,20 @@ class ExistingRoutine extends Component {
                           value={this.state.startDate}
                         />
                         <div className="date-error">
-                            {dateError}
+                            {daySelected ? routineError.message : "Select A Day"}
                         </div>
-                        <div className={`submit ${dateError ? 'disabled' : ""}`} onClick={() => this.props.submitRoutine(submitableRoutine)}>Create Routine</div>
+                        <div className={`submit ${routineError.message || !daySelected ? 'disabled' : ""}`} onClick={() => this.constructNewRoutine}>Create Routine</div>
                     </div>
                 }
                 {days.map((d, idx)=> {
                     return (
                         <div key={d._id}>
-                            <RoutineDay idx={idx} day={d} modal={true} editDay={this.handleDaySelect} editable={editable}/>
+                            <RoutineDay
+                                idx={idx}
+                                day={d}
+                                modal={true}
+                                editDayWorkout={(day) => this.handleDayWorkoutSelect(day, idx)}
+                                editable={editable}/>
                         </div>
                     )
                 })}
