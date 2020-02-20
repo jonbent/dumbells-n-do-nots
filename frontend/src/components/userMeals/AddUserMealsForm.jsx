@@ -6,16 +6,15 @@ import MealItem from "../meals/MealItem";
 class AddUserMealsForm extends React.Component{
     constructor(props){
         super(props);
-        let dayStr = 0;
-        let minCals;
-        let maxCals;
         this.state = {
             toggleShowMeals: false,
             curPage: 1,
             pageSize: 10,
             itemsAmount: 100,
             numMeals: this.props.numMeals || 0,
-            selectedMeals: {}
+            selectedMeals: {},
+            minCals: "",
+            maxCals: ""
         }
         this.updateField = this.updateField.bind(this);
         this.handleSetDate = this.handleSetDate.bind(this);
@@ -27,7 +26,7 @@ class AddUserMealsForm extends React.Component{
 
     handlePageChange(page){
         this.setState({curPage: page}, () => {
-            this.props.fetchMeals({ pageSize: this.state.pageSize, pageNum: this.state.curPage, minCals: "500", maxCals: "700"})
+            this.props.fetchMeals({ pageSize: this.state.pageSize, pageNum: this.state.curPage})
         });
     }
 

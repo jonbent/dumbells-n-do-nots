@@ -1,7 +1,7 @@
 import React from 'react';
 import NextArrow from "../svg/NextArrow";
 import '../../scss/meals/MealItem.scss';
-const MealItem = ({meal, daySelect, handleSelectMeal, day, handleMealCheck}) => {
+const MealItem = ({meal, daySelect, handleSelectMeal, day, handleMealCheck, selected= false}) => {
     return (
         <div className="meal-item" onClick={() => handleMealCheck()}>
                             {/*<img src={meal.photoUrl}/>*/}
@@ -16,11 +16,14 @@ const MealItem = ({meal, daySelect, handleSelectMeal, day, handleMealCheck}) => 
             </div>
             <div className="meal-info">
                 <div>{meal.title}</div>
-                <div className="meal-nutrients">
-                    <div>cals: {meal.calories}</div>
-                    <div>fat: {meal.fat}</div>
-                    <div>carbs: {meal.carbs}</div>
-                    <div>protein: {meal.protein}</div>
+                <div className="meal-content">
+                    <div className="meal-nutrients">
+                        <div>cals: {meal.calories}</div>
+                        <div>fat: {meal.fat}</div>
+                        <div>carbs: {meal.carbs}</div>
+                        <div>protein: {meal.protein}</div>
+                    </div>
+                    <div className={!!selected ? "check" : ""}></div>
                 </div>
             </div>
         </div>

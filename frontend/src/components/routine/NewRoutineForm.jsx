@@ -1,15 +1,10 @@
 import React from 'react';
 // import {Link} from 'react-router-dom';
 import DatePicker from "react-date-picker";
-import YearMonthForm from '../signup/year_month_form';
 import DateFormat from 'dateformat'
 // import "react-day-picker/lib/style.css";
 import "../../scss/newRoutineForm.scss"
 import {fetchRoutineByStartDate} from "../../util/RoutineApiUtil";
-
-const currentYear = new Date().getFullYear();
-const toMonth = new Date(currentYear, 0);
-const fromMonth = new Date(currentYear - 80)
 
 
 class NewRoutineForm extends React.Component {
@@ -57,7 +52,7 @@ class NewRoutineForm extends React.Component {
 
   render() {
     // const startDate = this.state.startDate;
-    const {dateError, month, startDate} = this.state;
+    const {dateError} = this.state;
     // const dayPickerProps = {
     //   fromMonth: fromMonth,
     //   toMonth: toMonth,

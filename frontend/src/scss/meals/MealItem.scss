@@ -8,6 +8,7 @@
       display: flex;
       flex-direction: column;
       height: fit-content;
+      width: 70%;
       .meal-nutrients{
         margin-top: 1rem;
         flex-wrap: wrap;
@@ -59,3 +60,18 @@
   .RoutineDay .meal-item{
     margin-top: 1rem;
   }
+
+  .meal-content{
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .check {
+  display: inline-block;
+  transform: rotate(45deg);
+  height: 1.5rem;
+  width: 0.75rem;
+  border-bottom: 0.44rem solid pink;
+  border-right: 0.44rem solid pink;
+  align-self: flex-end;
+}

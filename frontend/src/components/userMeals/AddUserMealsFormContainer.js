@@ -4,7 +4,7 @@ import { createDayUserMeal, fetchApiFilteredMeals } from '../../actions/UserMeal
 import { fetchAllMeals, fetchMeals } from '../../actions/MealActions'
 import {receiveRoutineMeals} from "../../actions/NewRoutineActions";
 import {openModal} from "../../actions/ModalActions";
-import {receiveNumMeals, receiveDaySelected, receiveGoalPath} from "../../actions/RoutineFilterActions"
+import {receiveNumMeals, receiveDaySelected} from "../../actions/RoutineFilterActions"
 
 
 const mapStateToProps = (state, ownProps) => {

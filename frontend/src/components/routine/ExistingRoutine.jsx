@@ -30,7 +30,7 @@ class ExistingRoutine extends Component {
             if (res.data.datesFound){
               dateError = "Routine already found for that week.";
             } else {
-                const {days, userMeals, meals, workouts, exercises} = this.props;
+                const {days, userMeals, workouts} = this.props;
                 this.props.receiveNewRoutineStartDateWithData(date, {days, userMeals, workouts});
             }
             this.setState({

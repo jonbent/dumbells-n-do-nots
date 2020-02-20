@@ -4,7 +4,7 @@ export const getAllMeals = () => {
     return axios.get('/api/meals')
 };
 export const getMeals = (options) => {
-    return axios.get('/api/meals', {params:options})
+    return axios.get('/api/meals', {params: options})
 };
 
 export const getUserMeals = id => {
