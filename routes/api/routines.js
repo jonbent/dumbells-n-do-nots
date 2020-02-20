@@ -26,7 +26,12 @@ router.get("/startDate", passport.authenticate("jwt", { session: false }), async
     let dates = await Day.find({date: {$in: dateRange}, routine: {$in: routineIds}});
     console.log(dates)
     const datesFound = dates.length ? true : false;
-    return res.json({datesFound});
+    return datesFound ? (
+        res.status(422).json({message: "Week already taken by existing routine"})
+    ) : (
+        res.json({datesFound})
+    );
+
 })
 router.get('/user/:userId', async (req, res) => {
     let routines = await Routine.find({user: req.params.userId}).sort({$natural:-1});
@@ -39,9 +44,9 @@ router.get('/user/:userId', async (req, res) => {
 router.get('/user/:userId/single', async (req, res) => {
     const curDate = new Date(DateFormat(new Date(), "yyyy-mm-dd"));
     curDate.setDate(curDate.getDate() + 1);
-    let date = await Day.find({date: {$eq: curDate}}).limit(1).sort({$natural:-1});
-    let routine = await Routine.find({user: req.params.userId, _id: date[0].routine}).limit(1).sort({$natural:-1});
-    routine = routine[0];
+    const routines = await Routine.find({user: req.params.userId});
+    let date = await Day.findOne({date: {$eq: curDate}, routine: {$in: routines.map(r => r._id)}})
+    const routine = await Routine.findOne({user: req.params.userId, _id: date.routine});
     if (!routine) return res.status(400).json({errors: {routine: "Cannot find given routine"}});
     const response = {days: [], userMeals: {}, workouts: {}, routine};
     response.days = await Day.find({routine: routine._id});
@@ -148,6 +153,7 @@ router.post("/", passport.authenticate("jwt", { session: false }), async (req, r
                          weeksMeals = weeksMeals.concat(meals);
 
                     } catch(e) {
+                        console.log('error:', e);
                         UserWorkout.deleteMany({_id: {$in: weeksWorkouts.map(w => w._id)}}).catch(err => console.log(err));
                         UserMeal.deleteMany({_id: {$in: weeksMeals.map(m => m._id)}}).catch(err => console.log(err));
                         Day.deleteMany({routine: routine._id}).catch(err => console.log(err));

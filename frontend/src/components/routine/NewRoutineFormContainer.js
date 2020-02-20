@@ -1,8 +1,9 @@
 import { connect } from 'react-redux';
 import NewRoutineForm from './NewRoutineForm';
 import { createRoutine } from '../../actions/RoutineActions';
-import { receiveNewRoutineStartDate } from '../../actions/NewRoutineActions'
+import {receiveNewRoutineStartDate, receiveRoutineErrors} from '../../actions/NewRoutineActions'
 import { openModal, closeModal } from '../../actions/ModalActions';
+import {fetchRoutineByStartDate} from "../../util/RoutineApiUtil";
 
 // import DateFormat from 'dateformat';
 
@@ -13,7 +14,8 @@ const mapStateToProps = (state) => {
     return { 
         routine: {
             user: state.session.user.id,
-        }
+        },
+        routineError: state.errors.routine
     }
 };
 
@@ -21,7 +23,11 @@ const mapDispatchToProps = dispatch => ({
     createRoutine: routine => dispatch(createRoutine(routine)),
     receiveNewRoutineStartDate: routineStartDate => dispatch(receiveNewRoutineStartDate(routineStartDate)),
     openAddMealsFormModal: () => dispatch(openModal('addUserMeals')),
-    closeRoutineModal: () => dispatch(closeModal())
+    closeRoutineModal: () => dispatch(closeModal()),
+    fetchRoutineByStartDate: (date, cb) => fetchRoutineByStartDate(date).then((res) => cb(date, res)).catch(err => {
+        cb(date);
+        dispatch(receiveRoutineErrors(err.response.data))
+    })
 });
 
 export default connect(

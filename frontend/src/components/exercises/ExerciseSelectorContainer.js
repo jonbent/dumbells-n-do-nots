@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import ExerciseSelector from './ExerciseSelector'
-import {receiveRoutineExercise, submitRoutine} from "../../actions/NewRoutineActions";
+import {receiveRoutineExercise, submitRoutineAndCloseModal} from "../../actions/NewRoutineActions";
 import {receiveDaySelected} from "../../actions/RoutineFilterActions";
 
 const mapStateToProps = ({ui, entities}) => ({
@@ -16,7 +16,7 @@ const mapStateToProps = ({ui, entities}) => ({
 const mapDispatchToProps = (dispatch) => ({
     receiveRoutineExercise: (payload) => dispatch(receiveRoutineExercise(payload)),
     receiveDaySelected: (day) => dispatch(receiveDaySelected(day)),
-    submitRoutine: (routine) => dispatch(submitRoutine(routine))
+    submitRoutine: (routine) => dispatch(submitRoutineAndCloseModal(routine))
 
 });
 

@@ -8,7 +8,15 @@ export const RECEIVE_ROUTINE_MEALS = "RECEIVE_ROUTINE_MEALS";
 export const RECEIVE_ROUTINE_WORKOUTS = "RECEIVE_ROUTINE_WORKOUTS";
 export const CLEAR_NEW_ROUTINE_DATA = "CLEAR_NEW_ROUTINE_DATA";
 export const RECEIVE_DAY_EXERCISE = "RECEIVE_DAY_EXERCISE";
+export const RECEIVE_ROUTINE_ERRORS = "RECEIVE_ROUTINE_ERRORS";
 
+export const receiveRoutineErrors = errors => {
+    console.log(errors);
+    return {
+        type: RECEIVE_ROUTINE_ERRORS,
+        errors
+    }
+};
 
 export const receiveNewRoutineStartDate = payload => ({
     type: RECEIVE_NEW_ROUTINE_STARTDATE,
@@ -40,6 +48,10 @@ export const clearNewRoutineData = payload => ({
 });
 
 export const submitRoutine = routine => dispatch => (
+    createRoutine(routine).then(res => dispatch(receiveUserRoutine(res.data)))
+);
+
+export const submitRoutineAndCloseModal = routine => dispatch => (
     createRoutine(routine).then(res => {
         dispatch(receiveUserRoutine(res.data)); return dispatch(closeModal())})
 );
