@@ -11,7 +11,8 @@ import { receivePageNum, receivePageSize } from '../../actions/FilterActions';
 const mapStateToProps = (state, ownProps) => {
     return {
         daySelect: state.ui.newRoutineData,
-        meals: Object.values(state.entities.meals),
+        meals: state.entities.meals,
+        allMeals: state.entities.routineMeals,
         day: state.ui.routineFilters.daySelected,
         numMeals: state.ui.routineFilters.numMeals,
         curUser: state.session.user,

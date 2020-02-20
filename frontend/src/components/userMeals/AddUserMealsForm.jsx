@@ -71,15 +71,18 @@ class AddUserMealsForm extends React.Component{
 
     render(){
         let meals;
-        const {daySelect, totalMeals} = this.props;
+        const {daySelect, totalMeals, day, allMeals} = this.props;
+        const calSum = daySelect[day].meals && Object.keys(allMeals).length ? Object.keys(daySelect[day].meals).reduce((acc, mId) => allMeals[mId] ? acc + parseInt(allMeals[mId].calories) : acc + 0, 0) : 0;
         let sumAllMeals = 0;
-        Object.values(this.props.daySelect).forEach((day) => Object.values(day.meals).forEach(mealVal => sumAllMeals += mealVal));
+        const daySelectVals = Object.values(daySelect);
+        daySelectVals.forEach((day) => Object.values(day.meals).forEach(mealVal => sumAllMeals += mealVal));
         if (this.state.toggleShowMeals){
-            meals = this.props.meals.length > 0 ? (
+            const mealsArray = Object.values(this.props.meals);
+            meals = mealsArray.length > 0 ? (
                 <div className="meal-list">
-                    {this.props.meals.map(meal => {
+                    {mealsArray.map(meal => {
                             return <MealItem meal={meal} key={meal._id} daySelect={daySelect}
-                                      handleSelectMeal={this.handleSelectMeal} day={this.props.day}/>
+                                      handleSelectMeal={this.handleSelectMeal} day={day}/>
                         }
                     )}
                     <div className="pagination-container">
@@ -116,6 +119,7 @@ class AddUserMealsForm extends React.Component{
                 </div>
                 <div className="num-meals-select">
                     <div className="add-user-meals-numofmeals-label">Select number of meals for {this.props.day}</div>
+                    <div>Total Calories: {calSum}</div>
                     <form>
                             <div className="add-user-meals-numofmeals-input">
                                 <input
