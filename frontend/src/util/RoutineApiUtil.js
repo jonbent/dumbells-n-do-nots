@@ -7,12 +7,17 @@ export const getSampleRoutines = () => {
 export const getUserRoutine = id => {
     return axios.get(`/api/routines/user/${id}/single`)
 };
+
 export const getUserRoutines = id => {
     return axios.get(`/api/routines/user/${id}`)
 };
 
 export const createRoutine = data => {
     return axios.post('/api/routines/', data)
+}
+
+export const updateRoutineChecks = data => {
+    return axios.put(`/api/routines/days/${data.dayId}/${data.completableType}/${data.completableId}`, {doneAmount: data.doneAmount, doneCheck: data.doneCheck})
 }
 
 export const getRoutineById = id => {

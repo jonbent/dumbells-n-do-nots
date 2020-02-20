@@ -16,6 +16,10 @@ export default class Login extends Component {
         this.handleUpdate = this.handleUpdate.bind(this)
     }
 
+    componentWillUnmount(){
+      this.props.resetErrors()
+    }
+
     handleUpdate(field, e){
         this.setState({[field]: e.target.value})
     }

@@ -94,6 +94,27 @@ router.get('/:routineId', async (req, res) => {
     await res.json(response);
 })
 
+// update routine to checkDone meals and workout
+router.put("/days/:dayId/:completableType/:completableId", passport.authenticate("jwt", { session: false }), async (req, res) => {
+    const day = await Day.findOne({_id: req.params.dayId})
+    const routine = await Routine.findOne({_id: day.routine})
+    switch(req.params.completableType){
+        case "workout":
+            const workout = await UserWorkout.findOne({_id: req.params.completableId})
+            workout.doneCheck = req.body.doneCheck
+            workout.save()
+            break;
+        case "meal":
+            const meal = await UserMeal.findOne({ _id: req.params.completableId})
+            meal.doneAmount += parseInt(req.body.doneAmount)
+            meal.save()
+            break;
+        default: 
+            break;
+        }
+        res.redirect(303, `/api/routines/${routine._id}`)
+})
+
 
 //let user create a routine
 router.post("/", passport.authenticate("jwt", { session: false }), async (req, res) => {

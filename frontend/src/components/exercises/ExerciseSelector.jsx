@@ -7,7 +7,6 @@ export default class ExerciseSelector extends Component {
     constructor(props) {
         super(props);
         this.state = {};
-
         this.handleExerciseSelect = this.handleExerciseSelect.bind(this);
         this.handleSetDate = this.handleSetDate.bind(this);
 

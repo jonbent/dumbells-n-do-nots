@@ -16,9 +16,14 @@ const WorkoutSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "User"
     },
+
     timeStamp: {
         type: Date,
         required: true,
+    },
+    doneCheck: {
+        type: Boolean,
+        default: false
     }
 })
 
