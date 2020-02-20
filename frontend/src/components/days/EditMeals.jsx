@@ -1,16 +1,16 @@
 import React, {Component} from 'react';
 import '../../scss/days/EditDay.scss'
-import ExerciseSelector from "../exercises/ExerciseSelectorContainer";
+import AddUserMealsForm from "../userMeals/AddUserMealsFormContainer";
 
-class EditWorkout extends Component {
+class EditMeals extends Component {
     render() {
         const {closeSelector} = this.props;
         return (
             <div className="edit-day-container">
-                <ExerciseSelector editing={true} closeSelector={closeSelector}/>
+                <AddUserMealsForm />
             </div>
         );
     }
 }
 
-export default EditWorkout;
+export default EditMeals;
