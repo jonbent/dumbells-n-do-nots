@@ -22,3 +22,7 @@ export const getRoutineById = id => {
 export const fetchRoutineByStartDate = (startDate) => {
     return axios.get('/api/routines/startDate', {params: {startDate}})
 }
+
+export const updateRoutine = (routineId, routine) => {
+    return axios.put(`/api/routines/${routine._id}`)
+}

@@ -30,7 +30,7 @@ class RoutineShow extends Component {
                     <div className="create"><div onClick={this.props.openNewRoutineModal}>Create New Routine</div></div>
                 </div>}
                 {!!dayValues.length && <div className="routine-day-container">
-                    <RoutineDay day={dayValues[curDay]}/>
+                    <RoutineDay day={dayValues[curDay]} />
                 </div>}
                 {!!dayValues.length && <div className="pagination-container">
                     <RoutinePage curDay={curDay} dayAmount={dayValues.length} dayValues={dayValues.map(el => DateFormat(el.date, "yyyy-mm-dd"))} changeDay={this.changeDay}/>
