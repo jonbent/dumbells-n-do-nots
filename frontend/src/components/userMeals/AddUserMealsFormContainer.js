@@ -17,6 +17,7 @@ const mapStateToProps = (state, ownProps) => {
         curUser: state.session.user,
         curPage: state.ui.filters.pageNum,
         pageSize: state.ui.filters.pageSize,
+        totalMeals: parseInt(state.ui.filters.numMeals)
         // minCals: state.ui.routineFilters.minCals,
         // maxCals: state.ui.routineFilters.maxCals,
     }

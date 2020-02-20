@@ -7,7 +7,7 @@ import "../../scss/routines/RoutineDay.scss"
 const mapStateToProps = ({entities, ui}, ownProps) => {
     const workout = entities.workouts[ownProps.day.workout];
     return {
-        meals: entities.meals,
+        meals: entities.routineMeals,
         userMeals: ownProps.day.meals.map(d => entities.userMeals[d]),
         workout,
         exercises: workout ? workout.exercises.map(id => entities.exercises[id]) : [],

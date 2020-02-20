@@ -20,11 +20,9 @@ router.get("/startDate", passport.authenticate("jwt", { session: false }), async
         const newDate = new Date(DateFormat(curDate, 'yyyy-mm-dd'));
         dateRange.push(newDate);
     }
-    console.log(dateRange)
     const routines = await Routine.find({user: req.user._id});
     const routineIds = routines.map(r => r._id);
     let dates = await Day.find({date: {$in: dateRange}, routine: {$in: routineIds}});
-    console.log(dates)
     const datesFound = dates.length ? true : false;
     return datesFound ? (
         res.status(422).json({message: "Week already taken by existing routine"})
