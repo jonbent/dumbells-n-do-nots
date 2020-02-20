@@ -1,0 +1,1 @@
+export const OPEN_FILTERS_MODAL = "OPEN_FILTERS_MODAL";

@@ -4,6 +4,7 @@ import '../../scss/users/UserShow.scss';
 import UserShowCard from './UserShowCard';
 import Modal from "../modal/Modal";
 import RoutineShow from "../routine/RoutineShowContainer";
+import FiltersModal from "../modal/FiltersModal";
 class UserShow extends Component {
     // constructor(props) {
     //     super(props);
@@ -21,6 +22,7 @@ class UserShow extends Component {
         return(
             <div className="user-show-container">
                 <Modal/>
+                <FiltersModal/>
                 <div className="user-show-content">
                     <UserShowCard user={user}/>
                     <div className="routine-info-container">
