@@ -1,7 +1,8 @@
 import React from 'react';
 import NextArrow from "../svg/NextArrow";
 import '../../scss/meals/MealItem.scss';
-const MealItem = ({meal, daySelect, handleSelectMeal, day, handleMealCheck, selected= false}) => {
+const MealItem = ({ meal, daySelect, handleSelectMeal, day, handleMealCheck = null, selected= false}) => {
+    console.log(daySelect)
     return (
         <div className="meal-item" onClick={() => handleMealCheck()}>
                             {/*<img src={meal.photoUrl}/>*/}

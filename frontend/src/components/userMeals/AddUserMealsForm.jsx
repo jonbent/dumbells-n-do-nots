@@ -8,8 +8,6 @@ class AddUserMealsForm extends React.Component{
         super(props);
         this.state = {
             toggleShowMeals: false,
-            curPage: 1,
-            pageSize: 10,
             itemsAmount: 100,
             numMeals: this.props.numMeals || 0,
             selectedMeals: {},
@@ -24,10 +22,9 @@ class AddUserMealsForm extends React.Component{
         this.handleSubmitWeekMeals = this.handleSubmitWeekMeals.bind(this);
     }
 
-    handlePageChange(page){
-        this.setState({curPage: page}, () => {
-            this.props.fetchMeals({ pageSize: this.state.pageSize, pageNum: this.state.curPage})
-        });
+    async handlePageChange(page){
+        await this.props.changePage(page);
+        this.props.fetchMeals({ pageSize: this.props.pageSize, pageNum: this.props.curPage, minCals: 2000/this.props.numMeals, maxCals: 2500/this.props.numMeals})
     }
 
     componentDidMount(){
@@ -47,10 +44,11 @@ class AddUserMealsForm extends React.Component{
         this.props.receiveDaySelected(Object.keys(this.props.daySelect)[e.currentTarget.value])
     }
 
-    handleSetNumMeals(e) {
+    async handleSetNumMeals(e) {
         e.preventDefault();
-        this.props.fetchMeals({pageSize: this.state.pageSize, pageNum: this.state.curPage})
-            .then(() => {this.setState({toggleShowMeals: true}); this.props.receiveNumMeals(this.state.numMeals)})
+        await this.props.receiveNumMeals(this.state.numMeals)
+        this.props.fetchMeals({ pageSize: this.props.pageSize, pageNum: this.props.curPage, minCals: 2000/this.props.numMeals, maxCals: 2500/this.props.numMeals})
+            .then(() => {this.setState({toggleShowMeals: true});})
     }
     handleSelectMeal(mealId, num = 0){
         const routine = this.props.daySelect;
@@ -77,18 +75,19 @@ class AddUserMealsForm extends React.Component{
         const {daySelect} = this.props;
         let sumAllMeals = 0;
         Object.values(this.props.daySelect).forEach((day) => Object.values(day.meals).forEach(mealVal => sumAllMeals += mealVal));
+        console.log(this.props.meals)
         if (this.state.toggleShowMeals){
             meals = this.props.meals.length > 0 ? (
                 <div className="meal-list">
-                    {this.props.meals.map(meal => (
+                    {this.props.meals.map(meal => !!meal ? (
                         <MealItem meal={meal} key={meal._id} daySelect={daySelect} handleSelectMeal={this.handleSelectMeal} day={this.props.day}/>
-                        )
+                        ) : console.log(meal)
                     )}
                     <div className="pagination-container">
                         <Pagination
                             changePage={this.handlePageChange}
-                            curPage={this.state.curPage}
-                            pageSize={this.state.pageSize}
+                            curPage={this.props.curPage}
+                            pageSize={this.props.pageSize}
                             itemsAmount={this.state.itemsAmount}
                         />
                     </div>

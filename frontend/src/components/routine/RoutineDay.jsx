@@ -16,7 +16,7 @@ const mapStateToProps = ({entities, ui}, ownProps) => {
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    updateRoutine: data => {
+    updateRoutineChecks: data => {
         return dispatch(updateRoutineChecks(data))
     },
 })

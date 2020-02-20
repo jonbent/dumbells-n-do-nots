@@ -7,20 +7,21 @@ const Meal = require("../../models/Meal");
 router.get("/test", (req, res) => res.json({ msg: "This is the users route" }));
 
 // get all availabe meals
-router.get("/", (req, res) => {
+router.get("/", async (req, res) => {
     const pageSize = parseInt(req.query.pageSize);
     const pageNum = parseInt(req.query.pageNum);
     const minCals = parseInt(req.query.minCals);
     const maxCals = parseInt(req.query.maxCals);
-    Meal
+    console.log(req)
+    const meals = await Meal
      .find()
      .sort({title: 1})
-     .gt('calories', minCals - 1)
+     .gte('calories', minCals)
      .gt('protein', 29)
-     .lt('calories', maxCals + 1)
+     .lte('calories', maxCals)
      .limit(pageSize)
      .skip(pageSize * pageNum)
-     .then(meals => res.json(meals))
+     return res.json(meals)
 })
 
 // post a customized meal by the user
