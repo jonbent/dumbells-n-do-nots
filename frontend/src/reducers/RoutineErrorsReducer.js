@@ -3,7 +3,6 @@ import {CLOSE_MODAL} from "../actions/ModalActions";
 
 export default (prevState = {}, action) => {
     Object.freeze(prevState);
-    console.log("hitting");
     switch (action.type) {
         case RECEIVE_ROUTINE_ERRORS:
             return Object.assign({}, prevState, action.errors);

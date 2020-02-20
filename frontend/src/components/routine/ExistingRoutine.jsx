@@ -4,6 +4,7 @@ import DatePicker from "react-date-picker"
 import "../../scss/routines/ExistingRoutine.scss";
 import {fetchRoutineByStartDate} from "../../util/RoutineApiUtil";
 import EditWorkout from "../days/EditWorkout";
+import EditMeals from "../days/EditMeals";
 
 class ExistingRoutine extends Component {
     constructor(props) {
@@ -13,6 +14,7 @@ class ExistingRoutine extends Component {
         this.state = {
             startDate: props.daySelected ? setDate : new Date(),
             selectedWorkoutDay: null,
+            selectedMealsDay: null,
             editable: false
         };
 
@@ -57,17 +59,21 @@ class ExistingRoutine extends Component {
 
         const {days, userMeals, meals, workouts, exercises, daySelected, routineError, receiveDaySelected, submitableRoutine} = this.props;
         if (!days.length) return null;
-        const {selectedWorkoutDay, editable} = this.state;
+        const {selectedWorkoutDay, editable, selectedMealsDay} = this.state;
         if (!!selectedWorkoutDay) {
-            const dayUserMeals = selectedWorkoutDay.meals.map(mealId => userMeals[mealId]);
+
             return (
                 <EditWorkout
                     closeSelector={this.closeSelector}
-                    day={selectedWorkoutDay}
+                />
+            );
+        }
+        if (!!selectedMealsDay){
+            const dayUserMeals = selectedWorkoutDay.meals.map(mealId => userMeals[mealId]);
+            return (
+                <EditMeals
                     userMeals={dayUserMeals}
-                    meals={meals}
-                    workout={workouts[selectedWorkoutDay.workout]}
-                    exercises={selectedWorkoutDay.workout ? workouts[selectedWorkoutDay.workout].exercises.map(eId => exercises[eId]) : []}
+                    closeSelector={this.closeSelector}
                 />
             );
         }

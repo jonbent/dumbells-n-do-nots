@@ -8,8 +8,7 @@ class AddUserMealsForm extends React.Component{
         super(props);
         this.state = {
             toggleShowMeals: false,
-            itemsAmount: 100,
-            numMeals: this.props.numMeals || 0,
+            numMeals: props.numMeals || 0,
             selectedMeals: {},
             minCals: "",
             maxCals: ""
@@ -46,7 +45,7 @@ class AddUserMealsForm extends React.Component{
 
     async handleSetNumMeals(e) {
         e.preventDefault();
-        await this.props.receiveNumMeals(this.state.numMeals)
+        await this.props.receiveNumMeals(this.state.numMeals);
         this.props.fetchMeals({ pageSize: this.props.pageSize, pageNum: this.props.curPage, minCals: 2000/this.props.numMeals, maxCals: 2500/this.props.numMeals})
             .then(() => {this.setState({toggleShowMeals: true});})
     }
@@ -72,23 +71,23 @@ class AddUserMealsForm extends React.Component{
 
     render(){
         let meals;
-        const {daySelect} = this.props;
+        const {daySelect, totalMeals} = this.props;
         let sumAllMeals = 0;
         Object.values(this.props.daySelect).forEach((day) => Object.values(day.meals).forEach(mealVal => sumAllMeals += mealVal));
-        console.log(this.props.meals)
         if (this.state.toggleShowMeals){
             meals = this.props.meals.length > 0 ? (
                 <div className="meal-list">
-                    {this.props.meals.map(meal => !!meal ? (
-                        <MealItem meal={meal} key={meal._id} daySelect={daySelect} handleSelectMeal={this.handleSelectMeal} day={this.props.day}/>
-                        ) : console.log(meal)
+                    {this.props.meals.map(meal => {
+                            return <MealItem meal={meal} key={meal._id} daySelect={daySelect}
+                                      handleSelectMeal={this.handleSelectMeal} day={this.props.day}/>
+                        }
                     )}
                     <div className="pagination-container">
                         <Pagination
                             changePage={this.handlePageChange}
                             curPage={this.props.curPage}
                             pageSize={this.props.pageSize}
-                            itemsAmount={this.state.itemsAmount}
+                            itemsAmount={totalMeals}
                         />
                     </div>
                     {

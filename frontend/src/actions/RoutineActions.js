@@ -27,7 +27,6 @@ export const fetchUserRoutine = id => dispatch => (
 export const updateRoutineChecks = data => dispatch => (
     RoutineApiUtil.updateRoutineChecks(data)
         .then(res => {
-            console.log(res)
             return dispatch(receiveUserRoutine(res.data))})
         .catch(err => console.log(err))
 );

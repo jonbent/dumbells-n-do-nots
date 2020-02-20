@@ -25,7 +25,6 @@ class NewRoutineForm extends React.Component {
   }
 
   handleStartDate(date) {
-    console.log(date);
     this.setState({ startDate: date }, () => {
       return this.props.fetchRoutineByStartDate(this.state.startDate, this.callback)
     });
@@ -43,7 +42,7 @@ class NewRoutineForm extends React.Component {
   }
   componentDidMount() {
     // document.querySelector('.DayPickerInput > input').setAttribute('readonly', true)
-
+    this.handleStartDate(new Date())
   }
 
   render() {

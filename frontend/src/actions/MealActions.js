@@ -4,10 +4,10 @@ export const RECEIVE_ALL_MEALS = "RECEIVE_ALL_MEALS"
 export const RECEIVE_USER_MEALS = "RECEIVE_USER_MEALS";
 export const RECEIVE_NEW_MEAL = "RECEIVE_NEW_MEAL";
 
-export const receiveAllMeals = meals => ({
+export const receiveAllMeals = payload => ({
     type: RECEIVE_ALL_MEALS,
-    meals
-})
+    payload
+});
 
 export const receiveUserMeals = meals => ({
     type: RECEIVE_USER_MEALS,
@@ -27,7 +27,7 @@ export const fetchAllMeals = () => dispatch => (
 
 export const fetchMeals = (options) => dispatch => (
     MealsApiUtil.getMeals(options)
-        .then(meals => dispatch(receiveAllMeals(meals)))
+        .then(res => dispatch(receiveAllMeals(res.data)))
         .catch(err => console.log(err))
 )
 

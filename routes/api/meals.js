@@ -12,16 +12,27 @@ router.get("/", async (req, res) => {
     const pageNum = parseInt(req.query.pageNum);
     const minCals = parseInt(req.query.minCals);
     const maxCals = parseInt(req.query.maxCals);
-    console.log(req)
+    const mealCount = await Meal.countDocuments(
+        {
+            calories: {
+                $gte: minCals,
+                $lte: maxCals
+            },
+            protein: {
+                $gte: 30
+            },
+
+        }
+    );
     const meals = await Meal
      .find()
      .sort({title: 1})
      .gte('calories', minCals)
-     .gt('protein', 29)
+     .gte('protein', 30)
      .lte('calories', maxCals)
      .limit(pageSize)
-     .skip(pageSize * pageNum)
-     return res.json(meals)
+     .skip(pageSize * (pageNum - 1));
+     return res.json({meals, totalMeals: mealCount})
 })
 
 // post a customized meal by the user
