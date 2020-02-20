@@ -72,7 +72,7 @@ class AddUserMealsForm extends React.Component{
     render(){
         let meals;
         const {daySelect, totalMeals, day, allMeals} = this.props;
-        const calSum = daySelect[day].meals && Object.keys(allMeals).length ? Object.keys(daySelect[day].meals).reduce((acc, mId) => allMeals[mId] ? acc + parseInt(allMeals[mId].calories) : acc + 0, 0) : 0;
+        const calSum = daySelect[day].meals && Object.keys(allMeals).length ? Object.keys(daySelect[day].meals).filter(key => daySelect[day].meals[key] > 0).reduce((acc, mId) => allMeals[mId] ? acc + parseInt(allMeals[mId].calories) : acc + 0, 0) : 0;
         let sumAllMeals = 0;
         const daySelectVals = Object.values(daySelect);
         daySelectVals.forEach((day) => Object.values(day.meals).forEach(mealVal => sumAllMeals += mealVal));
