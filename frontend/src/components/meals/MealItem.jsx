@@ -3,7 +3,7 @@ import NextArrow from "../svg/NextArrow";
 import '../../scss/meals/MealItem.scss';
 const MealItem = ({ meal, daySelect, handleSelectMeal, day, handleMealCheck = null, selected= false}) => {
     return (
-        <div className="meal-item" onClick={() => handleMealCheck()}>
+        <div className="meal-item" onClick={handleMealCheck}>
             <div className="meal-image-and-quantity">
                 <div className="meal-image" style={{backgroundImage: `url(${meal.photoUrl})`}}></div>
                 {daySelect && <div className="actions">
