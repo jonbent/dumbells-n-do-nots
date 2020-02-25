@@ -33,7 +33,7 @@ function Modal({ modal, closeModal }) {
             component = <ExerciseSelector />;
             break;
         case 'existingRoutine':
-            component = <ExistingRoutineContainer/>;
+            component = <ExistingRoutineContainer closeModal={closeModal}/>;
             break;
         case 'addUserMeals':
             component = <AddUserMealsFormContainer />;

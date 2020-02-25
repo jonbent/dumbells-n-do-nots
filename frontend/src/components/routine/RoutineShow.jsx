@@ -6,11 +6,13 @@ import DateFormat from 'dateformat'
 class RoutineShow extends Component {
     constructor(props) {
         super(props);
-
         this.state = {
-            curDay: 0,
+            curDay: props.curDayIdx,
         };
         this.changeDay = this.changeDay.bind(this);
+    }
+    componentDidMount() {
+        this.changeDay(this.props.curDayIdx)
     }
 
     changeDay(num){
@@ -18,6 +20,10 @@ class RoutineShow extends Component {
             curDay: num
         })
     }
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevProps.curDayIdx !== this.props.curDayIdx) this.changeDay(this.props.curDayIdx)
+    }
+
     render() {
         const {days} = this.props;
         const {curDay} = this.state;

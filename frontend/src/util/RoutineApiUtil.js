@@ -16,6 +16,10 @@ export const createRoutine = data => {
     return axios.post('/api/routines/', data)
 }
 
+export const editRoutine = (day, routineDay) => {
+    return axios.put(`/api/routines/${day.routine}/days/${day._id}`, routineDay);
+};
+
 export const updateRoutineChecks = data => {
     return axios.put(`/api/routines/days/${data.dayId}/${data.completableType}/${data.completableId}`, {doneAmount: data.doneAmount, doneCheck: data.doneCheck})
 }

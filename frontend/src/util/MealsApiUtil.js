@@ -13,6 +13,14 @@ export const getUserMeals = id => {
 };
 
 export const createMeals = data => {
+
+    return axios.post('/api/meals/', data)
+}
+export const createMeal = data => {
+    console.log(data);
     return axios.post('/api/meals/', data)
 }
 
+export const fetchSelectedMeals = (selectedMealIds) => (
+    axios.get('/api/meals/selected', {params: {selectedMealIds}})
+)

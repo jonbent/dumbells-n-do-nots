@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import filterModal from './FilterModalReducer';
+import filtersModal from './FiltersModalReducer';
 import filterReducer from './FiltersReducer';
 import modalReducer from './ModalReducer';
 
@@ -9,7 +9,7 @@ import routineFilterReducer from './RoutineFiltersReducer';
 export default combineReducers({
     filters: filterReducer,
     modal: modalReducer,
-    filterModal,
+    filtersModal,
     newRoutineData,
     routineFilters: routineFilterReducer
 });

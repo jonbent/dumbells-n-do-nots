@@ -35,7 +35,7 @@ router.post("/", passport.authenticate("jwt", { session: false }), (req, res) =>
     }
 
     const newExercise = new Exercise({
-        user: req.user.id,
+        user: req.user._id,
         name: req.body.name,
         description: req.body.description,
         muscleGroup: req.body.muscleGroupId,

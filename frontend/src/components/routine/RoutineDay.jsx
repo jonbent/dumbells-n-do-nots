@@ -21,7 +21,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     },
 })
 
-const RoutineDay = ({ updateRoutineChecks, workout, editable, day, routine, userMeals, meals, exercises, modal = false, idx, editDayWorkout = null, editDayMeals = null, newRoutineData }) => {
+const RoutineDay = ({ updateRoutineChecks, workout, editable, day, routine, userMeals, meals, exercises, modal = false, idx, editDayWorkout = null, editDayMeals = null, newRoutineData, history = false }) => {
     function check(id, value) {
         if(!id){
             let doneCheck = false
@@ -34,7 +34,11 @@ const RoutineDay = ({ updateRoutineChecks, workout, editable, day, routine, user
         }
     }
     if (!day) return null;
-    const readableDay = editable ? Object.keys(newRoutineData)[idx]  : idx ? `Day ${idx + 1}`: DateFormat(new Date(day.date), "yyyy-mm-dd");
+    const readableDay = editable ?
+        Object.keys(newRoutineData)[idx] :
+            !isNaN(idx) ?
+                `Day ${idx + 1}` :
+             DateFormat(new Date(day.date), "yyyy-mm-dd");
     return (
         <div className="RoutineDay">
             <div className="day-title">
@@ -48,20 +52,20 @@ const RoutineDay = ({ updateRoutineChecks, workout, editable, day, routine, user
                     return (
                         <div key={userMeal._id}>
                             {Object.keys([...new Array(userMeal.quantity)]).map((key, idx) => {
-                                return <MealItem meal={meal} key={key} selected={idx + 1 <= userMeal.doneAmount ? true : false} handleMealCheck={() => check(userMeal._id, idx + 1 <= userMeal.doneAmount ? -1 : 1)}/>
+                                return <MealItem meal={meal} key={key} selected={idx + 1 <= userMeal.doneAmount && !history ? true : false} handleMealCheck={() => !history ? check(userMeal._id, idx + 1 <= userMeal.doneAmount ? -1 : 1) : null}/>
                             })}
                         </div>
                     )
                 })}
             </div>
-            {exercises.length > 0 && <div className="day-workout" onClick={() => check()}>
+            {exercises.length > 0 && <div className="day-workout" onClick={() => !history ? check() : null}>
                 <div className="workout-title"><span>Workout</span></div>
                 {exercises.map((ex, idx) => {
                     return <div key={idx} className={workout.doneCheck === true ? "workout-done" : "day-exercise"}>{ex.name}</div>
                 })}
             </div>}
-            {!!editable && <div className="edit-day" onClick={() => editDayMeals(day)}>Edit Meals</div>}
-            {!!editable && <div className="edit-day" onClick={() => editDayWorkout(day)}>Edit Workout</div>}
+            {!!editable && <div className="edit-day" onClick={() => editDayMeals ? editDayMeals(day) : editDayMeals}>Edit Meals</div>}
+            {!!editable && <div className="edit-day" onClick={() => editDayWorkout ? editDayWorkout(day) : editDayWorkout}>Edit Workout</div>}
         </div>
     );
 };

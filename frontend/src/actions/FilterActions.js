@@ -1,7 +1,12 @@
 export const RECEIVE_NEXT_STEP = "RECEIVE_NEXT_STEP";
 export const RECEIVE_PAGE_SIZE = "RECEIVE_PAGE_SIZE";
 export const RECEIVE_PAGE_NUM = "RECEIVE_PAGE_NUM";
+export const UPDATE_FILTER = 'UPDATE_FILTER';
 
+export const updateFilter = (payload) => ({
+    type: UPDATE_FILTER,
+    payload
+})
 export const receiveNextStep = num => ({
     type: RECEIVE_NEXT_STEP,
     num

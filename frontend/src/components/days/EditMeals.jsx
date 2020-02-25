@@ -7,7 +7,7 @@ class EditMeals extends Component {
         const {closeSelector} = this.props;
         return (
             <div className="edit-day-container">
-                <AddUserMealsForm />
+                <AddUserMealsForm singleDay={true} closeSelector={closeSelector}/>
             </div>
         );
     }

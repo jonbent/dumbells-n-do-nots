@@ -24,7 +24,11 @@ document.addEventListener('DOMContentLoaded', () => {
     let store;
     let preloadedState = {ui:{
         filters: {
-            currentStep: 1
+            currentStep: 1,
+            pageSize: 10,
+            pageNum: 1,
+            maxCals: 625,
+            minCals: 500
         }
     }};
     if (localStorage.jwtToken) {

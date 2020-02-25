@@ -13,15 +13,15 @@ const MealsReducer = (state = {}, action) => {
             newState = Object.assign(newState, { [action.meals.id]: action.meals })
             return newState;
         case RECEIVE_NEW_MEAL:
-            newState = Object.assign(newState, { [action.meal.id]: action.meal })
+            newState = Object.assign(newState, { [action.meal._id]: action.meal })
             return newState;
         case RECEIVE_API_FILTERED_MEALS:
             newState = action.meals;
             return newState;
-        case RECEIVE_USER_ROUTINE:
-            newState = Object.assign(newState, state)
-            action.payload.meals.forEach(el => newState[el._id] = el);
-            return newState;
+        // case RECEIVE_USER_ROUTINE:
+        //     newState = Object.assign(newState, state)
+        //     action.payload.meals.forEach(el => newState[el._id] = el);
+        //     return newState;
         default:
             return state;
     }

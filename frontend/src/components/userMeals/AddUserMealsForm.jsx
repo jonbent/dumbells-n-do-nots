@@ -3,6 +3,7 @@ import Pagination from '../pagination/Pagination'
 import '../../scss/UserMealsModal.scss'
 
 import MealItem from "../meals/MealItem";
+import FiltersModal from "../modal/FiltersModal";
 class AddUserMealsForm extends React.Component{
     constructor(props){
         super(props);
@@ -10,24 +11,30 @@ class AddUserMealsForm extends React.Component{
             toggleShowMeals: false,
             numMeals: props.numMeals || 0,
             selectedMeals: {},
-            minCals: "",
-            maxCals: ""
+            minCals: 500,
+            maxCals: 625,
         }
         this.updateField = this.updateField.bind(this);
         this.handleSetDate = this.handleSetDate.bind(this);
-        this.handleSetNumMeals = this.handleSetNumMeals.bind(this);
+        this.fetchMeals = this.fetchMeals.bind(this);
         this.handlePageChange = this.handlePageChange.bind(this);
         this.handleSelectMeal = this.handleSelectMeal.bind(this);
         this.handleSubmitWeekMeals = this.handleSubmitWeekMeals.bind(this);
+        this.handleSubmitDayMeals = this.handleSubmitDayMeals.bind(this);
     }
 
     async handlePageChange(page){
-        await this.props.changePage(page);
-        this.props.fetchMeals({ pageSize: this.props.pageSize, pageNum: this.props.curPage, minCals: 2000/this.props.numMeals, maxCals: 2500/this.props.numMeals})
+        const {fetchMeals, pageSize, minCals, maxCals, changePage} = this.props;
+        await changePage(page);
+        fetchMeals({ pageSize, pageNum: page, minCals, maxCals});
     }
 
     componentDidMount(){
         // this.props.fetchApiFilteredMeals(400, 500)
+        let selectedMealIds = [];
+        Object.values(this.props.daySelect).forEach((day) => selectedMealIds = selectedMealIds.concat(Object.keys(day.meals)));
+        this.props.fetchSelectedMeals(selectedMealIds);
+        this.fetchMeals();
     }
 
     updateField(field, e) {
@@ -38,16 +45,19 @@ class AddUserMealsForm extends React.Component{
         //
     }
 
-    handleSetDate(e){
-        this.setState({ day: Object.keys(this.props.daySelect)[e.currentTarget.value] })
-        this.props.receiveDaySelected(Object.keys(this.props.daySelect)[e.currentTarget.value])
+    handleSetDate(day, increment = null){
+        const dayIndex = this.daySelectKeys.indexOf(this.props.day);
+        if (increment !== null && !day){
+            day = this.daySelectKeys[dayIndex + increment];
+        }
+        if (!day) return null;
+        this.props.receiveDaySelected(day);
     }
 
-    async handleSetNumMeals(e) {
-        e.preventDefault();
-        await this.props.receiveNumMeals(this.state.numMeals);
-        this.props.fetchMeals({ pageSize: this.props.pageSize, pageNum: this.props.curPage, minCals: 2000/this.props.numMeals, maxCals: 2500/this.props.numMeals})
-            .then(() => {this.setState({toggleShowMeals: true});})
+    async fetchMeals() {
+        const {pageSize, curPage, minCals, maxCals} = this.props;
+        await this.props.fetchMeals({ pageSize, pageNum: curPage, minCals, maxCals});
+        this.setState({toggleShowMeals: true})
     }
     handleSelectMeal(mealId, num = 0){
         const routine = this.props.daySelect;
@@ -63,19 +73,36 @@ class AddUserMealsForm extends React.Component{
         this.props.saveRoutine(routine)
     }
 
-    handleSubmitWeekMeals(allMeals){
-        if (allMeals === this.props.numMeals * 7 ){
-            this.props.openExercises()
-        }
+    handleSubmitDayMeals(){
+        this.props.closeSelector()
+    }
+    handleSubmitWeekMeals(){
+        this.props.openExercises()
     }
 
     render(){
         let meals;
-        const {daySelect, totalMeals, day, allMeals} = this.props;
-        const calSum = daySelect[day].meals && Object.keys(allMeals).length ? Object.keys(daySelect[day].meals).filter(key => daySelect[day].meals[key] > 0).reduce((acc, mId) => allMeals[mId] ? acc + parseInt(allMeals[mId].calories) : acc + 0, 0) : 0;
-        let sumAllMeals = 0;
-        const daySelectVals = Object.values(daySelect);
-        daySelectVals.forEach((day) => Object.values(day.meals).forEach(mealVal => sumAllMeals += mealVal));
+        const {daySelect, totalMeals, day, allMeals, openMealsFilters, curPage, pageSize, singleDay} = this.props;
+
+        this.daySelectKeys = Object.keys(daySelect);
+        let selectedDay;
+
+        const daySelectedMeals = new Set();
+        const calorieCounts = this.daySelectKeys.map((dateString, idx) => {
+            const mealKeys =  Object.keys(daySelect[dateString].meals);
+            if (dateString === day) selectedDay = idx;
+            return mealKeys
+                .reduce((acc, mealId) => {
+                    if (selectedDay === idx && !isNaN(daySelect[dateString].meals[mealId]) && daySelect[dateString].meals[mealId] > 0) daySelectedMeals.add(mealId);
+                    return allMeals[mealId] ?
+                        acc + (allMeals[mealId].calories * daySelect[dateString].meals[mealId]) :
+                        acc + 0;
+                }, 0)
+        });
+
+        const calorieCountClass = calorieCounts[selectedDay] < 1800 ?
+            "too-low" :
+            calorieCounts[selectedDay] > 2800 ? 'too-high' : "just-right";
         if (this.state.toggleShowMeals){
             const mealsArray = Object.values(this.props.meals);
             meals = mealsArray.length > 0 ? (
@@ -88,23 +115,24 @@ class AddUserMealsForm extends React.Component{
                     <div className="pagination-container">
                         <Pagination
                             changePage={this.handlePageChange}
-                            curPage={this.props.curPage}
-                            pageSize={this.props.pageSize}
+                            curPage={curPage}
+                            pageSize={pageSize}
                             itemsAmount={totalMeals}
                         />
                     </div>
-                    {
-                        sumAllMeals !== this.props.numMeals * 7 && (
-                            <div className="info">Please Select {this.props.numMeals} meal(s) for each day</div>
-                        )
-                    }
-                    <div className={`submit-meals ${sumAllMeals === this.props.numMeals * 7 ? "" : "disabled"}`} onClick={() => this.handleSubmitWeekMeals(sumAllMeals)}>
-                        Confirm Week's Meals
+                    <div className='routine-actions'>
+                        <div className="select-filters">
+                            <div onClick={openMealsFilters}>Select Filters</div>
+                        </div>
+                        <div className="submit-meals" onClick={!!singleDay ? this.handleSubmitDayMeals : this.handleSubmitWeekMeals}>
+                            {singleDay ? "Confirm Day's Meals" : "Confirm Week's Meals"}
+                        </div>
                     </div>
                 </div>
             ) : (
-                <div>
-                    Cannot find meals
+                <div className="not-found">
+                    <div>Cannot find meals with given filters</div>
+                    <div onClick={openMealsFilters}>Select Filters</div>
                 </div>
             )
 
@@ -112,28 +140,25 @@ class AddUserMealsForm extends React.Component{
         return(
             <div className="meal-selector">
                 <div className="day-select">
-                    <h1>Select Day</h1>
-                    <select defaultValue={this.props.day} onChange={this.handleSetDate}>
-                        {Object.keys(this.props.daySelect).map((date, idx) => <option key={date} value={idx}>{date}</option>)}
-                    </select>
+                    {!singleDay && <h1>Select Day</h1>}
+                    <div>
+                        {!singleDay && <div onClick={() => this.handleSetDate(null,-1)}>Prev.</div>}
+                        <select value={day} onChange={(e) => this.handleSetDate(e.currentTarget.value)}>
+                            {!singleDay && Object.keys(daySelect).map((date) => <option key={date} value={date}>{date}</option>)}
+                            {!!singleDay && <option value={day}>{day}</option>}
+                        </select>
+                        {!singleDay && <div onClick={() => this.handleSetDate( null, 1)}>Next</div>}
+                    </div>
                 </div>
-                <div className="num-meals-select">
-                    <div className="add-user-meals-numofmeals-label">Select number of meals for {this.props.day}</div>
-                    <div>Total Calories: {calSum}</div>
-                    <form>
-                            <div className="add-user-meals-numofmeals-input">
-                                <input
-                                    type="number"
-                                    onChange={e => this.updateField("numMeals", e)}
-                                    value={this.state.numMeals}
-                                />
-                            </div>
-                        <input
-                            type="submit"
-                            onClick={this.handleSetNumMeals}
-                            value="Submit"
-                            />
-                    </form>
+                <div className={`calorie-count ${calorieCountClass}`}>Total Calories: {calorieCounts[selectedDay]}</div>
+                <div className={"selected-meals"}>
+                    <div>Meals Selected</div>
+                    {Array.from(daySelectedMeals).map(mealId => {
+                        if (!allMeals[mealId]) return null;
+                        return (
+                            <MealItem key={mealId} meal={allMeals[mealId]} selected={false} daySelect={daySelect} day={day} handleSelectMeal={this.handleSelectMeal}/>
+                        )
+                    })}
                 </div>
                 {meals}
             </div>

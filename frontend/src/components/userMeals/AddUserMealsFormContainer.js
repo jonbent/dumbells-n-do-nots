@@ -1,11 +1,12 @@
 import { connect } from 'react-redux';
 import AddUserMealsForm from './AddUserMealsForm';
 import { createDayUserMeal, fetchApiFilteredMeals } from '../../actions/UserMealActions';
-import { fetchAllMeals, fetchMeals } from '../../actions/MealActions'
+import { fetchAllMeals, fetchMeals, fetchSelectedMeals } from '../../actions/MealActions'
 import {receiveRoutineMeals} from "../../actions/NewRoutineActions";
 import {openModal} from "../../actions/ModalActions";
 import {receiveNumMeals, receiveDaySelected} from "../../actions/RoutineFilterActions"
 import { receivePageNum, receivePageSize } from '../../actions/FilterActions';
+import {openFiltersModal} from "../../actions/FiltersModalActions";
 
 
 const mapStateToProps = (state, ownProps) => {
@@ -18,23 +19,23 @@ const mapStateToProps = (state, ownProps) => {
         curUser: state.session.user,
         curPage: state.ui.filters.pageNum,
         pageSize: state.ui.filters.pageSize,
-        totalMeals: parseInt(state.ui.filters.numMeals)
-        // minCals: state.ui.routineFilters.minCals,
-        // maxCals: state.ui.routineFilters.maxCals,
+        totalMeals: parseInt(state.ui.filters.numMeals),
+        minCals: state.ui.filters.minCals,
+        maxCals: state.ui.filters.maxCals,
     }
 };
 
 const mapDispatchToProps = dispatch => ({
     createDayUserMeal: meal => dispatch(createDayUserMeal(meal)),
-    fetchApiFilteredMeals: (minCals, maxCals) => dispatch(fetchApiFilteredMeals(minCals,maxCals)),
-    fetchAllMeals: () => dispatch(fetchAllMeals()),
     fetchMeals: (options) => dispatch(fetchMeals(options)),
     saveRoutine: (routine) => dispatch(receiveRoutineMeals(routine)),
     openExercises: () => dispatch(openModal('bodyUI')),
     receiveNumMeals: (num) => dispatch(receiveNumMeals(num)),
     receiveDaySelected: (day) => dispatch(receiveDaySelected(day)),
     changePage: num => dispatch(receivePageNum(num)),
+    openMealsFilters: () => dispatch(openFiltersModal('meals')),
     changePageSize: num => dispatch(receivePageSize(num)),
+    fetchSelectedMeals: (selectedMealIds) => dispatch(fetchSelectedMeals(selectedMealIds))
     // receiveGoalPath: (cals) => dispatch(receiveGoalPath(cals))
 });
 

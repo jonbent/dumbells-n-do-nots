@@ -1,63 +1,96 @@
-
-.new-routine-form{
-    background: rgba(0,0,0,0.5);
-    text-align: center;
-    border-radius: 0.5rem;
-    margin: 1rem;
-    height: 30rem;
+.new-creation-container{
+    height: 100%;
     display: flex;
     flex-direction: column;
+    overflow: scroll;
     position: relative;
-    justify-content: space-evenly;
-    text-shadow: 2px 2px 4px black;
-    color:pink;
-    .date-error{
-        color: red;
-        font-style: italic;
+    .creation-options{
+        display: flex;
+        justify-content: space-around;
+        margin: 1rem 1rem 0 1rem;
+        border-radius: 5px;
+        box-shadow: 2px 2px 6px black;
+
+        div:first-of-type{
+            border-radius: 5px 0 0 5px;
+        }
+        div:last-of-type{
+            border-radius: 0px 5px 5px 0px;
+        }
+        div.selected{
+            cursor: default;
+            background-color: pink;
+            color: black;
+            //text-shadow: 1px 1px 3px lightskyblue;
+        }
+        div{
+            cursor: pointer;
+            padding: 1rem 0;
+            background-color: rgba(0,0,0,0.5);
+            width: 100%;
+            color: pink;
+        }
     }
-    .new-routine-header{
-        font-size: 200%;
-    }
-    .start-date-input > label{
+    .new-routine-form{
+        background: rgba(0,0,0,0.5);
+        text-align: center;
+        border-radius: 0.5rem;
+        margin: 1rem;
+        height: 30rem;
         display: flex;
         flex-direction: column;
-        align-items: center;
-        .react-date-picker__wrapper{
-            border: none;
+        position: relative;
+        justify-content: space-evenly;
+        text-shadow: 2px 2px 4px black;
+        color:pink;
+        .date-error{
+            color: red;
+            font-style: italic;
         }
-        .react-date-picker__calendar{
-            left: -3rem !important;
-            .react-calendar__month-view__weekdays__weekday{
-                color: lightskyblue;
-                text-shadow: 1px 1px 2px;
-                abbr{
-                    text-decoration: none;
+        .new-routine-header{
+            font-size: 200%;
+        }
+        .start-date-input > label{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            .react-date-picker__wrapper{
+                border: none;
+            }
+            .react-date-picker__calendar{
+                left: -3rem !important;
+                .react-calendar__month-view__weekdays__weekday{
+                    color: lightskyblue;
+                    text-shadow: 1px 1px 2px;
+                    abbr{
+                        text-decoration: none;
+                    }
                 }
             }
-        }
 
-    }
-    .next-button.disabled{
-        div{
-            background-color: rgba(0,0,0,0.1);
-            cursor: default;
         }
-    }
-    .next-button{
-        cursor: pointer;
-        outline: none;
-        border: none;
-        font-size: large;
-        position: sticky;
-        background: none;
-        padding: 0;
-        display: flex;
-        justify-content: center;
-        div{
-            padding: 0.5rem 3rem;
-            background: pink;
-            border-radius: 5px;
-            box-shadow: 2px 2px 6px black;
+        .next-button.disabled{
+            div{
+                background-color: rgba(0,0,0,0.1);
+                cursor: default;
+            }
+        }
+        .next-button{
+            cursor: pointer;
+            outline: none;
+            border: none;
+            font-size: large;
+            position: sticky;
+            background: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            div{
+                padding: 0.5rem 3rem;
+                background: pink;
+                border-radius: 5px;
+                box-shadow: 2px 2px 6px black;
+            }
         }
     }
 }
