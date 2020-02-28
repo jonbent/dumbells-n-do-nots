@@ -29,25 +29,22 @@ router.get('muscle/:muscleId', (req, res) => {
 })
 // possibly create an exercise from a user
 router.post("/", passport.authenticate("jwt", { session: false }), (req, res) => {
-    const { isValid, errors } = validateExerciseInput(req.body);
+    const {isValid, errors} = validateExerciseInput(req.body);
     if (!isValid) {
         return res.status(400).json(errors);
     }
 
     const newExercise = new Exercise({
-        user: req.user.id,
+        user: req.user._id,
         name: req.body.name,
         description: req.body.description,
         muscleGroup: req.body.muscleGroupId,
-        numSets: req.body.numSets,
-        numReps: req.body.numReps,
-        interval: req.body.interval
-    })
-
-    newExercise
-        .save()
-        .then(exercise => res.json(exercise))
-    }
-)
+        // numSets: req.body.numSets,
+        // numReps: req.body.numReps,
+        // interval: req.body.interval
+    });
+    newExercise.save();
+    return res.json({newExercise});
+})
 
 module.exports = router;

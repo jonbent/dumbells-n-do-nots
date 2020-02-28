@@ -1,31 +1,34 @@
 import React from 'react';
-import { closeModal } from '../../actions/ModalActions';
+import { closeFiltersModal } from '../../actions/FiltersModalActions';
 import { connect } from 'react-redux';
 import MealsFilters from '../modal/MealsFilters'
 import '../../scss/Modal.scss'
+import { fetchMeals } from '../../actions/MealActions'
+import {receivePageNum} from "../../actions/FilterActions";
 
-import AddRoutineFormContainer from '../routine/NewRoutineFormContainer'
-import ExerciseSelector from '../exercises/ExerciseSelectorContainer';
-import AddUserMealsFormContainer from '../userMeals/AddUserMealsFormContainer'
-
-const FiltersModal = ({ modal, closeModal }) => {
+const FiltersModal = ({ modal, closeFiltersModal, fetchMeals, pageSize, minCals, maxCals, pageNum, changePage }) => {
     if (!modal) {
         return null;
     }
     let component;
     switch (modal) {
-        case 'meals':
-            return <MealsFilters />
+        case "meals":
+            component = <MealsFilters />;
+            break;
         default:
             return null;
     }
+    const confirmFilters = () => {
+        changePage(1);
+        closeFiltersModal();
+        fetchMeals({ pageSize, pageNum: 1, minCals, maxCals});
+    }
     return (
-        <div className="modal-background">
-
+        <div className="filters-modal-background">
             <div className="modal-child-container">
-                <div className="close-modal-button" onClick={closeModal}>
+                <div className="close-modal-button" onClick={confirmFilters}>
                     <div>
-                        Close
+                        Confirm Filters
                     </div>
                 </div>
                 <div className="modal-child" onClick={e => e.stopPropagation()}>
@@ -34,17 +37,23 @@ const FiltersModal = ({ modal, closeModal }) => {
             </div>
         </div>
     );
-}
+};
 
-const mapStateToProps = state => {
+const mapStateToProps = ({ui}) => {
     return {
-        modal: state.ui.filterModal
+        modal: ui.filtersModal,
+        maxCals: ui.filters.maxCals,
+        minCals: ui.filters.minCals,
+        pageNum: ui.filters.pageNum,
+        pageSize: ui.filters.pageSize
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        closeModal: () => dispatch(closeModal())
+        closeFiltersModal: () => dispatch(closeFiltersModal()),
+        fetchMeals: (filters) => dispatch(fetchMeals(filters)),
+        changePage: num => dispatch(receivePageNum(num)),
     };
 };
 

@@ -13,6 +13,7 @@ const DateFormat = require('dateformat')
 
 router.get("/test", (req, res) => res.json({ msg: "This is the users route" }));
 router.get("/startDate", passport.authenticate("jwt", { session: false }), async (req, res) => {
+    if (!req.query.startDate) return res.status(422).json({message: "Start Date must be provided"});
     const curDate = new Date(req.query.startDate);
     const dateRange = [];
     for(let i = 0; i < 7; i++){
@@ -66,9 +67,43 @@ router.get('/user/:userId/single', async (req, res) => {
     await res.json(response);
 });
 
+router.put('/:routineId/days/:dayId', passport.authenticate("jwt", { session: false }), async (req, res) => {
+    const routine = await Routine.findOne({_id: req.params.routineId});
+    if (!routine) return res.status(400).json({errors: {routine: "Cannot find given routine"}});
+    if (routine.user.toString() !== req.user._id.toString()) return res.status(401).json({errors: {routine: "Cannot edit other user's routines"}});
+    const day = await Day.findOne({_id: req.params.dayId});
+    if (!day) return res.status(400).json({errors: {routine: "Cannot find given day"}});
+    // const meals = await UserMeal.find({day: day._id});
+
+    const dayMeals = [];
+    Object.keys(req.body.meals).forEach((mealId) => {
+        dayMeals.push({meal: mealId, quantity: req.body.meals[mealId], day: day._id});
+    });
+    const exercises = Object.keys(req.body.workout).filter(eId => !!req.body.workout[eId]);
+    try {
+
+        await UserMeal.deleteMany({day: day.id});
+        await UserWorkout.deleteOne({day: day.id});
+        const userMeals = await UserMeal.insertMany(dayMeals);
+        if (exercises.length) {
+            const newWorkout = new UserWorkout({day: day._id, exercises});
+            await newWorkout.save();
+            day.workout = newWorkout._id;
+        } else {
+            day.workout = null;
+        }
+        day.meals = userMeals.map(dm => dm._id);
+        day.save();
+    } catch(e) {
+        res.status(500).json({message: "Unable to update day"})
+    }
+    res.redirect(303, `/api/routines/${routine._id}`);
+    // if (req.body.workout.length !== 0 ) dayWorkout = {day: days[idx]._id, exercises: req.body[dayString].workout};
+
+})
+
 router.get('/:routineId', async (req, res) => {
-    let routine = await Routine.find({_id: req.params.routineId}).limit(1);
-    routine = routine[0];
+    let routine = await Routine.findOne({_id: req.params.routineId});
     if (!routine) return res.status(400).json({errors: {routine: "Cannot find given routine"}});
 
     const response = {days: [], userMeals: {}, workouts: {}, routine};
@@ -94,24 +129,84 @@ router.get('/:routineId', async (req, res) => {
 
 // update routine to checkDone meals and workout
 router.put("/days/:dayId/:completableType/:completableId", passport.authenticate("jwt", { session: false }), async (req, res) => {
-    const day = await Day.findOne({_id: req.params.dayId})
-    const routine = await Routine.findOne({_id: day.routine})
+    const day = await Day.findOne({_id: req.params.dayId});
+    if (!day) return res.status(422).json({message: "No Day found with given ID."});
+    const routine = await Routine.findOne({_id: day.routine});
+    if (routine.user.toString() !== req.user._id.toString()) return res.status(422).json({message: "Current User does not own given routine"})
     switch(req.params.completableType){
         case "workout":
-            const workout = await UserWorkout.findOne({_id: req.params.completableId})
-            workout.doneCheck = req.body.doneCheck
-            workout.save()
+            const workout = await UserWorkout.findOne({_id: req.params.completableId});
+            if (!workout) return res.status(422).json({message: "Cannot find given workout"});
+            if (typeof req.body.doneCheck !== "boolean" ) return res.status(422).json({message: "doneCheck must be provided"})
+            workout.doneCheck = req.body.doneCheck;
+            workout.save();
             break;
         case "meal":
-            const meal = await UserMeal.findOne({ _id: req.params.completableId})
-            meal.doneAmount += parseInt(req.body.doneAmount)
-            meal.save()
+            const meal = await UserMeal.findOne({ _id: req.params.completableId});
+            if (!meal) return res.status(422).json({message: "Cannot find given meal"});
+            if (!req.body.doneAmount || isNaN(req.body.doneAmount)) return res.status(422).json({message: "doneAmount must be a valid number"})
+            meal.doneAmount += parseInt(req.body.doneAmount);
+            meal.save();
             break;
         default: 
-            break;
+            return res.status(422).json({message: "Cannot find completeable type"});
         }
-        res.redirect(303, `/api/routines/${routine._id}`)
+        res.redirect(303, `/api/routines/${routine._id}`);
+});
+
+router.patch('/days/:dayId/meals/:mealId', passport.authenticate('jwt', {session: false}), async(req, res) => {
+    if (isNaN(req.body.val) || !req.body.val) return res.status(422).json({message: "Val must be a valid number."});
+    const day = await Day.findOne({_id: req.params.dayId});
+    if (!day) return res.status(422).json({message: "Day not found"});
+
+    const meal = await Meal.findOne({_id: req.params.mealId});
+    if (!meal) return res.status(422).json({message: "Meal not found"});
+
+    const routine = await Routine.findOne({_id: day.routine});
+    if (!routine) return res.status(422).json({message: "Routine not found"});
+
+    if (routine.user.toString() !== req.user._id.toString()) return res.status(401).json({message: "Unathorized to edit routine."})
+    let userMeal = await UserMeal.findOne({day: day._id, meal: meal._id});
+    const val = parseInt(req.body.val);
+    if (!userMeal) {
+        if (req.body.val <= 0) return res.status(422).json({message: "User meal cannot have a negative value for quantity."})
+        userMeal = new UserMeal({day: day._id, meal: meal._id, quantity: val});
+        day.meals.push(userMeal._id);
+        day.save();
+    } else {
+        if (val + userMeal.quantity < 0) return res.status(422).json({message: "User meal cannot have a negative value for quantity."})
+        userMeal.quantity += val;
+    }
+    userMeal.save();
+    return res.redirect(303, `/api/routines/${routine._id}`)
 })
+router.patch('/days/:dayId/exercises/:exerciseId', passport.authenticate('jwt', {session: false}), async(req, res) => {
+    const day = await Day.findOne({_id: req.params.dayId});
+    if (!day) return res.status(422).json({message: "Day not found"});
+    const routine = await Routine.findOne({_id: day.routine});
+    if (!routine) return res.status(422).json({message: "Routine not found"});
+    if (routine.user.toString() !== req.user._id.toString()) return res.status(401).json({message: "Unathorized to edit routine."})
+    let userWorkout = await UserWorkout.findOne({day: day._id});
+    let selected = false;
+    if (!userWorkout) {
+        userWorkout = new UserWorkout({day: day._id, exercises: [req.params.exerciseId]});
+        day.workout = userWorkout._id;
+        day.save();
+    } else {
+        selected = userWorkout.exercises.indexOf(req.params.exerciseId);
+        if (selected !== -1){
+            userWorkout.exercises.splice(selected, 1);
+        } else {
+            userWorkout.exercises.push(req.params.exerciseId)
+        }
+    }
+    userWorkout.save()
+    res.redirect(303, `/api/routines/${routine._id}`);
+
+
+
+})
+
 
 
 //let user create a routine
@@ -157,7 +252,7 @@ router.post("/", passport.authenticate("jwt", { session: false }), async (req, r
                     Object.keys(req.body[dayString].meals).forEach((mealId) => {
                         dayMeals.push({meal: mealId, quantity: req.body[dayString].meals[mealId], day: days[idx]._id});
                     });
-                    if ( req.body[dayString].workout.length !== 0 ) dayWorkout = {day: days[idx]._id, exercises: req.body[dayString].workout};
+                    if ( req.body[dayString].workout.length !== 0 ) dayWorkout = {day: days[idx]._id, exercises: Object.keys(req.body[dayString].workout).filter(exerciseId => req.body[dayString].workout[exerciseId] === true)};
                     let meals;
                     let newWorkout;
                     let workout;

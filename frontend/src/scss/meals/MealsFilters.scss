@@ -1,0 +1,137 @@
+.meals-filters{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  color: pink;
+  text-shadow: 1px 1px 3px black;
+  .filter-summary-container{
+     margin-top: 1rem;
+    .title{
+      font-size: 150%;
+    }
+    .filter-summary{
+      padding: 1rem;
+      display: flex;
+      justify-content: space-around;
+      .nutrient-info{
+        display: flex;
+        flex-direction: column;
+        .min-max-container{
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          .min-max{
+            margin: 1rem;
+          }
+        }
+        .to-container{
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .to-container:after{
+          content: "TO";
+        }
+      }
+    }
+  }
+  .filter-input-container{
+    margin-top: 1rem;
+    box-shadow: 3px 3px 6px -5px black;
+    .filter-input.average{
+      margin: 1rem 1rem;
+      .submit{
+        margin-top: 1rem;
+        background-color: rgba(0,0,0,0.5);
+        box-shadow: 3px 3px 6px black;
+        padding: 0.5rem 1rem;
+        border-radius: 5px;
+        text-shadow: 1px 1px 3px black;
+      }
+      input{
+        margin-top: 0.5rem;
+      }
+    }
+    .filter-input{
+      display: flex;
+      justify-content: space-between;
+      margin: 2rem;
+      .to-container{
+        display: flex;
+        align-items: center;
+        margin: 0 0.5rem;
+      }
+      .to-container:after{
+        content: "TO";
+      }
+      label{
+        margin: 1rem 0;
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        //justify-content: center;
+        //align-items: center;
+        h1{
+          width: 100%;
+        }
+        input{
+          background-color: lightskyblue;
+          border: none;
+          text-align: center;
+          font-size: 150%;
+          width: 100%;
+          padding: 0;
+          //box-shadow: 3px 3px 6px -5px black;
+          box-shadow: 0px 5px 5px -5px #111;
+        }
+      }
+    }
+  }
+
+}
+
+@media only screen and (max-width: 365px) {
+  .meals-filters {
+    .filter-summary-container {
+      .filter-summary {
+        flex-direction: column;
+        .nutrient-info:not(:nth-of-type(1)){
+          margin-top: 1rem;
+        }
+      }
+    }
+  }
+}
+@media only screen and (max-width: 500px) {
+  .meals-filters {
+    .filter-summary-container {
+      .filter-summary {
+        .nutrient-info {
+          .min-max-container {
+            flex-direction: column;
+          }
+        }
+      }
+    }
+  }
+}
+@media only screen and (max-width: 555px) {
+  .meals-filters{
+    .filter-summary{
+      .nutrient-info{
+        .min-max-container{
+          flex-direction: column;
+        }
+      }
+    }
+    .filter-input{
+      flex-direction: column;
+      label{
+        width:auto;
+      }
+      div{
+        justify-content: center;
+      }
+    }
+  }
+}

@@ -4,6 +4,7 @@ import BottomNavBar from "../navbar/BottomNavBarContainer";
 import Modal from "../modal/Modal";
 import DateFormat from 'dateformat'
 import FiltersModal from "../modal/FiltersModal";
+import Alert from "../alerts/Alert";
 
 class UserHistory extends Component {
     constructor(props) {
@@ -28,6 +29,7 @@ class UserHistory extends Component {
         return (
             <div className="user-history-container">
                 <Modal/>
+                <Alert/>
                 <FiltersModal/>
                 <div className="UserHistory">
                     <div className="routine-history">

@@ -3,6 +3,7 @@ import { RECEIVE_NEW_ROUTINE_STARTDATE, RECEIVE_NEW_ROUTINE_STARTDATE_WITH_DATA 
 import {CLOSE_MODAL, OPEN_MODAL} from "../actions/ModalActions";
 import {RECEIVE_SELECTED_MUSCLE_GROUP, RECEIVE_SIDE, RECEIVE_SELECTED_ROUTINE} from "../actions/RoutineFilterActions";
 import {RESET_SELECTED_MUSCLE_GROUPS} from "../actions/MuscleGroupActions";
+import {RECEIVE_ALL_MEALS} from "../actions/MealActions";
 const _nullState = {
     side: "front",
     Arms: false,
@@ -26,6 +27,8 @@ export default function (state = _nullState, action) {
     switch (action.type) {
         case RECEIVE_DAY_SELECTED:
             return Object.assign({}, state, { daySelected: action.day });
+        case RECEIVE_ALL_MEALS:
+            return Object.assign({}, state, { numMeals: action.payload.totalMeals });
         case RECEIVE_NUM_MEALS:
             return Object.assign({}, state, { numMeals: action.num });
         case RECEIVE_NEW_ROUTINE_STARTDATE:
@@ -35,6 +38,7 @@ export default function (state = _nullState, action) {
             localStorage.setItem('defaultStartDate', action.payload);
             return Object.assign({}, state, { daySelected: action.payload.date });
         case CLOSE_MODAL:
+            localStorage.removeItem('routineEdit');
             nextState = Object.assign(nextState, state);
             delete nextState.daySelected;
             delete nextState.numMeals;

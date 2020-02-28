@@ -1,0 +1,96 @@
+.add-user-meal-form{
+  display: flex;
+  flex-direction: column;
+  margin: 1rem 1rem;
+  background-color: rgba(0,0,0,0.5);
+  border-radius: 10px;
+  padding: 1rem 1rem;
+  color: pink;
+  text-shadow: 1px 1px 3px black;
+  box-shadow: 2px 2px 6px black;
+  .image-container{
+      margin-bottom: 2rem;
+      #edit-profile-picture{
+          display: none;
+      }
+      label[for="edit-profile-picture"]{
+          text-align: center;
+          height: auto;
+          display: flex;
+          justify-content: center;
+
+      }
+      label[for="edit-profile-picture"]:hover{
+          cursor: pointer;
+      }
+      .image{
+        height: 8rem;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        margin-bottom: 0.5rem;
+        border-radius: 0.25rem;
+        //background-size: cover;
+        //background-position: center;
+      }
+  }
+  //.image > div{
+  //    height: 8rem;
+  //    width: 8rem;
+  //    margin-bottom: 0.5rem;
+  //    border-radius: 0.25rem;
+  //    background-size: cover;
+  //    background-position: center;
+  //}
+  //.image-container{
+  //  .image{
+  //    height: 8rem;
+  //    background-size: contain;
+  //    background-repeat: no-repeat;
+  //    background-position: 50% 50%;
+  //  }
+  //}
+  .meal-errors{
+    font-style: italic;
+    color: red;
+  }
+  .add-user-meal-input-container{
+    display: flex;
+    flex-direction: column;
+    input, label{
+      margin: 1rem 2rem 1rem 2rem;
+    }
+    label{
+      display: flex;
+      justify-content: space-between;
+    }
+    input:-internal-autofill-selected{
+      background-color: rgba(0,0,0,0) !important;
+      //color: -internal-light-dark-color(black, black) !important;
+      -webkit-text-fill-color: black;
+    }
+    input{
+      background-color: rgba(0,0,0,0);
+      border: none;
+      border-bottom: 1px solid pink;
+      text-align: center;
+      font-size: 150%;
+      color: black;
+    }
+
+  }
+  .submit-container{
+    //border-top: 1px solid lightskyblue;
+    padding: 0.5rem 2rem 1rem 2rem;
+    margin-top: 1rem;
+    .submit{
+      background-color: pink;
+      color: black;
+      text-shadow: 1px 1px 3px lightskyblue;
+      box-shadow: 2px 2px 6px black;
+      border-radius: 5px;
+      padding: 1rem 0;
+    }
+  }
+
+}

@@ -4,10 +4,10 @@ import ExerciseSelector from "../exercises/ExerciseSelectorContainer";
 
 class EditWorkout extends Component {
     render() {
-        const {closeSelector} = this.props;
+        const {closeSelector, single = false, day = null} = this.props;
         return (
             <div className="edit-day-container">
-                <ExerciseSelector editing={true} closeSelector={closeSelector}/>
+                <ExerciseSelector editing={true} closeSelector={closeSelector} single={single} day={day}/>
             </div>
         );
     }

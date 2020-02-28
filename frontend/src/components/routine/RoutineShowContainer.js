@@ -9,10 +9,16 @@ const mapStateToProps = ({entities, session}) => {
     const dayValues = Object.values(entities.days);
     curDate = dayValues.find(day => new Date(day.date).getTime() === curDate.getTime());
     let curDates = [];
+
     if ( curDate ){
         const curRoutine = entities.routines[curDate.routine];
-        curDates = dayValues.filter(day => day.routine === curRoutine._id)
+        curDates = dayValues.filter((day) => {
+            return day.routine === curRoutine._id
+        })
     }
+    let curDayIdx = 0;
+    const daysHash = {}
+    curDates.forEach((el, idx) => {daysHash[el._id] = el; if (el._id === curDate._id) curDayIdx = idx;});
 
     return {
         user: session.user,
@@ -22,7 +28,9 @@ const mapStateToProps = ({entities, session}) => {
         exercises: entities.exercises,
         userWorkouts: entities.userWorkouts,
         days: curDates,
-        curDay: curDate
+        daysHash,
+        curDay: curDate,
+        curDayIdx
     }
 };
 

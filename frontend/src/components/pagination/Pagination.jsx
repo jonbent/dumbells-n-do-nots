@@ -16,6 +16,8 @@ export default class Pagination extends Component {
         this.toggleDropDown = this.toggleDropDown.bind(this)
     }
     toggleDropDown(){
+        const numPages = Math.ceil(this.props.itemsAmount / this.props.pageSize);
+        if (numPages === 0) return null;
         this.setState({
             openDropDown: !this.state.openDropDown
         })
@@ -25,6 +27,7 @@ export default class Pagination extends Component {
         const { pageSize, itemsAmount, changePage } = this.props;
         const curPage = Number.parseInt(this.props.curPage);
         const { openDropDown } = this.state;
+        const numPages = Math.ceil(itemsAmount / pageSize);
         return (
             <nav className="pagination">
                 <button onClick={() => changePage(curPage < 2 ? curPage : curPage - 1)} disabled={curPage === 1 ? true : false} className="back-button">
@@ -33,7 +36,7 @@ export default class Pagination extends Component {
                 <div>
                     <button onMouseUp={this.toggleDropDown}>
                         <span>
-                            Page {curPage} of {Math.ceil(itemsAmount / pageSize)}
+                            Page {curPage} of {numPages > 0 ? numPages : 1}
                         </span>
                         <div>
                             <DropDownArrow />

@@ -1,10 +1,11 @@
 import React from 'react';
-// import {Link} from 'react-router-dom';
+import CreateMeal from "../meals/CreateMeal";
+import CreateExercise from '../exercises/CreateExercise'
+
 import DatePicker from "react-date-picker";
 import DateFormat from 'dateformat'
-// import "react-day-picker/lib/style.css";
+
 import "../../scss/newRoutineForm.scss"
-import {fetchRoutineByStartDate} from "../../util/RoutineApiUtil";
 
 
 class NewRoutineForm extends React.Component {
@@ -16,14 +17,20 @@ class NewRoutineForm extends React.Component {
       month: currentDate,
       startDate: currentDate,
       endDate: DateFormat(weekFromCurrentDate, "yyyy-mm-dd"),
-      dateError: "Select A date"
+      dateError: "Select A date",
+      creationSelection: 'routine'
     };
     this.handleStartDate = this.handleStartDate.bind(this);
     this.handleYearMonthChange = this.handleYearMonthChange.bind(this);
     this.handleNext = this.handleNext.bind(this);
     this.callback = this.callback.bind(this);
+    this.handleCreationSelect = this.handleCreationSelect.bind(this);
   }
-
+  handleCreationSelect(select){
+    this.setState({
+      creationSelection: select
+    })
+  }
   handleStartDate(date) {
     this.setState({ startDate: date }, () => {
       return this.props.fetchRoutineByStartDate(this.state.startDate, this.callback)
@@ -46,27 +53,58 @@ class NewRoutineForm extends React.Component {
   }
 
   render() {
-    const {dateError} = this.state;
-    const {routineError} = this.props;
-    return (
-      <form className="new-routine-form">
-        <h1 className="new-routine-header">New Routine</h1>
+    const {dateError, creationSelection} = this.state;
+    const {
+      routineError,
+      createMeal,
+      mealErrors,
+      closeRoutineModal,
+      fetchMuscleGroups,
+      exerciseErrors,
+      createExercise,
+      muscleGroups
+    } = this.props;
 
-        <div className="start-date-input">
-          <label className="start-date-label">Select Start Date
-            <DatePicker
-              onChange={this.handleStartDate}
-              value={this.state.startDate}
-            />
-          </label>
-        </div>
-        <div className="date-error">
-            {routineError.message}
+    let content = null;
+    switch(creationSelection){
+      case 'routine':
+        content = (<form className="new-routine-form">
+            <h1 className="new-routine-header">New Routine</h1>
+            <div className="start-date-input">
+              <label className="start-date-label">Select Start Date
+                <DatePicker
+                  onChange={this.handleStartDate}
+                  value={this.state.startDate}
+                />
+              </label>
+            </div>
+            <div className="date-error">
+              {routineError.message}
+            </div>
+            <button className={`next-button ${routineError.message ? "disabled" : ""}`} onClick={this.handleNext}>
+              <div>Next</div>
+            </button>
+          </form>)
+            break;
+      case "meal":
+        content = <CreateMeal createMeal={createMeal} mealErrors={mealErrors}/>;
+        break;
+      case "exercise":
+        content = <CreateExercise muscleGroups={muscleGroups} createExercise={createExercise} exerciseErrors={exerciseErrors} fetchMuscleGroups={fetchMuscleGroups}/>
+        break;
+      default:
+        content = null;
+        break;
+    }
+    return (
+        <div className="new-creation-container">
+          <div className="creation-options">
+            <div className={creationSelection === 'routine' ? 'selected' : ''} onClick={() => this.handleCreationSelect("routine")}>Routine</div>
+            <div className={creationSelection === 'meal' ? 'selected' : ''} onClick={() => this.handleCreationSelect("meal")}>Meal</div>
+            <div className={creationSelection === 'exercise' ? 'selected' : ''} onClick={() => this.handleCreationSelect("exercise")}>Exercise</div>
           </div>
-        <button className={`next-button ${routineError.message ? "disabled" : ""}`} onClick={this.handleNext}>
-            <div>Next</div>
-        </button>
-      </form>
+          {content}
+        </div>
     );
   }
 }
