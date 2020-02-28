@@ -2,25 +2,18 @@
   height: 100%;
   //display: flex;
   //flex-direction: column;
-  .meal-list{
+  .not-found{
+    box-shadow: 0px -2px 3px gray;
+    display: flex;
     flex-direction: column;
-    .info{
-      padding: 1rem;
-      margin-bottom: 1rem;
-      font-style: italic;
-      color: red;
-    }
-    .submit-meals.disabled{
-      opacity: 0.2;
-      cursor: default;
-    }
-    .submit-meals{
-      color: pink;
-      background-color: black;
+    div:nth-of-type(2){
+      margin: 1rem 0;
+      color: black;
+      background-color: pink;
+      width: 100%;
       border: none;
       height: 3rem;
       border-radius: 5px;
-      margin-bottom: 1rem;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -31,7 +24,129 @@
          -moz-user-select: none; /* Old versions of Firefox */
           -ms-user-select: none; /* Internet Explorer/Edge */
               user-select: none; /* Non-prefixed version, currently
-                                    supported by Chrome, Opera and Firefox */
+                                        supported by Chrome, Opera and Firefox */
+
+    }
+
+  }
+  .day-select > div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    div{
+      background-color: black;
+      border: 1px solid pink;
+      cursor: pointer;
+      color: pink;
+      border-radius: 5px;
+      padding: 0.5rem 1rem;
+    }
+  }
+  .meal-search{
+    display: flex;
+    flex-direction: column;
+    .search-headers{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      div{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        align-items: center;
+      }
+      .ignore-filters{
+        background-color: pink;
+        color: black;
+        border: 1px solid pink;
+        border-radius: 5px;
+        margin-top: 1rem;
+        padding: 1rem 0;
+        cursor: pointer;
+      }
+      .ignore-filters.ignoring{
+        background-color: black;
+        color: pink;
+      }
+    }
+    input{
+      margin-top: 1rem;
+      text-align: center;
+      font-size: 150%;
+    }
+  }
+  .calorie-count{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+  }
+  .calorie-count.too-low{
+    color: blue;
+  }
+  .calorie-count.too-high{
+    color: red;
+  }
+  .calorie-count.just-right{
+    color: darkgreen;
+  }
+  .day-select{
+    h1{
+      margin-bottom: 1rem;
+    }
+    flex-direction: column;
+    justify-content: inherit;
+
+  }
+  .selected-meals{
+    margin: 1rem;
+    background-color: rgba(0,0,0,0.5);
+    border-radius: 5px;
+    .meal-item:not(:nth-of-type(1)){
+      margin-top: 1rem;
+    }
+  }
+  .meal-list, .selected-meals{
+    flex-direction: column;
+    .info{
+      padding: 1rem;
+      margin-bottom: 1rem;
+      font-style: italic;
+      color: red;
+    }
+    .routine-actions{
+      display: flex;
+      justify-content: space-between;
+      margin: 1rem 0;
+      .submit-meals.disabled{
+        opacity: 0.2;
+        cursor: default;
+      }
+      .submit-meals, .select-filters {
+        margin: 0 1rem;
+        //width: calc(100% - 2rem);
+        width: 100%;
+        color: pink;
+        background-color: black;
+        border: none;
+        height: 3rem;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        -webkit-touch-callout: none; /* iOS Safari */
+        -webkit-user-select: none; /* Safari */
+         -khtml-user-select: none; /* Konqueror HTML */
+           -moz-user-select: none; /* Old versions of Firefox */
+            -ms-user-select: none; /* Internet Explorer/Edge */
+                user-select: none; /* Non-prefixed version, currently
+                                      supported by Chrome, Opera and Firefox */
+      }
+      .select-filters{
+        color: black;
+        background-color: pink;
+      }
     }
   }
   select::-ms-expand {
@@ -66,4 +181,30 @@
   display: flex;
   padding: 1rem;
   justify-content: space-between;
+}
+
+@media only screen and (min-width: 540px) {
+  .meal-selector {
+    .meal-search {
+      .search-headers {
+        flex-direction: row;
+        justify-content: space-between;
+        .ignore-filters{
+          margin-top: 0;
+        }
+      }
+    }
+  }
+}
+@media only screen and (max-width: 630px) {
+  .meal-selector{
+    .meal-list{
+      .routine-actions{
+        flex-direction: column;
+        .submit-meals, .select-filters {
+          margin: 0.5rem 0;
+        }
+      }
+    }
+  }
 }

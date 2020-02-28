@@ -24,7 +24,7 @@ class Signup extends React.Component {
       birthDate: '',
       sex: "",
       weightStart: "",
-      goalPath: "",
+      goalPath: 0,
       height1: "",
       height2: "",
       month: currentDate
@@ -252,8 +252,8 @@ class Signup extends React.Component {
                   onChange={e => this.updateField("goalPath", e)}
                 >
                   <option value="">-- Select one --</option>
-                  <option value={"loose_weight"}>Loose weight</option>
-                  <option value={"gain_weight"}>Gain weight</option>
+                  <option value={1}>Lose weight</option>
+                  <option value={2}>Gain weight</option>
                 </select>
               </div>
             </div>

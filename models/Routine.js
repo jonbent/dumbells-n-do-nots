@@ -6,7 +6,11 @@ const RoutineSchema = new Schema({
         type: Schema.Types.ObjectId,
         required: true,
         ref: "User"
-    }
-})
+    },
+    days: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Day'
+    }]
+});
 
 module.exports = Routine = mongoose.model("Routine", RoutineSchema)

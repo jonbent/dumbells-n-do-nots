@@ -2,11 +2,11 @@ import React, {Component} from 'react';
 import MuscleGroupSelectorContainer from '../musclegroups/MuscleGroupSelectorContainer';
 import '../../scss/bodyUI/ExerciseSelector.scss'
 import OptionCarouselHolder from "../slider/OptionCarouselHolder";
+import {submitRoutineAndCloseModal} from "../../actions/NewRoutineActions";
 export default class ExerciseSelector extends Component {
     constructor(props) {
         super(props);
         this.state = {};
-
         this.handleExerciseSelect = this.handleExerciseSelect.bind(this);
         this.handleSetDate = this.handleSetDate.bind(this);
 
@@ -19,34 +19,37 @@ export default class ExerciseSelector extends Component {
         this.props.receiveDaySelected(val)
     }
     render() {
-        const {muscleGroups, selectedExercises, days, day, selectedMuscleGroupIds, exercises, exerciseDays, submitRoutine, curRoutine } = this.props;
+        const {muscleGroups, selectedExercises, days, day, selectedMuscleGroupIds, exercises, exerciseDays = [], closeSelector, curRoutine, editing } = this.props;
 
         // separate exercises by muscle group
         const allExercises = {};
         selectedMuscleGroupIds.forEach(id => allExercises[id] = []);
         if (selectedMuscleGroupIds.length)
-        Object.values(exercises).forEach(e => {
+            Object.values(exercises).forEach(e => {
             if (allExercises[e.muscleGroup]) allExercises[e.muscleGroup].push(e)
         });
-
+        const muscleGroupKeys = Object.keys(muscleGroups)
         return (
             <div className="exercise-selector-container">
                 <MuscleGroupSelectorContainer selectedMuscleGroupIds={selectedMuscleGroupIds}/>
                 {exerciseDays.length !== 0 && <div className="scheduled-days-container">
-                    <div>Scheduled Workouts:</div>
+                    <div>Scheduled Workout{!editing ? "s": ""}:</div>
                     <div className="scheduled-days">
-                        {exerciseDays.map((date) => (
+                        {!editing && exerciseDays.map((date) => (
                             <div key={date} className={ day === date ? "selected" : ""} onClick={e => this.handleSetDate(date)}>{date}</div>
                         ))}
+                        {!!editing && (
+                            <div className="selected">{day}</div>
+                        )}
                     </div>
                 </div>}
-                <div className="day-select">
+                {!editing && <div className="day-select">
                     <h1>Select Day</h1>
                     <select value={day} onChange={e => this.handleSetDate(e.currentTarget.value)}>
                         {days.map((date, idx) => <option key={date} value={date}>{date}</option>)}
                     </select>
-                </div>
-                {selectedMuscleGroupIds.length !== 0 && <div className="group-exercises-container">
+                </div>}
+                {muscleGroupKeys.length && selectedMuscleGroupIds.length !== 0 && <div className="group-exercises-container">
                         {selectedMuscleGroupIds.map(groupId => {
                             return (
                                 <div className="group-exercise-list" key={groupId}>
@@ -57,8 +60,8 @@ export default class ExerciseSelector extends Component {
                     </div>
                 }
                 <div className="submit">
-                    <div onClick={() => submitRoutine(curRoutine)}>
-                        Submit Week's Workouts
+                    <div onClick={() => !editing ? submitRoutineAndCloseModal(curRoutine) : closeSelector()}>
+                        {!editing ? "Submit Week's Workouts" : "Confirm Exercises"}
                     </div>
                 </div>
             </div>

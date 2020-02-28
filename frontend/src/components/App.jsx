@@ -21,7 +21,7 @@ const App = ({ loggedIn }) => (
             <AuthRoute exact path="/login" component={LoginContainer} />
             {!loggedIn && <AuthRoute exact path="/" component={Splash} />}
             <ProtectedRoute exact path="/settings" component={SettingsContainer} />}
-            <Route path="/users/:username/history" component={UserHistory}/>
+            <ProtectedRoute exact path="/users/:username/history" component={UserHistory}/>
             {loggedIn &&  <ProtectedRoute path="/" component={UserShowContainer} />}
         </Switch>
 

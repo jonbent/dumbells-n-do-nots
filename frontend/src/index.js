@@ -10,11 +10,12 @@ import { setAuthToken } from './util/SessionApiUtil'
 import { receiveNewRoutineStartDate } from './actions/NewRoutineActions';
 import { logout, login } from './actions/SessionActions';
 import { openModal } from './actions/ModalActions';
-
+import {receiveAlert} from "./actions/AlertActions";
 
 document.addEventListener('DOMContentLoaded', () => {
     window.axios = axios;
     window.openModal = openModal;
+    window.receiveAlert = receiveAlert;
     window.receiveNewRoutineStartDate = receiveNewRoutineStartDate;
     window.mobileAndTabletcheck = () => {
       let check = false;
@@ -22,10 +23,19 @@ document.addEventListener('DOMContentLoaded', () => {
       return check;
     };
     let store;
-    let preloadedState = {ui:{
-        filters: {
-            currentStep: 1
-        }
+    let preloadedState = {
+        ui:{
+            filters: {
+                currentStep: 1,
+                pageSize: 10,
+                pageNum: 1,
+                maxCals: 625,
+                minCals: 500
+            },
+            alert: {
+                message: "blank message",
+                status: "none"
+            }
     }};
     if (localStorage.jwtToken) {
 

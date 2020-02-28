@@ -8,7 +8,7 @@ const mapStateToProps = (state, { location }) => ({
 
 const mapDispatchToProps = dispatch => ({
     login: (formUser) => dispatch(login(formUser)),
-    resetErrors: () => dispatch(resetErrors())
+    resetErrors: () => dispatch(resetErrors()),
 });
 
 export default connect(

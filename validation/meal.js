@@ -13,20 +13,20 @@ module.exports = function validateMealInput(data) {
     data.prepTime = validText(data.prepTime) ? data.prepTime : '';
 
     if (Validator.isEmpty(data.title)) {
-        errors.title = 'Meal name is required';
+        errors.title = 'title field is required';
     }
-
-    if (!Validator.isLength(data.description, {min: 5, max: 250})) {
-        errors.description = 'Description must be between 5 & 250 characters';
-    }
-
-    if (Validator.isEmpty(data.description)) {
-        errors.description = 'Description is required';
-    }
-
-    if (Validator.isEmpty(data.calories)) {
-        errors.calories = 'calories field is required';
-    }
+    //
+    // if (!Validator.isLength(data.description, {min: 5, max: 250})) {
+    //     errors.description = 'Description must be between 5 & 250 characters';
+    // }
+    //
+    // if (Validator.isEmpty(data.description)) {
+    //     errors.description = 'Description is required';
+    // }
+    //
+    // if (Validator.isEmpty(data.calories)) {
+    //     errors.calories = 'calories field is required';
+    // }
 
     if (Validator.isEmpty(data.protein)) {
         errors.protein = 'protein field is required';
@@ -40,9 +40,9 @@ module.exports = function validateMealInput(data) {
         errors.carbs = 'carbs field is required';
     }
 
-    if (Validator.isEmpty(data.prepTime)) {
-        errors.prepTime = 'Please choose a valid time period to prep the meal';
-    }
+    // if (Validator.isEmpty(data.prepTime)) {
+    //     errors.prepTime = 'Please choose a valid time period to prep the meal';
+    // }
 
     return {
         errors,

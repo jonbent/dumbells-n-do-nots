@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import AddWorkoutsFormContainer from '../workouts/AddWorkoutsFormContainer';
 import AddMealsFormContainer from '../meals/AddMealsFormContainer';
 import SampleRoutinesContainer from '../sampleRoutines/SampleRoutinesContainer';
+import ExistingRoutineContainer from '../routine/ExistingRoutineContainer';
 import '../../scss/Modal.scss'
 
 import AddRoutineFormContainer from '../routine/NewRoutineFormContainer'
@@ -31,8 +32,11 @@ function Modal({ modal, closeModal }) {
         case 'bodyUI':
             component = <ExerciseSelector />;
             break;
+        case 'existingRoutine':
+            component = <ExistingRoutineContainer closeModal={closeModal}/>;
+            break;
         case 'addUserMeals':
-            component = <AddUserMealsFormContainer />
+            component = <AddUserMealsFormContainer />;
             break;
         default:
             return null;

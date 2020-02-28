@@ -23,6 +23,14 @@ export const fetchUserRoutine = id => dispatch => (
         .then(res => dispatch(receiveUserRoutine(res.data)))
         .catch(err => console.log(err))
 );
+
+export const updateRoutineChecks = data => dispatch => (
+    RoutineApiUtil.updateRoutineChecks(data)
+        .then(res => {
+            return dispatch(receiveUserRoutine(res.data))})
+        .catch(err => console.log(err))
+);
+
 export const fetchUserRoutines = id => dispatch => (
     RoutineApiUtil.getUserRoutines(id)
         .then(res => dispatch(receiveUserRoutines(res.data)))
@@ -34,3 +42,20 @@ export const createRoutine = data => dispatch => (
         .then(routine => {dispatch(receiveNewRoutine(routine)); dispatch(resetSelectedMuscleGroups())})
         .catch(err => console.log(err))
 );
+
+export const fetchRoutineById = id => dispatch => {
+    return RoutineApiUtil.getRoutineById(id)
+        .then(res => dispatch(receiveUserRoutine(res.data)))
+        .catch(err => console.log(err))
+}
+
+export const toggleExercise = (dayId, exerciseId) => dispatch => {
+    return RoutineApiUtil.toggleExercise(dayId, exerciseId)
+        .then(res => dispatch(receiveUserRoutine(res.data)))
+        .catch(err => console.log(err))
+}
+export const updateDaysMeal = (dayId, mealId, val) => dispatch => {
+    return RoutineApiUtil.updateDaysMeal(dayId, mealId, val)
+        .then(res => dispatch(receiveUserRoutine(res.data)))
+        .catch(err => console.log(err))
+}

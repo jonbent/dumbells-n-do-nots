@@ -1,15 +1,11 @@
 import React from 'react';
-// import {Link} from 'react-router-dom';
-import DatePicker from "react-date-picker";
-import YearMonthForm from '../signup/year_month_form';
-import DateFormat from 'dateformat'
-// import "react-day-picker/lib/style.css";
-import "../../scss/newRoutineForm.scss"
-import {fetchRoutineByStartDate} from "../../util/RoutineApiUtil";
+import CreateMeal from "../meals/CreateMeal";
+import CreateExercise from '../exercises/CreateExercise'
 
-const currentYear = new Date().getFullYear();
-const toMonth = new Date(currentYear, 0);
-const fromMonth = new Date(currentYear - 80)
+import DatePicker from "react-date-picker";
+import DateFormat from 'dateformat'
+
+import "../../scss/newRoutineForm.scss"
 
 
 class NewRoutineForm extends React.Component {
@@ -21,77 +17,94 @@ class NewRoutineForm extends React.Component {
       month: currentDate,
       startDate: currentDate,
       endDate: DateFormat(weekFromCurrentDate, "yyyy-mm-dd"),
-      dateError: "Select A date"
+      dateError: "Select A date",
+      creationSelection: 'routine'
     };
     this.handleStartDate = this.handleStartDate.bind(this);
     this.handleYearMonthChange = this.handleYearMonthChange.bind(this);
     this.handleNext = this.handleNext.bind(this);
+    this.callback = this.callback.bind(this);
+    this.handleCreationSelect = this.handleCreationSelect.bind(this);
   }
-
+  handleCreationSelect(select){
+    this.setState({
+      creationSelection: select
+    })
+  }
   handleStartDate(date) {
-    console.log(date);
     this.setState({ startDate: date }, () => {
-      fetchRoutineByStartDate(this.state.startDate).then(res => {
-        let dateError = null;
-        if (res.data.datesFound){
-          dateError = "Routine already found for that week.";
-        }
-        this.setState({
-            dateError
-        })
-      }).catch(err => console.log(err));
+      return this.props.fetchRoutineByStartDate(this.state.startDate, this.callback)
     });
   }
   handleYearMonthChange(month) {
     this.setState({ month });
   }
-  handleNext(e) {
-    if (this.state.dateError) return null;
-    e.preventDefault();
+  callback(){
     this.props.receiveNewRoutineStartDate(DateFormat(this.state.startDate, 'yyyy-mm-dd'));
+  }
+  handleNext(e) {
+    if (this.props.routineError.message) return null;
+    e.preventDefault();
     this.props.openAddMealsFormModal();
   }
   componentDidMount() {
     // document.querySelector('.DayPickerInput > input').setAttribute('readonly', true)
+    this.handleStartDate(new Date())
   }
 
   render() {
-    // const startDate = this.state.startDate;
-    const {dateError, month, startDate} = this.state;
-    // const dayPickerProps = {
-    //   fromMonth: fromMonth,
-    //   toMonth: toMonth,
-    //   captionElement: ({ date, localeUtils }) => (
-    //     <YearMonthForm
-    //       date={date}
-    //       localeUtils={localeUtils}
-    //       onChange={this.handleYearMonthChange}
-    //       selectedDays={startDate}
-    //     />
-    //   )
-    // };
-    return (
-      <form className="new-routine-form">
-        <h1 className="new-routine-header">New Routine</h1>
+    const {dateError, creationSelection} = this.state;
+    const {
+      routineError,
+      createMeal,
+      mealErrors,
+      closeRoutineModal,
+      fetchMuscleGroups,
+      exerciseErrors,
+      createExercise,
+      muscleGroups
+    } = this.props;
 
-        <div className="start-date-input">
-          <label className="start-date-label">Select Start Date
-            <DatePicker
-              // dayPickerProps={dayPickerProps}
-              onChange={this.handleStartDate}
-              value={this.state.startDate}
-              // selectedDays={startDate}
-              // keepFocus={false}
-            />
-          </label>
-        </div>
-        <div className="date-error">
-            {dateError}
+    let content = null;
+    switch(creationSelection){
+      case 'routine':
+        content = (<form className="new-routine-form">
+            <h1 className="new-routine-header">New Routine</h1>
+            <div className="start-date-input">
+              <label className="start-date-label">Select Start Date
+                <DatePicker
+                  onChange={this.handleStartDate}
+                  value={this.state.startDate}
+                />
+              </label>
+            </div>
+            <div className="date-error">
+              {routineError.message}
+            </div>
+            <button className={`next-button ${routineError.message ? "disabled" : ""}`} onClick={this.handleNext}>
+              <div>Next</div>
+            </button>
+          </form>)
+            break;
+      case "meal":
+        content = <CreateMeal createMeal={createMeal} mealErrors={mealErrors}/>;
+        break;
+      case "exercise":
+        content = <CreateExercise muscleGroups={muscleGroups} createExercise={createExercise} exerciseErrors={exerciseErrors} fetchMuscleGroups={fetchMuscleGroups}/>
+        break;
+      default:
+        content = null;
+        break;
+    }
+    return (
+        <div className="new-creation-container">
+          <div className="creation-options">
+            <div className={creationSelection === 'routine' ? 'selected' : ''} onClick={() => this.handleCreationSelect("routine")}>Routine</div>
+            <div className={creationSelection === 'meal' ? 'selected' : ''} onClick={() => this.handleCreationSelect("meal")}>Meal</div>
+            <div className={creationSelection === 'exercise' ? 'selected' : ''} onClick={() => this.handleCreationSelect("exercise")}>Exercise</div>
           </div>
-        <button className={`next-button ${dateError ? "disabled" : ""}`} onClick={this.handleNext}>
-            <div>Next</div>
-        </button>
-      </form>
+          {content}
+        </div>
     );
   }
 }

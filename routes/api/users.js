@@ -42,7 +42,7 @@ router.get('/current', passport.authenticate('jwt', { session: false }), (req, r
         goalPath: req.user.goalPath,
         
     });
-})
+});
 
 
 router.post('/register', (req, res) => {
@@ -56,6 +56,7 @@ router.post('/register', (req, res) => {
         weightCur: req.body.weightStart,
         height: req.body.height,
         sex: req.body.sex,
+        goalPath: parseInt(req.body.goalPath)
     });
 
     let errors = {};
@@ -130,6 +131,18 @@ router.post('/register', (req, res) => {
         };
     }
 
+    if ([1,2].includes(req.body.goalPath)) {
+        errors.goalPath = {
+            message: 'Path `goal path` must be selected.',
+            name: 'ValidatorError',
+            properties: {
+                message: 'goal path must be selected.',
+                type: "not valid",
+                path: "goalPath"
+            }
+        };
+    }
+
     if (Object.keys(errors).length !== 0) return res.status(422).json(errors)
     bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(newUser.password, salt, (err, hash) => {
@@ -145,7 +158,7 @@ router.post('/register', (req, res) => {
                         payload,
                         keys.secretOrKey,
                         // Tell the key to expire in one hour
-                        { expiresIn: 3600 },
+                        { expiresIn: 604_800 },
                         (err, token) => {
                             res.json({
                                 success: true,
@@ -167,8 +180,7 @@ router.post('/login', (req, res) => {
     if (!isValid) {
         return res.status(400).json(errors);
     }
-
-    User.findOne({ username })
+    User.findOne({ username: new RegExp(`^${username}$`, 'i')})
         .then(user => {
             if (!user) {
                 // Use the validations to send the error
@@ -186,7 +198,7 @@ router.post('/login', (req, res) => {
                             payload,
                             keys.secretOrKey,
                             // Tell the key to expire in one hour
-                            { expiresIn: 3600 },
+                            { expiresIn: 604_800 },
                             (err, token) => {
                                 if (err){
                                     return res.status(400).json(errors);
@@ -201,7 +213,7 @@ router.post('/login', (req, res) => {
                         return res.status(400).json({password: 'Invalid credentials'});
                     }
                 })
-        })
+        }).catch(err => console.log(err))
 })
 router.get('/:username', (req, res) => {
     User.findOne({ username: req.params.username })
@@ -239,7 +251,7 @@ router.post('/:username/update', passport.authenticate('jwt', { session: false }
                     payload,
                     keys.secretOrKey,
                     // Tell the key to expire in one hour
-                    { expiresIn: 3600 },
+                    { expiresIn: 604_800 },
                     (err, token) => {
                         if (err) return res.json(err)
                         return res.json({

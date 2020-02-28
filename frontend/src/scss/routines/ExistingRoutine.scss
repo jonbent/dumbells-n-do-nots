@@ -1,0 +1,65 @@
+.existing-days-container{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    .or-container{
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        div:not(:nth-of-type(2)){
+            margin: 1rem;
+            border-bottom: 1px solid gray;
+            width: 75%;
+            height: 0px;
+        }
+    }
+    .edit-routine-container{
+        margin: 1rem 0rem;
+        padding: 1rem 0rem;
+        box-shadow: 0px 4px 3px -2px gray;
+        .edit-routine{
+            box-shadow: 2px 2px 6px black;
+            cursor: pointer;
+            padding: 1rem;
+            background-color: pink;
+            text-shadow: 1px 1px 3px lightskyblue;
+            border-radius: 5px;
+            margin: 0.5rem 2rem;
+        }
+    }
+
+    .title{
+        color: pink;
+        text-shadow: 1px 1px 3px black;
+        margin-top: 1rem;
+        font-size: 150%;
+    }
+    .meal-title{
+      text-align: start;
+    }
+    .date-error{
+        margin-top: 1rem;
+        color: red;
+        font-style: italic;
+    }
+    .react-date-picker{
+        margin: 2rem 3rem 0 3rem;
+        .react-date-picker__calendar{
+            left: -3rem !important;
+        }
+    }
+    .submit{
+        margin: 2rem 1rem;
+        background-color: pink;
+        padding: 2rem;
+        border-radius: 5px;
+        font-size: 150%;
+        text-shadow: 1px 1px 3px lightskyblue;
+        box-shadow: 2px 2px 6px black;
+        cursor: pointer;
+    }
+    .submit.disabled{
+        background-color: rgba(0,0,0,0.5);
+        cursor: default;
+    }
+}
