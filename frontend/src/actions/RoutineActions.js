@@ -48,3 +48,14 @@ export const fetchRoutineById = id => dispatch => {
         .then(res => dispatch(receiveUserRoutine(res.data)))
         .catch(err => console.log(err))
 }
+
+export const toggleExercise = (dayId, exerciseId) => dispatch => {
+    return RoutineApiUtil.toggleExercise(dayId, exerciseId)
+        .then(res => dispatch(receiveUserRoutine(res.data)))
+        .catch(err => console.log(err))
+}
+export const updateDaysMeal = (dayId, mealId, val) => dispatch => {
+    return RoutineApiUtil.updateDaysMeal(dayId, mealId, val)
+        .then(res => dispatch(receiveUserRoutine(res.data)))
+        .catch(err => console.log(err))
+}

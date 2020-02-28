@@ -17,6 +17,9 @@
         div:last-of-type{
             border-radius: 0px 5px 5px 0px;
         }
+        div:not(:last-of-type){
+            border-right: 1px solid pink;
+        }
         div.selected{
             cursor: default;
             background-color: pink;

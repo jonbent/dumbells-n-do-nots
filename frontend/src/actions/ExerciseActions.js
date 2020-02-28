@@ -4,6 +4,7 @@ export const RECEIVE_EXERCISES_BY_MUSCLE_GROUPS = "RECEIVE_EXERCISES_BY_MUSCLE_G
 export const RECEIVE_ALL_EXERCISES = "RECEIVE_ALL_EXERCISES";
 export const RECEIVE_USER_EXERCISES = "RECEIVE_USER_EXERCISES";
 export const RECEIVE_NEW_EXERCISE = "RECEIVE_NEW_EXERCISE";
+export const RECEIVE_EXERCISE_ERRORS = "RECEIVE_EXERCISE_ERRORS";
 
 export const receiveAllExercises = exercises =>({
     type: RECEIVE_ALL_EXERCISES,
@@ -24,6 +25,14 @@ export const receiveNewExercises = exercise =>({
     type: RECEIVE_NEW_EXERCISE,
     exercise
 });
+export const receiveNewExercise = exercise =>({
+    type: RECEIVE_NEW_EXERCISE,
+    exercise
+});
+export const receiveExerciseErrors = errors =>({
+    type: RECEIVE_NEW_EXERCISE,
+    errors
+});
 
 export const fetchAllExercises = () => dispatch => (
     ExerciseApiUtil.getAllExercises()
@@ -43,12 +52,12 @@ export const fetchUserExercises = id => dispatch => (
         .catch(err => console.log(err))
 );
 
-export const createExercises = data => dispatch => (
-    ExerciseApiUtil.createExercises(data)
-        .then(exercise => dispatch(receiveNewExercises(exercise)))
-        .catch(err => console.log(err))
+export const createExercise = data => dispatch => (
+    ExerciseApiUtil.createExercise(data)
+        .then(res => dispatch(receiveNewExercise(res.data.newExercise)))
+        .catch(err => {
+            dispatch(receiveExerciseErrors(err.response.data));
+            throw "Exercise failed to create with given info";
+        })
 );
-
-
-
 

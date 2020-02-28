@@ -10,7 +10,6 @@ class CreateMeal extends Component {
             carbs: "",
             protein: "",
             fat: "",
-            photoUrl: "",
             prepTime: "",
             mealPicFile: null,
             mealPic: "https://spoonacular.com/recipeImages/125276-312x231.png",
@@ -21,6 +20,7 @@ class CreateMeal extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
     handleSubmit(e){
+        e.preventDefault();
         const {title, description, carbs, protein, fat, mealPicFile} = this.state;
         const formData = new FormData();
         formData.append('title', title);
@@ -30,12 +30,12 @@ class CreateMeal extends Component {
         formData.append('fat', fat);
 
         if (this.state.mealPicFile) {
-            formData.append("avatarUrl", mealPicFile);
+            formData.append("photoUrl", mealPicFile);
         }
         this.props.createMeal(formData)
     }
     handleChange(e, field){
-        if (["calories", "carbs", "protein", "fat"].includes(field) && isNaN(e.target.value) && e.target.value !== "") return null;
+        if (isNaN(e.target.value) && e.target.value !== "" && ["calories", "carbs", "protein", "fat"].includes(field)) return null;
         this.setState({
             [field]: e.target.value
         })

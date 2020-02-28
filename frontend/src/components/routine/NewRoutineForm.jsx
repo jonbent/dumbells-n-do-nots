@@ -1,11 +1,11 @@
 import React from 'react';
-// import {Link} from 'react-router-dom';
+import CreateMeal from "../meals/CreateMeal";
+import CreateExercise from '../exercises/CreateExercise'
+
 import DatePicker from "react-date-picker";
 import DateFormat from 'dateformat'
-// import "react-day-picker/lib/style.css";
+
 import "../../scss/newRoutineForm.scss"
-import {fetchRoutineByStartDate} from "../../util/RoutineApiUtil";
-import CreateMeal from "../meals/CreateMeal";
 
 
 class NewRoutineForm extends React.Component {
@@ -54,7 +54,17 @@ class NewRoutineForm extends React.Component {
 
   render() {
     const {dateError, creationSelection} = this.state;
-    const {routineError, createMeal, mealErrors} = this.props;
+    const {
+      routineError,
+      createMeal,
+      mealErrors,
+      closeRoutineModal,
+      fetchMuscleGroups,
+      exerciseErrors,
+      createExercise,
+      muscleGroups
+    } = this.props;
+
     let content = null;
     switch(creationSelection){
       case 'routine':
@@ -79,6 +89,9 @@ class NewRoutineForm extends React.Component {
       case "meal":
         content = <CreateMeal createMeal={createMeal} mealErrors={mealErrors}/>;
         break;
+      case "exercise":
+        content = <CreateExercise muscleGroups={muscleGroups} createExercise={createExercise} exerciseErrors={exerciseErrors} fetchMuscleGroups={fetchMuscleGroups}/>
+        break;
       default:
         content = null;
         break;
@@ -88,6 +101,7 @@ class NewRoutineForm extends React.Component {
           <div className="creation-options">
             <div className={creationSelection === 'routine' ? 'selected' : ''} onClick={() => this.handleCreationSelect("routine")}>Routine</div>
             <div className={creationSelection === 'meal' ? 'selected' : ''} onClick={() => this.handleCreationSelect("meal")}>Meal</div>
+            <div className={creationSelection === 'exercise' ? 'selected' : ''} onClick={() => this.handleCreationSelect("exercise")}>Exercise</div>
           </div>
           {content}
         </div>

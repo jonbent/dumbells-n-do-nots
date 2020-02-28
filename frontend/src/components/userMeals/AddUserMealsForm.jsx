@@ -4,6 +4,7 @@ import '../../scss/UserMealsModal.scss'
 
 import MealItem from "../meals/MealItem";
 import FiltersModal from "../modal/FiltersModal";
+import { debounce } from 'lodash'
 class AddUserMealsForm extends React.Component{
     constructor(props){
         super(props);
@@ -13,6 +14,8 @@ class AddUserMealsForm extends React.Component{
             selectedMeals: {},
             minCals: 500,
             maxCals: 625,
+            mealSearch: "",
+            ignoringFilters: false
         }
         this.updateField = this.updateField.bind(this);
         this.handleSetDate = this.handleSetDate.bind(this);
@@ -21,6 +24,9 @@ class AddUserMealsForm extends React.Component{
         this.handleSelectMeal = this.handleSelectMeal.bind(this);
         this.handleSubmitWeekMeals = this.handleSubmitWeekMeals.bind(this);
         this.handleSubmitDayMeals = this.handleSubmitDayMeals.bind(this);
+        this.handleSearchInputChange = this.handleSearchInputChange.bind(this);
+        this.handleFilterIngore = this.handleFilterIngore.bind(this);
+        this.emitSearchInputChangeDebounce = debounce(this.emitSearchInputChange, 500);
     }
 
     async handlePageChange(page){
@@ -32,7 +38,14 @@ class AddUserMealsForm extends React.Component{
     componentDidMount(){
         // this.props.fetchApiFilteredMeals(400, 500)
         let selectedMealIds = [];
-        Object.values(this.props.daySelect).forEach((day) => selectedMealIds = selectedMealIds.concat(Object.keys(day.meals)));
+        if (!!this.props.single){
+            selectedMealIds = this.props.userMeals.map(uMeal => {
+
+                return selectedMealIds.push(uMeal.meal)
+            })
+        } else {
+            Object.values(this.props.daySelect).forEach((day) => selectedMealIds = selectedMealIds.concat(Object.keys(day.meals)));
+        }
         this.props.fetchSelectedMeals(selectedMealIds);
         this.fetchMeals();
     }
@@ -44,7 +57,32 @@ class AddUserMealsForm extends React.Component{
         // if(e.target.value.include(".")) return null;
         //
     }
-
+    async emitSearchInputChange(val){
+        const {changePage, fetchMeals, pageSize, minCals, maxCals} = this.props;
+        if (val !== ""){
+            await changePage(1);
+            const fetchOptions = { pageSize, pageNum: 1, searchTerm: val};
+            if (!this.state.ignoringFilters){
+                fetchOptions.minCals = minCals;
+                fetchOptions.maxCals = maxCals;
+            }
+            await fetchMeals(fetchOptions);
+        } else {
+            this.fetchMeals();
+        }
+    }
+    handleSearchInputChange(e){
+        const val = e.target.value;
+        this.setState({
+            mealSearch: val
+        });
+        this.emitSearchInputChangeDebounce(val);
+    }
+    handleFilterIngore(){
+        this.setState({
+            ignoringFilters: !this.state.ignoringFilters
+        }, () => this.state.mealSearch ? this.emitSearchInputChange(this.state.mealSearch) : null)
+    }
     handleSetDate(day, increment = null){
         const dayIndex = this.daySelectKeys.indexOf(this.props.day);
         if (increment !== null && !day){
@@ -60,17 +98,22 @@ class AddUserMealsForm extends React.Component{
         this.setState({toggleShowMeals: true})
     }
     handleSelectMeal(mealId, num = 0){
-        const routine = this.props.daySelect;
-        let sumMeals = Object.values(routine[this.props.day].meals).reduce((acc, el) => acc + el, 0);
-        if (num + sumMeals > this.props.numMeals) return null;
-        if (!routine[this.props.day].meals[mealId]){
-            if (num <= 0) return null;
-            routine[this.props.day].meals[mealId] = num;
+        if (!this.props.single){
+            const routine = this.props.daySelect;
+            let sumMeals = Object.values(routine[this.props.day].meals).reduce((acc, el) => acc + el, 0);
+            if (num + sumMeals > this.props.numMeals) return null;
+            if (!routine[this.props.day].meals[mealId]){
+                if (num <= 0) return null;
+                routine[this.props.day].meals[mealId] = num;
+            } else {
+                if (num + routine[this.props.day].meals[mealId] < 0) return null;
+                routine[this.props.day].meals[mealId] += num;
+            }
+            this.props.saveRoutine(routine)
         } else {
-            if (num + routine[this.props.day].meals[mealId] < 0) return null;
-            routine[this.props.day].meals[mealId] += num;
+            this.props.updateDaysMeal(this.props.dbDay._id, mealId, num)
         }
-        this.props.saveRoutine(routine)
+
     }
 
     handleSubmitDayMeals(){
@@ -81,14 +124,15 @@ class AddUserMealsForm extends React.Component{
     }
 
     render(){
-        let meals;
-        const {daySelect, totalMeals, day, allMeals, openMealsFilters, curPage, pageSize, singleDay} = this.props;
-
-        this.daySelectKeys = Object.keys(daySelect);
+        let mealList;
+        const {daySelect, totalMeals, day, allMeals, openMealsFilters, curPage, pageSize, singleDay, single = false, dbDay, userMeals} = this.props;
+        const {mealSearch, toggleShowMeals, ignoringFilters} = this.state;
         let selectedDay;
-
-        const daySelectedMeals = new Set();
-        const calorieCounts = this.daySelectKeys.map((dateString, idx) => {
+        let daySelectedMeals = new Set();
+        let calorieCounts;
+        let calorieCountClass;
+        if (!single){
+            calorieCounts = this.daySelectKeys.map((dateString, idx) => {
             const mealKeys =  Object.keys(daySelect[dateString].meals);
             if (dateString === day) selectedDay = idx;
             return mealKeys
@@ -98,18 +142,35 @@ class AddUserMealsForm extends React.Component{
                         acc + (allMeals[mealId].calories * daySelect[dateString].meals[mealId]) :
                         acc + 0;
                 }, 0)
-        });
+            });
+            daySelectedMeals = Array.from(daySelectedMeals);
+            this.daySelectKeys = Object.keys(daySelect);
+            calorieCountClass = calorieCounts[selectedDay] < 1800 ?
+                "too-low" :
+                calorieCounts[selectedDay] > 2800 ? 'too-high' : "just-right";
+        } else {
+            calorieCounts = userMeals.reduce((acc, el) => acc + (allMeals[el.meal].calories * el.quantity), 0);
+            calorieCountClass = calorieCounts < 1800 ?
+                "too-low" :
+                calorieCounts > 2800 ? 'too-high' : "just-right";
+            daySelectedMeals = userMeals.filter(m => m.quantity > 0).map(m => m.meal);
+        }
 
-        const calorieCountClass = calorieCounts[selectedDay] < 1800 ?
-            "too-low" :
-            calorieCounts[selectedDay] > 2800 ? 'too-high' : "just-right";
-        if (this.state.toggleShowMeals){
+        if (toggleShowMeals){
             const mealsArray = Object.values(this.props.meals);
-            meals = mealsArray.length > 0 ? (
+            mealList = mealsArray.length > 0 ? (
                 <div className="meal-list">
                     {mealsArray.map(meal => {
-                            return <MealItem meal={meal} key={meal._id} daySelect={daySelect}
-                                      handleSelectMeal={this.handleSelectMeal} day={day}/>
+                            return <MealItem
+                                meal={meal}
+                                key={meal._id}
+                                daySelect={daySelect}
+                                handleSelectMeal={this.handleSelectMeal}
+                                day={day}
+                                single={!!single}
+                                dbDay={dbDay}
+                                userMeals={userMeals}
+                            />
                         }
                     )}
                     <div className="pagination-container">
@@ -150,17 +211,34 @@ class AddUserMealsForm extends React.Component{
                         {!singleDay && <div onClick={() => this.handleSetDate( null, 1)}>Next</div>}
                     </div>
                 </div>
-                <div className={`calorie-count ${calorieCountClass}`}>Total Calories: {calorieCounts[selectedDay]}</div>
+                <div className={`calorie-count ${calorieCountClass}`}>Total Calories: {!single ? calorieCounts[selectedDay] : calorieCounts}</div>
+                <div className="meal-search">
+                    <div className="search-headers">
+                        <div>Search for meals</div>
+                        <div className={`ignore-filters ${ignoringFilters ? "ignoring" : ""}`} onClick={this.handleFilterIngore}>{ignoringFilters ? "Enable Filters for Search" : "Disable Filters for Search"}</div>
+                    </div>
+                    <input placeholder="Search by title..." value={mealSearch} onChange={this.handleSearchInputChange}/>
+                </div>
                 <div className={"selected-meals"}>
                     <div>Meals Selected</div>
-                    {Array.from(daySelectedMeals).map(mealId => {
+                    {daySelectedMeals.map(mealId => {
                         if (!allMeals[mealId]) return null;
                         return (
-                            <MealItem key={mealId} meal={allMeals[mealId]} selected={false} daySelect={daySelect} day={day} handleSelectMeal={this.handleSelectMeal}/>
+                            <MealItem
+                                key={mealId}
+                                meal={allMeals[mealId]}
+                                selected={false}
+                                daySelect={daySelect}
+                                userMeals={userMeals}
+                                dbDay={dbDay}
+                                day={day}
+                                handleSelectMeal={this.handleSelectMeal}
+                                single={single}
+                            />
                         )
                     })}
                 </div>
-                {meals}
+                {mealList}
             </div>
         )
     }

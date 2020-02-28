@@ -23,10 +23,10 @@ module.exports = function validateMealInput(data) {
     // if (Validator.isEmpty(data.description)) {
     //     errors.description = 'Description is required';
     // }
-
-    if (Validator.isEmpty(data.calories)) {
-        errors.calories = 'calories field is required';
-    }
+    //
+    // if (Validator.isEmpty(data.calories)) {
+    //     errors.calories = 'calories field is required';
+    // }
 
     if (Validator.isEmpty(data.protein)) {
         errors.protein = 'protein field is required';

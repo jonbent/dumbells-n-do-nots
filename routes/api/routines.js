@@ -80,7 +80,6 @@ router.put('/:routineId/days/:dayId', passport.authenticate("jwt", { session: fa
         dayMeals.push({meal: mealId, quantity: req.body.meals[mealId], day: day._id});
     });
     const exercises = Object.keys(req.body.workout).filter(eId => !!req.body.workout[eId]);
-    console.log(exercises)
     try {
 
         await UserMeal.deleteMany({day: day.id});
@@ -153,7 +152,61 @@ router.put("/days/:dayId/:completableType/:completableId", passport.authenticate
             return res.status(422).json({message: "Cannot find completeable type"});
         }
         res.redirect(303, `/api/routines/${routine._id}`);
+});
+
+router.patch('/days/:dayId/meals/:mealId', passport.authenticate('jwt', {session: false}), async(req, res) => {
+    if (isNaN(req.body.val) || !req.body.val) return res.status(422).json({message: "Val must be a valid number."});
+    const day = await Day.findOne({_id: req.params.dayId});
+    if (!day) return res.status(422).json({message: "Day not found"});
+
+    const meal = await Meal.findOne({_id: req.params.mealId});
+    if (!meal) return res.status(422).json({message: "Meal not found"});
+
+    const routine = await Routine.findOne({_id: day.routine});
+    if (!routine) return res.status(422).json({message: "Routine not found"});
+
+    if (routine.user.toString() !== req.user._id.toString()) return res.status(401).json({message: "Unathorized to edit routine."})
+    let userMeal = await UserMeal.findOne({day: day._id, meal: meal._id});
+    const val = parseInt(req.body.val);
+    if (!userMeal) {
+        if (req.body.val <= 0) return res.status(422).json({message: "User meal cannot have a negative value for quantity."})
+        userMeal = new UserMeal({day: day._id, meal: meal._id, quantity: val});
+        day.meals.push(userMeal._id);
+        day.save();
+    } else {
+        if (val + userMeal.quantity < 0) return res.status(422).json({message: "User meal cannot have a negative value for quantity."})
+        userMeal.quantity += val;
+    }
+    userMeal.save();
+    return res.redirect(303, `/api/routines/${routine._id}`)
 })
+router.patch('/days/:dayId/exercises/:exerciseId', passport.authenticate('jwt', {session: false}), async(req, res) => {
+    const day = await Day.findOne({_id: req.params.dayId});
+    if (!day) return res.status(422).json({message: "Day not found"});
+    const routine = await Routine.findOne({_id: day.routine});
+    if (!routine) return res.status(422).json({message: "Routine not found"});
+    if (routine.user.toString() !== req.user._id.toString()) return res.status(401).json({message: "Unathorized to edit routine."})
+    let userWorkout = await UserWorkout.findOne({day: day._id});
+    let selected = false;
+    if (!userWorkout) {
+        userWorkout = new UserWorkout({day: day._id, exercises: [req.params.exerciseId]});
+        day.workout = userWorkout._id;
+        day.save();
+    } else {
+        selected = userWorkout.exercises.indexOf(req.params.exerciseId);
+        if (selected !== -1){
+            userWorkout.exercises.splice(selected, 1);
+        } else {
+            userWorkout.exercises.push(req.params.exerciseId)
+        }
+    }
+    userWorkout.save()
+    res.redirect(303, `/api/routines/${routine._id}`);
+
+
+
+})
+
 
 
 //let user create a routine
@@ -199,7 +252,7 @@ router.post("/", passport.authenticate("jwt", { session: false }), async (req, r
                     Object.keys(req.body[dayString].meals).forEach((mealId) => {
                         dayMeals.push({meal: mealId, quantity: req.body[dayString].meals[mealId], day: days[idx]._id});
                     });
-                    if ( req.body[dayString].workout.length !== 0 ) dayWorkout = {day: days[idx]._id, exercises: req.body[dayString].workout};
+                    if ( req.body[dayString].workout.length !== 0 ) dayWorkout = {day: days[idx]._id, exercises: Object.keys(req.body[dayString].workout).filter(exerciseId => req.body[dayString].workout[exerciseId] === true)};
                     let meals;
                     let newWorkout;
                     let workout;

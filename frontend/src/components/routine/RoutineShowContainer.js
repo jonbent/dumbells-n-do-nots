@@ -17,7 +17,8 @@ const mapStateToProps = ({entities, session}) => {
         })
     }
     let curDayIdx = 0;
-    curDates.forEach((el, idx) => {if (el._id === curDate._id) curDayIdx = idx});
+    const daysHash = {}
+    curDates.forEach((el, idx) => {daysHash[el._id] = el; if (el._id === curDate._id) curDayIdx = idx;});
 
     return {
         user: session.user,
@@ -27,6 +28,7 @@ const mapStateToProps = ({entities, session}) => {
         exercises: entities.exercises,
         userWorkouts: entities.userWorkouts,
         days: curDates,
+        daysHash,
         curDay: curDate,
         curDayIdx
     }

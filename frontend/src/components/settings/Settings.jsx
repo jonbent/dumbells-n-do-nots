@@ -4,6 +4,7 @@ import "../../scss/settings.scss";
 import DateFormat from "dateformat";
 import Modal from "../modal/Modal";
 import FiltersModal from "../modal/FiltersModal";
+import Alert from "../alerts/Alert";
 
 
 
@@ -94,6 +95,7 @@ class Settings extends Component {
     return (
       <div className="settings-page">
         <Modal/>
+        <Alert/>
         <FiltersModal/>
         <div className="main-container">
           <div className="image">

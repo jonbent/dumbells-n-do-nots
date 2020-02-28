@@ -19,16 +19,16 @@ export default class ExerciseSelector extends Component {
         this.props.receiveDaySelected(val)
     }
     render() {
-        const {muscleGroups, selectedExercises, days, day, selectedMuscleGroupIds, exercises, exerciseDays, closeSelector, curRoutine, editing } = this.props;
+        const {muscleGroups, selectedExercises, days, day, selectedMuscleGroupIds, exercises, exerciseDays = [], closeSelector, curRoutine, editing } = this.props;
 
         // separate exercises by muscle group
         const allExercises = {};
         selectedMuscleGroupIds.forEach(id => allExercises[id] = []);
         if (selectedMuscleGroupIds.length)
-        Object.values(exercises).forEach(e => {
+            Object.values(exercises).forEach(e => {
             if (allExercises[e.muscleGroup]) allExercises[e.muscleGroup].push(e)
         });
-
+        const muscleGroupKeys = Object.keys(muscleGroups)
         return (
             <div className="exercise-selector-container">
                 <MuscleGroupSelectorContainer selectedMuscleGroupIds={selectedMuscleGroupIds}/>
@@ -49,7 +49,7 @@ export default class ExerciseSelector extends Component {
                         {days.map((date, idx) => <option key={date} value={date}>{date}</option>)}
                     </select>
                 </div>}
-                {selectedMuscleGroupIds.length !== 0 && <div className="group-exercises-container">
+                {muscleGroupKeys.length && selectedMuscleGroupIds.length !== 0 && <div className="group-exercises-container">
                         {selectedMuscleGroupIds.map(groupId => {
                             return (
                                 <div className="group-exercise-list" key={groupId}>

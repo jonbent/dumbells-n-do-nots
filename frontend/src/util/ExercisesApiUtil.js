@@ -13,6 +13,6 @@ export const getUserExercises = id => {
     return axios.get(`/api/exercises/user/${id}`)
 };
 
-export const createExercises = data => { 
+export const createExercise = data => {
     return axios.post('/api/exercises', data)
 };

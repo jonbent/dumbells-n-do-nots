@@ -42,7 +42,7 @@ router.get('/current', passport.authenticate('jwt', { session: false }), (req, r
         goalPath: req.user.goalPath,
         
     });
-})
+});
 
 
 router.post('/register', (req, res) => {
@@ -158,7 +158,7 @@ router.post('/register', (req, res) => {
                         payload,
                         keys.secretOrKey,
                         // Tell the key to expire in one hour
-                        { expiresIn: 3600 },
+                        { expiresIn: 604_800 },
                         (err, token) => {
                             res.json({
                                 success: true,
@@ -198,7 +198,7 @@ router.post('/login', (req, res) => {
                             payload,
                             keys.secretOrKey,
                             // Tell the key to expire in one hour
-                            { expiresIn: 3600 },
+                            { expiresIn: 604_800 },
                             (err, token) => {
                                 if (err){
                                     return res.status(400).json(errors);
@@ -251,7 +251,7 @@ router.post('/:username/update', passport.authenticate('jwt', { session: false }
                     payload,
                     keys.secretOrKey,
                     // Tell the key to expire in one hour
-                    { expiresIn: 3600 },
+                    { expiresIn: 604_800 },
                     (err, token) => {
                         if (err) return res.json(err)
                         return res.json({

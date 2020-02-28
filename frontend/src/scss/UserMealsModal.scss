@@ -42,6 +42,40 @@
       padding: 0.5rem 1rem;
     }
   }
+  .meal-search{
+    display: flex;
+    flex-direction: column;
+    .search-headers{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      div{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        align-items: center;
+      }
+      .ignore-filters{
+        background-color: pink;
+        color: black;
+        border: 1px solid pink;
+        border-radius: 5px;
+        margin-top: 1rem;
+        padding: 1rem 0;
+        cursor: pointer;
+      }
+      .ignore-filters.ignoring{
+        background-color: black;
+        color: pink;
+      }
+    }
+    input{
+      margin-top: 1rem;
+      text-align: center;
+      font-size: 150%;
+    }
+  }
   .calorie-count{
     text-align: center;
     display: flex;
@@ -149,6 +183,19 @@
   justify-content: space-between;
 }
 
+@media only screen and (min-width: 540px) {
+  .meal-selector {
+    .meal-search {
+      .search-headers {
+        flex-direction: row;
+        justify-content: space-between;
+        .ignore-filters{
+          margin-top: 0;
+        }
+      }
+    }
+  }
+}
 @media only screen and (max-width: 630px) {
   .meal-selector{
     .meal-list{

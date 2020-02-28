@@ -5,6 +5,9 @@ import {createMeal} from '../../actions/MealActions';
 import {receiveNewRoutineStartDate, receiveRoutineErrors} from '../../actions/NewRoutineActions'
 import { openModal, closeModal } from '../../actions/ModalActions';
 import {fetchRoutineByStartDate} from "../../util/RoutineApiUtil";
+import {receiveAlert} from "../../actions/AlertActions";
+import {fetchMuscleGroups} from "../../actions/MuscleGroupActions";
+import {createExercise} from "../../actions/ExerciseActions";
 
 // import DateFormat from 'dateformat';
 
@@ -17,7 +20,9 @@ const mapStateToProps = (state) => {
             user: state.session.user.id,
         },
         routineError: state.errors.routine,
-        mealErrors: state.errors.meal
+        mealErrors: state.errors.meal,
+        exerciseErrors: state.errors.exercise,
+        muscleGroups: state.entities.muscleGroups
     }
 };
 
@@ -30,7 +35,21 @@ const mapDispatchToProps = dispatch => ({
         cb(date);
         dispatch(receiveRoutineErrors(err.response.data))
     }),
-    createMeal: mealForm => dispatch(createMeal(mealForm))
+    createMeal: mealForm => {
+        return dispatch(createMeal(mealForm)).then((res) => {
+            dispatch(closeModal());
+            dispatch(receiveAlert({message: "Meal created successfully.", status: "success"}));
+        }).catch((err) => {
+            dispatch(receiveAlert({message: err, status: "fail"}));
+        })
+    },
+    fetchMuscleGroups: () => dispatch(fetchMuscleGroups()),
+    createExercise: formExercise => dispatch(createExercise(formExercise)).then(res => {
+        dispatch(closeModal());
+        dispatch(receiveAlert({message: "Exercise created successfully.", status: "success"}));
+    }).catch(err => {
+        dispatch(receiveAlert({message: err, status: "fail"}));
+    })
 });
 
 export default connect(

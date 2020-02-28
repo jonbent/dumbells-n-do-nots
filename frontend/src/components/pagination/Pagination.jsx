@@ -16,8 +16,6 @@ export default class Pagination extends Component {
         this.toggleDropDown = this.toggleDropDown.bind(this)
     }
     toggleDropDown(){
-        console.log(this.props.itemsAmount)
-        console.log(this.props.pageSize)
         const numPages = Math.ceil(this.props.itemsAmount / this.props.pageSize);
         if (numPages === 0) return null;
         this.setState({
