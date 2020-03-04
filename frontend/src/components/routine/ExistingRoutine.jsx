@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import RoutineDay from "./RoutineDay";
 import DatePicker from "react-date-picker"
 import "../../scss/routines/ExistingRoutine.scss";
-import {fetchRoutineByStartDate} from "../../util/RoutineApiUtil";
 import EditWorkout from "../days/EditWorkout";
 import EditMeals from "../days/EditMeals";
 import dateFormat from 'dateformat'
@@ -55,10 +54,6 @@ class ExistingRoutine extends Component {
         const {days, userMeals, workouts} = this.props;
         this.props.receiveNewRoutineStartDateWithData(date, {days, userMeals, workouts});
     }
-
-    handleEditSubmit(){
-
-    }
     closeSelector(){
         if (this.state.selectedWorkoutDay) this.props.submitEdit(this.state.selectedWorkoutDay, this.props.submitableRoutine[this.props.daySelected]);
         if (this.state.selectedMealsDay) this.props.submitEdit(this.state.selectedMealsDay, this.props.submitableRoutine[this.props.daySelected]);
@@ -75,7 +70,7 @@ class ExistingRoutine extends Component {
     }
 
     render() {
-        const {days, userMeals, meals, workouts, exercises, daySelected, routineError, receiveDaySelected, submitableRoutine, closeModal} = this.props;
+        const {days, userMeals, daySelected, routineError, closeModal} = this.props;
         const curDate = new Date();
         curDate.setHours(0,0,0,0);
         if (!days.length) return null;

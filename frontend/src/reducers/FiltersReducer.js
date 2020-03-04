@@ -1,6 +1,5 @@
 import { RECEIVE_SESSION_ERRORS } from '../actions/SessionActions';
 import { RECEIVE_NEXT_STEP, RECEIVE_PAGE_SIZE, RECEIVE_PAGE_NUM, UPDATE_FILTER } from '../actions/FilterActions'
-import { OPEN_MODAL } from '../actions/ModalActions';
 import {RECEIVE_ALL_MEALS} from "../actions/MealActions";
 
 export default function(state = {}, action) {

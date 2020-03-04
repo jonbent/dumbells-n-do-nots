@@ -1,6 +1,5 @@
 import { RECEIVE_USER_MEALS, RECEIVE_NEW_MEAL, RECEIVE_ALL_MEALS } from '../actions/MealActions';
 import { RECEIVE_API_FILTERED_MEALS} from '../actions/UserMealActions'
-import {RECEIVE_USER_ROUTINE} from "../actions/RoutineActions";
 
 const MealsReducer = (state = {}, action) => {
     let newState = {};
