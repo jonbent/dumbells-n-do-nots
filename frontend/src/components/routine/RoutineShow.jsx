@@ -46,7 +46,10 @@ class RoutineShow extends Component {
     render() {
         const {days, userMeals, daysHash} = this.props;
         const {curDay, selectedWorkoutDay, selectedMealsDay} = this.state;
-        if (!days.length) return null;
+        if (!days.length) return <div className="RoutineShow"><div className="not-found">
+                <div className="title">Current Routine not found.</div>
+                <div className="create"><div onClick={this.props.openNewRoutineModal}>Create New Routine</div></div>
+        </div></div>;
         const dayValues = Object.values(days);
         if (!!selectedWorkoutDay) {
 

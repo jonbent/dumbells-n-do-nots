@@ -45,6 +45,7 @@ router.get('/user/:userId/single', async (req, res) => {
     curDate.setDate(curDate.getDate() + 1);
     const routines = await Routine.find({user: req.params.userId});
     let date = await Day.findOne({date: {$eq: curDate}, routine: {$in: routines.map(r => r._id)}})
+    if (!date) return res.status(400).json({errors: {routine: "Cannot find given routine"}});
     const routine = await Routine.findOne({user: req.params.userId, _id: date.routine});
     if (!routine) return res.status(400).json({errors: {routine: "Cannot find given routine"}});
     const response = {days: [], userMeals: {}, workouts: {}, routine};
