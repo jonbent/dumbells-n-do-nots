@@ -14,6 +14,7 @@ export default class Login extends Component {
         }
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleUpdate = this.handleUpdate.bind(this)
+        this.handleDemoLogin = this.handleDemoLogin.bind(this)
     }
 
     componentWillUnmount(){
@@ -23,6 +24,12 @@ export default class Login extends Component {
     handleUpdate(field, e){
         this.setState({[field]: e.target.value})
     }
+
+    handleDemoLogin(){
+      this.setState({username: "DemoUser", password: "Password1"})
+      setTimeout(() => this.props.login(this.state), 500)
+    }
+
     handleSubmit(e){
         e.preventDefault();
         this.props.login(this.state)
@@ -66,6 +73,7 @@ export default class Login extends Component {
                 {passwordError}
                 <input type="submit" value="Log In" />
               </form>
+              <div className="demo-login" onClick={this.handleDemoLogin}>Demo User</div>
                 <div className="separator-container">
                     <span className="separator"></span>
                     <span>OR</span>
