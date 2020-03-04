@@ -3,8 +3,8 @@ import Pagination from '../pagination/Pagination'
 import '../../scss/UserMealsModal.scss'
 
 import MealItem from "../meals/MealItem";
-import FiltersModal from "../modal/FiltersModal";
 import { debounce } from 'lodash'
+
 class AddUserMealsForm extends React.Component{
     constructor(props){
         super(props);
@@ -132,6 +132,7 @@ class AddUserMealsForm extends React.Component{
         let calorieCounts;
         let calorieCountClass;
         if (!single){
+            this.daySelectKeys = Object.keys(daySelect);
             calorieCounts = this.daySelectKeys.map((dateString, idx) => {
             const mealKeys =  Object.keys(daySelect[dateString].meals);
             if (dateString === day) selectedDay = idx;
@@ -144,7 +145,7 @@ class AddUserMealsForm extends React.Component{
                 }, 0)
             });
             daySelectedMeals = Array.from(daySelectedMeals);
-            this.daySelectKeys = Object.keys(daySelect);
+
             calorieCountClass = calorieCounts[selectedDay] < 1800 ?
                 "too-low" :
                 calorieCounts[selectedDay] > 2800 ? 'too-high' : "just-right";

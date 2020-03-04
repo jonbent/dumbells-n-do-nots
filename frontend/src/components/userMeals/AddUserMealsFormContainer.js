@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import AddUserMealsForm from './AddUserMealsForm';
-import { createDayUserMeal, fetchApiFilteredMeals } from '../../actions/UserMealActions';
-import { fetchAllMeals, fetchMeals, fetchSelectedMeals } from '../../actions/MealActions'
+import { createDayUserMeal } from '../../actions/UserMealActions';
+import { fetchMeals, fetchSelectedMeals } from '../../actions/MealActions'
 import {receiveRoutineMeals} from "../../actions/NewRoutineActions";
 import {openModal} from "../../actions/ModalActions";
 import {receiveNumMeals, receiveDaySelected} from "../../actions/RoutineFilterActions"

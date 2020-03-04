@@ -36,7 +36,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 message: "blank message",
                 status: "none"
             }
-    }};
+        }
+    };
     if (localStorage.jwtToken) {
 
         // Set the token as a common header for all axios requests
@@ -46,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const decodedUser = jwt_decode(localStorage.jwtToken);
 
         // Create a preconfigured state we can immediately add to our store
-        preloadedState = { session: { isAuthenticated: true, user: decodedUser }, entities: { users: { [decodedUser.username]: decodedUser}} };
+        preloadedState = Object.assign(preloadedState, { session: { isAuthenticated: true, user: decodedUser }, entities: { users: { [decodedUser.username]: decodedUser}} });
         store = configureStore(preloadedState);
 
         const currentTime = Date.now() / 1000;
@@ -61,9 +62,12 @@ document.addEventListener('DOMContentLoaded', () => {
         // If this is a first time user, start with an empty store
         store = configureStore(preloadedState);
     }
-    window.store = store.store
-    window.login = login
-    window.logout = logout
+    if (process.env.NODE_ENV === "development"){
+         window.store = store.store;
+         window.login = login;
+         window.logout = logout;
+    }
+
     ReactDOM.render(<Root store={store.store} persistor={store.persistor}/>, document.getElementById('root'));
 })
 
