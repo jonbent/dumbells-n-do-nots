@@ -53,12 +53,11 @@ class NewRoutineForm extends React.Component {
   }
 
   render() {
-    const {dateError, creationSelection} = this.state;
+    const {creationSelection} = this.state;
     const {
       routineError,
       createMeal,
       mealErrors,
-      closeRoutineModal,
       fetchMuscleGroups,
       exerciseErrors,
       createExercise,

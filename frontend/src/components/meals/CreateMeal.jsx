@@ -51,8 +51,8 @@ class CreateMeal extends Component {
         }
     }
     render() {
-        const {title, calories, carbs, protein, fat, mealPic} = this.state;
-        const {createMeal, mealErrors} = this.props;
+        const {title, carbs, protein, fat, mealPic} = this.state;
+        const {mealErrors} = this.props;
         return (
             <div className="add-user-meal-form">
                 <div className="image-container">
