@@ -38,31 +38,31 @@ export const receiveSelectedMeals = meals => ({
 export const fetchSelectedMeals = selectedMealIds => dispatch => (
     MealsApiUtil.fetchSelectedMeals(selectedMealIds)
         .then(res => dispatch(receiveSelectedMeals(res.data)))
-        .catch(err => console.log(err))
+        
 );
 
 export const fetchAllMeals = () => dispatch => (
     MealsApiUtil.getAllMeals()
      .then(meals => dispatch(receiveAllMeals(meals)))
-     .catch(err => console.log(err))
+     
 );
 
 export const fetchMeals = (options) => dispatch => (
     MealsApiUtil.getMeals(options)
         .then(res => dispatch(receiveAllMeals(res.data)))
-        .catch(err => console.log(err))
+        
 );
 
 export const fetchUserMeals = id => dispatch => (
     MealsApiUtil.getUserMeals(id)
         .then(meal => dispatch(receiveUserMeals(meal)))
-        .catch(err => console.log(err))
+        
 );
 
 export const createMeals = data => dispatch => (
     MealsApiUtil.createMeals(data)
         .then(meal => dispatch(receiveNewMeals(meal)))
-        .catch(err => console.log(err))
+        
 );
 export const createMeal = data => dispatch => (
     MealsApiUtil.createMeal(data)

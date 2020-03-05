@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import MuscleGroupSelectorContainer from '../musclegroups/MuscleGroupSelectorContainer';
 import '../../scss/bodyUI/ExerciseSelector.scss'
 import OptionCarouselHolder from "../slider/OptionCarouselHolder";
-import {submitRoutineAndCloseModal} from "../../actions/NewRoutineActions";
 export default class ExerciseSelector extends Component {
     constructor(props) {
         super(props);
@@ -60,7 +59,7 @@ export default class ExerciseSelector extends Component {
                     </div>
                 }
                 <div className="submit">
-                    <div onClick={() => !editing ? submitRoutineAndCloseModal(curRoutine) : closeSelector()}>
+                    <div onClick={() => !editing ? this.props.submitRoutine(curRoutine) : closeSelector()}>
                         {!editing ? "Submit Week's Workouts" : "Confirm Exercises"}
                     </div>
                 </div>

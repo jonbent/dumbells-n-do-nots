@@ -28,7 +28,6 @@ module.exports = async (data) => {
             const curDate = new Date(days[i]);
             if (prevDate.getDate() !== curDate.getDate() && prevDate.getMonth() !== curDate.getMonth() && prevDate.getFullYear() !== curDate.getFullYear()) errors.routine = "Dates must be consecutive."
         }
-        if (Object.values(data[days[i]].meals).reduce((acc, mealAmount) => acc + mealAmount, 0) !== mealAmount) errors.meals = "User must specify same amount of meals each day";
         data[days[i]].workout = Object.keys(data[days[i]].workout).filter(ex => data[days[i]].workout[ex] === true);
         Object.assign(allMeals, data[days[i]].meals);
         allExercises = allExercises.concat(data[days[i]].workout);
