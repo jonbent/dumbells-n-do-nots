@@ -93,7 +93,7 @@ const Splash = () => {
                          <a href="https://www.linkedin.com/in/manraj-singh-01366710a/">
                          <img src="/images/linkedin-logo.png" alt="Manraj Singh's LinkedIn"></img>
                          </a>
-                         <a href="https://github.com/mmmymustafa">
+                         <a href="https://github.com/mskhokhar">
                          <img src="/images/github-logo.png" alt="Manraj Singh's Github"></img>
                          </a>
                          <a href="https://angel.co/manraj-singh-10">

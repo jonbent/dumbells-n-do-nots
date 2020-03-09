@@ -269,10 +269,10 @@ router.post("/", passport.authenticate("jwt", { session: false }), async (req, r
 
                     } catch(e) {
                         console.log('error:', e);
-                        UserWorkout.deleteMany({_id: {$in: weeksWorkouts.map(w => w._id)}}).catch(err => console.log(err));
-                        UserMeal.deleteMany({_id: {$in: weeksMeals.map(m => m._id)}}).catch(err => console.log(err));
-                        Day.deleteMany({routine: routine._id}).catch(err => console.log(err));
-                        Routine.deleteOne({_id: routine._id}).catch(err => console.log(err));
+                        UserWorkout.deleteMany({_id: {$in: weeksWorkouts.map(w => w._id)}});
+                        UserMeal.deleteMany({_id: {$in: weeksMeals.map(m => m._id)}});
+                        Day.deleteMany({routine: routine._id});
+                        Routine.deleteOne({_id: routine._id});
                         return res.status(422).json({dates: "Unable to insert with given information"})
 
                     }
