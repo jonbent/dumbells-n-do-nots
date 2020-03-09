@@ -16,7 +16,7 @@ class AddUserMealsForm extends React.Component{
             maxCals: 625,
             mealSearch: "",
             ignoringFilters: false
-        }
+        };
         this.updateField = this.updateField.bind(this);
         this.handleSetDate = this.handleSetDate.bind(this);
         this.fetchMeals = this.fetchMeals.bind(this);

@@ -21,8 +21,7 @@ const NewRoutinesReducer = (state = {}, action) => {
             const {days, userMeals, workouts} = action.payload.data
             for(let i = 0; i < 7; i++){
                 let formattedDate;
-                newStartDate.setDate(newStartDate.getDate() + 1);
-                formattedDate = DateFormat(newStartDate, 'yyyy-mm-dd');
+                formattedDate = DateFormat(newStartDate, 'mm-dd-yyyy');
                 const dayWorkout = {};
                 if (days[i].workout) workouts[days[i].workout].exercises.forEach(e => dayWorkout[e] = true);
                 const dayMeals = {};
@@ -35,9 +34,9 @@ const NewRoutinesReducer = (state = {}, action) => {
             newStartDate = new Date(startDate);
             for(let i = 0; i < 7; i++){
                 let formattedDate;
-                newStartDate.setDate(newStartDate.getDate() + 1);
-                formattedDate = DateFormat(newStartDate, 'yyyy-mm-dd');
+                formattedDate = DateFormat(newStartDate, 'mm-dd-yyyy');
                 nextState[formattedDate] = {meals:{}, workout:{}}
+                newStartDate.setDate(newStartDate.getDate() + 1);
             }
             return nextState;
         case RECEIVE_ROUTINE_MEALS:

@@ -38,7 +38,7 @@ const RoutineDay = ({ updateRoutineChecks, workout, editable, day, routine, user
         Object.keys(newRoutineData)[idx] :
             !isNaN(idx) ?
                 `Day ${idx + 1}` :
-             DateFormat(new Date(day.date), "yyyy-mm-dd");
+             DateFormat(new Date(day.date), "mm-dd-yyyy");
     return (
         <div className="RoutineDay">
             <div className="day-title">

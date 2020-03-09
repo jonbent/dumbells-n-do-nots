@@ -25,6 +25,26 @@ AWS.config.update({
     region: keys.awsRegion
 });
 
+const createDemoRoutine = async (req, res) => {
+    const curDate = new Date();
+    const dateRange = [];
+    curDate.setHours(0,0,0,0);
+    for (let i = 0; i < 7; i++){
+        dateRange.push(new Date(curDate));
+        curDate.setDate(curDate.getDate() + 1);
+    }
+    const routines = await Routine.find({user: "5e2a79c88fbdc9103b756ef6"});
+    const routineIds = routines.map(r => r._id);
+    let dates = await Day.find({date: {$in: dateRange}, routine: {$in: routineIds}});
+    if (dates.length !== 0) {
+        return null;
+    }
+};
+
+router.get('/demo', async (req, res) => {
+    await createDemoRoutine(req, res);
+});
+
 
 
 router.get('/current', passport.authenticate('jwt', { session: false }), (req, res) => {
@@ -190,6 +210,7 @@ router.post('/login', (req, res) => {
             bcrypt.compare(password, user.password)
                 .then(isMatch => {
                     if (isMatch) {
+                        if (user._id.toString() === "5e601d09012e125773768324") createDemoRoutine();
                         let newUser = Object.assign({}, user.toObject());
                         delete newUser.password;
                         delete newUser.date;
