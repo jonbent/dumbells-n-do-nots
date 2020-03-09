@@ -45,8 +45,8 @@ class UserHistory extends Component {
                             endDate.setDate(endDate.getDate() + 7);
                             return (
                                 <div key={r._id} className="routine-item" onClick={() => this.handleSelect(r)}>
-                                    <div>{DateFormat(startDate, 'yyyy-mm-dd')}</div>
-                                    <div>{DateFormat(endDate, 'yyyy-mm-dd')}</div>
+                                    <div>{DateFormat(startDate, 'mm-dd-yyyy')}</div>
+                                    <div>{DateFormat(endDate, 'mm-dd-yyyy')}</div>
                                 </div>
                             )
                         })}

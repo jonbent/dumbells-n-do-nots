@@ -17,18 +17,17 @@ module.exports = async (data) => {
 
     let allMeals = {};
     let allExercises = [];
-    const mealAmount = Object.values(data[days[0]].meals).reduce((acc, mealAmount) => {
-        return acc + mealAmount;
-    }, 0);
     let prevDate = new Date(days[0]);
     for(let i = 0; i < days.length; i++){
         if (!Validator.toDate(days[i])) errors.dates = "Keys must be valid date strings.";
         if (i > 0){
-            prevDate.setDate(prevDate.getDate() + 1);
             const curDate = new Date(days[i]);
             if (prevDate.getDate() !== curDate.getDate() && prevDate.getMonth() !== curDate.getMonth() && prevDate.getFullYear() !== curDate.getFullYear()) errors.routine = "Dates must be consecutive."
+            prevDate.setDate(prevDate.getDate() + 1);
         }
+        console.log('before', data[days[i]]);
         data[days[i]].workout = Object.keys(data[days[i]].workout).filter(ex => data[days[i]].workout[ex] === true);
+        console.log('after', data[days[i]]);
         Object.assign(allMeals, data[days[i]].meals);
         allExercises = allExercises.concat(data[days[i]].workout);
     }

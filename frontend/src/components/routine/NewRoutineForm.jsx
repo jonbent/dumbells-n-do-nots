@@ -16,7 +16,7 @@ class NewRoutineForm extends React.Component {
     this.state = {
       month: currentDate,
       startDate: currentDate,
-      endDate: DateFormat(weekFromCurrentDate, "yyyy-mm-dd"),
+      endDate: DateFormat(weekFromCurrentDate, "mm-dd-yyyy"),
       dateError: "Select A date",
       creationSelection: 'routine'
     };
@@ -40,7 +40,7 @@ class NewRoutineForm extends React.Component {
     this.setState({ month });
   }
   callback(){
-    this.props.receiveNewRoutineStartDate(DateFormat(this.state.startDate, 'yyyy-mm-dd'));
+    this.props.receiveNewRoutineStartDate(DateFormat(this.state.startDate, 'mm-dd-yyyy'));
   }
   handleNext(e) {
     if (this.props.routineError.message) return null;
