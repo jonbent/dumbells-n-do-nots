@@ -17,8 +17,8 @@ router.get("/startDate", passport.authenticate("jwt", { session: false }), async
     const curDate = new Date(req.query.startDate);
     const dateRange = [];
     for(let i = 0; i < 7; i++){
+        const newDate = new Date(DateFormat(curDate, 'mm-dd-yyyy'));
         curDate.setDate(curDate.getDate() + 1);
-        const newDate = new Date(DateFormat(curDate, 'yyyy-mm-dd'));
         dateRange.push(newDate);
     }
     const routines = await Routine.find({user: req.user._id});
@@ -41,8 +41,8 @@ router.get('/user/:userId', async (req, res) => {
 
 // get user routine
 router.get('/user/:userId/single', async (req, res) => {
-    const curDate = new Date(DateFormat(new Date(), "yyyy-mm-dd"));
-    curDate.setDate(curDate.getDate() + 1);
+    const curDate = new Date();
+    curDate.setHours(0,0,0,0);
     const routines = await Routine.find({user: req.params.userId});
     let date = await Day.findOne({date: {$eq: curDate}, routine: {$in: routines.map(r => r._id)}})
     if (!date) return res.status(400).json({errors: {routine: "Cannot find given routine"}});
@@ -227,9 +227,7 @@ router.post("/", passport.authenticate("jwt", { session: false }), async (req, r
     const dayStrings = Object.keys(req.body);
     dayStrings.forEach(dayString => {
         let routineDay = new Date(dayString);
-        routineDay.setDate(routineDay.getDate() + 1);
         dateRange.push(routineDay);
-
     });
     const routines = await Routine.find({user: req.user._id});
     const routineIds = routines.map(r => r._id);
@@ -253,7 +251,7 @@ router.post("/", passport.authenticate("jwt", { session: false }), async (req, r
                     Object.keys(req.body[dayString].meals).forEach((mealId) => {
                         dayMeals.push({meal: mealId, quantity: req.body[dayString].meals[mealId], day: days[idx]._id});
                     });
-                    if ( req.body[dayString].workout.length !== 0 ) dayWorkout = {day: days[idx]._id, exercises: Object.keys(req.body[dayString].workout).filter(exerciseId => req.body[dayString].workout[exerciseId] === true)};
+                    if ( req.body[dayString].workout.length !== 0 ) dayWorkout = {day: days[idx]._id, exercises: req.body[dayString].workout};
                     let meals;
                     let newWorkout;
                     let workout;
@@ -268,7 +266,6 @@ router.post("/", passport.authenticate("jwt", { session: false }), async (req, r
                          weeksMeals = weeksMeals.concat(meals);
 
                     } catch(e) {
-                        console.log('error:', e);
                         UserWorkout.deleteMany({_id: {$in: weeksWorkouts.map(w => w._id)}});
                         UserMeal.deleteMany({_id: {$in: weeksMeals.map(m => m._id)}});
                         Day.deleteMany({routine: routine._id});

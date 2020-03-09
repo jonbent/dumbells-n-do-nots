@@ -25,7 +25,6 @@ class ExistingRoutine extends Component {
     }
     componentDidMount() {
         let setDate = new Date(this.props.daySelected);
-        setDate.setDate(setDate.getDate() + 1);
         if (this.props.daySelected) {
             this.setState({
                 startDate: setDate
@@ -122,7 +121,7 @@ class ExistingRoutine extends Component {
                                 <div className="edit-routine" onClick={() => this.setState({editable: true})}>
                                     Edit Routine
                                 </div>
-                                <div>{dateFormat(days[0].date, 'yyyy-mm-dd')} - {dateFormat(days[6].date, 'yyyy-mm-dd')}</div>
+                                <div>{dateFormat(days[0].date, 'mm-dd-yyyy')} - {dateFormat(days[6].date, 'mm-dd-yyyy')}</div>
                             </div>}
                     </div>
                 }

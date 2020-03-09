@@ -66,7 +66,7 @@ class RoutineShow extends Component {
             return (
                 <EditMeals
                     userMeals={dayUserMeals}
-                    day={DateFormat(selectedMealsDay.date, "yyyy-mm-dd")}
+                    day={DateFormat(selectedMealsDay.date, "mm-dd-yyyy")}
                     dbDay={daysHash[selectedMealsDay._id]}
                     closeSelector={this.closeSelector}
                     single={true}
@@ -88,7 +88,7 @@ class RoutineShow extends Component {
                     />
                 </div>}
                 {!!dayValues.length && <div className="pagination-container">
-                    <RoutinePage curDay={curDay} dayAmount={dayValues.length} dayValues={dayValues.map(el => DateFormat(el.date, "yyyy-mm-dd"))} changeDay={this.changeDay}/>
+                    <RoutinePage curDay={curDay} dayAmount={dayValues.length} dayValues={dayValues.map(el => DateFormat(el.date, "mm-dd-yyyy"))} changeDay={this.changeDay}/>
                 </div>}
             </div>
         );
