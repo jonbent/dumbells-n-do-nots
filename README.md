@@ -2,7 +2,7 @@
 
 Dumbells-N-Donuts is a mobile friendly fitness website, utilizing MERN stack developed by software devs that hopes to let everyone who joins it to help manage their workouts and meals in a flexible way. A user can decide to choose from already defined exhaustive list of meals and exercises or have their own custom meals and form a routine.
 
-
+![splash](https://github.com/jonbent/dumbells-n-do-nots/blob/master/frontend/public/readme/dumbells.gif)
 
 # Getting Started
 
@@ -26,13 +26,19 @@ Dumbells-N-Donuts is a mobile friendly fitness website, utilizing MERN stack dev
 
 * Profile settings page.
 
+![home](https://github.com/jonbent/dumbells-n-do-nots/blob/master/frontend/public/readme/readme_4.png)
+
 * Create new routine.
 
 * Meals and exercise selector.
 
+![home](https://github.com/jonbent/dumbells-n-do-nots/blob/master/frontend/public/readme/readme_3.png)
+
 * Custom exercises and meals.
 
 * Muscle Selector
+
+![muscleSelector](https://github.com/jonbent/dumbells-n-do-nots/blob/master/frontend/public/readme/readme_5.png)
 
 # Authors
 
