@@ -40,10 +40,13 @@ class UserHistory extends Component {
                             No Routines Found
                         </div>}
                         {routines.map(r => {
+                            const startDate = new Date(days[r._id][0].date);
+                            const endDate =  new Date(startDate.getTime());
+                            endDate.setDate(endDate.getDate() + 7);
                             return (
                                 <div key={r._id} className="routine-item" onClick={() => this.handleSelect(r)}>
-                                    <div>{DateFormat(new Date(days[r._id][0].date), 'yyyy-mm-dd')}</div>
-                                    <div>{DateFormat(new Date(days[r._id][days[r._id].length - 1].date), 'yyyy-mm-dd')}</div>
+                                    <div>{DateFormat(startDate, 'yyyy-mm-dd')}</div>
+                                    <div>{DateFormat(endDate, 'yyyy-mm-dd')}</div>
                                 </div>
                             )
                         })}

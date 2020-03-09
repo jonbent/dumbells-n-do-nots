@@ -23,17 +23,17 @@ export const receiveApiFilteredMeals = meals => ({
 export const fetchDayUserMeals = id => dispatch => (
     UserMealsApiUtil.getDayUserMeals(id)
         .then(meal => dispatch(receiveDayUserMeal(meal)))
-        .catch(err => console.log(err))
+        
 );
 
 export const createDayUserMeal = data => dispatch => (
     UserMealsApiUtil.createUserMealForDay(data)
         .then(meal => dispatch(receiveNewUserMeals(meal)))
-        .catch(err => console.log(err))
+        
 );
 
 export const fetchApiFilteredMeals = (minCals, maxCals) => dispatch => (
     UserMealsApiUtil.fetchCaloriesFilteredApiMeals(minCals, maxCals)
         .then(meals => dispatch(receiveApiFilteredMeals(meals)))
-        .catch(err => console.log(err))
+        
 );
