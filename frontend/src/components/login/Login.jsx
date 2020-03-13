@@ -67,6 +67,7 @@ export default class Login extends Component {
                     type="password"
                     id="password"
                     value={password}
+                    autoComplete="current-password"
                     onChange={e => this.handleUpdate("password", e)}
                   />
                 </div>
