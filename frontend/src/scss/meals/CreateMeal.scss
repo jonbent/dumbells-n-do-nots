@@ -83,7 +83,11 @@
     //border-top: 1px solid lightskyblue;
     padding: 0.5rem 2rem 1rem 2rem;
     margin-top: 1rem;
+    .submit:hover{
+      background-color: darken(pink, 5%);
+    }
     .submit{
+      cursor: pointer;
       background-color: pink;
       color: black;
       text-shadow: 1px 1px 3px lightskyblue;

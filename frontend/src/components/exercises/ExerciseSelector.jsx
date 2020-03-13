@@ -27,26 +27,23 @@ export default class ExerciseSelector extends Component {
             Object.values(exercises).forEach(e => {
             if (allExercises[e.muscleGroup]) allExercises[e.muscleGroup].push(e)
         });
-        const muscleGroupKeys = Object.keys(muscleGroups)
+        const muscleGroupKeys = Object.keys(muscleGroups);
         return (
             <div className="exercise-selector-container">
                 <MuscleGroupSelectorContainer selectedMuscleGroupIds={selectedMuscleGroupIds}/>
-                {exerciseDays.length !== 0 && <div className="scheduled-days-container">
-                    <div>Scheduled Workout{!editing ? "s": ""}:</div>
+                {!editing && <div className="day-select">
+                    <h1>Select Day</h1>
                     <div className="scheduled-days">
-                        {!editing && exerciseDays.map((date) => (
+                        {!editing && days.map((date) => (
                             <div key={date} className={ day === date ? "selected" : ""} onClick={e => this.handleSetDate(date)}>{date}</div>
                         ))}
                         {!!editing && (
                             <div className="selected">{day}</div>
                         )}
                     </div>
-                </div>}
-                {!editing && <div className="day-select">
-                    <h1>Select Day</h1>
-                    <select value={day} onChange={e => this.handleSetDate(e.currentTarget.value)}>
-                        {days.map((date, idx) => <option key={date} value={date}>{date}</option>)}
-                    </select>
+                    {/*<select value={day} onChange={e => this.handleSetDate(e.currentTarget.value)}>*/}
+                    {/*    {days.map((date, idx) => <option key={date} value={date}>{date}</option>)}*/}
+                    {/*</select>*/}
                 </div>}
                 {muscleGroupKeys.length && selectedMuscleGroupIds.length !== 0 && <div className="group-exercises-container">
                         {selectedMuscleGroupIds.map(groupId => {

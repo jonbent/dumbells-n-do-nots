@@ -8,6 +8,25 @@
     top: 0;
     bottom: 8rem;
     justify-content: center;
+    .close-history:hover{
+      background-color: darken(pink, 5%);
+    }
+    .close-history{
+      text-decoration: none;
+      color: black;
+      position: absolute;
+      top: 0;
+      background-color: lightpink;
+      border: none;
+      width: 80vw;
+      height: 3rem;
+      border-radius: 5px;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
     .routine-history{
       //height: max-content;
       margin-top: 5rem;
@@ -25,7 +44,11 @@
         font-size: 200%;
         text-align: center;
       }
+      .routine-item:hover{
+        background-color: black;
+      }
       .routine-item{
+        cursor: pointer;
         //display: inline-block;
         border-radius: 5px;
         display: flex;

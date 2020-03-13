@@ -19,15 +19,18 @@ class MealsFilters extends Component {
         if (numMeals > 6 || numMeals < 0) return null;
         this.setState({numMeals});
     }
-    handleAverage(){
+    async handleAverage(){
         const num = parseInt(this.state.numMeals);
         if (isNaN(num) || num === 0) return null;
-        this.props.changeFilter('minCals', 2000 / num);
-        this.props.changeFilter('maxCals', 2500 / num);
+        await this.props.changeFilter('minCals', 2000 / num);
+        await this.props.changeFilter('maxCals', 2500 / num);
     }
     render() {
         const {
-            maxCals, minCals, changeFilter
+            maxCals,
+            minCals,
+            changeFilter,
+            confirmFilters
         } = this.props;
         return (
             <div className="meals-filters">
@@ -41,14 +44,6 @@ class MealsFilters extends Component {
                         <label><h1>Max</h1>
                             <input onChange={e => changeFilter('maxCals', e.target.value)}  type="text" value={maxCals}/>
                         </label>
-                    </div>
-                </div>
-                <div className="filter-input-container">
-                    <div className="filter-input average">
-                        <label>Average Calories by number of meals per day
-                            <input type="text" placeholder="Maximum of 6" onChange={e => this.handleChange(e.target.value)} value={this.state.numMeals}/>
-                        </label>
-                        <div className="submit" onClick={this.handleAverage}>Submit</div>
                     </div>
                 </div>
                 <div className="filter-summary-container">
@@ -92,6 +87,15 @@ class MealsFilters extends Component {
                         </div>
                     </div>
                 </div>
+                <div className="filter-input-container">
+                    <div className="filter-input average">
+                        <label>Average Calories by number of meals per day
+                            <input type="text" placeholder="Maximum of 6" onChange={e => this.handleChange(e.target.value)} value={this.state.numMeals}/>
+                        </label>
+                        <div className="submit" onClick={() => this.handleAverage().then(confirmFilters)}>Submit</div>
+                    </div>
+                </div>
+
 
             </div>
         );

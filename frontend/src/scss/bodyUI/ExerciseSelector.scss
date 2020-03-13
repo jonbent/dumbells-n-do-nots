@@ -1,6 +1,9 @@
 .exercise-selector-container{
   height: 100%;
   -webkit-transform: translate3d(0, 0, 0);
+  .submit > div:hover{
+    background-color: darken(pink, 5%);
+  }
   .submit{
     margin: 1rem;
     background-color: rgba(0, 0, 0, 0.5);
@@ -17,42 +20,46 @@
       border-radius: 5px;
     }
   }
-  .day-select{
-    display: flex;
-    justify-content: space-between;
-    flex-direction: row-reverse;
-    margin: 1rem;
-    align-items: center;
-    background-color: rgba(0, 0, 0, 0.5);
-    padding: 1rem;
-    box-shadow: 3px 3px 6px black;
-    border-radius: 5px;
-    select{
-      -webkit-appearance: none;
-      outline: none;
-      //padding-right: 0.25rem;
-      border-radius: 5px;
-      background-color: black;
-      border: 1px solid pink;
-      color: pink;
-      padding: 0.5rem 1rem;
-    }
+  //.day-select{
+  //  display: flex;
+  //  justify-content: space-between;
+  //  flex-direction: row-reverse;
+  //  margin: 1rem;
+  //  align-items: center;
+  //  background-color: rgba(0, 0, 0, 0.5);
+  //  padding: 1rem;
+  //  box-shadow: 3px 3px 6px black;
+  //  border-radius: 5px;
+  //  select{
+  //    -webkit-appearance: none;
+  //    outline: none;
+  //    //padding-right: 0.25rem;
+  //    border-radius: 5px;
+  //    background-color: black;
+  //    border: 1px solid pink;
+  //    color: pink;
+  //    padding: 0.5rem 1rem;
+  //  }
 
-    .drop-down{
-      background-color: pink;
-      padding: 0.25rem 0.5rem;
-      border-radius: 5px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+  //  .drop-down{
+  //    background-color: pink;
+  //    padding: 0.25rem 0.5rem;
+  //    border-radius: 5px;
+  //    display: flex;
+  //    justify-content: space-between;
+  //    align-items: center;
+  //  }
+  //}
+  .day-select{
+    h1{
+
+      margin: 1rem 0;
     }
-  }
-  .scheduled-days-container{
+    padding-bottom: 1rem;
     display: flex;
     flex-direction: column;
     background-color: rgba(0, 0, 0, 0.5);
     margin: 1rem;
-    padding: 1rem;
     box-shadow: 3px 3px 6px black;
     border-radius: 5px;
     .scheduled-days{
@@ -60,14 +67,16 @@
       flex-direction: row;
       flex-wrap: wrap;
       margin-top: 0.5rem;
+      justify-content: center;
       div{
         border-radius: 5px;
-        flex: 1 1 100%;
-        margin: 0.5rem;
         padding: 1rem;
         background-color: rgba(0, 0, 0, 0.3);
         box-shadow: 3px 3px 6px black;
         cursor: pointer;
+      }
+      div:hover{
+        background-color: darken(pink, 5%);
       }
       div.selected{
         background-color: pink;
@@ -198,6 +207,9 @@
           flex-direction: column;
         }
 
+      }
+      .exercise-item:hover{
+        color: pink;
       }
       .exercise-item{
         background-color: rgba(0, 0, 0, 0.5);

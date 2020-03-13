@@ -129,6 +129,7 @@ class AddUserMealsForm extends React.Component{
         const {mealSearch, toggleShowMeals, ignoringFilters} = this.state;
         let selectedDay;
         let daySelectedMeals = new Set();
+        let daySelectedMealsArray = [];
         let calorieCounts;
         let calorieCountClass;
         if (!single){
@@ -144,7 +145,7 @@ class AddUserMealsForm extends React.Component{
                         acc + 0;
                 }, 0)
             });
-            daySelectedMeals = Array.from(daySelectedMeals);
+            daySelectedMealsArray = Array.from(daySelectedMeals);
 
             calorieCountClass = calorieCounts[selectedDay] < 1800 ?
                 "too-low" :
@@ -154,7 +155,7 @@ class AddUserMealsForm extends React.Component{
             calorieCountClass = calorieCounts < 1800 ?
                 "too-low" :
                 calorieCounts > 2800 ? 'too-high' : "just-right";
-            daySelectedMeals = userMeals.filter(m => m.quantity > 0).map(m => m.meal);
+            daySelectedMealsArray = userMeals.filter(m => m.quantity > 0).map(m => m.meal);
         }
 
         if (toggleShowMeals){
@@ -162,18 +163,19 @@ class AddUserMealsForm extends React.Component{
             mealList = mealsArray.length > 0 ? (
                 <div className="meal-list">
                     {mealsArray.map(meal => {
-                            return <MealItem
-                                meal={meal}
-                                key={meal._id}
-                                daySelect={daySelect}
-                                handleSelectMeal={this.handleSelectMeal}
-                                day={day}
-                                single={!!single}
-                                dbDay={dbDay}
-                                userMeals={userMeals}
-                            />
-                        }
-                    )}
+                        console.log(daySelectedMeals instanceof Set);
+                        if (daySelectedMeals.has(meal._id)) return null;
+                        return <MealItem
+                            meal={meal}
+                            key={meal._id}
+                            daySelect={daySelect}
+                            handleSelectMeal={this.handleSelectMeal}
+                            day={day}
+                            single={!!single}
+                            dbDay={dbDay}
+                            userMeals={userMeals}
+                        />
+                    })}
                     <div className="pagination-container">
                         <Pagination
                             changePage={this.handlePageChange}
@@ -201,28 +203,33 @@ class AddUserMealsForm extends React.Component{
         }
         return(
             <div className="meal-selector">
+                <div className="meal-search">
+                    <div>Search for meals</div>
+                    <div className="search-actions">
+                        <div className={`ignore-filters ${ignoringFilters ? "ignoring" : ""}`} onClick={this.handleFilterIngore}>{ignoringFilters ? "Enable Filters for Search" : "Disable Filters for Search"}</div>
+                        <input placeholder="Search by title..." value={mealSearch} onChange={this.handleSearchInputChange}/>
+
+                    </div>
+                </div>
                 <div className="day-select">
                     {!singleDay && <h1>Select Day</h1>}
-                    <div>
-                        {!singleDay && <div onClick={() => this.handleSetDate(null,-1)}>Prev.</div>}
-                        <select value={day} onChange={(e) => this.handleSetDate(e.currentTarget.value)}>
-                            {!singleDay && Object.keys(daySelect).map((date) => <option key={date} value={date}>{date}</option>)}
-                            {!!singleDay && <option value={day}>{day}</option>}
-                        </select>
-                        {!singleDay && <div onClick={() => this.handleSetDate( null, 1)}>Next</div>}
+                    <div className="scheduled-days">
+                        {!singleDay && Object.keys(daySelect).map((date) => {
+                            return (
+                                <div key={date} className={day === date ? "selected" : ""}
+                                     onClick={e => this.handleSetDate(date)}>{date}</div>
+                            )
+                        })}
+                        {!!singleDay && (
+                            <div className="selected">{day}</div>
+                        )}
                     </div>
+
                 </div>
                 <div className={`calorie-count ${calorieCountClass}`}>Total Calories: {!single ? calorieCounts[selectedDay] : calorieCounts}</div>
-                <div className="meal-search">
-                    <div className="search-headers">
-                        <div>Search for meals</div>
-                        <div className={`ignore-filters ${ignoringFilters ? "ignoring" : ""}`} onClick={this.handleFilterIngore}>{ignoringFilters ? "Enable Filters for Search" : "Disable Filters for Search"}</div>
-                    </div>
-                    <input placeholder="Search by title..." value={mealSearch} onChange={this.handleSearchInputChange}/>
-                </div>
-                <div className={"selected-meals"}>
+                {!!daySelectedMealsArray.length && <div className={"selected-meals"}>
                     <div>Meals Selected</div>
-                    {daySelectedMeals.map(mealId => {
+                    {daySelectedMealsArray.map(mealId => {
                         if (!allMeals[mealId]) return null;
                         return (
                             <MealItem
@@ -238,7 +245,7 @@ class AddUserMealsForm extends React.Component{
                             />
                         )
                     })}
-                </div>
+                </div>}
                 {mealList}
             </div>
         )

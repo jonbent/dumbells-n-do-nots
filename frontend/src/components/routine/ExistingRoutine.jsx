@@ -121,7 +121,7 @@ class ExistingRoutine extends Component {
                                 <div className="edit-routine" onClick={() => this.setState({editable: true})}>
                                     Edit Routine
                                 </div>
-                                <div>{dateFormat(days[0].date, 'mm-dd-yyyy')} - {dateFormat(days[6].date, 'mm-dd-yyyy')}</div>
+                                <div>{dateFormat(days[0].date, 'mm/dd/yyyy')} - {dateFormat(days[6].date, 'mm/dd/yyyy')}</div>
                             </div>}
                     </div>
                 }
