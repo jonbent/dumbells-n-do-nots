@@ -26,6 +26,9 @@
             color: black;
             //text-shadow: 1px 1px 3px lightskyblue;
         }
+        div:not(.selected):hover{
+            background-color: rgba(0,0,0,0.7);
+        }
         div{
             cursor: pointer;
             padding: 1rem 0;
@@ -76,6 +79,11 @@
             div{
                 background-color: rgba(0,0,0,0.1);
                 cursor: default;
+            }
+        }
+        .next-button:not(.disabled){
+            div:hover{
+                background-color: darken(pink, 5%);
             }
         }
         .next-button{

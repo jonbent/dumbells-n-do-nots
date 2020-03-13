@@ -6,19 +6,26 @@
     border-radius: 5px;
   overflow: hidden;
   .muscle-group-selector {
+    .exercise-selector-header{
+      font-size: 150%;
+    }
     .side-choice{
-        padding: 1rem;
-        margin: 0 1rem;
-        display: flex;
-        justify-content: center;
-        color: black;
+      padding: 1rem;
+      margin: 0 1rem;
+      display: flex;
+      justify-content: center;
+      color: black;
       div{
           background-color: pink;
           border-radius: 5px;
-          width: fit-content;
-          padding: 1rem 10rem;
+          width: 100%;
+          padding: 1rem 0;
           box-shadow: 3px 3px 6px black;
           cursor: pointer;
+
+        }
+        div:hover{
+          background-color: darken(pink, 5%);
         }
       }
     img{

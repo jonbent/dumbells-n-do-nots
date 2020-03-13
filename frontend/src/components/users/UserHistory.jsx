@@ -6,6 +6,8 @@ import DateFormat from 'dateformat'
 import FiltersModal from "../modal/FiltersModal";
 import Alert from "../alerts/Alert";
 
+import {Link } from 'react-router-dom';
+
 class UserHistory extends Component {
     constructor(props) {
         super(props);
@@ -32,6 +34,9 @@ class UserHistory extends Component {
                 <Alert/>
                 <FiltersModal/>
                 <div className="UserHistory">
+                    <Link to='/' className="close-history">
+                        Close
+                    </Link>
                     <div className="routine-history">
                         <div className="history-title">
                             History
@@ -45,8 +50,8 @@ class UserHistory extends Component {
                             endDate.setDate(endDate.getDate() + 7);
                             return (
                                 <div key={r._id} className="routine-item" onClick={() => this.handleSelect(r)}>
-                                    <div>{DateFormat(startDate, 'mm-dd-yyyy')}</div>
-                                    <div>{DateFormat(endDate, 'mm-dd-yyyy')}</div>
+                                    <div>{DateFormat(startDate, 'mm/dd/yyyy')}</div>
+                                    <div>{DateFormat(endDate, 'mm/dd/yyyy')}</div>
                                 </div>
                             )
                         })}

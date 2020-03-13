@@ -83,7 +83,6 @@
 }
 .signup-form-input-detail-container{
     margin-bottom: 1.5625rem;
-    max-width: 12.5rem;
     margin: auto;
     margin-bottom: 1.875rem;
 }
@@ -94,13 +93,12 @@ input:focus{
     text-align: center;
     font-size: 1.25rem;
     // border: solid 1px lightgray;
-    width: 80%;
     margin: auto;
     box-shadow: 0 0 1rem black;
     // margin-bottom: 1.875rem ;
     padding: 0.335rem 0.625rem;
     border-radius: 50px;
-    background-color: #316a95;
+    background-color: lightskyblue;
 }
 .signup-errors{
     font-size: 0.7375rem;
@@ -127,7 +125,7 @@ input:focus{
     width: 12.5rem;
 }
 .signup-form{
-    width: 100%;
+    width: 80%;
 }
 .signup-form-height{
     display: flex;
@@ -160,6 +158,10 @@ input:focus{
 // .signup-form-height>input:focus{
 //     font-size: 100%;
 // }
+.signup-form-input-detail-container{
+    display: flex;
+    flex-direction: column;
+}
 .signup-form-input-detail-container:focus-within{
     label{
         transition: 0.3s ease;

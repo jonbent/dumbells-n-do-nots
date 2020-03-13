@@ -6,6 +6,6 @@ export const fetchUserInfo = (username) => (
 
 export const updateUserInfo = (formData,username) => {
     return(
-    axios({method:"post", url: `/api/users/${username}/update`, data: formData, headers: {'Content-Type': 'multipart/form-data' }})
+    axios({method:"patch", url: `/api/users/${username}/update`, data: formData, headers: {'Content-Type': 'multipart/form-data' }})
     );
 }

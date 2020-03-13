@@ -10,6 +10,39 @@
         padding: 1rem 0;
         border-radius: 10px;
         background-color: lightskyblue;
+        .routine-day-container .RoutineDay {
+            .day-meals .meal-item:hover {
+                cursor: pointer;
+                color: darken(pink, 25%);
+            }
+            .day-workout.workout-done{
+                .check{
+                    display: inline-block;
+                    transform: rotate(45deg);
+                    height: 1.5rem;
+                    width: 0.75rem;
+                    border-bottom: 0.44rem solid pink;
+                    border-right: 0.44rem solid pink;
+                    align-self: flex-end;
+                }
+            }
+            .day-workout:hover{
+                background-color: black;
+                cursor: pointer;
+                .day-exercise{
+                    background-color: darken(darkgray, 50%);
+                }
+                .check{
+                    display: inline-block;
+                    transform: rotate(45deg);
+                    height: 1.5rem;
+                    width: 0.75rem;
+                    border-bottom: 0.44rem solid pink;
+                    border-right: 0.44rem solid pink;
+                    align-self: flex-end;
+                }
+            }
+        }
     }
     .user-show-content{
         margin-bottom: 5rem;
