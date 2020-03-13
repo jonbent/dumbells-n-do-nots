@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ui:{
             filters: {
                 currentStep: 1,
-                pageSize: 10,
+                pageSize: 5,
                 pageNum: 1,
                 maxCals: 625,
                 minCals: 500

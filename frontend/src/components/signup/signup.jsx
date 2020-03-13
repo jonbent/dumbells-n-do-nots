@@ -61,7 +61,7 @@ class Signup extends React.Component {
     this.props.receiveNextStep(2);
   }
   handleBirthDate(e) {
-    this.setState({ birthDate: DateFormat(e, "mm-dd-yyyy") });
+    this.setState({ birthDate: DateFormat(e, "mm/dd/yyyy") });
   }
   handleYearMonthChange(month) {
     this.setState({ month });
@@ -99,7 +99,7 @@ class Signup extends React.Component {
       if (errors.email) {
         emailErrors = errors.email.message
       }
-      if (errors.password) {
+      if (errors.password && errors.password.message) {
         passwordErrors = errors.password.message.slice(5);
       }
       if (errors.password2) {
@@ -118,55 +118,59 @@ class Signup extends React.Component {
     let form_type;
     if (this.props.step === 1) {
       form_type = (
-        <form>
+        <form className="signup-form">
           <div className="signup-form-header">Sign up</div>
           <div className="signup-form-detail-container">
             <div className="signup-form-input-detail-container">
-              <label className="signup-form-detail-label">Username</label>
-              <div className="signup-form-detail-input">
+              <label className="signup-form-detail-label" htmlFor="username">Username</label>
+              <label className="signup-form-detail-input">
                 <input
                   type="text"
+                  id="username"
                   onChange={e => this.updateField("username", e)}
                   value={this.state.username}
                 />
-              </div>
+              </label>
               <div className="signup-errors">{usernameErrors}</div>
             </div>
             <div className="signup-form-input-detail-container">
-              <label className="signup-form-detail-label">Email</label>
-              <div className="signup-form-detail-input">
+              <label className="signup-form-detail-label" htmlFor="email">Email</label>
+              <label className="signup-form-detail-input">
                 <input
+                  id="email"
                   type="text"
                   onChange={e => this.updateField("email", e)}
                   value={this.state.email}
                 />
-              </div>
+              </label>
               <div className="signup-errors">{emailErrors}</div>
             </div>
             <div className="signup-form-input-detail-container">
-              <label className="signup-form-detail-label">Password</label>
-              <div className="signup-form-detail-input">
+              <label className="signup-form-detail-label" htmlFor="password">Password</label>
+              <label className="signup-form-detail-input">
                 <input
                   type="password"
+                  id="password"
                   onChange={e => this.updateField("password", e)}
                   value={this.state.password}
                   autoComplete="new-password"
                 />
-              </div>
+              </label>
               <div className="signup-errors">{passwordErrors}</div>
             </div>
             <div className="signup-form-input-detail-container">
-              <label className="signup-form-detail-label">
+              <label className="signup-form-detail-label" htmlFor="password2">
                 Confirm password
               </label>
-              <div className="signup-form-detail-input">
+              <label className="signup-form-detail-input">
                 <input
                   type="password"
+                  id="password2"
                   onChange={e => this.updateField("password2", e)}
                   value={this.state.password2}
                   autoComplete="new-password"
                 />
-              </div>
+              </label>
               <div className="signup-errors">{confimrPasswordErrors}</div>
             </div>
           </div>
@@ -193,10 +197,11 @@ class Signup extends React.Component {
             </div>
 
             <div className="signup-form-input-detail-container">
-              <label className="signup-form-detail-label">Height</label>
-              <div className="signup-form-height-input">
+              <label className="signup-form-detail-label" htmlFor="height1">Height</label>
+              <label className="signup-form-height-input">
                 <div className="signup-form-height">
                   <input
+                    id="height1"
                     type="text"
                     onChange={e => this.updateField("height1", e)}
                     value={this.state.height1}
@@ -210,11 +215,11 @@ class Signup extends React.Component {
                   <span>in</span>
                 </div>
                 <div className="signup-errors">{heightErrors}</div>
-              </div>
+              </label>
             </div>
             <div className="signup-form-input-detail-container">
-              <div className="signup-form-detail-label">Sex</div>
-              <div className="signup-form-detail-dropdown">
+              <label className="signup-form-detail-label">Sex</label>
+              <label className="signup-form-detail-dropdown">
                 <select
                   className="signup-form-dropdown"
                   defaultValue=""
@@ -226,26 +231,27 @@ class Signup extends React.Component {
                   </option>
                   <option value={"F"}>Female</option>
                 </select>
-              </div>
+              </label>
               <div className="signup-errors">{sexErrors}</div>
             </div>
 
             <div className="signup-form-input-detail-container">
-              <label className="signup-form-detail-label">Weight</label>
-              <div className="signup-form-detail-input">
+              <label className="signup-form-detail-label" htmlFor="weight">Weight</label>
+              <label className="signup-form-detail-input">
                 <input
+                  id="weight"
                   type="input"
                   placeholder="in lbs"
                   onChange={e => this.updateField("weightStart", e)}
                   value={this.state.weightStart}
                 />
-              </div>
+              </label>
               <div className="signup-errors">{weightErrors}</div>
             </div>
 
             <div className="signup-form-input-detail-container">
               <label className="signup-form-detail-label">Goal Path</label>
-              <div className="signup-form-detail-dropdown">
+              <label className="signup-form-detail-dropdown">
                 <select
                   className="signup-form-dropdown"
                   defaultValue=""
@@ -255,7 +261,7 @@ class Signup extends React.Component {
                   <option value={1}>Lose weight</option>
                   <option value={2}>Gain weight</option>
                 </select>
-              </div>
+              </label>
             </div>
           </div>
           <div onClick={this.handleSubmit} className="signup-form-button">
@@ -269,11 +275,11 @@ class Signup extends React.Component {
         <NavBar />
         <div className="signup-form-container">
           {form_type}
-        <div className="separator-container">
-            <span className="separator"></span>
-            <span>OR</span>
-            <span className="separator"></span>
-        </div>
+          <div className="separator-container">
+              <span className="separator"></span>
+              <span>OR</span>
+              <span className="separator"></span>
+          </div>
           <Link onClick={this.props.resetErrors} to="/login" className="sign-up-link">Login</Link>
         </div>
 

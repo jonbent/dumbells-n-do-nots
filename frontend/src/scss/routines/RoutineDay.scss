@@ -9,6 +9,9 @@
   background-color: rgba(0,0,0, 0.5);
   color: pink;
   box-shadow: 3px 3px 6px black;
+  .edit-day:hover{
+    background-color: darken(pink, 5%);
+  }
   .edit-day{
     margin-top: 1rem;
     border-radius: 5px;
@@ -42,7 +45,10 @@
     box-shadow: 3px 3px 6px black;
     .workout-title{
       display: flex;
+      align-items: center;
+      padding: 0 1rem;
       justify-content: space-between;
+      min-height: 31.031px;
     }
     .day-exercise{
       padding: 1rem 0;
@@ -55,15 +61,11 @@
       box-shadow: 3px 3px 6px black;
     }
     .workout-done{
-      padding: 1rem 0;
-      margin: 1rem 0;
-      display: flex;
-      justify-content: center;
-      text-align: center;
-      background-color: pink;
-      color: rgba(0,0,0, 0.75);
-      border-radius: 5px;
-      box-shadow: 3px 3px 6px black;
+      .day-exercise{
+        background-color: pink;
+        color: rgba(0,0,0, 0.75);
+
+      }
     }
   }
 }

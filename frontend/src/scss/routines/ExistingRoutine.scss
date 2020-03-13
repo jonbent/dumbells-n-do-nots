@@ -48,6 +48,9 @@
             left: -3rem !important;
         }
     }
+    .submit:not(.disabled):hover{
+        background-color: darken(pink, 5%);
+    }
     .submit{
         margin: 2rem 1rem;
         background-color: pink;

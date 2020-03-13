@@ -31,7 +31,7 @@ const mapStateToProps = ({ui, entities, errors}) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchRoutine: id => dispatch(fetchRoutineById(id)),
-        receiveNewRoutineStartDateWithData: (day, data) => dispatch(receiveNewRoutineStartDateWithData({date: day ? dateFormat(day, 'mm-dd-yyyy') : null, data})),
+        receiveNewRoutineStartDateWithData: (day, data) => dispatch(receiveNewRoutineStartDateWithData({date: day ? dateFormat(day, 'mm/dd/yyyy') : null, data})),
         submitRoutine: (routine) => {return dispatch(submitRoutine(routine))},
         fetchRoutineByStartDate: (date, cb) => fetchRoutineByStartDate(date).then((res) => cb(date, res)).catch(err => {
             cb(date);

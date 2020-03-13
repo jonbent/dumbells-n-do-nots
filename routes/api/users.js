@@ -4,13 +4,17 @@ const validateRegisterInput = require('../../validation/register');
 const validateLoginInput = require('../../validation/login');
 const bcrypt = require('bcryptjs');
 const User = require('../../models/User');
+const Day = require('../../models/Day');
+const Routine = require('../../models/Routine');
+const UserMeal = require('../../models/UserMeal');
+const UserWorkout = require('../../models/UserWorkout');
 const jwt = require('jsonwebtoken');
 const keys = require('../../config/keys');
 const passport = require('passport');
 const uuid = require('uuid');
 const Validator = require('validator');
 const passwordValidator = require('password-validator');
-
+const sampleRoutine = require('../../sampleroutine.js');
 
 
 const multer = require("multer");
@@ -25,7 +29,7 @@ AWS.config.update({
     region: keys.awsRegion
 });
 
-const createDemoRoutine = async (req, res) => {
+const createDemoRoutine = async (req, res, user) => {
     const curDate = new Date();
     const dateRange = [];
     curDate.setHours(0,0,0,0);
@@ -33,16 +37,84 @@ const createDemoRoutine = async (req, res) => {
         dateRange.push(new Date(curDate));
         curDate.setDate(curDate.getDate() + 1);
     }
-    const routines = await Routine.find({user: "5e2a79c88fbdc9103b756ef6"});
+    const routines = await Routine.find({user: "5e601d09012e125773768324"});
     const routineIds = routines.map(r => r._id);
     let dates = await Day.find({date: {$in: dateRange}, routine: {$in: routineIds}});
     if (dates.length !== 0) {
         return null;
+    } else {
+        // const newSampleRoutine = Object.assign({}, sampleRoutine);
+        const sampleRoutineKeys = Object.keys(sampleRoutine);
+        const newRoutine = {};
+        dateRange.forEach((date, idx) => {
+            let month = date.getMonth() + 1;
+            if (month < 10) month = `0${month}`;
+            let day = date.getDate();
+            if (day < 10) day = `0${day}`;
+            const year = date.getFullYear();
+            newRoutine[`${month}/${day}/${year}`] = sampleRoutine[sampleRoutineKeys[idx]];
+        });
+        const newUserRoutine = new Routine({
+            user: user._id
+        });
+        const newDays = [];
+        const dayStrings = Object.keys(newRoutine);
+        return newUserRoutine
+        .save()
+        .then(routine => {
+            dateRange.forEach(date => {
+                newDays.push({date, routine: routine._id});
+            });
+            Day.insertMany(newDays).then((days) => {
+                routine.days = days.map(day => day._id);
+                routine.save();
+                const weeksWorkouts = [];
+                let weeksMeals = [];
+                dayStrings.forEach(async (dayString, idx) => {
+                    const dayMeals = [];
+                    let dayWorkout;
+
+                    Object.keys(newRoutine[dayString].meals).forEach((mealId) => {
+                        dayMeals.push({meal: mealId, quantity: newRoutine[dayString].meals[mealId], day: days[idx]._id});
+                    });
+                    const workoutKeys = Object.keys(newRoutine[dayString].workout).filter(exKey => newRoutine[dayString].workout[exKey] === true);
+                    if ( workoutKeys.length !== 0 ) dayWorkout = {day: days[idx]._id, exercises: workoutKeys};
+                    let meals;
+                    let newWorkout;
+                    let workout;
+                    try {
+                        if ( workoutKeys.length !== 0 ){
+                            newWorkout = new UserWorkout(dayWorkout);
+                            workout = await newWorkout.save();
+                            weeksWorkouts.push(workout);
+                        }
+
+                         meals = await UserMeal.insertMany(dayMeals);
+                         weeksMeals = weeksMeals.concat(meals);
+
+                    } catch(e) {
+                        console.log("ERROR!!!!!!!!!!!", e);
+                        UserWorkout.deleteMany({"_id": {$in: weeksWorkouts.map(w => w._id)}});
+                        UserMeal.deleteMany({"_id": {$in: weeksMeals.map(m => m._id)}});
+                        Day.deleteMany({"routine": routine._id});
+                        Routine.deleteOne({"_id": routine._id});
+
+                    }
+                    days[idx].meals = meals.map(meal => meal._id);
+                    if ( newRoutine[dayString].workout.length !== 0 ) days[idx].workout = workout._id;
+                    days[idx].save();
+                });
+            });
+        });
     }
+
 };
 
 router.get('/demo', async (req, res) => {
-    await createDemoRoutine(req, res);
+    let r = await Routine.find({user: "5e601d09012e125773768324"});
+    Day.deleteMany({"routine": r._id});
+    Routine.deleteOne({"_id": r._id});
+    return res.json({message: r})
 });
 
 
@@ -208,9 +280,9 @@ router.post('/login', (req, res) => {
                 return res.status(400).json(errors);
             };
             bcrypt.compare(password, user.password)
-                .then(isMatch => {
+                .then(async isMatch => {
                     if (isMatch) {
-                        if (user._id.toString() === "5e601d09012e125773768324") createDemoRoutine();
+                        if (user._id.toString() === "5e601d09012e125773768324") await createDemoRoutine(req, res, user);
                         let newUser = Object.assign({}, user.toObject());
                         delete newUser.password;
                         delete newUser.date;
@@ -253,7 +325,7 @@ router.get('/:username', (req, res) => {
         })
 })
 
-router.post('/:username/update', passport.authenticate('jwt', { session: false }), upload.single("avatarUrl"), (req, res) => {
+router.patch('/:username/update', passport.authenticate('jwt', { session: false }), upload.single("avatarUrl"), (req, res) => {
     const s3 = new AWS.S3();
     User.findOne({ username: req.params.username }).then(user => {
         if (!user) return res.status(400).json({ user: { message: "User not found" } })
@@ -262,6 +334,9 @@ router.post('/:username/update', passport.authenticate('jwt', { session: false }
             user.weightCur = req.body.weightCur;
             user.height = req.body.height;
             user.username = req.body.username;
+            if (Validator.isEmail(req.body.email)) {
+                user.email = req.body.email;
+            }
             user.save(function (error, newFile) {
                 if (error) return res.status(422).json(error);
                 let newUser = Object.assign({}, user.toObject());

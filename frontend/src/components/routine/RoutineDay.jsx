@@ -38,13 +38,13 @@ const RoutineDay = ({ updateRoutineChecks, workout, editable, day, routine, user
         Object.keys(newRoutineData)[idx] :
             !isNaN(idx) ?
                 `Day ${idx + 1}` :
-             DateFormat(new Date(day.date), "mm-dd-yyyy");
+             DateFormat(new Date(day.date), "mm/dd/yyyy");
     return (
         <div className="RoutineDay">
             <div className="day-title">
                 {readableDay}
             </div>
-            <div className="day-meals">
+            {userMeals.length !== 0 && <div className="day-meals">
                 <div className="meal-title">Meals</div>
                 {userMeals.map((userMeal) => {
                     if (!userMeal) return null;
@@ -57,11 +57,11 @@ const RoutineDay = ({ updateRoutineChecks, workout, editable, day, routine, user
                         </div>
                     )
                 })}
-            </div>
-            {exercises.length > 0 && <div className="day-workout" onClick={() => !history ? check() : null}>
-                <div className="workout-title"><span>Workout</span></div>
+            </div>}
+            {exercises.length > 0 && <div className={`day-workout ${workout.doneCheck === true ? "workout-done" : ""}`} onClick={() => !history ? check() : null}>
+                <div className="workout-title"><span>Workout</span><span className="check"></span></div>
                 {exercises.map((ex, idx) => {
-                    return <div key={idx} className={workout.doneCheck === true ? "workout-done" : "day-exercise"}>{ex.name}</div>
+                    return <div key={idx} className="day-exercise">{ex.name}</div>
                 })}
             </div>}
             {!!editable && <div className="edit-day" onClick={() => editDayMeals ? editDayMeals(day) : editDayMeals}>Edit Meals</div>}

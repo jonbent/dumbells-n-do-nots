@@ -29,32 +29,24 @@
     }
 
   }
-  .day-select > div{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    div{
-      background-color: black;
-      border: 1px solid pink;
-      cursor: pointer;
-      color: pink;
-      border-radius: 5px;
-      padding: 0.5rem 1rem;
-    }
-  }
+
   .meal-search{
     display: flex;
     flex-direction: column;
-    .search-headers{
+    .search-actions{
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      div{
+      align-items: center;
+      div, input{
         width: 100%;
+        height: 100%;
+        padding: 1rem 0;
         display: flex;
         justify-content: center;
         text-align: center;
         align-items: center;
+        font-size: 100%;
       }
       .ignore-filters{
         background-color: pink;
@@ -62,8 +54,14 @@
         border: 1px solid pink;
         border-radius: 5px;
         margin-top: 1rem;
-        padding: 1rem 0;
         cursor: pointer;
+      }
+      .ignore-filters:hover{
+        background-color: darken(pink, 5%);
+      }
+      .ignore-filters.ignoring:hover{
+        background-color: darken(pink, 5%);
+        color: black;
       }
       .ignore-filters.ignoring{
         background-color: black;
@@ -73,7 +71,7 @@
     input{
       margin-top: 1rem;
       text-align: center;
-      font-size: 150%;
+      //font-size: 150%;
     }
   }
   .calorie-count{
@@ -89,14 +87,6 @@
   }
   .calorie-count.just-right{
     color: darkgreen;
-  }
-  .day-select{
-    h1{
-      margin-bottom: 1rem;
-    }
-    flex-direction: column;
-    justify-content: inherit;
-
   }
   .selected-meals{
     margin: 1rem;
@@ -121,6 +111,12 @@
       .submit-meals.disabled{
         opacity: 0.2;
         cursor: default;
+      }
+      .submit-meals:hover{
+        color: darken(pink, 10%);
+      }
+      .select-filters:hover{
+        background-color: darken(pink, 5%);
       }
       .submit-meals, .select-filters {
         margin: 0 1rem;
@@ -155,16 +151,40 @@
   select:focus{
     outline: none;
   }
-  select, input{
+  select, input {
     -moz-appearance: none;
     border-radius: 5px;
     -webkit-appearance: none;
     background-color: black;
     border:1px solid pink;
     color: pink;
-    padding: 0.5rem 1rem;
-    //background-color: transparent;
   }
+  .day-select{
+    display: flex;
+    flex-direction: column;
+    .scheduled-days{
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      margin-top: 0.5rem;
+      justify-content: center;
+      div{
+        border-radius: 5px;
+        padding: 1rem;
+        background-color: rgba(0, 0, 0, 0.3);
+        box-shadow: 3px 3px 6px black;
+        cursor: pointer;
+      }
+      div:hover{
+        background-color: darken(pink, 5%);
+      }
+      div.selected{
+        background-color: pink;
+        color: black;
+      }
+    }
+  }
+
   .num-meals-select{
     flex-direction: column;
     form{
@@ -183,20 +203,26 @@
   justify-content: space-between;
 }
 
-@media only screen and (min-width: 540px) {
+@media only screen and (min-width: 725px) {
   .meal-selector {
     .meal-search {
-      .search-headers {
+      .search-actions {
         flex-direction: row;
         justify-content: space-between;
+        div{
+          margin-right: 0.35rem;
+        }
+        input{
+          margin-left: 0.35rem;
+        }
         .ignore-filters{
-          margin-top: 0;
+          margin-top: 1rem;
         }
       }
     }
   }
 }
-@media only screen and (max-width: 630px) {
+@media only screen and (max-width: 715px) {
   .meal-selector{
     .meal-list{
       .routine-actions{

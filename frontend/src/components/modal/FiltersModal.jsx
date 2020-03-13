@@ -11,17 +11,17 @@ const FiltersModal = ({ modal, closeFiltersModal, fetchMeals, pageSize, minCals,
         return null;
     }
     let component;
-    switch (modal) {
-        case "meals":
-            component = <MealsFilters />;
-            break;
-        default:
-            return null;
-    }
     const confirmFilters = () => {
         changePage(1);
         closeFiltersModal();
         fetchMeals({ pageSize, pageNum: 1, minCals, maxCals});
+    };
+    switch (modal) {
+        case "meals":
+            component = <MealsFilters confirmFilters={confirmFilters}/>;
+            break;
+        default:
+            return null;
     }
     return (
         <div className="filters-modal-background">

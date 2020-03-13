@@ -15,7 +15,7 @@ router.get("/test", (req, res) => res.json({ msg: "This is the users route" }));
 router.get("/startDate", passport.authenticate("jwt", { session: false }), async (req, res) => {
     if (!req.query.startDate) return res.status(422).json({message: "Start Date must be provided"});
     const curDate = new Date(req.query.startDate);
-    curDate.setHours(0,0,0,0)
+    curDate.setHours(0,0,0,0);
     const dateRange = [];
     for(let i = 0; i < 7; i++){
         const newDate = new Date(curDate);

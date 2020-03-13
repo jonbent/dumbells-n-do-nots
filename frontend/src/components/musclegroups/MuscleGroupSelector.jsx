@@ -68,10 +68,11 @@ class MuscleGroupSelector extends Component {
               <div className="muscle-group-selector-container">
 
                   <div className="muscle-group-selector">
+                      <div className="exercise-selector-header">Select a muscle to train for selected date.</div>
                       <div>{bodySide}</div>
                       <div className="side-choice">
                           <div onClick={this.handleSide} >
-                              {this.props.side === "front" ? "Back" : "Front"}
+                              {this.props.side === "front" ? "Back Muscles" : "Front Muscles"}
                           </div>
                       </div>
                   </div>
