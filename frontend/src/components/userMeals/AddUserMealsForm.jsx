@@ -163,7 +163,6 @@ class AddUserMealsForm extends React.Component{
             mealList = mealsArray.length > 0 ? (
                 <div className="meal-list">
                     {mealsArray.map(meal => {
-                        console.log(daySelectedMeals instanceof Set);
                         if (daySelectedMeals.has(meal._id)) return null;
                         return <MealItem
                             meal={meal}
