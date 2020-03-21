@@ -1,12 +1,13 @@
 import React from 'react'
 import '../../scss/Splash.scss';
-import NavBar from "../navbar/NavBar";
+import SplashCarousel from '../splashCarousel/splashCarousel';
+// import NavBar from "../navbar/NavBar";
 
 
 const Splash = () => {
     return (
         <div className="wrapper">
-            <NavBar/>
+            {/* <NavBar/> */}
             <div className="Info">
                 <h1>Fitness starts with a plan...</h1>
                 <p>New Year, New Me! Start taking control of your goals.
@@ -15,24 +16,46 @@ const Splash = () => {
                 <a href="/#/signup">
                 <button className="Sign-up-btn">signup for free</button>
                 </a>
-                <p>aready have an account?
+                <p>Already have an account?
                     <a href="/#/login" > Login</a>
                 </p>
             </div>
+
+            <div className="separators">
+                <SplashCarousel>
+                    <div className="demo-text">
+                        <h2>
+                            Select your meals from our Database
+                        </h2>
+                        <p>
+                            What's in your food? Learn about calories, fats, carbs and poteins in your meal.
+                        </p>
+                    </div> 
+                    <div className="demo-text">
+                        <h2>
+                            Customize your meals!
+                        </h2>
+                        <p>
+                            You can construct your own meals.
+                        </p>
+                    </div> 
+                </ SplashCarousel>
+
+            </div>
+
              <div className="demo-feature">
                 <div className="selector-demo" style={{backgroundImage: "url(/images/meal-selector-demo.png)"}}></div>
-                <div className="demo-text">
+                {/* <div className="demo-text">
                     <h2>
                         Select your meals from our Database
                     </h2>
                     <p>
                        What's in your food? Learn about calories, fats, carbs and poteins in your meal.
                     </p>
-                </div>
+                </div> */}
             </div>
 
-            <div className="exercise-demo-feature">
-                <div className="exercise-selector-demo" style={{backgroundImage: "url(/images/exercise-selector-demo.png)"}}></div>
+            <div className="separators">
                 <div className="exercise-demo-text">
                     <h2>
                         Customize your work-out routine
@@ -43,6 +66,25 @@ const Splash = () => {
                     </p>
                 </div>
             </div>
+
+
+            <div className="exercise-demo-feature">
+                <div className="exercise-selector-demo" style={{backgroundImage: "url(/images/exercise-selector-demo.png)"}}></div>
+                {/* <div className="exercise-demo-text">
+                    <h2>
+                        Customize your work-out routine
+                    </h2>
+                    <p>
+                        Select your work-out routine based on your desire muscle groups
+
+                    </p>
+                </div> */}
+            </div>
+
+            {/* <div className="separators">
+
+            </div> */}
+
             <div className="developer-info">
                 <div className="developer-profile">
                     <div className="developer-photo">
