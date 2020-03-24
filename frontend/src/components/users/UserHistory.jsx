@@ -7,6 +7,7 @@ import FiltersModal from "../modal/FiltersModal";
 import Alert from "../alerts/Alert";
 
 import {Link } from 'react-router-dom';
+import NavBar from "../navbar/NavBar";
 
 class UserHistory extends Component {
     constructor(props) {
@@ -33,10 +34,8 @@ class UserHistory extends Component {
                 <Modal/>
                 <Alert/>
                 <FiltersModal/>
+                <NavBar/>
                 <div className="UserHistory">
-                    <Link to='/' className="close-history">
-                        Close
-                    </Link>
                     <div className="routine-history">
                         <div className="history-title">
                             History
@@ -57,7 +56,7 @@ class UserHistory extends Component {
                         })}
                     </div>
                 </div>
-                <BottomNavBar user={currentUser}/>
+                {/*<BottomNavBar user={currentUser}/>*/}
             </div>
         );
     }

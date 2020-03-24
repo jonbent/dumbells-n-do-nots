@@ -6,6 +6,8 @@ import Modal from "../modal/Modal";
 import RoutineShow from "../routine/RoutineShowContainer";
 import FiltersModal from "../modal/FiltersModal";
 import Alert from "../alerts/Alert";
+import NavBar from "../navbar/NavBar";
+import Hamburger from "../modal/Hamburger";
 class UserShow extends Component {
     // constructor(props) {
     //     super(props);
@@ -25,6 +27,7 @@ class UserShow extends Component {
                 <Modal/>
                 <Alert/>
                 <FiltersModal/>
+                <NavBar/>
 
                 <div className="user-show-content">
                     <UserShowCard user={user}/>
@@ -32,7 +35,7 @@ class UserShow extends Component {
                         <RoutineShow/>
                     </div>
                 </div>
-                <BottomNavBar user={user}/>
+                {/*<BottomNavBar user={user}/>*/}
             </div>
         )
     }

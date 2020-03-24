@@ -5,6 +5,7 @@ import DateFormat from "dateformat";
 import Modal from "../modal/Modal";
 import FiltersModal from "../modal/FiltersModal";
 import Alert from "../alerts/Alert";
+import NavBar from "../navbar/NavBar";
 
 
 
@@ -97,6 +98,7 @@ class Settings extends Component {
         <Modal/>
         <Alert/>
         <FiltersModal/>
+        <NavBar/>
         <div className="main-container">
           <div className="image">
             {profilePic}
@@ -155,7 +157,7 @@ class Settings extends Component {
             <div>Logout</div>
           </div>
         </div>
-        <BottomNavBar user={user} />
+        {/*<BottomNavBar user={user} />*/}
       </div>
     );
   }

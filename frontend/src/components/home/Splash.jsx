@@ -25,21 +25,21 @@ const Splash = () => {
                 <SplashCarousel>
                     <div className="demo-text">
                         <h2>
-                            Select your meals from our Database
+                            Track your progress!
                         </h2>
                         <p>
-                            What's in your food? Learn about calories, fats, carbs and poteins in your meal.
+                            You can track your weight progress & view past, present, and future routines.
                         </p>
-                    </div> 
+                    </div>
                     <div className="demo-text">
                         <h2>
-                            Customize your meals!
+                            Select your meals from an exhaustive list of provided meals.
                         </h2>
                         <p>
-                            You can construct your own meals.
+                            We take it upon ourselves to add new meals to the database on a regular basis in order for you to have more options for your special routine.
                         </p>
-                    </div> 
-                </ SplashCarousel>
+                    </div>
+                </SplashCarousel>
 
             </div>
 
@@ -56,15 +56,24 @@ const Splash = () => {
             </div>
 
             <div className="separators">
-                <div className="exercise-demo-text">
-                    <h2>
-                        Customize your work-out routine
-                    </h2>
-                    <p>
-                        Select your work-out routine based on your desire muscle groups
-
-                    </p>
-                </div>
+                <SplashCarousel>
+                    <div className="demo-text">
+                        <h2>
+                            Customize your workout routine
+                        </h2>
+                        <p>
+                            Select your workout routine day-to-day based on specific desired muscle groups.
+                        </p>
+                    </div>
+                    <div className="demo-text">
+                        <h2>
+                            Customize your own exercises
+                        </h2>
+                        <p>
+                            Not only do we allow you to help us expand our meals, but we also allow you to expand the exercise list.
+                        </p>
+                    </div>
+                </SplashCarousel>
             </div>
 
 
