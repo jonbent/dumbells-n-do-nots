@@ -206,7 +206,7 @@ class AddUserMealsForm extends React.Component{
                     <div>Search for meals</div>
                     <div className="search-actions">
                         <div className={`ignore-filters ${ignoringFilters ? "ignoring" : ""}`} onClick={this.handleFilterIngore}>{ignoringFilters ? "Enable Filters for Search" : "Disable Filters for Search"}</div>
-                        <input placeholder="Search by title..." value={mealSearch} onChange={this.handleSearchInputChange}/>
+                        <input placeholder="Search by recipe name..." value={mealSearch} onChange={this.handleSearchInputChange}/>
 
                     </div>
                 </div>

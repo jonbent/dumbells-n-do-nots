@@ -14,7 +14,7 @@ const DateFormat = require('dateformat')
 router.get("/test", (req, res) => res.json({ msg: "This is the users route" }));
 router.get("/startDate", passport.authenticate("jwt", { session: false }), async (req, res) => {
     if (!req.query.startDate) return res.status(422).json({message: "Start Date must be provided"});
-    const curDate = new Date(req.query.startDate);
+    const curDate = new Date(DateFormat(req.query.startDate, 'mm/dd/yyyy'));
     curDate.setHours(0,0,0,0);
     const dateRange = [];
     for(let i = 0; i < 7; i++){
@@ -27,12 +27,11 @@ router.get("/startDate", passport.authenticate("jwt", { session: false }), async
     let dates = await Day.find({date: {$in: dateRange}, routine: {$in: routineIds}});
     const datesFound = dates.length ? true : false;
     return datesFound ? (
-        res.status(422).json({message: "Week already taken by existing routine"})
+        res.status(422).json({message: "Please select another date from above, week has already been taken by an existing routine."})
     ) : (
         res.json({datesFound})
     );
-
-})
+});
 router.get('/user/:userId', async (req, res) => {
     let routines = await Routine.find({user: req.params.userId}).sort({$natural:-1});
     const response = {routines};
@@ -44,8 +43,9 @@ router.get('/user/:userId', async (req, res) => {
 router.get('/user/:userId/single', async (req, res) => {
     const curDate = new Date();
     curDate.setHours(0,0,0,0);
+    console.log(curDate);
     const routines = await Routine.find({user: req.params.userId});
-    let date = await Day.findOne({date: {$eq: curDate}, routine: {$in: routines.map(r => r._id)}})
+    let date = await Day.findOne({date: curDate, routine: {$in: routines.map(r => r._id)}});
     if (!date) return res.status(400).json({errors: {routine: "Cannot find given routine"}});
     const routine = await Routine.findOne({user: req.params.userId, _id: date.routine});
     if (!routine) return res.status(400).json({errors: {routine: "Cannot find given routine"}});
@@ -134,19 +134,19 @@ router.put("/days/:dayId/:completableType/:completableId", passport.authenticate
     const day = await Day.findOne({_id: req.params.dayId});
     if (!day) return res.status(422).json({message: "No Day found with given ID."});
     const routine = await Routine.findOne({_id: day.routine});
-    if (routine.user.toString() !== req.user._id.toString()) return res.status(422).json({message: "Current User does not own given routine"})
+    if (routine.user.toString() !== req.user._id.toString()) return res.status(422).json({message: "Current User does not own given routine"});
     switch(req.params.completableType){
         case "workout":
             const workout = await UserWorkout.findOne({_id: req.params.completableId});
             if (!workout) return res.status(422).json({message: "Cannot find given workout"});
-            if (typeof req.body.doneCheck !== "boolean" ) return res.status(422).json({message: "doneCheck must be provided"})
+            if (typeof req.body.doneCheck !== "boolean" ) return res.status(422).json({message: "doneCheck must be provided"});
             workout.doneCheck = req.body.doneCheck;
             workout.save();
             break;
         case "meal":
             const meal = await UserMeal.findOne({ _id: req.params.completableId});
             if (!meal) return res.status(422).json({message: "Cannot find given meal"});
-            if (!req.body.doneAmount || isNaN(req.body.doneAmount)) return res.status(422).json({message: "doneAmount must be a valid number"})
+            if (!req.body.doneAmount || isNaN(req.body.doneAmount)) return res.status(422).json({message: "doneAmount must be a valid number"});
             meal.doneAmount += parseInt(req.body.doneAmount);
             meal.save();
             break;

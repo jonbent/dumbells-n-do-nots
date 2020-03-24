@@ -61,6 +61,7 @@
     top: 102px;
     left: 96px;
     z-index: 4;
+    clip-path: polygon(0 0, 100% 0%, 50% 100%, 0 100%);
 }
 
 #front-male-right-shoulder{
@@ -68,6 +69,7 @@
     top: 103px;
     left: 193px;
     z-index: 4;
+    clip-path: polygon(0 0, 100% 0%, 100% 100%, 77% 100%);
 }
 
 #front-male-left-chest{

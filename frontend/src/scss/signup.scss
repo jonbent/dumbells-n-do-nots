@@ -5,7 +5,7 @@
     margin-top: 3rem;
     font-size: 3.5rem;
     font-weight: bold;
-    color: white;
+    //color: white;
 }
 .signup-form-container{
     display: flex;
@@ -13,13 +13,14 @@
     padding-bottom: 4rem;
     flex-direction: column;
     align-items: center;
+    background-color: mintcream;
     .sign-up-link{
         width: 80%;
         background-color: lightpink;
         font-size: 200%;
-        border-radius: 50px;
+        //border-radius: 50px;
         color: black;
-        box-shadow: 0rem 0rem 0.5rem black;
+        //box-shadow: 0rem 0rem 0.5rem black;
         text-decoration: none;
         display: flex;
         justify-content: center;
@@ -40,7 +41,7 @@
 }
 .signup-form-detail-label{
     transition: 0.3s ease-in;
-    color: white;
+    //color: white;
     font-size: 120%;
 }
 
@@ -48,22 +49,21 @@
     transition: 0.5s ease-in;
     border: none;
     margin-top: 0.5rem;
-    border-bottom: solid 1px white;
+    border-bottom: solid 1px black;
     input{
         font-size: 80%;
     // transition: 0.3s ease;
-    text-align: center;
-    border: none;
-    background: transparent;
-    color: white;
-    width: 100%;
+        text-align: center;
+        border: none;
+        background: transparent;
+        //color: white;
+        width: 100%;
     }
 }
 .signup-form-detail-input:focus-within{
     transition: 0.5s ease-out;
-    font-size: 150% ;
+    font-size: 150%;
     width: 100%;
-
     text-align: center;
 }
 .signup-form-detail-input {
@@ -94,11 +94,12 @@ input:focus{
     font-size: 1.25rem;
     // border: solid 1px lightgray;
     margin: auto;
-    box-shadow: 0 0 1rem black;
+    //box-shadow: 0 0 1rem black;
     // margin-bottom: 1.875rem ;
     padding: 0.335rem 0.625rem;
-    border-radius: 50px;
+    //border-radius: 50px;
     background-color: lightskyblue;
+    cursor: pointer;
 }
 .signup-errors{
     font-size: 0.7375rem;
@@ -119,7 +120,7 @@ input:focus{
 }
 .signup-form-dropdown{
     appearance: none;
-    color: white;
+    //color: white;
     background-color: transparent;
     height: 1.875rem;
     width: 12.5rem;
@@ -131,14 +132,14 @@ input:focus{
     display: flex;
     flex-direction: row;
     justify-content: center;
-    border-bottom: 1px solid white;
-    color: white;
+    border-bottom: 1px solid black;
+    //color: white;
     input{
         max-width: 2rem;
         background: transparent;
         border: none;
         // border-bottom: 1px solid white;
-        color: white;
+        //color: white;
         text-align: center;
     }
 }
@@ -149,11 +150,11 @@ input:focus{
     width: 100%;
     font-size: 1rem;
 }
-.signup-form-height-input:focus-within{
-    transition: 0.3s ease-out;
-    font-size: 200%;
-    text-align: center;
-}
+//.signup-form-height-input:focus-within{
+//    transition: 0.3s ease-out;
+//    font-size: 200%;
+//    text-align: center;
+//}
 
 // .signup-form-height>input:focus{
 //     font-size: 100%;
@@ -165,7 +166,7 @@ input:focus{
 .signup-form-input-detail-container:focus-within{
     label{
         transition: 0.3s ease;
-        font-size: 75%;
+        font-size: 200%;
     }
     input,span{
         // transition: 0.3s ease;

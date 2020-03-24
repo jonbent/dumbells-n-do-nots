@@ -90,7 +90,7 @@ class Signup extends React.Component {
     let heightErrors
     if (errors) {
       
-      if (errors.username) {
+      if (errors.username && errors.username.message) {
         usernameErrors = errors.username.message.slice(5);
       }
       if (errors.height) {
@@ -108,7 +108,7 @@ class Signup extends React.Component {
       if (errors.sex) {
         sexErrors = errors.sex.message;
       }
-      if (errors.birthDate) {
+      if (errors.birthDate && errors.birthDate.message) {
         dobErrors = errors.birthDate.message.slice(5);
       }
       if (errors.weightStart) {

@@ -1,95 +1,107 @@
 #root > div{
     height: 100%;
 }
-.login-page{
+
+.login-page-container{
     display: flex;
     flex-direction: column;
-    .login-form-container{
-        margin: 1rem 0rem;
-        height: 100%;
-        width: 100%;
-        color: lightgray;
+    height: 100%;
+    .login-page{
         display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding-bottom: 3rem;
-        .sign-up-link{
-            width: 80%;
-            background-color: lightpink;
-            font-size: 200%;
-            border-radius: 50px;
-            color: black;
-            box-shadow: 0rem 0rem 0.5rem black;
-            text-decoration: none;
-            display: flex;
-            justify-content: center;
-            padding: 1px 7px 2px;
-            margin-top: 2rem;
-            height: 3.5rem;
-            align-items: center;
-            font-family: system-ui;
-        }
-        form{
-            display: flex;
+        height: 100%;
+        overflow: hidden;
+        .signup-pic{
+            width: 30%;
             height: 100%;
-            width: 80%;
+        }
+        .login-form-container{
+            height: 100%;
+            width: 70%;
+            color: black;
+            display: flex;
             flex-direction: column;
-            justify-content: space-around;
-            .selected-field{
-                border-bottom: 1px solid lightgray;
-                margin: 1rem 0rem;
-            }
-            .selected-field:focus-within{
-                label{
-                    font-size: 75%;
-                }
-            }
-            input:focus{
-                font-size: 200% !important;
-            }
-            input[type="submit"]{
-                background-color: lightskyblue;
+            align-items: center;
+            padding-bottom: 3rem;
+            overflow-y: scroll;
+            background: white;
+            .sign-up-link{
+                width: 80%;
+                background-color: lightpink;
                 font-size: 200%;
                 border-radius: 50px;
-                color:black;
+                color: black;
                 box-shadow: 0rem 0rem 0.5rem black;
-                cursor: pointer;
-                margin: 2rem 0rem;
-            }
-
-            input{
-                transition: font-size 1s ease;
-                width: 100%;
-                background-color: transparent;
-                border: none;
-                text-align: center;
-                font-size: 100%;
-                color:lightgray;
-            }
-            label{
-                transition: font-size 1s ease;
+                text-decoration: none;
                 display: flex;
-                flex-direction: column;
-                justify-content: space-between;
+                justify-content: center;
+                padding: 1px 7px 2px;
+                margin-top: 2rem;
+                height: 3.5rem;
                 align-items: center;
-                height: 4rem;
-                width: 100%;
-                font-size: 200%;
-                
+                font-family: system-ui;
+            }
+            form{
+                display: flex;
+                height: 100%;
+                width: 80%;
+                flex-direction: column;
+                justify-content: space-around;
+                .selected-field{
+                    border-bottom: 1px solid lightgray;
+                    margin: 1rem 0rem;
+                }
+                .selected-field:focus-within{
+                    label{
+                        font-size: 75%;
+                    }
+                }
+                input:focus{
+                    font-size: 200% !important;
+                }
+                input[type="submit"]{
+                    background-color: lightskyblue;
+                    font-size: 200%;
+                    border-radius: 50px;
+                    color:black;
+                    box-shadow: 0rem 0rem 0.5rem black;
+                    cursor: pointer;
+                    margin: 2rem 0rem;
+                }
+
+                input{
+                    transition: font-size 1s ease;
+                    width: 100%;
+                    background-color: transparent;
+                    border: none;
+                    text-align: center;
+                    font-size: 100%;
+                    color:black;
+                }
+                label{
+                    transition: font-size 1s ease;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    align-items: center;
+                    height: 4rem;
+                    width: 100%;
+                    font-size: 200%;
+
+                }
             }
         }
-    }
-    .demo-login{
-        background-color: lightskyblue;
-        font-size: 200%;
-        border-radius: 50px;
-        color:black;
-        box-shadow: 0rem 0rem 0.5rem black;
-        cursor: pointer;
-        width: 80vw;
-        text-align: center;
-        font-family: system-ui;
-        padding: 0.25rem 0rem;
+        .demo-login{
+            background-color: lightskyblue;
+            font-size: 200%;
+            border-radius: 50px;
+            color:black;
+            box-shadow: 0rem 0rem 0.5rem black;
+            cursor: pointer;
+            width: 80vw;
+            text-align: center;
+            font-family: system-ui;
+            padding: 0.25rem 0rem;
+        }
     }
 }
 
