@@ -35,11 +35,22 @@
       width: 100%;
       overflow: scroll;
       padding: 0.9375rem 0px;
-      a{
+      button{
+        width: 100%;
+      }
+      button:hover, a.active, a:hover{
+        background-color: #F9C095;
+        color: black;
+      }
+      a, button{
         -webkit-box-align: center;
         align-items: center;
         color: #F9C095;
+        background-color: black;
+        outline: none;
+        border: none;
         cursor: pointer;
+        text-decoration: underline;
         display: flex;
         font-size: 0.8125rem;
         font-weight: 500;

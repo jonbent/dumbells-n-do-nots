@@ -2,11 +2,14 @@ import {connect} from 'react-redux';
 import React from 'react';
 
 import '../../scss/Hamburger.scss';
-import {Link} from "react-router-dom";
+import {Link, withRouter, NavLink} from "react-router-dom";
 import {logout} from "../../actions/SessionActions";
 import {closeHamburger} from "../../actions/HamburgerActions";
+import Plus from "../svg/Plus";
+import {openModal} from "../../actions/ModalActions";
 
-const Hamburger = ({openStatus, loggedIn, user, logout, closeHamburger}) => {
+const Hamburger = ({openStatus, loggedIn, user, logout, closeHamburger, location, openNewRoutineModal}) => {
+    const splitLocation = location.pathname.split('/');
     return (
         <div className={`Hamburger ${openStatus ? "slide-in" : ""}`}>
             <div className="absolute-hamburger">
@@ -34,10 +37,15 @@ const Hamburger = ({openStatus, loggedIn, user, logout, closeHamburger}) => {
                     </div>
                 </div>}
                 <div className="site-links">
-                    <Link to="/">Home</Link>
-                    {loggedIn && <Link to={`/users/${user.username}/history`}>History</Link>}
-                    <Link to="/deliveries">Deliveries</Link>
-                    <Link to="/stores">Stores</Link>
+                    <NavLink exact to="/">Home</NavLink>
+                    {!!loggedIn && <NavLink to={splitLocation[3] === "history" ? "/" : `/users/${user.username}/history`}>
+                        History
+                    </NavLink>}
+                    {!!loggedIn && <div>
+                        <button onClick={openNewRoutineModal}>
+                            Add New Routine
+                        </button>
+                    </div>}
                     {!!loggedIn && <Link to="/" onMouseDown={logout}>Logout</Link>}
                 </div>
             </div>
@@ -57,8 +65,9 @@ const mapStateToProps = ({entities, ui, session}) => {
 
 const mapDispatchToProps = (dispatch) => ({
     logout: () => dispatch(logout()),
-    closeHamburger: () => dispatch(closeHamburger())
+    closeHamburger: () => dispatch(closeHamburger()),
+    openNewRoutineModal: () => dispatch(openModal('addRoutine')),
 });
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Hamburger)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Hamburger));

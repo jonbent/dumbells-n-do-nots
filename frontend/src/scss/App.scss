@@ -7,9 +7,26 @@ html{
     //-webkit-transform-style: flat;
     //transform-style: flat;
 }
+body::after {
+  content: "";
+  display: block;
+  position: absolute;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  background-image: url('/images/dumbnot-background.jpg');
+  //background-size: cover;
+  background-position: left top;
+  opacity: 0.3;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
 body{
-    background-image: url('/images/dumbnot-background.jpg');
+    //background-image: url('/images/dumbnot-background.jpg');
     background-position: left top;
+    background-color: black;
     display: flex;
     flex-direction: column;
     //font-family: 'Roboto Mono', monospace;

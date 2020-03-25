@@ -32,11 +32,6 @@ export default class BottomNavBar extends React.Component{
                             <History/>
                         </NavLink>
                     </div>
-                    {/*<div>*/}
-                    {/*    <button onClick={() => this.props.testMuscleGroupsSelector()}>*/}
-                    {/*        <History/>*/}
-                    {/*    </button>*/}
-                    {/*</div>*/}
                 </div>
             </div>
         )
