@@ -55,17 +55,22 @@
                     color: black;
                 }
             }
+            form > div:not(:nth-of-type(1)){
+                margin-top: 1.875rem;
+            }
             form{
                 display: flex;
-                height: 100%;
                 max-width: 512px;
                 width: 100%;
                 flex-direction: column;
-                justify-content: space-around;
+                margin-top: 2rem;
                 h3{
                     font-size: 24px;
                     font-weight: 700;
                     text-transform: uppercase;
+                }
+                .selected-field:nth-of-type(1){
+                    margin-top: 3rem;
                 }
                 .selected-field{
                     margin: 1rem 0rem;
@@ -74,7 +79,7 @@
                     }
                     label{
                         font-size: 1.2em;
-                        font-weight: 600;
+                        font-weight: 400;
                         display: block;
                         padding: 5px 0;
                     }
@@ -137,7 +142,7 @@
                     flex-direction: column;
                     width: 100%;
                     font-size: 1.2em;
-                    font-weight: 600;
+                    font-weight: 400;
 
                 }
             }

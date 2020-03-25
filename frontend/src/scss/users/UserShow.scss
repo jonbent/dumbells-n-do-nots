@@ -8,39 +8,52 @@
     flex-direction: column;
     .routine-info-container{
         border-radius: 10px;
-        background-color: lightskyblue;
+        background-color: #F9C095;
         width: 100%;
         margin-right: 2rem;
-        .routine-day-container .RoutineDay {
-            .day-meals .meal-item:hover {
-                cursor: pointer;
-                color: darken(pink, 25%);
+        height: fit-content;
+        .routine-day-container {
+            .routine-day-title{
+                text-align: center;
+                font-size: 1.3rem;
+                font-weight: 600;
+                padding: 1rem 0;
             }
-            .day-workout.workout-done{
-                .check{
-                    display: inline-block;
-                    transform: rotate(45deg);
-                    height: 1.5rem;
-                    width: 0.75rem;
-                    border-bottom: 0.44rem solid pink;
-                    border-right: 0.44rem solid pink;
-                    align-self: flex-end;
+            .RoutineDay {
+                .day-meals .meal-item:hover {
+                    cursor: pointer;
+                    color: darken(pink, 25%);
                 }
-            }
-            .day-workout:hover{
-                background-color: black;
-                cursor: pointer;
-                .day-exercise{
-                    background-color: darken(darkgray, 50%);
+
+                .day-workout.workout-done {
+                    .check {
+                        display: inline-block;
+                        transform: rotate(45deg);
+                        height: 1.5rem;
+                        width: 0.75rem;
+                        border-bottom: 0.44rem solid pink;
+                        border-right: 0.44rem solid pink;
+                        align-self: flex-end;
+                    }
                 }
-                .check{
-                    display: inline-block;
-                    transform: rotate(45deg);
-                    height: 1.5rem;
-                    width: 0.75rem;
-                    border-bottom: 0.44rem solid pink;
-                    border-right: 0.44rem solid pink;
-                    align-self: flex-end;
+
+                .day-workout:hover {
+                    background-color: black;
+                    cursor: pointer;
+
+                    .day-exercise {
+                        background-color: darken(darkgray, 50%);
+                    }
+
+                    .check {
+                        display: inline-block;
+                        transform: rotate(45deg);
+                        height: 1.5rem;
+                        width: 0.75rem;
+                        border-bottom: 0.44rem solid pink;
+                        border-right: 0.44rem solid pink;
+                        align-self: flex-end;
+                    }
                 }
             }
         }

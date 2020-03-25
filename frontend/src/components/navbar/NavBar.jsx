@@ -4,6 +4,8 @@ import Hamburger from "../svg/Hamburger";
 import {connect} from 'react-redux';
 import {openHamburger} from "../../actions/HamburgerActions";
 import {logout} from "../../actions/SessionActions";
+import History from "../svg/History";
+
 const NavBar = ({openHamburger, logout, currentUser}) => {
     return (
         <div className="navbar-container">
@@ -21,12 +23,12 @@ const NavBar = ({openHamburger, logout, currentUser}) => {
             </div>
         </div>
     )
-}
+};
 const mapStateToProps = ({session}) => ({
     currentUser: session.user,
-})
+});
 const mapDispatchToProps = (dispatch) => ({
     openHamburger: ()=> dispatch(openHamburger()),
     logout: ()=> dispatch(logout())
-})
+});
 export default connect(mapStateToProps, mapDispatchToProps)(NavBar);

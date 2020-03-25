@@ -47,7 +47,7 @@ class RoutineShow extends Component {
         const {days, userMeals, daysHash} = this.props;
         const {curDay, selectedWorkoutDay, selectedMealsDay} = this.state;
         if (!days.length) return <div className="RoutineShow"><div className="not-found">
-                <div className="title">Current Routine not found.</div>
+                <div className="title">Current Routine not found. </div>
                 <div className="create"><div onClick={this.props.openNewRoutineModal}>Create New Routine</div></div>
         </div></div>;
         const dayValues = Object.values(days);
@@ -80,6 +80,7 @@ class RoutineShow extends Component {
                     <div className="create"><div onClick={this.props.openNewRoutineModal}>Create New Routine</div></div>
                 </div>}
                 {!!dayValues.length && <div className="routine-day-container">
+                    <div className="routine-day-title">Your routine for {DateFormat(dayValues[curDay].date, 'mm/dd/yyyy')}</div>
                     <RoutineDay
                         day={dayValues[curDay]}
                         editable={this.props.curDayIdx <= curDay}
