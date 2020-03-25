@@ -52,37 +52,46 @@ export default class Login extends Component {
                 <div className="login-page">
                     <div style={{backgroundImage: "url(/images/signup-pic.jpeg)"}} className="signup-pic"></div>
                     <div className="login-form-container">
-                        <form onSubmit={this.handleSubmit}>
+                        <form>
+                            <h3>Login</h3>
                             <div className="selected-field">
                                 <label htmlFor="username">Username</label>
-                                <input
-                                    type="text"
-                                    id="username"
-                                    value={username}
-                                    onChange={e => this.handleUpdate("username", e)}
-                                />
+                                <div>
+                                    <input
+                                        type="text"
+                                        id="username"
+                                        value={username}
+                                        onChange={e => this.handleUpdate("username", e)}
+                                    />
+                                </div>
+                                {usernameError && <div className={'login-error'}>{usernameError}</div>}
                             </div>
-                            {usernameError}
                             <div className="selected-field">
                                 <label htmlFor="password">Password</label>
-                                <input
-                                    type="password"
-                                    id="password"
-                                    value={password}
-                                    autoComplete="current-password"
-                                    onChange={e => this.handleUpdate("password", e)}
-                                />
+                                <div>
+                                    <input
+                                        type="password"
+                                        id="password"
+                                        value={password}
+                                        autoComplete="current-password"
+                                        onChange={e => this.handleUpdate("password", e)}
+                                    />
+                                </div>
+                                {passwordError && <div className={'login-error'}>{passwordError}</div>}
                             </div>
-                            {passwordError}
-                            <input type="submit" value="Log In" />
+                            <div className="login-button-container"><div className="login-button" onClick={this.handleSubmit}>Log In</div></div>
                         </form>
-                        <div className="demo-login" onClick={this.handleDemoLogin}>Demo User</div>
                         <div className="separator-container">
                             <span className="separator"></span>
                             <span>OR</span>
                             <span className="separator"></span>
                         </div>
-                        <Link to="/signup" className="sign-up-link">Sign Up</Link>
+                        <div className="demo-login-container">
+                            <div className="demo-login" onClick={this.handleDemoLogin}>Demo User</div>
+                        </div>
+                        <div className="sign-up-link-container">
+                            <Link to="/signup" className="sign-up-link">Sign Up</Link>
+                        </div>
                     </div>
                 </div>
             </div>
