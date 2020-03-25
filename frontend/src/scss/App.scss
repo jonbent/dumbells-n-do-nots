@@ -60,18 +60,18 @@ input:-webkit-autofill:active {
     animation: autofill 0s forwards;
 }
 
-@keyframes autofill {
-    100% {
-        background: transparent;
-        color: lightgray ;
-    }
-}
-@-webkit-keyframes autofill {
-    100% {
-        background: transparent;
-        color: lightgray ;
-    }
-}
+//@keyframes autofill {
+//    100% {
+//        background: transparent;
+//        color: lightgray ;
+//    }
+//}
+//@-webkit-keyframes autofill {
+//    100% {
+//        background: transparent;
+//        color: lightgray ;
+//    }
+//}
 
 .separator-container {
     display: flex;
