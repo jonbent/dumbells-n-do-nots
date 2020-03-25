@@ -273,14 +273,17 @@ class Signup extends React.Component {
     return (
       <div className="login-page">
         <NavBar />
-        <div className="signup-form-container">
-          {form_type}
-          <div className="separator-container">
+        <div className="login-page">
+          <div style={{ backgroundImage: "url(/images/signup-pic.jpeg)" }} className="signup-pic"></div>
+          <div className="signup-form-container">
+            {form_type}
+            <div className="separator-container">
               <span className="separator"></span>
               <span>OR</span>
               <span className="separator"></span>
+            </div>
+            <Link onClick={this.props.resetErrors} to="/login" className="sign-up-link">Login</Link>
           </div>
-          <Link onClick={this.props.resetErrors} to="/login" className="sign-up-link">Login</Link>
         </div>
 
       </div>
