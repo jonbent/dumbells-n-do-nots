@@ -131,6 +131,7 @@ class Signup extends React.Component {
                 <input
                   type="text"
                   id="username"
+                  autoComplete="username"
                   onChange={e => this.updateField("username", e)}
                   value={this.state.username}
                 />
