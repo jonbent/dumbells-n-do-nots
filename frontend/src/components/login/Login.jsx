@@ -60,6 +60,7 @@ export default class Login extends Component {
                                     <input
                                         type="text"
                                         id="username"
+                                        autoComplete="username"
                                         value={username}
                                         onChange={e => this.handleUpdate("username", e)}
                                     />

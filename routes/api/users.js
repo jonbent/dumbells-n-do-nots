@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const validateRegisterInput = require('../../validation/register');
+// const validateRegisterInput = require('../../validation/register');
 const validateLoginInput = require('../../validation/login');
 const bcrypt = require('bcryptjs');
 const User = require('../../models/User');
@@ -382,38 +382,5 @@ router.patch('/:username/update', passport.authenticate('jwt', { session: false 
         }
 
     }).catch(err => res.json(err))
-    // User.findOne({ username: req.params.username }).then(user => {
-    //     if (!user) return res.status(400).json({ user: { message: "User not found" } })
-    //     const file = req.file;
-    //     const s3FileURL = keys.UploadFileUrlLink;
-    //     let params = {
-    //         Bucket: keys.awsBucketName,
-    //         Key: file.originalname,
-    //         Body: file.buffer,
-    //         ContentType: file.mimetype
-    //         // ACL: 'public-read'
-    //     }
-    //     const s3 = new AWS.S3({
-    //         accessKeyId: keys.awsBucketAccessId,
-    //         secretAccessKey: keys.awsBucketToken,
-    //         // signatureVersion: 'v4',
-    //         region: keys.awsRegion
-    //     })
-    //     const signedUrl = s3.getSignedUrl('putObject', params, (err, data) => {
-    //         if (err) {
-    //             res.status(500).json({ error: true, Message: err });
-    //         }
-
-    //     })
-    //     user.avatarUrl = signedUrl;
-
-
-    //     user.save(function (error, newFile) {
-    //         if (error) {
-    //             throw error;
-    //         }
-    //         res.json({ user });
-    //     });
-    // })
 })
 module.exports = router;
