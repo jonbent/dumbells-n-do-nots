@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import MuscleGroupSelector from "./MuscleGroupSelector";
 import {fetchMuscleGroups} from '../../actions/MuscleGroupActions';
 import {fetchExercisesByMuscleGroups} from '../../actions/ExerciseActions';
-import {receiveSelectedMuscleGroups, receiveSide} from "../../actions/RoutineFilterActions";
+import {receiveSelectedMuscleGroup, receiveSide, receiveSelectedMuscleGroups} from "../../actions/RoutineFilterActions";
 
 const mSTP = (state) => ({
         daySelect: state.ui.newRoutineData,
@@ -33,7 +33,8 @@ const mSTP = (state) => ({
 const mDTP = dispatch =>({
     fetchMuscleGroups: () => dispatch(fetchMuscleGroups()),
     fetchExercisesByMuscleGroups: ids => dispatch(fetchExercisesByMuscleGroups(ids)),
-    selectMuscleGroup: muscleGroup => dispatch(receiveSelectedMuscleGroups(muscleGroup)),
+    selectMuscleGroup: muscleGroup => dispatch(receiveSelectedMuscleGroup(muscleGroup)),
+    selectMuscleGroups: muscleGroups => dispatch(receiveSelectedMuscleGroups(muscleGroups)),
     selectSide: side => dispatch(receiveSide(side)),
 })
 

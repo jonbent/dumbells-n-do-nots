@@ -5,7 +5,19 @@
     margin-bottom: 32px;
     display: flex;
     .pagination{
-      margin-top: 1rem;
+        .back-button, .next-button, .drop-down, button{
+            background-color: black !important;
+            color: #F9C095 !important;
+            span{
+                color: #F9C095 !important;
+            }
+            svg{
+                path{
+                    fill: #F9C095 !important;
+                }
+            }
+        }
+        margin-top: 1rem;
         box-sizing: border-box;
         display: flex;
         font-family: proxima-nova, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
@@ -23,8 +35,8 @@
                 min-width: 9.375rem;
                 position: absolute;
                 left: 0px;
-                background-color: rgb(255, 255, 255);
-                box-shadow: rgba(0, 0, 0, 0.2) 0px 0.0625rem 0.1875rem 0px;
+                background-color: #F9C095;
+                box-shadow: rgba(249, 192, 149, 0.2) 0px 0.0625rem 0.1875rem 0px;
                 overflow-y: auto;
                 box-sizing: border-box;
                 z-index: 10;
@@ -32,14 +44,14 @@
                 border-radius: 0.1875rem;
                 border-width: 0.0625rem;
                 border-style: solid;
-                border-color: rgb(204, 204, 204);
+                border-color: #F9C095;
                 border-image: initial;
                 button{
                     display: flex;
                     justify-content: center;
                     font-size: 1rem;
                     font-weight: 300;
-                    color: rgb(74, 74, 74);
+                    color: #F9C095;
                     padding: 0.5rem;
                     border-radius: 0;
                 }
@@ -76,10 +88,15 @@
                 padding: 0px 1rem;
                 border-width: 0.0625rem;
                 border-style: solid;
-                border-color: rgb(204, 204, 204);
+                border-color: #F9C095;
                 border-image: initial;
                 border-radius: 0.1875rem;
                 outline: none;
+                svg{
+                    path{
+                        fill: #F9C095;
+                    }
+                }
                 span{
                     text-overflow: ellipsis;
                     white-space: nowrap;
@@ -115,14 +132,14 @@
             -webkit-box-pack: center;
             justify-content: center;
             height: 2.5rem;
-            color: rgb(74, 74, 74);
+            color: #F9C095;
             cursor: pointer;
-            background-color: rgb(255, 255, 255);
+            background-color: #F9C095;
             padding: 0px;
             border-radius: 3px;
             border-width: 0.0625rem;
             border-style: solid;
-            border-color: rgb(204, 204, 204);
+            border-color: #F9C095;
             border-image: initial;
             margin: 0px 0.5rem 0px 0px;
             outline:none;
@@ -137,14 +154,14 @@
             -webkit-box-pack: center;
             justify-content: center;
             height: 2.5rem;
-            color: rgb(74, 74, 74);
+            color: #F9C095;
             cursor: pointer;
-            background-color: rgb(255, 255, 255);
+            background-color: black;
             padding: 0px;
             border-radius: 3px;
             border-width: 0.0625rem;
             border-style: solid;
-            border-color: rgb(204, 204, 204);
+            border-color: #F9C095;
             border-image: initial;
             margin: 0px 0px 0px 0.5rem;
             outline:none;
@@ -165,4 +182,4 @@
             }
         }
     }
-  }
+}

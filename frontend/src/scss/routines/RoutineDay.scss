@@ -9,15 +9,25 @@
   background-color: rgba(0,0,0, 0.5);
   color: pink;
   box-shadow: 3px 3px 6px black;
+  .routine-none-found{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    margin-top: 1rem;
+    color: black;
+  }
   .edit-day:hover{
-    background-color: darken(pink, 5%);
+    //background-color: darken(pink, 5%);
+    background-color: black;
+    color: #F9C095;
   }
   .edit-day{
     margin-top: 1rem;
     border-radius: 5px;
     cursor: pointer;
     padding: 1rem;
-    background-color: pink;
+    background-color: #F9C095;
     color: black;
   }
   .day-title{

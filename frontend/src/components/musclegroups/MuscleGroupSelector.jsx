@@ -34,6 +34,7 @@ class MuscleGroupSelector extends Component {
     }
     componentDidMount(){
         this.props.fetchMuscleGroups().then(() => {
+            this.props.selectMuscleGroups(this.props.selectedMuscleGroupIds.map(groupId => this.props.muscleGroups[groupId]));
             this.props.fetchExercisesByMuscleGroups(this.props.selectedMuscleGroupIds)
         })
     }

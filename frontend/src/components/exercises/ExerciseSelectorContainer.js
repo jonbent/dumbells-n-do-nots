@@ -2,10 +2,11 @@ import {connect} from 'react-redux';
 import ExerciseSelector from './ExerciseSelector'
 import {receiveRoutineExercise, submitRoutineAndCloseModal} from "../../actions/NewRoutineActions";
 import {receiveDaySelected} from "../../actions/RoutineFilterActions";
-import {toggleExercise} from "../../actions/RoutineActions";
+import {fetchUserRoutine, toggleExercise} from "../../actions/RoutineActions";
 
-const mapStateToProps = ({ui, entities}, ownProps) => {
+const mapStateToProps = ({ui, entities, session}, ownProps) => {
     const dayKeys = Object.keys(ui.newRoutineData);
+    let user = session.user;
     if (ownProps.single === true) {
         // ownProps.day.workout ?
         // ownProps.day.workout.map(exId => entities.exercises[exId])
@@ -22,6 +23,7 @@ const mapStateToProps = ({ui, entities}, ownProps) => {
         let selectedMuscleGroupIdHash = {};
         selectedMuscleGroupIds.forEach(el => selectedMuscleGroupIdHash[el] = true);
         return {
+            user,
             days: entities.days,
             selectedExercises: selectedExercisesHash,
             exercises: entities.exercises,
@@ -30,6 +32,7 @@ const mapStateToProps = ({ui, entities}, ownProps) => {
         }
     } else {
         return {
+            user,
             days: dayKeys,
             curRoutine: ui.newRoutineData,
             exerciseDays: dayKeys.filter(day => Object.keys(ui.newRoutineData[day].workout).length !== 0),
@@ -41,7 +44,6 @@ const mapStateToProps = ({ui, entities}, ownProps) => {
         }
 
     }
-
 };
 const mapDispatchToProps = (dispatch, ownProps) => {
     if (ownProps.single === true) {
@@ -52,8 +54,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         return {
             receiveRoutineExercise: (payload) => dispatch(receiveRoutineExercise(payload)),
             receiveDaySelected: (day) => dispatch(receiveDaySelected(day)),
-            submitRoutine: (routine) => dispatch(submitRoutineAndCloseModal(routine))
-
+            submitRoutine: (routine, userId) => {dispatch(submitRoutineAndCloseModal(routine)); dispatch(fetchUserRoutine(userId));}
         }
     }
 };
