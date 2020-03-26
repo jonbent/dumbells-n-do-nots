@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import BottomNavBar from "../navbar/BottomNavBarContainer";
+// import BottomNavBar from "../navbar/BottomNavBarContainer";
 import "../../scss/settings.scss";
 import DateFormat from "dateformat";
 import Modal from "../modal/Modal";
 import FiltersModal from "../modal/FiltersModal";
 import Alert from "../alerts/Alert";
+import NavBar from "../navbar/NavBar";
 
 
 
@@ -93,70 +94,73 @@ class Settings extends Component {
        }
     }
     return (
-      <div className="settings-page">
-        <Modal/>
-        <Alert/>
-        <FiltersModal/>
-        <div className="main-container">
-          <div className="image">
-            {profilePic}
-            <label htmlFor="edit-profile-picture">Edit</label>
-            <input
-              id="edit-profile-picture"
-              type="file"
-              onChange={this.handleFile}
-            />
-            {/* <div className="new-feed-picture-preview">{preview}</div> */}
-          </div>
-          <label className="username">{user.username}</label>
-          <div className="user-details">
-            <div className="detail-container">
-              <div>Email:</div>
-              <input
-                type="text"
-                value={this.state.email}
-                onChange={this.update("email")}
-              />
+        <div className="settings-page">
+          <Modal/>
+          <Alert/>
+          <FiltersModal/>
+          <NavBar/>
+          <div className="main-container">
+            <div className="settings-form">
+              <div className="image">
+                {profilePic}
+                <label htmlFor="edit-profile-picture">Edit</label>
+                <input
+                    id="edit-profile-picture"
+                    type="file"
+                    onChange={this.handleFile}
+                />
+                {/* <div className="new-feed-picture-preview">{preview}</div> */}
+              </div>
+              <label className="username">{user.username}</label>
+              <div className="user-details">
+                <div className="detail-container">
+                  <div>Email:</div>
+                  <input
+                      type="text"
+                      value={this.state.email}
+                      onChange={this.update("email")}
+                  />
+                </div>
+                <span>{emailError}</span>
+                <div className="detail-container">
+                  <div>D.O.B:</div>
+                  <input
+                      disabled
+                      type="text"
+                      value={this.state.birthDate.slice(0, 10)}
+                      max={DateFormat(this.currDate, "mm/dd/yyyy")}
+                      onChange={this.handleBirthDate}
+                  />
+                </div>
+                <div className="detail-container">
+                  <div>Weight:</div>
+                  <input
+                      type="text"
+                      value={this.state.weightCur}
+                      onChange={this.update("weightCur")}
+                  />
+                </div>
+                <span>{weightError}</span>
+                <div className="detail-container">
+                  <div>Height:</div>
+                  <input
+                      type="text"
+                      value={this.state.height}
+                      onChange={this.update("height")}
+                  />
+                </div>
+                <span>{heightError}</span>
+              </div>
+              <div onClick={this.handleSave} className="save">
+                <div>Save</div>
+              </div>
+              <div onClick={this.logout} className="logout">
+                <div>Logout</div>
+              </div>
             </div>
-            <span>{emailError}</span>
-            <div className="detail-container">
-              <div>D.O.B:</div>
-              <input
-                disabled
-                type="text"
-                value={this.state.birthDate.slice(0, 10)}
-                max={DateFormat(this.currDate, "mm/dd/yyyy")}
-                onChange={this.handleBirthDate}
-              />
-            </div>
-            <div className="detail-container">
-              <div>Weight:</div>
-              <input
-                type="text"
-                value={this.state.weightCur}
-                onChange={this.update("weightCur")}
-              />
-            </div>
-            <span>{weightError}</span>
-            <div className="detail-container">
-              <div>Height:</div>
-              <input
-                type="text"
-                value={this.state.height}
-                onChange={this.update("height")}
-              />
-            </div>
-            <span>{heightError}</span>
-          </div>
-          <div onClick={this.handleSave} className="save">
-            <div>Save</div>
-          </div>
-          <div onClick={this.logout} className="logout">
-            <div>Logout</div>
+            {/*<BottomNavBar user={user} />*/}
           </div>
         </div>
-        <BottomNavBar user={user} />
-      </div>
     );
   }
 }

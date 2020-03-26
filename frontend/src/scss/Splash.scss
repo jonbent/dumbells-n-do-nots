@@ -1,14 +1,46 @@
 .wrapper{
+    background-color: #ffffff;
+    font-family: 'Noto Sans KR', sans-serif;
+    .separators{
+        padding: 2rem 0;
+        text-align: center;
+        background-color: #2F4858;
+        color: whitesmoke;
+        
+        h2{
+            // text-shadow: 3px 2px black;
+            display: block;
+            font-size: 2.3em;
+            margin-block-start: 0.83em;
+            margin-block-end: 0.83em;
+            margin-inline-start: 0px;
+            margin-inline-end: 0px;
+            font-weight: bold
+        }
+
+        p{
+            // text-shadow: 1px 1px black;
+            display: block;
+            margin-block-start: 1.5em;
+            margin-block-end: 1em;
+            margin-inline-start: 0px;
+            margin-inline-end: 0px;
+            font-size: 1.2rem;
+            line-height: 1.71em;
+        }
+
+    }
     .Info{
-        background-color: #C0C3C9;
-        background-image: url("https://media.giphy.com/media/26BRq9PYFLeJl3WLu/giphy.gif");
+        // background-color: #C0C3C9;
+        background-image: url("/images/workout.jpg");
         background-repeat: no-repeat;
-        background-position: 100%;
-        background-size: auto;
+        background-position: top left;
+        background-size: cover;
         position: flex;
         min-width: 320px;
         padding: 3em 1em;
         padding-bottom: 160px;
+        text-shadow: 2px 2px 3px black;
     }
 
     .Info h1{
@@ -26,14 +58,20 @@
         margin-inline-end: 0px;
         font-size: 1.2rem;
         line-height: 1.70em;
-        color: white ;
+        color: white;
         max-width: 24em;
+        a{
+            color: #F9C095;
+        }
+        a:hover{
+            text-decoration: underline;
+        }
     }
 
-    button{
+    .Sign-up-btn{
         border: none;
-        color: beige;
-        background-color: darkslateblue;
+        color: black;
+        background-color: #F9C095;
         padding: 18px 60px;
         font-size: 0.875rem;
         min-width: 64px;
@@ -43,6 +81,11 @@
         border-radius: 7px;
         text-transform: uppercase;
         cursor: pointer;
+    }
+    .Sign-up-btn:hover{
+        color: #F9C095;
+        background-color: black;
+        box-shadow: 3px 3px 6px black;
     }
 
     a{

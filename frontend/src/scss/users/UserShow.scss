@@ -5,49 +5,91 @@
     position: relative;
     justify-content: center;
     height:100%;
+    flex-direction: column;
     .routine-info-container{
-        margin: 3rem 0;
-        padding: 1rem 0;
         border-radius: 10px;
-        background-color: lightskyblue;
-        .routine-day-container .RoutineDay {
-            .day-meals .meal-item:hover {
-                cursor: pointer;
-                color: darken(pink, 25%);
+        background-color: #F9C095;
+        width: 100%;
+        margin-right: 2rem;
+        height: fit-content;
+        .routine-day-container {
+            .routine-day-title{
+                text-align: center;
+                font-size: 1.3rem;
+                font-weight: 600;
+                padding: 1rem 0;
             }
-            .day-workout.workout-done{
-                .check{
-                    display: inline-block;
-                    transform: rotate(45deg);
-                    height: 1.5rem;
-                    width: 0.75rem;
-                    border-bottom: 0.44rem solid pink;
-                    border-right: 0.44rem solid pink;
-                    align-self: flex-end;
+            .RoutineDay {
+                color: #F9C095;
+                .day-meals .meal-item:hover {
+                    .meal-info{
+                        color: darken(#F9C095, 25%);
+
+                    }
+                    cursor: pointer;
                 }
-            }
-            .day-workout:hover{
-                background-color: black;
-                cursor: pointer;
-                .day-exercise{
-                    background-color: darken(darkgray, 50%);
+
+                .day-workout.workout-done {
+                    .check {
+                        display: inline-block;
+                        transform: rotate(45deg);
+                        height: 1.5rem;
+                        width: 0.75rem;
+                        border-bottom: 0.44rem solid #F9C095;
+                        border-right: 0.44rem solid #F9C095;
+                        align-self: flex-end;
+                    }
                 }
-                .check{
-                    display: inline-block;
-                    transform: rotate(45deg);
-                    height: 1.5rem;
-                    width: 0.75rem;
-                    border-bottom: 0.44rem solid pink;
-                    border-right: 0.44rem solid pink;
-                    align-self: flex-end;
+
+                .day-workout:hover {
+                    background-color: black;
+                    cursor: pointer;
+
+                    .day-exercise {
+                        background-color: darken(darkgray, 50%);
+                    }
+
+                    .check {
+                        display: inline-block;
+                        transform: rotate(45deg);
+                        height: 1.5rem;
+                        width: 0.75rem;
+                        border-bottom: 0.44rem solid #F9C095;
+                        border-right: 0.44rem solid #F9C095;
+                        align-self: flex-end;
+                    }
                 }
             }
         }
     }
     .user-show-content{
-        margin-bottom: 5rem;
         overflow: scroll;
-        width: 90%;
+        width: 100%;
         padding-top: 3rem;
+        display: flex;
+        position: relative;
+        height: 100%;
     }
+    .user-show-content > div{
+        margin-bottom: 3rem;
+        .RoutineShow{
+            margin-bottom: 3rem;
+        }
+    }
+}
+@media only screen and (max-width: 710px) {
+    .user-show-container {
+        .routine-info-container{
+            margin: 0 2rem;
+            width: auto;
+        }
+        .user-show-content {
+            flex-direction: column;
+            .user-show-card{
+                min-height: 90vh;
+                position: static;
+            }
+        }
+    }
+
 }

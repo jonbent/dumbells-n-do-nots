@@ -2,119 +2,119 @@
     color: white;
     display: flex;
     justify-content: center;
-    padding-bottom: 7rem;
+    flex-direction: column;
     .main-container{
         display: flex;
-        flex-direction: column;
-        margin-top: 3rem;
-        align-items: center;
-        .save{
+        justify-content: center;
+        margin: 3rem 1rem 0;
+
+        .settings-form{
+            display: flex;
+            flex-direction: column;
+            max-width: 512px;
+            width: 100%;
+            align-items: center;
+            .save, .logout{
                 margin-top: 2rem;
-                box-shadow: 0 0 0.2rem black;
-                background-color: lightskyblue;
+                background-color: #F9C095;
                 color: black;
                 width: 100%;
                 text-align: center;
                 padding: 5px 0;
                 font-size: 30px;
                 border-radius: 5px;
-            cursor: pointer;
-        }
-        .logout:hover{
-            color: pink;
-        }
-        .logout{
-            margin-top: 2rem;
-            box-shadow: 0 0 0.2rem black;
-            background-color: black;
-            color: lightgray;
-            width: 100%;
-            text-align: center;
-            padding: 5px 0;
-            font-size: 30px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .save:hover{
-            background-color: rgb(114, 178, 218);
-            cursor: pointer;
-        }
-        .username{
-                font-size: 35px;
-            } 
-        .image{
-            margin-bottom: 2rem;
-            #edit-profile-picture{
-                display: none;
-            }
-            label[for="edit-profile-picture"]{
-                text-align: center;
-                height: auto;
-                display: flex;
-                justify-content: center;
-
-            }
-            label[for="edit-profile-picture"]:hover{
                 cursor: pointer;
             }
-            
-        }
-        .image > div{
-            height: 8rem;
-            width: 8rem;
-            margin-bottom: 0.5rem;
-            border-radius: 0.25rem;
-            background-size: cover;
-            background-position: center;
-        }
-        .user-details{
-            margin-top: 2rem;
-            div:focus-within{
-                font-size: 150%;
+            .save:hover, .logout:hover{
+                color: #F9C095;
+                background-color: black;
+                cursor: pointer;
             }
-            span{
-                font-size: 12px;
-                color: lightgray;
+            .username{
+                font-size: 35px;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                max-width: 100%;
+                padding: 0.4rem 0;
             }
-            div{
-                transition: 0.1s font-size ease;
-                display: flex;
-                flex-direction: row;
-                justify-content: space-between;
-                width: 18rem;
+            .image{
+                margin-bottom: 2rem;
+                #edit-profile-picture{
+                    display: none;
+                }
+                label[for="edit-profile-picture"]{
+                    text-align: center;
+                    height: auto;
+                    display: flex;
+                    justify-content: center;
+
+                }
+                label[for="edit-profile-picture"]:hover{
+                    cursor: pointer;
+                }
+
             }
-            .detail-container{
-                display: flex;
-                flex-direction: row;
-                justify-content: space-between;
-                //width: 18rem;
-                border-bottom: 1px solid lightgrey;
-                padding-bottom: 5px;
+            .image > div{
+                height: 8rem;
+                width: 8rem;
+                margin-bottom: 0.5rem;
+                border-radius: 0.25rem;
+                background-size: cover;
+                background-position: center;
             }
-            div:not(:nth-of-type(1) ){
-                margin-top: 1rem;
+            .user-details{
+                margin-top: 2rem;
+                width: 100%;
+                div:focus-within{
+                    font-size: 150%;
+                }
+                span{
+                    font-size: 12px;
+                    color: lightgray;
+                }
+                div{
+                    transition: 0.1s font-size ease;
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    width: 100%;
+                }
+                .detail-container{
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    //width: 18rem;
+                    border-bottom: 1px solid lightgrey;
+                    padding-bottom: 5px;
+                    div{
+                        align-items: center;
+                    }
+                }
+                div:not(:nth-of-type(1) ){
+                    margin-top: 1rem;
+                }
+                div>input{
+                    background-color: black;
+                    border: none;
+                    padding: 0.5rem 0;
+                    text-align: center;
+                    color: #F9C095;
+                    font-size: 18px;
+                    border-radius: 5px;
+                    width: 190%;
+                }
+                //div>input[type='date']{
+                //    background-color: black;
+                //    border: none;
+                //    padding: 0.5rem 0;
+                //    text-align: center;
+                //    color: #F9C095;
+                //    width: 190%;
+                //    font-size: 18px;
+                //    border-radius: 5px;
+                //
+                //}
             }
-            div>input{
-                background-color: lightskyblue;
-                border: none;
-                padding: 0.5rem 0;
-                text-align: center;
-                color:white;
-                font-size: 18px;
-                border-radius: 5px;
-                width: 190%;
-            }
-            //div>input[type='date']{
-            //    background-color: lightskyblue;
-            //    border: none;
-            //    padding: 0.5rem 0;
-            //    text-align: center;
-            //    color:white;
-            //    width: 190%;
-            //    font-size: 18px;
-            //    border-radius: 5px;
-            //
-            //}
         }
     }
 }

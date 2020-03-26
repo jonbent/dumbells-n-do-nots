@@ -1,16 +1,32 @@
 .meals-filters > div:not(:last-of-type){
-    box-shadow: 3px 3px 6px -5px black;
+//    box-shadow: 3px 3px 6px -5px black;
+//  border-bottom: 1px solid black;
 }
 .meals-filters{
   display: flex;
+  align-items: center;
   flex-direction: column;
   height: 100%;
-  color: pink;
-  text-shadow: 1px 1px 3px black;
+  color: black;
+  width: 100%;
+  .separator-container{
+    max-width: 512px;
+    width: 100%;
+    color: black;
+    .separator{
+      border-color: black;
+    }
+  }
   .filter-summary-container{
+    max-width: 512px;
+    width: 100%;
+    background-color: black;
+    color: #F9C095;
      margin-top: 1rem;
+    border-bottom: 1px solid black;
     .title{
       font-size: 150%;
+      padding: 0.5rem 0;
     }
     .filter-summary{
       padding: 1rem;
@@ -39,20 +55,21 @@
     }
   }
   .filter-input-container{
+    max-width: 512px;
+    width: 100%;
     margin-top: 1rem;
     .filter-input.average{
-      margin: 1rem 1rem;
+      margin: 1rem 2rem;
       .submit:hover{
+        box-shadow: 3px 3px 6px -5px black;
         cursor: pointer;
-        background-color: rgba(0,0,0,0.7);
       }
       .submit{
         margin-top: 1rem;
-        background-color: rgba(0,0,0,0.5);
-        box-shadow: 3px 3px 6px black;
+        background-color: black;
+        color: #F9C095;
         padding: 0.5rem 1rem;
         border-radius: 5px;
-        text-shadow: 1px 1px 3px black;
       }
       input{
         margin-top: 0.5rem;
@@ -85,7 +102,7 @@
           width: 100%;
         }
         input{
-          background-color: lightskyblue;
+          background-color: #F9C095;
           border: none;
           text-align: center;
           font-size: 150%;

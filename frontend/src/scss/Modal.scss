@@ -7,7 +7,7 @@
   bottom: 0;
   right: 0;
   left: 0;
-  background: url(/images/dumbnot-background.jpg);
+  background-color: rgba(0,0,0,0.85);
   z-index: 10;
   .modal-child-container {
     height: 100%;
@@ -17,11 +17,12 @@
     left: 50%;
     transform: translate(-50%, -50%);
     .close-modal-button:hover{
-      background-color: darken(pink, 5%);
+      background-color: black;
+      color: #F9C095;
     }
     .close-modal-button{
       color: black;
-      background-color: lightpink;
+      background-color: #F9C095;
       border: none;
       width: 80vw;
       height: 3rem;
@@ -34,7 +35,7 @@
 
     }
     .modal-child {
-      background-color: lightskyblue;
+      background-color: #F9C095;
       text-align: center;
       border-radius: 1rem;
       width: 100%;

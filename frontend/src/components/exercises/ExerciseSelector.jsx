@@ -17,8 +17,9 @@ export default class ExerciseSelector extends Component {
     handleSetDate(val){
         this.props.receiveDaySelected(val)
     }
+
     render() {
-        const {muscleGroups, selectedExercises, days, day, selectedMuscleGroupIds, exercises, exerciseDays = [], closeSelector, curRoutine, editing } = this.props;
+        const {muscleGroups, selectedExercises, days, day, selectedMuscleGroupIds, exercises, closeSelector, curRoutine, editing } = this.props;
 
         // separate exercises by muscle group
         const allExercises = {};
@@ -30,9 +31,8 @@ export default class ExerciseSelector extends Component {
         const muscleGroupKeys = Object.keys(muscleGroups);
         return (
             <div className="exercise-selector-container">
-                <MuscleGroupSelectorContainer selectedMuscleGroupIds={selectedMuscleGroupIds}/>
                 {!editing && <div className="day-select">
-                    <h1>Select Day</h1>
+                    <h1>For each day below, select desired exercises for day's workout</h1>
                     <div className="scheduled-days">
                         {!editing && days.map((date) => (
                             <div key={date} className={ day === date ? "selected" : ""} onClick={e => this.handleSetDate(date)}>{date}</div>
@@ -45,7 +45,8 @@ export default class ExerciseSelector extends Component {
                     {/*    {days.map((date, idx) => <option key={date} value={date}>{date}</option>)}*/}
                     {/*</select>*/}
                 </div>}
-                {muscleGroupKeys.length && selectedMuscleGroupIds.length !== 0 && <div className="group-exercises-container">
+            <MuscleGroupSelectorContainer selectedMuscleGroupIds={selectedMuscleGroupIds}/>
+                {muscleGroupKeys.length !== 0 && selectedMuscleGroupIds.length !== 0 && <div className="group-exercises-container">
                         {selectedMuscleGroupIds.map(groupId => {
                             return (
                                 <div className="group-exercise-list" key={groupId}>
@@ -56,7 +57,7 @@ export default class ExerciseSelector extends Component {
                     </div>
                 }
                 <div className="submit">
-                    <div onClick={() => !editing ? this.props.submitRoutine(curRoutine) : closeSelector()}>
+                    <div onClick={() => !editing ? this.props.submitRoutine(curRoutine, this.props.user._id) : closeSelector()}>
                         {!editing ? "Submit Week's Workouts" : "Confirm Exercises"}
                     </div>
                 </div>

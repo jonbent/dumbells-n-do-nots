@@ -14,18 +14,19 @@
       margin: 0 1rem;
       display: flex;
       justify-content: center;
-      color: black;
+      color: #F9C095;
       div{
-          background-color: pink;
+          background-color: black;
           border-radius: 5px;
           width: 100%;
           padding: 1rem 0;
-          box-shadow: 3px 3px 6px black;
+
           cursor: pointer;
 
         }
         div:hover{
-          background-color: darken(pink, 5%);
+          color: darken(#F9C095, 5%);
+          box-shadow: 3px 3px 6px black;
         }
       }
     img{

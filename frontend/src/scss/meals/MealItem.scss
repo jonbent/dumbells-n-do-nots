@@ -4,11 +4,14 @@
     display: flex;
     padding: 1rem;
     .meal-info{
+      line-height: 150%;
       padding-left: 1rem;
       display: flex;
       flex-direction: column;
       height: fit-content;
       width: 70%;
+      text-align: start;
+      color: white;
       .meal-nutrients{
         margin-top: 1rem;
         flex-wrap: wrap;
@@ -29,7 +32,7 @@
         justify-content: space-between;
         align-items: center;
         svg:hover{
-          background-color: pink;
+          background-color: #F9C095;
           fill: black;
           cursor: pointer;
           path{
@@ -41,7 +44,7 @@
           padding: 0.5rem;
           border-radius: 50%;
           path{
-            fill: pink;
+            fill: #F9C095;
           }
         }
         svg:nth-of-type(1){
@@ -74,8 +77,8 @@
       transform: rotate(45deg);
       height: 1.5rem;
       width: 0.75rem;
-      border-bottom: 0.44rem solid pink;
-      border-right: 0.44rem solid pink;
+      border-bottom: 0.44rem solid #F9C095;
+      border-right: 0.44rem solid #F9C095;
       align-self: flex-end;
     }
   }

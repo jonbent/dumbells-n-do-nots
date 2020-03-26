@@ -29,15 +29,14 @@
     }
     .routine-history{
       //height: max-content;
-      margin-top: 5rem;
-      background-color: lightskyblue;
+      margin-top: 7rem;
+      background-color: #F9C095;
       display: block;
       //flex-direction: column;
       padding: 3rem;
       border-radius: 10px;
       width: 80%;
-      color: pink;
-      text-shadow: 2px 2px 4px black;
+      color: black;
       overflow: scroll;
       .history-title{
         margin-bottom: 1rem;
@@ -46,6 +45,7 @@
       }
       .routine-item:hover{
         background-color: black;
+        color: #F9C095;
       }
       .routine-item{
         cursor: pointer;

@@ -33,45 +33,72 @@
   .meal-search{
     display: flex;
     flex-direction: column;
-    .search-actions{
+    .search-actions-container{
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-      align-items: center;
+      .meal-searchbar{
+          position: relative;
+        input{
+         padding-left: 3rem;
+        }
+          svg{
+            path:nth-of-type(1){
+              fill: white;
+            }
+            left: 1rem;
+            top: 2rem;
+            position: absolute;
+          }
+        }
+      .search-actions{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+      }
+      .ignore-filters{
+        margin-top: 1rem;
+      }
       div, input{
         width: 100%;
         height: 100%;
         padding: 1rem 0;
         display: flex;
         justify-content: center;
-        text-align: center;
         align-items: center;
         font-size: 100%;
       }
-      .ignore-filters{
-        background-color: pink;
-        color: black;
-        border: 1px solid pink;
+      .ignore-filters, .select-filters{
+        background-color: black;
+        color: #F9C095;
         border-radius: 5px;
         margin-top: 1rem;
         cursor: pointer;
       }
-      .ignore-filters:hover{
-        background-color: darken(pink, 5%);
+      .ignore-filters:hover, .select-filters:hover{
+        box-shadow: 3px 3px 6px black;
+        background-color: darken(#F9C095, 10%);
+        color: black;
       }
       .ignore-filters.ignoring:hover{
-        background-color: darken(pink, 5%);
+        box-shadow: 3px 3px 6px black;
+        background-color: darken(#F9C095, 10%);
         color: black;
       }
       .ignore-filters.ignoring{
         background-color: black;
-        color: pink;
+        color: #F9C095;
       }
     }
+    input::placeholder{
+      color: white;
+    }
     input{
-      margin-top: 1rem;
-      text-align: center;
+      text-align: start;
+
       //font-size: 150%;
+      color: white;
+      padding-left: 2rem;
     }
   }
   .calorie-count{
@@ -113,16 +140,14 @@
         cursor: default;
       }
       .submit-meals:hover{
-        color: darken(pink, 10%);
-      }
-      .select-filters:hover{
-        background-color: darken(pink, 5%);
+        color: darken(#F9C095, 10%);
+        box-shadow: 3px 3px 6px black;
       }
       .submit-meals, .select-filters {
         margin: 0 1rem;
         //width: calc(100% - 2rem);
         width: 100%;
-        color: pink;
+        color: #F9C095;
         background-color: black;
         border: none;
         height: 3rem;
@@ -162,6 +187,10 @@
   .day-select{
     display: flex;
     flex-direction: column;
+    h1{
+      margin-bottom: 1rem;
+      font-size: 125%;
+    }
     .scheduled-days{
       display: flex;
       flex-direction: row;
@@ -176,11 +205,12 @@
         cursor: pointer;
       }
       div:hover{
-        background-color: darken(pink, 5%);
+        background-color: darken(#F9C095, 5%);
+        color: black;
       }
       div.selected{
-        background-color: pink;
-        color: black;
+        background-color: black;
+        color: #F9C095;
       }
     }
   }
@@ -206,14 +236,14 @@
 @media only screen and (min-width: 725px) {
   .meal-selector {
     .meal-search {
-      .search-actions {
-        flex-direction: row;
+      .search-actions-container {
+        .search-actions{
+          flex-direction: row;
+
+        }
         justify-content: space-between;
         div{
           margin-right: 0.35rem;
-        }
-        input{
-          margin-left: 0.35rem;
         }
         .ignore-filters{
           margin-top: 1rem;

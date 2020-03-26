@@ -30,12 +30,25 @@ class MealsFilters extends Component {
             maxCals,
             minCals,
             changeFilter,
-            confirmFilters
         } = this.props;
         return (
             <div className="meals-filters">
                 <div className="filter-input-container">
-                    <div>Calories Per Meal</div>
+                    <div className="filter-input average">
+                        <label>Enter desired amount of meals per day.
+                            <input type="text" placeholder="Maximum of 6" onChange={e => this.handleChange(e.target.value)} value={this.state.numMeals}/>
+                        </label>
+                        {/*<div className="submit" onClick={() => this.handleAverage().then(confirmFilters)}>Submit</div>*/}
+                        <div className="submit" onClick={() => this.handleAverage()}>Calculate average calories per meal</div>
+                    </div>
+                </div>
+                <div className="separator-container">
+                    <span className="separator"></span>
+                    <span>OR</span>
+                    <span className="separator"></span>
+                </div>
+                <div className="filter-input-container">
+                    <div>Enter desired calories per meal for each day.</div>
                     <div className="filter-input">
                         <label><h1>Min</h1>
                             <input onChange={e => changeFilter('minCals', e.target.value)}  type="text" value={minCals}/>
@@ -47,7 +60,7 @@ class MealsFilters extends Component {
                     </div>
                 </div>
                 <div className="filter-summary-container">
-                    <div className="title">Summary</div>
+                    <div className="title">Estimated amount of nutrients based on given inputs.</div>
                     <div className="filter-summary">
                         <div className="nutrient-info">
                             <div>Carbs</div>
@@ -85,14 +98,6 @@ class MealsFilters extends Component {
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div className="filter-input-container">
-                    <div className="filter-input average">
-                        <label>Average Calories by number of meals per day
-                            <input type="text" placeholder="Maximum of 6" onChange={e => this.handleChange(e.target.value)} value={this.state.numMeals}/>
-                        </label>
-                        <div className="submit" onClick={() => this.handleAverage().then(confirmFilters)}>Submit</div>
                     </div>
                 </div>
 

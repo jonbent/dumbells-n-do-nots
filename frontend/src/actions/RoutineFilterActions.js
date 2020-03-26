@@ -2,6 +2,7 @@ export const RECEIVE_DAY_SELECTED = "RECEIVE_DAY_SELECTED";
 export const RECEIVE_NUM_MEALS = "RECEIVE_NUM_MEALS";
 export const RECEIVE_SIDE = "RECEIVE_SIDE";
 export const RECEIVE_SELECTED_MUSCLE_GROUP = 'RECEIVE_SELECTED_MUSCLE_GROUP';
+export const RECEIVE_SELECTED_MUSCLE_GROUPS = 'RECEIVE_SELECTED_MUSCLE_GROUPS';
 export const RECEIVE_SELECTED_ROUTINE = 'RECEIVE_SELECTED_ROUTINE';
 
 export const receiveDaySelected = day => ({
@@ -23,7 +24,11 @@ export const receiveSide = side => ({
     side
 });
 
-export const receiveSelectedMuscleGroups = (muscleGroup) => ({
+export const receiveSelectedMuscleGroup = (muscleGroup) => ({
     type: RECEIVE_SELECTED_MUSCLE_GROUP,
     muscleGroup
+});
+export const receiveSelectedMuscleGroups = (muscleGroups) => ({
+    type: RECEIVE_SELECTED_MUSCLE_GROUPS,
+    muscleGroups
 });

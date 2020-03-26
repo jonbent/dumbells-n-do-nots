@@ -1,17 +1,36 @@
 html{
     height: 100%;
+
 }
 *:not(html) {
     //-webkit-transform: translate3d(0, 0, 0);
     //-webkit-transform-style: flat;
     //transform-style: flat;
 }
+body::after {
+  content: "";
+  display: block;
+  position: absolute;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  background-image: url('/images/dumbnot-background.jpg');
+  //background-size: cover;
+  background-position: left top;
+  opacity: 0.3;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
 body{
-    background-image: url('/images/dumbnot-background.jpg');
+    //background-image: url('/images/dumbnot-background.jpg');
     background-position: left top;
+    background-color: black;
     display: flex;
     flex-direction: column;
-    font-family: 'Roboto Mono', monospace;
+    //font-family: 'Roboto Mono', monospace;
+    font-family: 'Noto Sans KR', sans-serif;
     height: 100%;
     -webkit-transform: translate3d(0, 0, 0);
     -webkit-backface-visibility: hidden;
@@ -21,6 +40,25 @@ body{
         height: 100%;
         overflow: scroll;
         position: relative;
+        .App{
+          transition-duration: 0.5s;
+        }
+        .slide-out {
+              position: fixed;
+              width: 100%;
+              height: 100%;
+              transform: translate3d(17.5rem, 0px, 0px);
+              backface-visibility: hidden;
+              perspective: 62.5rem;
+            .overlay{
+              background-color: rgba(0, 0, 0, 0.4);
+              position: fixed;
+              width: 100%;
+              height: 100%;
+              z-index: 10000;
+              top: 0;
+            }
+          }
     }
 }
 html{
@@ -39,18 +77,18 @@ input:-webkit-autofill:active {
     animation: autofill 0s forwards;
 }
 
-@keyframes autofill {
-    100% {
-        background: transparent;
-        color: lightgray ;
-    }
-}
-@-webkit-keyframes autofill {
-    100% {
-        background: transparent;
-        color: lightgray ;
-    }
-}
+//@keyframes autofill {
+//    100% {
+//        background: transparent;
+//        color: lightgray ;
+//    }
+//}
+//@-webkit-keyframes autofill {
+//    100% {
+//        background: transparent;
+//        color: lightgray ;
+//    }
+//}
 
 .separator-container {
     display: flex;

@@ -37,6 +37,10 @@ class Signup extends React.Component {
     this.setHeight = this.setHeight.bind(this);
     this.handleYearMonthChange = this.handleYearMonthChange.bind(this);
   }
+  componentDidMount() {
+    this.props.receiveNextStep(1);
+  }
+
   setHeight() {
     let feet = this.state.height1;
     let inches = this.state.height2;
@@ -90,7 +94,7 @@ class Signup extends React.Component {
     let heightErrors
     if (errors) {
       
-      if (errors.username) {
+      if (errors.username && errors.username.message) {
         usernameErrors = errors.username.message.slice(5);
       }
       if (errors.height) {
@@ -108,7 +112,7 @@ class Signup extends React.Component {
       if (errors.sex) {
         sexErrors = errors.sex.message;
       }
-      if (errors.birthDate) {
+      if (errors.birthDate && errors.birthDate.message) {
         dobErrors = errors.birthDate.message.slice(5);
       }
       if (errors.weightStart) {
@@ -174,8 +178,10 @@ class Signup extends React.Component {
               <div className="signup-errors">{confimrPasswordErrors}</div>
             </div>
           </div>
-          <div onClick={this.handleNext} className="signup-form-button">
-            Next
+          <div className="signup-form-button-container">
+            <div onClick={this.handleNext} className="signup-form-button">
+              Next
+            </div>
           </div>
         </form>
       );
@@ -225,7 +231,7 @@ class Signup extends React.Component {
                   defaultValue=""
                   onChange={e => this.updateField("sex", e)}
                 >
-                  <option value="">-- Select one --</option>
+                  <option value="">Select one</option>
                   <option style={{ textAlign: "center" }} value={"M"}>
                     Male
                   </option>
@@ -257,30 +263,41 @@ class Signup extends React.Component {
                   defaultValue=""
                   onChange={e => this.updateField("goalPath", e)}
                 >
-                  <option value="">-- Select one --</option>
+                  <option value="">Select one</option>
                   <option value={1}>Lose weight</option>
                   <option value={2}>Gain weight</option>
                 </select>
               </label>
             </div>
           </div>
-          <div onClick={this.handleSubmit} className="signup-form-button">
-            Sign up
+          <div className="signup-form-button-container">
+            <div onClick={this.handleSubmit} className="signup-form-button">
+              Sign up
+            </div>
           </div>
         </form>
       );
     }
     return (
-      <div className="login-page">
+      <div className="signup-page-container">
         <NavBar />
-        <div className="signup-form-container">
-          {form_type}
-          <div className="separator-container">
-              <span className="separator"></span>
-              <span>OR</span>
-              <span className="separator"></span>
+        <div className="signup-page">
+          <div style={{ backgroundImage: "url(/images/signup-pic.jpeg)" }} className="signup-pic"></div>
+          <div className="signup-form-container">
+            <div>
+
+              {form_type}
+              <div className="separator-container">
+                <span className="separator"></span>
+                <span>OR</span>
+                <span className="separator"></span>
+              </div>
+              <div className="sign-up-link-container">
+                <Link onClick={this.props.resetErrors} to="/login" className="sign-up-link">Login</Link>
+
+              </div>
+            </div>
           </div>
-          <Link onClick={this.props.resetErrors} to="/login" className="sign-up-link">Login</Link>
         </div>
 
       </div>

@@ -13,9 +13,10 @@ import Splash from './home/Splash';
 
 import '../scss/reset.scss';
 import '../scss/App.scss';
+import {closeHamburger} from "../actions/HamburgerActions";
 
-const App = ({ loggedIn }) => (
-    <div>
+const App = ({ loggedIn, hamburger, closeHamburger }) => (
+    <div className={`App ${hamburger ? "slide-out" : ""}`}>
         <Switch>
             <AuthRoute exact path="/signup" component={SignupContainer} />
             <AuthRoute exact path="/login" component={LoginContainer} />
@@ -25,10 +26,17 @@ const App = ({ loggedIn }) => (
             {loggedIn &&  <ProtectedRoute path="/" component={UserShowContainer} />}
         </Switch>
 
+        {hamburger && <div className="overlay" onClick={closeHamburger}></div>}
     </div>
 );
 
 const mapStateToProps = state => (
-  { loggedIn: state.session.isAuthenticated }
+  {
+      loggedIn: state.session.isAuthenticated,
+      hamburger: state.ui.hamburger
+  }
 );
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = dispatch => ({
+    closeHamburger: () => dispatch(closeHamburger())
+});
+export default connect(mapStateToProps, mapDispatchToProps)(App);

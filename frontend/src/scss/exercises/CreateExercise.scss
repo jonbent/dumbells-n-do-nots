@@ -5,10 +5,11 @@
   background-color: rgba(0,0,0,0.5);
   border-radius: 10px;
   padding: 1rem 1rem;
-  color: pink;
-  text-shadow: 1px 1px 3px black;
-  box-shadow: 2px 2px 6px black;
+  color: white;
+
+  //box-shadow: 2px 2px 6px black;
   .exercise-errors{
+    text-shadow: 1px 1px 3px black;
     font-style: italic;
     color: red;
   }
@@ -27,29 +28,44 @@
       //color: -internal-light-dark-color(black, black) !important;
       -webkit-text-fill-color: black;
     }
-    select::-ms-expand {
-      display: none;
+    input:focus{
+      border-color: #F9C095;
     }
-    select{
-      -webkit-appearance: none;
-      -moz-appearance: none;
-      text-indent: 1px;
-      text-overflow: '';
-    }
-    input, select, textarea{
-      background-color: rgba(0,0,0,0);
-      border: none;
-      border-bottom: 1px solid pink;
-      text-align: center;
-      text-align-last: center;
+    input , select, textarea{
+      padding: 0.5rem;
+      border: 2px solid #ccc;
+      box-sizing: border-box;
+      border-radius: 5px;
+      //background-color: rgba(0,0,0,0);
+      //border: none;
+      //border-bottom: 1px solid pink;
+      //text-align: center;
       font-size: 150%;
-      color: pink;
-      outline: none;
+      color: black;
     }
-    textarea{
-      text-align-last: start;
-      text-align: start;
-    }
+    //select::-ms-expand {
+    //  display: none;
+    //}
+    //select{
+    //  -webkit-appearance: none;
+    //  -moz-appearance: none;
+    //  text-indent: 1px;
+    //  text-overflow: '';
+    //}
+    //input, select, textarea{
+    //  background-color: rgba(0,0,0,0);
+    //  border: none;
+    //  border-bottom: 1px solid pink;
+    //  text-align: center;
+    //  text-align-last: center;
+    //  font-size: 150%;
+    //  color: pink;
+    //  outline: none;
+    //}
+    //textarea{
+    //  text-align-last: start;
+    //  text-align: start;
+    //}
 
   }
   .submit-container{
@@ -57,14 +73,14 @@
     padding: 0.5rem 2rem 1rem 2rem;
     margin-top: 1rem;
     .submit:hover{
-      background-color: darken(pink, 5%);
+      //background-color: darken(pink, 5%);
+      box-shadow: 2px 2px 6px black;
     }
     .submit{
       cursor: pointer;
-      background-color: pink;
-      color: black;
-      text-shadow: 1px 1px 3px lightskyblue;
-      box-shadow: 2px 2px 6px black;
+      background-color: black;
+      color: #F9C095;
+
       border-radius: 5px;
       padding: 1rem 0;
     }

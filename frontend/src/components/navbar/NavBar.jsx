@@ -1,17 +1,32 @@
 import React from 'react'
 import '../../scss/NavBar.scss'
+import Hamburger from "../svg/Hamburger";
+import {connect} from 'react-redux';
+import {openHamburger} from "../../actions/HamburgerActions";
+import {logout} from "../../actions/SessionActions";
+import {withRouter} from 'react-router-dom';
 
-const NavBar = () => {
+const NavBar = ({openHamburger, logout, currentUser, history}) => {
     return (
         <div className="navbar-container">
             <div className="navbar">
-                <div className="navbar-logo">
-                    {/* <img src="/images/donut-dumbbell-full-logo.png" alt=""/> */}
+                <div className="hamburger">
+                    <Hamburger onClick={openHamburger}/>
                 </div>
-                {/* <div className="navbar-name"><h3>Dumbells-N-Do Nots</h3></div> */}
+                <div className="navbar-logo" onClick={() => history.push('/')}>
+                </div>
+                <div className="action-container">
+                    {!!currentUser && <button className='logout-button' onClick={logout}>Logout</button>}
+                </div>
             </div>
         </div>
     )
-}
-
-export default NavBar
+};
+const mapStateToProps = ({session}) => ({
+    currentUser: session.user,
+});
+const mapDispatchToProps = (dispatch) => ({
+    openHamburger: ()=> dispatch(openHamburger()),
+    logout: ()=> dispatch(logout())
+});
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NavBar));

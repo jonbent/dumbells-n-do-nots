@@ -1,186 +1,230 @@
 
 .signup-form-header{
-    text-align: center;
-    margin: 5rem;
-    margin-top: 3rem;
-    font-size: 3.5rem;
-    font-weight: bold;
-    color: white;
+    font-size: 24px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-top: 2rem;
 }
-.signup-form-container{
-    display: flex;
-    justify-content: center;
-    padding-bottom: 4rem;
-    flex-direction: column;
-    align-items: center;
-    .sign-up-link{
-        width: 80%;
-        background-color: lightpink;
-        font-size: 200%;
-        border-radius: 50px;
-        color: black;
-        box-shadow: 0rem 0rem 0.5rem black;
-        text-decoration: none;
+.signup-page-container{
+    height: 100%;
+    overflow: hidden;
+    .signup-page{
         display: flex;
-        justify-content: center;
-        padding: 1px 7px 2px;
-        margin-top: 2rem;
-        height: 2.5rem;
-        align-items: center;
-    }
-    form{
-        padding-bottom: 4rem;
+        height: 100%;
+        .signup-pic{
+            flex: 1 1;
+            height: 100%;
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+        .signup-form-container > div{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin-bottom: 8rem;
+            .separator-container{
+                max-width: 512px;
+                width: 100%;
+            }
+        }
+        .signup-form-container{
+            overflow-y: scroll;
+            flex: 2 1;
+            // justify-content: start;
+            //padding-bottom: 4rem;
+            // align-items: center;
+            background-color: white;
+            //padding-left: 5rem;
+            .sign-up-link-container {
+                max-width: 512px;
+                width: 100%;
+                display: flex;
+
+                .sign-up-link {
+                    width: 100%;
+                    display: block;
+                    align-items: center;
+                    text-align: center;
+                    text-decoration: none;
+                    border: 1px solid black;
+                    border-radius: 3px;
+                    background-color: black;
+                    margin: 1em 0 0 0;
+                    -webkit-transition: all .2s ease-in-out;
+                    transition: all .2s ease-in-out;
+                    will-change: background-color color;
+                    text-transform: uppercase;
+                    color: #F9C095;
+                    padding: 1.25em 2em;
+                    cursor: pointer;
+                }
+
+                .sign-up-link:hover {
+                    border: 1px solid #F9C095;
+                    background-color: #F9C095;
+                    color: black;
+                }
+            }
+        }
+
     }
 }
+
 .signup-form-detail-container{
-    text-align: center;
+    // text-align: center;
     font-size: 1.123rem;
     margin-top: 3.7rem;
     margin-bottom: 3.7rem;
 }
-.signup-form-detail-label{
-    transition: 0.3s ease-in;
-    color: white;
-    font-size: 120%;
-}
 
 .signup-form-detail-input{
-    transition: 0.5s ease-in;
+    // transition: 0.5s ease-in;
     border: none;
     margin-top: 0.5rem;
-    border-bottom: solid 1px white;
+    display:flex;
     input{
-        font-size: 80%;
-    // transition: 0.3s ease;
-    text-align: center;
-    border: none;
-    background: transparent;
-    color: white;
-    width: 100%;
+        width: 100%;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        color: black;
+        height: 2.5em;
+        background-color: #fff;
+        padding: 0 .5em;
+        font-size: 1em;
     }
-}
-.signup-form-detail-input:focus-within{
-    transition: 0.5s ease-out;
-    font-size: 150% ;
-    width: 100%;
-
-    text-align: center;
-}
-.signup-form-detail-input {
-    
-}
-// .signup-form-detail-input > input:focus, DayPickerInput > input:focus{
-//     transition: 0.3s ease-out;
-//     font-size: 150%;
-//     text-align: center;
-
-// }
-.signup-form-detail-dropdown{
-
+    input:-webkit-autofill, .login-page-container .login-page .login-form-container input:-webkit-autofill:hover, .login-page-container .login-page .login-form-container input:-webkit-autofill:focus, .login-page-container .login-page .login-form-container input:-webkit-autofill:active, .login-page-container .login-page .login-form-container input:-internal-autofill-selected {
+        background-color: white !important;
+        -webkit-box-shadow: none !important;
+        color: black !important;
+    }
 }
 .signup-form-dropdown{
     padding: 0.3125rem 3.5625rem;
 }
 .signup-form-input-detail-container{
-    margin-bottom: 1.5625rem;
     margin: auto;
     margin-bottom: 1.875rem;
 }
 input:focus{
     outline: none;
 }
-.signup-form-button{
-    text-align: center;
-    font-size: 1.25rem;
-    // border: solid 1px lightgray;
-    margin: auto;
-    box-shadow: 0 0 1rem black;
-    // margin-bottom: 1.875rem ;
-    padding: 0.335rem 0.625rem;
-    border-radius: 50px;
-    background-color: lightskyblue;
+.signup-form-button-container{
+    display: flex;
+    .signup-form-button{
+        width: 100%;
+        display: block;
+        align-items: center;
+        text-align: center;
+        text-decoration: none;
+        border: 1px solid #F9C095;
+        border-radius: 3px;
+        background-color: #F9C095;
+        margin: 0 0 1em;
+        transition: all .2s ease-in-out;
+        will-change: background-color color;
+        text-transform: uppercase;
+        color: black;
+        padding: 1.25em 2em;
+        cursor: pointer;
+    }
+    .signup-form-button:hover{
+        border: 1px solid black;
+        background-color: black;
+        color: #F9C095;
+    }
 }
 .signup-errors{
-    font-size: 0.7375rem;
-    padding: 0.3125rem;
-    color: rgb(185, 185, 185)
+    padding: 5px 0;
+    color: red;
+    font-style: italic;
+    font-size: 75%;
 }
-.DayPickerInput > input{
-    text-align: center;
-    background: transparent;
-    border: none;
+.DayPickerInput{
+    width: 100%;
+    display: flex;
+    position: relative;
+    input{
+        width: 100%;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        color: black;
+        height: 2.5em;
+        background-color: #fff;
+        padding: 0 .5em;
+        font-size: 1em;
+    }
+    input:-webkit-autofill, .login-page-container .login-page .login-form-container input:-webkit-autofill:hover, .login-page-container .login-page .login-form-container input:-webkit-autofill:focus, .login-page-container .login-page .login-form-container input:-webkit-autofill:active, .login-page-container .login-page .login-form-container input:-internal-autofill-selected {
+        background-color: white !important;
+        -webkit-box-shadow: none !important;
+        color: black !important;
+    }
 
 }
 .signup-form-detail-dropdown{
     margin-top: 0.5rem;
-}
-.signup-form-dropdown:focus{
-    outline: none;
-}
-.signup-form-dropdown{
-    appearance: none;
-    color: white;
-    background-color: transparent;
-    height: 1.875rem;
-    width: 12.5rem;
-}
-.signup-form{
-    width: 80%;
-}
-.signup-form-height{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    border-bottom: 1px solid white;
-    color: white;
-    input{
-        max-width: 2rem;
-        background: transparent;
-        border: none;
-        // border-bottom: 1px solid white;
-        color: white;
-        text-align: center;
+    .signup-form-dropdown:focus{
+        outline: none;
+    }
+    .signup-form-dropdown{
+        width: 100%;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        color: black;
+        height: 2.5em;
+        background-color: #fff;
+        padding: 0 .5em;
+        font-size: 1em;
+        //appearance: none;
+        //color: white;
     }
 }
+.signup-form{
+    max-width: 512px;
+    width: 100%;
+}
+
 .signup-form-height-input{
-    transition: 0.5s ease-in;
+    // transition: 0.5s ease-in;
     border: none;
     margin-top: 1rem;
     width: 100%;
     font-size: 1rem;
+    .signup-form-height{
+        display: flex;
+        span{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 0.5rem;
+        }
+        input{
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            color: black;
+            height: 2.5em;
+            background-color: #fff;
+            padding: 0 .5em;
+            font-size: 1em;
+        }
+        input:-webkit-autofill, .login-page-container .login-page .login-form-container input:-webkit-autofill:hover, .login-page-container .login-page .login-form-container input:-webkit-autofill:focus, .login-page-container .login-page .login-form-container input:-webkit-autofill:active, .login-page-container .login-page .login-form-container input:-internal-autofill-selected {
+            background-color: white !important;
+            -webkit-box-shadow: none !important;
+            color: black !important;
+        }
+    }
 }
-.signup-form-height-input:focus-within{
-    transition: 0.3s ease-out;
-    font-size: 200%;
-    text-align: center;
-}
-
-// .signup-form-height>input:focus{
-//     font-size: 100%;
-// }
 .signup-form-input-detail-container{
     display: flex;
     flex-direction: column;
 }
-.signup-form-input-detail-container:focus-within{
-    label{
-        transition: 0.3s ease;
-        font-size: 75%;
-    }
-    input,span{
-        // transition: 0.3s ease;
-        font-size: 110%;
-        text-align: center;
-    }
-    // .signup-form-detail-input > input{
-    //     transition: 0.3s ease;
-    //     font-size: 130%;
-    //     text-align: center;
-    // }
-}
 .DayPickerInput-OverlayWrapper{
-    right: 2rem;
+    left: 0rem;
+    top: 3rem;
     z-index: 40;
+    position: absolute;
 }
 
 

@@ -6,6 +6,7 @@ import alert from './AlertReducer';
 
 import newRoutineData from './NewRoutineDataReducer';
 import routineFilterReducer from './RoutineFiltersReducer';
+import HamburgerReducer from "./HamburgerReducer";
 
 export default combineReducers({
     filters: filterReducer,
@@ -13,5 +14,6 @@ export default combineReducers({
     alert,
     filtersModal,
     newRoutineData,
-    routineFilters: routineFilterReducer
+    routineFilters: routineFilterReducer,
+    hamburger: HamburgerReducer
 });
