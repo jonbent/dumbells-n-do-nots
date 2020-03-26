@@ -5,7 +5,6 @@ import '../../scss/Hamburger.scss';
 import {Link, withRouter, NavLink} from "react-router-dom";
 import {logout} from "../../actions/SessionActions";
 import {closeHamburger} from "../../actions/HamburgerActions";
-import Plus from "../svg/Plus";
 import {openModal} from "../../actions/ModalActions";
 
 const Hamburger = ({openStatus, loggedIn, user, logout, closeHamburger, location, openNewRoutineModal}) => {

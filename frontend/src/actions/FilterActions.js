@@ -6,16 +6,16 @@ export const UPDATE_FILTER = 'UPDATE_FILTER';
 export const updateFilter = (payload) => ({
     type: UPDATE_FILTER,
     payload
-})
+});
 export const receiveNextStep = num => ({
     type: RECEIVE_NEXT_STEP,
     num
-})
+});
 export const receivePageSize = num => ({
     type: RECEIVE_PAGE_SIZE,
     num
-})
+});
 export const receivePageNum = num => ({
     type: RECEIVE_PAGE_NUM,
     num
-})
+});

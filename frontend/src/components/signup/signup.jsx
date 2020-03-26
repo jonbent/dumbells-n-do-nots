@@ -37,6 +37,10 @@ class Signup extends React.Component {
     this.setHeight = this.setHeight.bind(this);
     this.handleYearMonthChange = this.handleYearMonthChange.bind(this);
   }
+  componentDidMount() {
+    this.props.receiveNextStep(1);
+  }
+
   setHeight() {
     let feet = this.state.height1;
     let inches = this.state.height2;

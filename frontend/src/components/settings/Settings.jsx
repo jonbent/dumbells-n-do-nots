@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import BottomNavBar from "../navbar/BottomNavBarContainer";
+// import BottomNavBar from "../navbar/BottomNavBarContainer";
 import "../../scss/settings.scss";
 import DateFormat from "dateformat";
 import Modal from "../modal/Modal";

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import BottomNavBar from '../navbar/BottomNavBarContainer';
+// import BottomNavBar from '../navbar/BottomNavBarContainer';
 import '../../scss/users/UserShow.scss';
 import UserShowCard from './UserShowCard';
 import Modal from "../modal/Modal";
@@ -7,7 +7,7 @@ import RoutineShow from "../routine/RoutineShowContainer";
 import FiltersModal from "../modal/FiltersModal";
 import Alert from "../alerts/Alert";
 import NavBar from "../navbar/NavBar";
-import Hamburger from "../modal/Hamburger";
+// import Hamburger from "../modal/Hamburger";
 class UserShow extends Component {
     // constructor(props) {
     //     super(props);
@@ -18,8 +18,7 @@ class UserShow extends Component {
         }
         this.props.fetchRoutineData(this.props.user._id);
     }
-    
-    
+
     render(){
         const {user} = this.props;
         return(

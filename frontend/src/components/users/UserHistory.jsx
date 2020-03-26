@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import '../../scss/users/UserHistory.scss'
-import BottomNavBar from "../navbar/BottomNavBarContainer";
+// import BottomNavBar from "../navbar/BottomNavBarContainer";
 import Modal from "../modal/Modal";
 import DateFormat from 'dateformat'
 import FiltersModal from "../modal/FiltersModal";
 import Alert from "../alerts/Alert";
 
-import {Link } from 'react-router-dom';
+// import {Link } from 'react-router-dom';
 import NavBar from "../navbar/NavBar";
 
 class UserHistory extends Component {
@@ -28,7 +28,7 @@ class UserHistory extends Component {
     }
 
     render(){
-        const {currentUser, routines, days} = this.props;
+        const {routines, days} = this.props;
         return (
             <div className="user-history-container">
                 <Modal/>
