@@ -1,6 +1,7 @@
 import React from 'react'
 import '../../scss/Splash.scss';
 import SplashCarousel from '../splashCarousel/splashCarousel';
+import {Link} from 'react-router-dom';
 // import NavBar from "../navbar/NavBar";
 
 
@@ -13,11 +14,11 @@ const Splash = () => {
                 <p>New Year, New Me! Start taking control of your goals.
                     Let us find you the perfect meal and your custom exercise routine.
                 </p>
-                <a href="/#/signup">
+                <Link to="/signup">
                 <button className="Sign-up-btn">signup for free</button>
-                </a>
+                </Link>
                 <p>Already have an account?
-                    <a href="/#/login" > Login</a>
+                    <span> <Link to="/login" >Login</Link></span>
                 </p>
             </div>
 

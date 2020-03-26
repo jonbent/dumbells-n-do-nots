@@ -44,6 +44,9 @@ const RoutineDay = ({ updateRoutineChecks, workout, editable, day, routine, user
             <div className="day-title">
                 {readableDay}
             </div>
+            {userMeals.length === 0 && exercises.length === 0 && (
+                <div className="routine-none-found">No Meal or workout found for this day</div>
+            )}
             {userMeals.length !== 0 && <div className="day-meals">
                 <div className="meal-title">Meals</div>
                 {userMeals.map((userMeal) => {
@@ -58,7 +61,7 @@ const RoutineDay = ({ updateRoutineChecks, workout, editable, day, routine, user
                     )
                 })}
             </div>}
-            {exercises.length > 0 && <div className={`day-workout ${workout.doneCheck === true ? "workout-done" : ""}`} onClick={() => !history ? check() : null}>
+            {exercises.length !== 0 && <div className={`day-workout ${workout.doneCheck === true ? "workout-done" : ""}`} onClick={() => !history ? check() : null}>
                 <div className="workout-title"><span>Workout</span><span className="check"></span></div>
                 {exercises.map((ex, idx) => {
                     return <div key={idx} className="day-exercise">{ex.name}</div>

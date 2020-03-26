@@ -68,7 +68,8 @@ class NewRoutineForm extends React.Component {
     switch(creationSelection){
       case 'routine':
         content = (<form className="new-routine-form">
-            <h1 className="new-routine-header">New Routine</h1>
+            <h1 className="new-routine-header">Let's create new routine for the selected date!</h1>
+            <h3>Please select a day you want to start your routine on.</h3>
             <div className="start-date-input">
               <label className="start-date-label">Select Start Date
                 <DatePicker

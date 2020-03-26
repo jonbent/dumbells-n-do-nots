@@ -17,11 +17,12 @@
     left: 50%;
     transform: translate(-50%, -50%);
     .close-modal-button:hover{
-      background-color: darken(pink, 5%);
+      background-color: black;
+      color: #F9C095;
     }
     .close-modal-button{
       color: black;
-      background-color: lightpink;
+      background-color: #F9C095;
       border: none;
       width: 80vw;
       height: 3rem;

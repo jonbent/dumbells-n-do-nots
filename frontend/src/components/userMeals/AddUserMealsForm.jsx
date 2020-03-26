@@ -4,6 +4,7 @@ import '../../scss/UserMealsModal.scss'
 
 import MealItem from "../meals/MealItem";
 import { debounce } from 'lodash'
+import MagnifyingGlass from "../svg/MagnifyingGlass";
 
 class AddUserMealsForm extends React.Component{
     constructor(props){
@@ -184,9 +185,6 @@ class AddUserMealsForm extends React.Component{
                         />
                     </div>
                     <div className='routine-actions'>
-                        <div className="select-filters">
-                            <div onClick={openMealsFilters}>Select Filters</div>
-                        </div>
                         <div className="submit-meals" onClick={!!singleDay ? this.handleSubmitDayMeals : this.handleSubmitWeekMeals}>
                             {singleDay ? "Confirm Day's Meals" : "Confirm Week's Meals"}
                         </div>
@@ -202,16 +200,8 @@ class AddUserMealsForm extends React.Component{
         }
         return(
             <div className="meal-selector">
-                <div className="meal-search">
-                    <div>Search for meals</div>
-                    <div className="search-actions">
-                        <div className={`ignore-filters ${ignoringFilters ? "ignoring" : ""}`} onClick={this.handleFilterIngore}>{ignoringFilters ? "Enable Filters for Search" : "Disable Filters for Search"}</div>
-                        <input placeholder="Search by recipe name..." value={mealSearch} onChange={this.handleSearchInputChange}/>
-
-                    </div>
-                </div>
                 <div className="day-select">
-                    {!singleDay && <h1>Select Day</h1>}
+                    {!singleDay && <h1>For each day below, select desired meals</h1>}
                     <div className="scheduled-days">
                         {!singleDay && Object.keys(daySelect).map((date) => {
                             return (
@@ -225,7 +215,24 @@ class AddUserMealsForm extends React.Component{
                     </div>
 
                 </div>
-                <div className={`calorie-count ${calorieCountClass}`}>Total Calories: {!single ? calorieCounts[selectedDay] : calorieCounts}</div>
+                <div className="meal-search">
+                    <div>Search for meals</div>
+                    <div className="search-actions-container">
+                        <div className="search-actions">
+                            <div className={`ignore-filters ${ignoringFilters ? "ignoring" : ""}`} onClick={this.handleFilterIngore}>{ignoringFilters ? "Enable Filters for Search" : "Disable Filters for Search"}</div>
+                            <div className="select-filters" onClick={openMealsFilters}>
+                                Select Filters
+                            </div>
+
+                        </div>
+                        <div className="meal-searchbar">
+                            <MagnifyingGlass/>
+                            <input placeholder="Search by recipe name..." value={mealSearch} onChange={this.handleSearchInputChange}/>
+
+                        </div>
+                    </div>
+                </div>
+                <div className={`calorie-count ${calorieCountClass}`}>Total Calories for selected day: {!single ? calorieCounts[selectedDay] : calorieCounts}</div>
                 {!!daySelectedMealsArray.length && <div className={"selected-meals"}>
                     <div>Meals Selected</div>
                     {daySelectedMealsArray.map(mealId => {

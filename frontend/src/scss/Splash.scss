@@ -58,14 +58,20 @@
         margin-inline-end: 0px;
         font-size: 1.2rem;
         line-height: 1.70em;
-        color: white ;
+        color: white;
         max-width: 24em;
+        a{
+            color: #F9C095;
+        }
+        a:hover{
+            text-decoration: underline;
+        }
     }
 
-    button{
+    .Sign-up-btn{
         border: none;
-        color: beige;
-        background-color: darkslateblue;
+        color: black;
+        background-color: #F9C095;
         padding: 18px 60px;
         font-size: 0.875rem;
         min-width: 64px;
@@ -75,6 +81,11 @@
         border-radius: 7px;
         text-transform: uppercase;
         cursor: pointer;
+    }
+    .Sign-up-btn:hover{
+        color: #F9C095;
+        background-color: black;
+        box-shadow: 3px 3px 6px black;
     }
 
     a{

@@ -2,7 +2,8 @@
   height: 100%;
   -webkit-transform: translate3d(0, 0, 0);
   .submit > div:hover{
-    background-color: darken(pink, 5%);
+    color: darken(#F9C095, 5%);
+    box-shadow: 3px 3px 6px black;
   }
   .submit{
     margin: 1rem;
@@ -15,8 +16,8 @@
       cursor: pointer;
       margin: 1rem;
       padding: 1rem;
-      box-shadow: 3px 3px 6px black;
-      background-color: pink;
+      color: #F9C095;
+      background-color: black;
       border-radius: 5px;
     }
   }
@@ -51,17 +52,13 @@
   //  }
   //}
   .day-select{
-    h1{
-
-      margin: 1rem 0;
-    }
-    padding-bottom: 1rem;
+    margin-top: 1rem;
     display: flex;
     flex-direction: column;
-    background-color: rgba(0, 0, 0, 0.5);
-    margin: 1rem;
-    box-shadow: 3px 3px 6px black;
-    border-radius: 5px;
+    h1{
+      margin-bottom: 1rem;
+      font-size: 125%;
+    }
     .scheduled-days{
       display: flex;
       flex-direction: row;
@@ -76,11 +73,12 @@
         cursor: pointer;
       }
       div:hover{
-        background-color: darken(pink, 5%);
+        background-color: darken(#F9C095, 5%);
+        color: black;
       }
       div.selected{
-        background-color: pink;
-        color: black;
+        background-color: black;
+        color: #F9C095;
       }
     }
   }
@@ -121,7 +119,7 @@
                   justify-content: space-around;
                   position: relative;
                   height: 2.5rem;
-                  color: rgb(102, 102, 102);
+                  color: #F9C095;
                   font-family: proxima-nova, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
                   font-size: 0.875rem;
                   font-weight: 600;
@@ -129,7 +127,7 @@
                   user-select: none;
                   white-space: nowrap;
                   width: auto;
-                  background: rgb(255, 255, 255);
+                  background: black;
                   border-width: 0.0625rem;
                   border-style: solid;
                   border-color: rgb(221, 221, 221);
@@ -147,6 +145,11 @@
                   white-space: nowrap;
                   .carousel-nav.disabled{
                       cursor: auto;
+                      svg{
+                        path{
+                          fill: gray;
+                        }
+                      }
                   }
                   .carousel-nav{
                       cursor: pointer;
@@ -157,10 +160,10 @@
                       position: relative;
                       height: 2.5rem;
                       width: 2.75rem;
-                      background: rgb(255, 255, 255);
+                      background: black;
                       border-width: 0.0625rem;
                       border-style: solid;
-                      border-color: rgb(221, 221, 221);
+                      border-color: #F9C095;
                       border-image: initial;
                       border-radius: 0.25rem;
                       transition: all 300ms ease 0s;
@@ -170,12 +173,18 @@
                       transform: translateX(0.0625rem);
                       border-radius: 0.25rem 0px 0px 0.25rem;
                       svg{
+                        path{
+                          fill: #F9C095;
+                        }
                           transform: rotate(90deg);
                       }
                   }
                   .next-button{
                       border-radius: 0px 0.25rem 0.25rem 0px;
                       svg{
+                        path{
+                          fill: #F9C095;
+                        }
                           transform: rotate(270deg);
                       }
                   }
@@ -187,10 +196,9 @@
                   -webkit-box-pack: center;
                   justify-content: center;
                   display: flex;
-                  color: pink;
-                  text-shadow: 1px 1px 3px black;
                   line-height: 1.25;
                   padding-right: 0.5rem;
+                  color: black;
               }
           }
       }
@@ -209,9 +217,11 @@
 
       }
       .exercise-item:hover{
-        color: pink;
+        background-color: black;
+        box-shadow: 3px 3px 6px black;
       }
       .exercise-item{
+        color: white;
         background-color: rgba(0, 0, 0, 0.5);
         border-radius: 5px;
         display: flex;
@@ -220,11 +230,10 @@
         margin: 0.5rem;
         text-align: start;
         cursor: pointer;
-        box-shadow: 3px 3px 6px black;
       }
       .exercise-item.selected{
-        background-color: pink;
-        color:black;
+        background-color: black;
+        box-shadow: 3px 3px 6px black;
 
       }
     }
