@@ -30,7 +30,7 @@ export const receiveNewExercise = exercise =>({
     exercise
 });
 export const receiveExerciseErrors = errors =>({
-    type: RECEIVE_NEW_EXERCISE,
+    type: RECEIVE_EXERCISE_ERRORS,
     errors
 });
 

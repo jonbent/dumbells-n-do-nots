@@ -19,7 +19,7 @@ export default class ExerciseSelector extends Component {
     }
 
     render() {
-        const {muscleGroups, selectedExercises, days, day, selectedMuscleGroupIds, exercises, exerciseDays = [], closeSelector, curRoutine, editing } = this.props;
+        const {muscleGroups, selectedExercises, days, day, selectedMuscleGroupIds, exercises, closeSelector, curRoutine, editing } = this.props;
 
         // separate exercises by muscle group
         const allExercises = {};

@@ -54,7 +54,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         return {
             receiveRoutineExercise: (payload) => dispatch(receiveRoutineExercise(payload)),
             receiveDaySelected: (day) => dispatch(receiveDaySelected(day)),
-            submitRoutine: (routine, userId) => {dispatch(submitRoutineAndCloseModal(routine)); dispatch(fetchUserRoutine(userId));}
+            submitRoutine: (routine, userId) => dispatch(submitRoutineAndCloseModal(routine)).then(() => dispatch(fetchUserRoutine(userId)))
         }
     }
 };

@@ -2,12 +2,12 @@
     color: white;
     display: flex;
     justify-content: center;
-    padding-bottom: 7rem;
     flex-direction: column;
     .main-container{
         display: flex;
         justify-content: center;
-        margin-top: 3rem;
+        margin: 3rem 1rem 0;
+
         .settings-form{
             display: flex;
             flex-direction: column;
@@ -31,8 +31,12 @@
                 cursor: pointer;
             }
             .username{
-                    font-size: 35px;
-                }
+                font-size: 35px;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                max-width: 100%;
+                padding: 0.4rem 0;
+            }
             .image{
                 margin-bottom: 2rem;
                 #edit-profile-picture{

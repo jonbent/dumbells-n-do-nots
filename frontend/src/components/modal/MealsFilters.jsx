@@ -30,7 +30,6 @@ class MealsFilters extends Component {
             maxCals,
             minCals,
             changeFilter,
-            confirmFilters
         } = this.props;
         return (
             <div className="meals-filters">

@@ -77,3 +77,19 @@
         }
     }
 }
+@media only screen and (max-width: 710px) {
+    .user-show-container {
+        .routine-info-container{
+            margin: 0 2rem;
+            width: auto;
+        }
+        .user-show-content {
+            flex-direction: column;
+            .user-show-card{
+                min-height: 90vh;
+                position: static;
+            }
+        }
+    }
+
+}

@@ -4,19 +4,17 @@ import Hamburger from "../svg/Hamburger";
 import {connect} from 'react-redux';
 import {openHamburger} from "../../actions/HamburgerActions";
 import {logout} from "../../actions/SessionActions";
-import History from "../svg/History";
+import {withRouter} from 'react-router-dom';
 
-const NavBar = ({openHamburger, logout, currentUser}) => {
+const NavBar = ({openHamburger, logout, currentUser, history}) => {
     return (
         <div className="navbar-container">
             <div className="navbar">
                 <div className="hamburger">
                     <Hamburger onClick={openHamburger}/>
                 </div>
-                <div className="navbar-logo">
-                    {/* <img src="/images/donut-dumbbell-full-logo.png" alt=""/> */}
+                <div className="navbar-logo" onClick={() => history.push('/')}>
                 </div>
-                {/* <div className="navbar-name"><h3>Dumbells-N-Do Nots</h3></div> */}
                 <div className="action-container">
                     {!!currentUser && <button className='logout-button' onClick={logout}>Logout</button>}
                 </div>
@@ -31,4 +29,4 @@ const mapDispatchToProps = (dispatch) => ({
     openHamburger: ()=> dispatch(openHamburger()),
     logout: ()=> dispatch(logout())
 });
-export default connect(mapStateToProps, mapDispatchToProps)(NavBar);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NavBar));

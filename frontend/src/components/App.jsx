@@ -13,7 +13,6 @@ import Splash from './home/Splash';
 
 import '../scss/reset.scss';
 import '../scss/App.scss';
-import Hamburger from "./modal/Hamburger";
 import {closeHamburger} from "../actions/HamburgerActions";
 
 const App = ({ loggedIn, hamburger, closeHamburger }) => (
