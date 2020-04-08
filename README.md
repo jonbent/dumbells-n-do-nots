@@ -2,7 +2,7 @@
 
 Dumbells-N-Donuts is a mobile friendly fitness website, utilizing MERN stack developed by software devs that hopes to let everyone who joins it to help manage their workouts and meals in a flexible way. A user can decide to choose from already defined exhaustive list of meals and exercises or have their own custom meals and form a routine.
 
-![splash](https://github.com/jonbent/dumbells-n-do-nots/blob/master/frontend/public/readme/dumbells.gif)
+![splash](https://github.com/jonbent/dumbells-n-do-nots/blob/master/frontend/public/readme/mern_gif.gif)
 
 # Getting Started
 
@@ -20,25 +20,27 @@ Dumbells-N-Donuts is a mobile friendly fitness website, utilizing MERN stack dev
 
 * Log-in page.
 
+![login](https://github.com/jonbent/dumbells-n-do-nots/blob/master/frontend/public/readme/login.png)
+
 * Sign-up page.
 
 * Home/Landing page.
 
-* Profile settings page.
+![muscleSelector](https://github.com/jonbent/dumbells-n-do-nots/blob/master/frontend/public/readme/muscle.gif)
 
-![home](https://github.com/jonbent/dumbells-n-do-nots/blob/master/frontend/public/readme/readme_4.png)
+* Profile settings page.
 
 * Create new routine.
 
 * Meals and exercise selector.
 
-![home](https://github.com/jonbent/dumbells-n-do-nots/blob/master/frontend/public/readme/readme_3.png)
+![home](https://github.com/jonbent/dumbells-n-do-nots/blob/master/frontend/public/readme/home.png)
 
 * Custom exercises and meals.
 
 * Muscle Selector
 
-![muscleSelector](https://github.com/jonbent/dumbells-n-do-nots/blob/master/frontend/public/readme/readme_5.png)
+![mealSelector](https://github.com/jonbent/dumbells-n-do-nots/blob/master/frontend/public/readme/meal_selector.png)
 
 # Authors
 
