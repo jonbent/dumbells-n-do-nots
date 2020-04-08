@@ -26,7 +26,7 @@ Dumbells-N-Donuts is a mobile friendly fitness website, utilizing MERN stack dev
 
 * Home/Landing page.
 
-![muscleSelector](https://github.com/jonbent/dumbells-n-do-nots/blob/master/frontend/public/readme/muscle.gif)
+![home](https://github.com/jonbent/dumbells-n-do-nots/blob/master/frontend/public/readme/home.png)
 
 * Profile settings page.
 
@@ -34,13 +34,14 @@ Dumbells-N-Donuts is a mobile friendly fitness website, utilizing MERN stack dev
 
 * Meals and exercise selector.
 
-![home](https://github.com/jonbent/dumbells-n-do-nots/blob/master/frontend/public/readme/home.png)
+![mealSelector](https://github.com/jonbent/dumbells-n-do-nots/blob/master/frontend/public/readme/meal_selector.png)
 
 * Custom exercises and meals.
 
 * Muscle Selector
 
-![mealSelector](https://github.com/jonbent/dumbells-n-do-nots/blob/master/frontend/public/readme/meal_selector.png)
+![muscleSelector](https://github.com/jonbent/dumbells-n-do-nots/blob/master/frontend/public/readme/muscle.gif)
+
 
 # Authors
 
