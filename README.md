@@ -53,6 +53,52 @@ Dumbells-N-Donuts is a mobile friendly fitness website, utilizing MERN stack dev
 
 * [Julius Wu](https://github.com/juliuswuwu)
 
+# Code Snippet:
+
+* Thunk action for Muscle Groups:
+
+```javascript
+import * as MuscleGroupsAPIUtil from '../util/MuscleGroupsApiUtil';
+
+export const RECEIVE_MUSCLE_GROUPS = 'RECEIVE_MUSCLE_GROUPS';
+export const RESET_SELECTED_MUSCLE_GROUPS = 'RESET_SELECTED_MUSCLE_GROUPS';
+
+const receiveMuscleGroups = (payload) => ({
+    type: RECEIVE_MUSCLE_GROUPS,
+    payload
+});
+
+export const resetSelectedMuscleGroups = () => ({
+    type: RESET_SELECTED_MUSCLE_GROUPS,
+});
+
+export const fetchMuscleGroups = () => dispatch =>(
+    MuscleGroupsAPIUtil.fetchMuscleGroups()
+        .then(res =>{
+            dispatch(receiveMuscleGroups(res))
+        })
+        
+);
+```
+* Thunk action for recievin sample routines:
+
+```javascript
+import { getSampleRoutines } from '../util/RoutineApiUtil';
+
+export const RECEIVE_SAMPLE_ROUTINES = "RECEIVE_SAMPLE_ROUTINES";
+
+export const receiveSampleRoutines = sampleRoutines => ({
+    type: RECEIVE_SAMPLE_ROUTINES,
+    sampleRoutines
+});
+
+export const fetchSampleRoutines = () => dispatch => (
+    getSampleRoutines()
+        .then(sampleRoutines => dispatch(receiveSampleRoutines(sampleRoutines)))
+        .catch(err => console.log(err))
+);
+```
+
 # Dynamics 
 
 * Schedule
