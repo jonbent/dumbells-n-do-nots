@@ -80,7 +80,7 @@ export const fetchMuscleGroups = () => dispatch =>(
         
 );
 ```
-* Thunk action for recievin sample routines:
+* Thunk action for recieving sample routines:
 
 ```javascript
 import { getSampleRoutines } from '../util/RoutineApiUtil';
