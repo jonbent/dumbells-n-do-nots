@@ -27,6 +27,7 @@ export default class CarouselItem extends Component {
         if (this.state.shouldRender) return (
         <div className={`exercise-item ${selected}`} onClick={() => onClick(item._id)}>
             {item.name}
+            {selected === 'selected' && <div className="check"></div>}
         </div>
         );
         // <div key={groupExercise._id} className={`exercise-item ${selectedExercises[groupExercise._id] ? 'selected' : ""}`} onClick={() => this.handleExerciseSelect(groupExercise._id)}>
