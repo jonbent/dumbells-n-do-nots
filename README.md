@@ -2,7 +2,7 @@
 
 Dumbells-N-Donuts is a mobile friendly fitness website, utilizing MERN stack developed by software devs that hopes to let everyone who joins it to help manage their workouts and meals in a flexible way. A user can decide to choose from already defined exhaustive list of meals and exercises or have their own custom meals and form a routine.
 
-![splash](https://github.com/jonbent/dumbells-n-do-nots/blob/master/frontend/public/readme/dumbells.gif)
+![splash](https://github.com/jonbent/dumbells-n-do-nots/blob/master/frontend/public/readme/mern_gif.gif)
 
 # Getting Started
 
@@ -20,25 +20,28 @@ Dumbells-N-Donuts is a mobile friendly fitness website, utilizing MERN stack dev
 
 * Log-in page.
 
+![login](https://github.com/jonbent/dumbells-n-do-nots/blob/master/frontend/public/readme/login.png)
+
 * Sign-up page.
 
 * Home/Landing page.
 
-* Profile settings page.
+![home](https://github.com/jonbent/dumbells-n-do-nots/blob/master/frontend/public/readme/home.png)
 
-![home](https://github.com/jonbent/dumbells-n-do-nots/blob/master/frontend/public/readme/readme_4.png)
+* Profile settings page.
 
 * Create new routine.
 
 * Meals and exercise selector.
 
-![home](https://github.com/jonbent/dumbells-n-do-nots/blob/master/frontend/public/readme/readme_3.png)
+![mealSelector](https://github.com/jonbent/dumbells-n-do-nots/blob/master/frontend/public/readme/meal_selector.png)
 
 * Custom exercises and meals.
 
 * Muscle Selector
 
-![muscleSelector](https://github.com/jonbent/dumbells-n-do-nots/blob/master/frontend/public/readme/readme_5.png)
+![muscleSelector](https://github.com/jonbent/dumbells-n-do-nots/blob/master/frontend/public/readme/muscle.gif)
+
 
 # Authors
 
@@ -49,6 +52,52 @@ Dumbells-N-Donuts is a mobile friendly fitness website, utilizing MERN stack dev
 * [Manraj Singh](https://github.com/mskhokhar)
 
 * [Julius Wu](https://github.com/juliuswuwu)
+
+# Code Snippet:
+
+* Thunk action for Muscle Groups:
+
+```javascript
+import * as MuscleGroupsAPIUtil from '../util/MuscleGroupsApiUtil';
+
+export const RECEIVE_MUSCLE_GROUPS = 'RECEIVE_MUSCLE_GROUPS';
+export const RESET_SELECTED_MUSCLE_GROUPS = 'RESET_SELECTED_MUSCLE_GROUPS';
+
+const receiveMuscleGroups = (payload) => ({
+    type: RECEIVE_MUSCLE_GROUPS,
+    payload
+});
+
+export const resetSelectedMuscleGroups = () => ({
+    type: RESET_SELECTED_MUSCLE_GROUPS,
+});
+
+export const fetchMuscleGroups = () => dispatch =>(
+    MuscleGroupsAPIUtil.fetchMuscleGroups()
+        .then(res =>{
+            dispatch(receiveMuscleGroups(res))
+        })
+        
+);
+```
+* Thunk action for recieving sample routines:
+
+```javascript
+import { getSampleRoutines } from '../util/RoutineApiUtil';
+
+export const RECEIVE_SAMPLE_ROUTINES = "RECEIVE_SAMPLE_ROUTINES";
+
+export const receiveSampleRoutines = sampleRoutines => ({
+    type: RECEIVE_SAMPLE_ROUTINES,
+    sampleRoutines
+});
+
+export const fetchSampleRoutines = () => dispatch => (
+    getSampleRoutines()
+        .then(sampleRoutines => dispatch(receiveSampleRoutines(sampleRoutines)))
+        .catch(err => console.log(err))
+);
+```
 
 # Dynamics 
 
