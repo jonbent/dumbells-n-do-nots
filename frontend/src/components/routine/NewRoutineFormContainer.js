@@ -8,17 +8,24 @@ import {fetchRoutineByStartDate} from "../../util/RoutineApiUtil";
 import {receiveAlert} from "../../actions/AlertActions";
 import {fetchMuscleGroups} from "../../actions/MuscleGroupActions";
 import {createExercise} from "../../actions/ExerciseActions";
+import {fetchDaysAfterToday} from "../../actions/DayActions";
 
-// import DateFormat from 'dateformat';
+import DateFormat from 'dateformat';
 
 
 const mapStateToProps = (state) => {
     // const currentDate = new Date();
     // const weekFromCurrentDate = currentDate.setDate(currentDate.getDate() + 7)
+    const days = new Set();
+    Object.values(state.entities.days).filter(el => el.user === state.session.user.id).forEach(el => {
+        el = new Date(el.date);
+        days.add(`${el.getDate()}-${el.getMonth()}-${el.getFullYear()}`)
+    });
     return { 
         routine: {
             user: state.session.user.id,
         },
+        days,
         routineError: state.errors.routine,
         mealErrors: state.errors.meal,
         exerciseErrors: state.errors.exercise,
@@ -49,7 +56,8 @@ const mapDispatchToProps = dispatch => ({
         dispatch(receiveAlert({message: "Exercise created successfully.", status: "success"}));
     }).catch(err => {
         dispatch(receiveAlert({message: err, status: "fail"}));
-    })
+    }),
+    fetchDaysAfterToday: () => dispatch(fetchDaysAfterToday())
 });
 
 export default connect(

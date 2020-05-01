@@ -25,6 +25,7 @@ class ExistingRoutine extends Component {
     }
     componentDidMount() {
         let setDate = new Date(this.props.daySelected);
+        this.props.fetchDaysAfterToday();
         if (this.props.daySelected) {
             this.setState({
                 startDate: setDate
@@ -100,7 +101,10 @@ class ExistingRoutine extends Component {
                 {!editable &&
                     <div>
                         <div className="title">Restart Routine</div>
+                        <div className="description">If you would like to restart this routine, please select a valid date from below. with a span of at least a week of available days after the selected date</div>
                          <DatePicker
+                          tileDisabled={(day) => this.props.existingDaysAfterToday.has(`${day.date.getDate()}-${day.date.getMonth()}-${day.date.getFullYear()}`)}
+                          minDate={new Date()}
                           onChange={this.handleStartDate}
                           value={this.state.startDate}
                         />
@@ -110,21 +114,26 @@ class ExistingRoutine extends Component {
 
                         <div className={`submit ${routineError.message || !daySelected ? 'disabled' : ""}`}
                              onClick={this.constructNewRoutine}>
-                            Create Routine
+                            Restart Routine
                         </div>
-                        {shouldAllowEdit && <div className='or-container'>
-                            <div></div>
-                            <div>OR</div>
-                            <div></div>
-                        </div>}
-                        {shouldAllowEdit && <div className="edit-routine-container">
+                        {shouldAllowEdit &&
+                            <div className='or-container'>
+                                <div></div>
+                                <div>OR</div>
+                                <div></div>
+                            </div>
+                        }
+                        {shouldAllowEdit &&
+                            <div className="edit-routine-container">
                                 <div className="edit-routine" onClick={() => this.setState({editable: true})}>
                                     Edit Routine
                                 </div>
                                 <div>{dateFormat(days[0].date, 'mm/dd/yyyy')} - {dateFormat(days[6].date, 'mm/dd/yyyy')}</div>
-                            </div>}
+                            </div>
+                        }
                     </div>
                 }
+                {!editable && <div className="summary">Summary</div>}
                 {days.map((d, idx)=> {
                     return (
                         <div key={d._id}>

@@ -42,3 +42,7 @@ export const toggleExercise = (dayId, exerciseId) => {
 export const updateDaysMeal = (dayId, mealId, val) => {
     return axios.patch(`/api/routines/days/${dayId}/meals/${mealId}`, {val})
 };
+
+export const getDaysAfterToday = () => {
+    return axios.get('/api/routines/fromToday')
+};

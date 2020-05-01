@@ -28,15 +28,19 @@
                     }
                     cursor: pointer;
                 }
-
+                .day-exercise{
+                    display: flex;
+                    justify-content: space-between;
+                    padding: 1rem 1rem;
+                }
                 .day-workout.workout-done {
                     .check {
                         display: inline-block;
                         transform: rotate(45deg);
-                        height: 1.5rem;
-                        width: 0.75rem;
-                        border-bottom: 0.44rem solid #F9C095;
-                        border-right: 0.44rem solid #F9C095;
+                        height: 0.75rem;
+                        width: 0.375rem;
+                        border-bottom: 0.22rem solid #F9C095;
+                        border-right: 0.22rem solid #F9C095;
                         align-self: flex-end;
                     }
                 }
@@ -47,16 +51,6 @@
 
                     .day-exercise {
                         background-color: darken(darkgray, 50%);
-                    }
-
-                    .check {
-                        display: inline-block;
-                        transform: rotate(45deg);
-                        height: 1.5rem;
-                        width: 0.75rem;
-                        border-bottom: 0.44rem solid #F9C095;
-                        border-right: 0.44rem solid #F9C095;
-                        align-self: flex-end;
                     }
                 }
             }

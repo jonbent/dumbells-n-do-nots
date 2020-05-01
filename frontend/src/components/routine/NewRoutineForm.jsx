@@ -49,6 +49,7 @@ class NewRoutineForm extends React.Component {
   }
   componentDidMount() {
     // document.querySelector('.DayPickerInput > input').setAttribute('readonly', true)
+    this.props.fetchDaysAfterToday();
     this.handleStartDate(new Date())
   }
 
@@ -69,10 +70,13 @@ class NewRoutineForm extends React.Component {
       case 'routine':
         content = (<form className="new-routine-form">
             <h1 className="new-routine-header">Let's create new routine for the selected date!</h1>
-            <h3>Please select a day you want to start your routine on.</h3>
+            <h3>Select the day you would like to start your routine on</h3>
+            <h3>You must select a date that has at least 7 available dates after start date.</h3>
             <div className="start-date-input">
               <label className="start-date-label">Select Start Date
                 <DatePicker
+                  tileDisabled={(day) => this.props.days.has(`${day.date.getDate()}-${day.date.getMonth()}-${day.date.getFullYear()}`)}
+                  minDate={new Date()}
                   onChange={this.handleStartDate}
                   value={this.state.startDate}
                 />

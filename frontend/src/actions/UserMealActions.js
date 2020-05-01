@@ -26,12 +26,6 @@ export const fetchDayUserMeals = id => dispatch => (
         
 );
 
-export const createDayUserMeal = data => dispatch => (
-    UserMealsApiUtil.createUserMealForDay(data)
-        .then(meal => dispatch(receiveNewUserMeals(meal)))
-        
-);
-
 export const fetchApiFilteredMeals = (minCals, maxCals) => dispatch => (
     UserMealsApiUtil.fetchCaloriesFilteredApiMeals(minCals, maxCals)
         .then(meals => dispatch(receiveApiFilteredMeals(meals)))

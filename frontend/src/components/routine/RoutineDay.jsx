@@ -61,13 +61,14 @@ const RoutineDay = ({ updateRoutineChecks, workout, editable, day, routine, user
                     )
                 })}
             </div>}
+            {!!editable && <div className="edit-day" onClick={() => editDayMeals ? editDayMeals(day) : editDayMeals}>Edit Meals</div>}
             {exercises.length !== 0 && <div className={`day-workout ${workout.doneCheck === true ? "workout-done" : ""}`} onClick={() => !history ? check() : null}>
-                <div className="workout-title"><span>Workout</span><span className="check"></span></div>
+                <div className="workout-title"><span>Workout</span></div>
                 {exercises.map((ex, idx) => {
-                    return <div key={idx} className="day-exercise">{ex.name}</div>
+                    return <div key={idx} className="day-exercise"><span>{ex.name}</span><span className="check"></span></div>
                 })}
             </div>}
-            {!!editable && <div className="edit-day" onClick={() => editDayMeals ? editDayMeals(day) : editDayMeals}>Edit Meals</div>}
+
             {!!editable && <div className="edit-day" onClick={() => editDayWorkout ? editDayWorkout(day) : editDayWorkout}>Edit Workout</div>}
         </div>
     );

@@ -1,36 +1,100 @@
 .meal-item{
-    background-color: rgba(0,0,0,0.5);
-    border-radius: 5px;
+  background-color: rgba(0,0,0,0.5);
+  border-radius: 5px;
+  display: flex;
+  padding: 1rem;
+  .meal-info{
+    line-height: 150%;
+    padding-left: 1rem;
     display: flex;
-    padding: 1rem;
-    .meal-info{
-      line-height: 150%;
-      padding-left: 1rem;
+    flex-direction: column;
+    height: fit-content;
+    width: 100%;
+    text-align: start;
+    color: white;
+    .meal-nutrients{
+      margin-top: 1rem;
+      flex-wrap: wrap;
       display: flex;
+      height: 100%;
+      width: 100%;
       flex-direction: column;
-      height: fit-content;
-      width: 70%;
       text-align: start;
-      color: white;
-      .meal-nutrients{
-        margin-top: 1rem;
-        flex-wrap: wrap;
-        display: flex;
-        height: 100%;
-        flex-direction: column;
-        text-align: start;
+    }
+  }
+  .meal-image-and-quantity{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 5rem;
+    .meal-image{
+      border-radius: 5px;
+      height: 5rem;
+      width: 5rem;
+      min-width: 5rem;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+    }
+
+  }
+}
+.meal-list .meal-item:not(:nth-of-type(1)){
+  margin-top: 1rem;
+}
+.RoutineDay .meal-item{
+  margin-top: 1rem;
+  .check {
+    display: inline-block;
+    transform: rotate(45deg);
+    height: 1.5rem;
+    width: 0.75rem;
+    border-bottom: 0.44rem solid #F9C095;
+    border-right: 0.44rem solid #F9C095;
+    align-self: flex-end;
+  }
+}
+
+.meal-content{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  .actions > span {
+    padding: 0.25rem 0;
+  }
+  .actions{
+    width: 100%;
+    display: flex;
+    margin-top: 1rem;
+    justify-content: space-around;
+    align-items: flex-end;
+    min-width: 284px;
+    button:nth-of-type(even){
+      span:nth-of-type(odd){
+        svg{
+          transform: rotate(270deg);
+        }
       }
     }
-    .meal-image-and-quantity{
-      display: flex;
-      flex-direction: column;
-      justify-content: space-around;
-      width: 5rem;
-      .actions{
-        display: flex;
-        margin-top: 1rem;
-        justify-content: space-between;
-        align-items: center;
+    button:nth-of-type(odd){
+      span:nth-of-type(odd){
+        svg{
+          transform: rotate(90deg);
+        }
+      }
+    }
+    button{
+      background-color: black;
+      color: #F9C095;
+      border: none;
+      border-radius: 5px;
+      outline: none;
+      width: 100%;
+      max-width: 7rem;
+      padding: 0.5rem;
+      cursor: pointer;
+      span:nth-of-type(odd){
+        display: none;
         svg:hover{
           background-color: #F9C095;
           fill: black;
@@ -47,43 +111,42 @@
             fill: #F9C095;
           }
         }
-        svg:nth-of-type(1){
-          transform: rotate(90deg);
-        }
-        svg:nth-of-type(2){
-          transform: rotate(270deg);
-        }
-
       }
-      .meal-image{
-        border-radius: 5px;
-        height: 5rem;
-        width: 5rem;
-        min-width: 5rem;
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: center;
+      span:nth-of-type(even){
+        display: block;
       }
-
     }
   }
-  .meal-list .meal-item:not(:nth-of-type(1)){
-    margin-top: 1rem;
-  }
-  .RoutineDay .meal-item{
-    margin-top: 1rem;
-    .check {
-      display: inline-block;
-      transform: rotate(45deg);
-      height: 1.5rem;
-      width: 0.75rem;
-      border-bottom: 0.44rem solid #F9C095;
-      border-right: 0.44rem solid #F9C095;
-      align-self: flex-end;
+}
+
+@media only screen and (max-width: 700px){
+  .meal-item {
+    padding-bottom: 4rem;
+    position: relative;
+    .meal-content {
+      flex-direction: column;
+      .actions > span:before {
+        content: "Quantity: "
+      }
+      .actions {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        min-width: auto;
+        align-items: center;
+        button {
+          cursor: default;
+          max-width: none;
+          width: auto;
+          background-color: transparent;
+          span:nth-of-type(odd) {
+            display: block;
+          }
+          span:nth-of-type(even) {
+            display: none
+          }
+        }
+      }
     }
   }
-
-  .meal-content{
-    display: flex;
-    justify-content: space-between;
-  }
+}

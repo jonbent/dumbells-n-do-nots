@@ -32,6 +32,30 @@ router.get("/startDate", passport.authenticate("jwt", { session: false }), async
         res.json({datesFound})
     );
 });
+
+router.get("/fromToday", passport.authenticate("jwt", { session: false }), async (req, res) => {
+    const today = new Date();
+    const days = await Day.find({date: {$gte: today}});
+    return res.json({days})
+    // if (!req.query.startDate) return res.status(422).json({message: "Start Date must be provided"});
+    // const curDate = new Date(DateFormat(req.query.startDate, 'mm/dd/yyyy'));
+    // curDate.setHours(0,0,0,0);
+    // const dateRange = [];
+    // for(let i = 0; i < 7; i++){
+    //     const newDate = new Date(curDate);
+    //     curDate.setDate(curDate.getDate() + 1);
+    //     dateRange.push(newDate);
+    // }
+    // const routines = await Routine.find({user: req.user._id});
+    // const routineIds = routines.map(r => r._id);
+    // let dates = await Day.find({date: {$in: dateRange}, routine: {$in: routineIds}});
+    // const datesFound = dates.length ? true : false;
+    // return datesFound ? (
+    //     res.status(422).json({message: "Please select another date from above, week has already been taken by an existing routine."})
+    // ) : (
+    //     res.json({datesFound})
+    // );
+})
 router.get('/user/:userId', async (req, res) => {
     let routines = await Routine.find({user: req.params.userId}).sort({$natural:-1});
     const response = {routines};

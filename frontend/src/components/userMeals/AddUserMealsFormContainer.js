@@ -1,6 +1,5 @@
 import { connect } from 'react-redux';
 import AddUserMealsForm from './AddUserMealsForm';
-import { createDayUserMeal } from '../../actions/UserMealActions';
 import { fetchMeals, fetchSelectedMeals } from '../../actions/MealActions'
 import {receiveRoutineMeals} from "../../actions/NewRoutineActions";
 import {openModal} from "../../actions/ModalActions";
@@ -28,7 +27,6 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-    createDayUserMeal: meal => dispatch(createDayUserMeal(meal)),
     fetchMeals: (options) => dispatch(fetchMeals(options)),
     saveRoutine: (routine) => dispatch(receiveRoutineMeals(routine)),
     openExercises: () => dispatch(openModal('bodyUI')),
