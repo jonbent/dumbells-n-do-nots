@@ -8,6 +8,7 @@ import workouts from './WorkoutsReducer';
 import routineMeals from './RoutineMealsReducer';
 import MuscleGroupReducer from './MuscleGroupsReducer';
 import ExersicesReducer from './ExercisesReducer';
+import MealDetailsReducer from './MealDetailsReducer';
 import userMeals from './UserMealsReducer';
 
 export default combineReducers({
@@ -21,4 +22,5 @@ export default combineReducers({
     userMeals,
     muscleGroups: MuscleGroupReducer,
     exercises: ExersicesReducer,
+    mealDetails: MealDetailsReducer
 })

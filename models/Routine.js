@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 const RoutineSchema = new Schema({
@@ -13,4 +13,5 @@ const RoutineSchema = new Schema({
     }]
 });
 
-module.exports = Routine = mongoose.model("Routine", RoutineSchema)
+const Routine = mongoose.model("Routine", RoutineSchema)
+export default Routine;

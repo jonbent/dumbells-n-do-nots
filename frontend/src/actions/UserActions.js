@@ -1,6 +1,6 @@
 import * as UserApiUtil from '../util/UserApiUtil'
 import * as SessionApiUtil from "../util/SessionApiUtil";
-import jwt_decode from "jwt-decode";
+import {jwtDecode} from "jwt-decode";
 
 import {receiveCurrentUser, receiveErrors} from './SessionActions';
 
@@ -21,7 +21,7 @@ export const updateUser = (formData, username) => dispatch =>
              const { token } = res.data;
              localStorage.setItem("jwtToken", token);
              SessionApiUtil.setAuthToken(token);
-             const decoded = jwt_decode(token);
+             const decoded = jwtDecode(token);
              dispatch(receiveCurrentUser(decoded));
            })
            .catch(err => {

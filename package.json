@@ -15,26 +15,26 @@
   "license": "ISC",
   "dependencies": {
     "aws-sdk": "^2.608.0",
-    "axios": "^0.19.1",
-    "bcryptjs": "^2.4.3",
-    "body-parser": "^1.19.0",
-    "concurrently": "^5.0.2",
+    "axios": "^1.10.0",
+    "bcryptjs": "^3.0.2",
+    "body-parser": "^2.2.0",
+    "concurrently": "^9.2.0",
     "cors": "^2.8.5",
-    "dateformat": "^3.0.3",
-    "express": "^4.17.1",
-    "jsonwebtoken": "^8.5.1",
-    "jwt-decode": "^2.2.0",
-    "mongoose": "^5.8.9",
+    "dateformat": "^5.0.3",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "jwt-decode": "^4.0.0",
+    "mongoose": "^8.16.3",
     "mongoose-beautiful-unique-validation": "^7.1.1",
     "mongoose-unique-validation": "^0.1.0",
-    "multer": "^1.4.2",
-    "passport": "^0.4.1",
+    "multer": "^2.0.1",
+    "passport": "^0.7.0",
     "passport-jwt": "^4.0.0",
     "password-validator": "^5.0.3",
-    "uuid": "^3.4.0",
-    "validator": "^12.1.0"
+    "uuid": "^11.1.0",
+    "validator": "^13.15.15"
   },
   "devDependencies": {
-    "nodemon": "^2.0.2"
+    "nodemon": "^3.1.10"
   }
 }

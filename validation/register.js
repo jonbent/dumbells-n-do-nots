@@ -1,9 +1,9 @@
-const Validator = require('validator');
-const validText = require('./valid-text');
-const passwordValidator = require('password-validator');
-const User = require('../models/User');
+import Validator from 'validator';
+import validText from './valid-text.js';
+import passwordValidator from 'password-validator';
+import User from '../models/User.js';
 
-module.exports = function validateRegisterInput(data) {
+const validateRegisterInput =(data) => {
     let errors = {};
 
     const passwordSchema = new passwordValidator();
@@ -53,8 +53,8 @@ module.exports = function validateRegisterInput(data) {
         errors.birthDate = 'Birthday must be a valid Date';
     }
 
-    
-    passValid = passwordSchema.validate(data.password, { list: true })
+
+    const passValid = passwordSchema.validate(data.password, { list: true })
     if (passValid.length) {
         errors.password = passValid;
     }
@@ -68,3 +68,5 @@ module.exports = function validateRegisterInput(data) {
         isValid: Object.keys(errors).length === 0
     };
 };
+
+export default validateRegisterInput;

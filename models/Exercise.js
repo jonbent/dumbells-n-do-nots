@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 // const muscleGroup = require('./MuscleGroup');
 
@@ -43,4 +43,5 @@ const ExerciseSchema = new Schema({
     }
 })
 
-module.exports = Exercise = mongoose.model("Exercise", ExerciseSchema)
+const Exercise = mongoose.model("Exercise", ExerciseSchema)
+export default Exercise

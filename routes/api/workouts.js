@@ -1,8 +1,8 @@
-const express = require("express");
+import express from "express"
 const router = express.Router();
-const passport = require("passport");
-const validateWorkoutInput = require("../../validation/workout");
-const Workout = require("../../models/Workout");
+import passport from "passport"
+import validateWorkoutInput from "../../validation/workout.js"
+import Workout from "../../models/Workout.js"
 
 router.get("/test", (req, res) => res.json({ msg: "This is the users route" }));
 
@@ -45,4 +45,4 @@ router.get("/user/:user_id", (req, res) => {
 })
 
 
-module.exports = router;
+export default router;

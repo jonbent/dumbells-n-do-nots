@@ -1,15 +1,15 @@
 import React from 'react';
 import NextArrow from "../svg/NextArrow";
 import '../../scss/meals/MealItem.scss';
-const MealItem = ({ meal, daySelect, handleSelectMeal, day, handleMealCheck = null, selected= false, single=false, dbDay, userMeals}) => {
+const MealItem = ({ meal, daySelect, handleSelectMeal, day, handleMealCheck = null, openModal = null, selected= false, single=false, dbDay, userMeals}) => {
     let actions;
     const daySelectKeys = daySelect ? Object.keys(daySelect) : null;
     if (!single && daySelect && daySelectKeys.length){
         actions = (
             <div className="actions">
-                <button onClick={() => handleSelectMeal(meal._id, -1)}><span><NextArrow/></span><span>Remove</span></button>
-                <span>{daySelect[day].meals[meal._id] ? daySelect[day].meals[meal._id] : 0 }</span>
-                <button onClick={() => handleSelectMeal(meal._id, 1)}><span><NextArrow/></span><span>Add</span></button>
+                <button onClick={() => handleSelectMeal(meal?._id, -1)}><span><NextArrow/></span><span>Remove</span></button>
+                <span>{daySelect[day]?.meals[meal?._id] ? daySelect[day]?.meals[meal?._id] : 0 }</span>
+                <button onClick={() => handleSelectMeal(meal?._id, 1)}><span><NextArrow/></span><span>Add</span></button>
             </div>
         )
     } else if (single) {
@@ -23,7 +23,7 @@ const MealItem = ({ meal, daySelect, handleSelectMeal, day, handleMealCheck = nu
         )
     }
     return (
-        <div className="meal-item" onClick={handleMealCheck}>
+        <div className="meal-item" onClick={openModal}>
             <div className="meal-image-and-quantity">
                 <div className="meal-image" style={{backgroundImage: `url(${meal.photoUrl})`}}></div>
                 {/*actions*/}

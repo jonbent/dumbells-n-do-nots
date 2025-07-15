@@ -1,11 +1,11 @@
 
 import React from 'react';
 import { AuthRoute, ProtectedRoute } from '../util/RouteUtil';
-import { Switch } from 'react-router-dom';
+import {Outlet, Route, Routes} from 'react-router-dom';
 import SignupContainer from './signup/signup_container';
 import LoginContainer  from './login/LoginContainer';
-import UserShowContainer  from './users/UserShowContainer';
-import UserHistory  from './users/UserHistoryContainer';
+import UserShow  from './users/UserShow';
+import UserHistory  from './users/UserHistory';
 import SettingsContainer  from './settings/SettingsContainer';
 import { connect } from 'react-redux';
 
@@ -15,16 +15,41 @@ import '../scss/reset.scss';
 import '../scss/App.scss';
 import {closeHamburger} from "../actions/HamburgerActions";
 
+const  Layout = () => {
+  return <Outlet />;
+}
+
 const App = ({ loggedIn, hamburger, closeHamburger }) => (
     <div className={`App ${hamburger ? "slide-out" : ""}`}>
-        <Switch>
-            <AuthRoute exact path="/signup" component={SignupContainer} />
-            <AuthRoute exact path="/login" component={LoginContainer} />
-            {!loggedIn && <AuthRoute exact path="/" component={Splash} />}
-            <ProtectedRoute exact path="/settings" component={SettingsContainer} />}
-            <ProtectedRoute exact path="/users/:username/history" component={UserHistory}/>
-            {loggedIn &&  <ProtectedRoute path="/" component={UserShowContainer} />}
-        </Switch>
+
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route
+              index
+              element={
+                !loggedIn
+                  ? <AuthRoute element={<Splash />} />
+                  : <ProtectedRoute element={<UserShow />} />
+              }
+            />
+            <Route
+              path="login"
+              element={<AuthRoute element={<LoginContainer />} />}
+            />
+            <Route
+              path="signup"
+              element={<AuthRoute element={<SignupContainer />} />}
+            />
+            <Route
+              path="settings"
+              element={<ProtectedRoute element={<SettingsContainer />} />}
+            />
+            <Route
+              path="users/:username/history"
+              element={<ProtectedRoute element={<UserHistory />} />}
+            />
+          </Route>
+        </Routes>
 
         {hamburger && <div className="overlay" onClick={closeHamburger}></div>}
     </div>

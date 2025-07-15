@@ -14,7 +14,7 @@ body::after {
   z-index: -1;
   width: 100%;
   height: 100%;
-  background-image: url('/images/dumbnot-background.jpg');
+  background-image: url('../../public/images/dumbnot-background.jpg');
   //background-size: cover;
   background-position: left top;
   opacity: 0.3;
@@ -34,7 +34,7 @@ body{
     height: 100%;
     -webkit-transform: translate3d(0, 0, 0);
     -webkit-backface-visibility: hidden;
-    -webkit-perspective: 1000;
+    -webkit-perspective: 1000px;
     -webkit-overflow-scrolling: auto;
     #root {
         height: 100%;

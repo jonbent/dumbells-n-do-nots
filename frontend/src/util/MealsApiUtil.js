@@ -21,3 +21,7 @@ export const createMeal = data => {
 export const fetchSelectedMeals = (selectedMealIds) => (
     axios.get('/api/meals/selected', {params: {selectedMealIds}})
 )
+
+export const fetchMealDetails = (spoonacularId) => {
+    return axios.get(`/api/meals/${spoonacularId}`);
+}

@@ -1,28 +1,30 @@
-const path = require('path');
-const mongoose = require('mongoose');
-const express = require("express");
-const db = require('./config/keys').mongoURI;
-const bodyParser = require('body-parser');
-const passport = require('passport');
+import path from 'path';
+import mongoose from 'mongoose';
+import express from "express";
+import {mongoURI} from './config/keys.js';
+import bodyParser from 'body-parser';
+import passport from 'passport';
 
-const exercises = require("./routes/api/exercises");
-const favorites = require("./routes/api/favorites");
-const meals = require("./routes/api/meals");
-const muscleGroups = require("./routes/api/muscleGroups");
-const muscles = require("./routes/api/muscles");
-const routines = require("./routes/api/routines");
-const users = require("./routes/api/users");
-const workouts = require("./routes/api/workouts");
-const cors = require('cors');
+import exercises from "./routes/api/exercises.js";
+import favorites from "./routes/api/favorites.js";
+import meals from "./routes/api/meals.js";
+import muscleGroups from "./routes/api/muscleGroups.js";
+import muscles from "./routes/api/muscles.js";
+import routines from "./routes/api/routines.js";
+import users from "./routes/api/users.js";
+import workouts from "./routes/api/workouts.js";
+import cors from 'cors';
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use(passport.initialize());
-require('./config/passport')(passport);
+import configurePassport from './config/passport.js';
 
-const port = process.env.PORT || 5000;
+configurePassport(passport);
+
+const port = process.env.PORT || 3333;
 
 app.use("/api/exercises", exercises);
 app.use("/api/favorites", favorites);
@@ -42,7 +44,7 @@ if (process.env.NODE_ENV === 'production') {
 
 app.listen(port, () => {
 
-    mongoose.connect(db, {useUnifiedTopology: true,useNewUrlParser: true,})
+    mongoose.connect(mongoURI, {useUnifiedTopology: true,useNewUrlParser: true,})
         .then(() => console.log("Connected to MongoDB successfully"))
         .catch(err => console.log(err));
 

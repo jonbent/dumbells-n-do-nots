@@ -1,4 +1,4 @@
-# [Dumbells-N-Donuts Live](http://dumbells-n-donuts.herokuapp.com/#/)
+# [Dumbells-N-Donuts Live](http://dumbells-n-donuts.herokuapp.com/)
 
 Dumbells-N-Donuts is a mobile friendly fitness website, utilizing MERN stack developed by software devs that hopes to let everyone who joins it to help manage their workouts and meals in a flexible way. A user can decide to choose from already defined exhaustive list of meals and exercises or have their own custom meals and form a routine.
 

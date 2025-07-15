@@ -1,8 +1,8 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
-const Exercise = require("../../models/Exercise");
-const passport = require("passport");
-const validateExerciseInput = require("../../validation/exercise")
+import Exercise from "../../models/Exercise.js";
+import passport from "passport";
+import validateExerciseInput from "../../validation/exercise.js";
 
 router.get("/test", (req, res) => res.json({ msg: "This is the users route" }));
 
@@ -15,7 +15,7 @@ router.get('muscleGroups/:muscleGroupId', (req, res) => {
 router.get('/', (req, res) => {
     let findQuery = {};
     if (req.query.muscleGroupIds) findQuery = { muscleGroup: { $in: req.query.muscleGroupIds } }
-    
+
     Exercise
         .find(findQuery)
         .then(exercises => res.json(exercises))
@@ -47,4 +47,4 @@ router.post("/", passport.authenticate("jwt", { session: false }), (req, res) =>
     return res.json({newExercise});
 })
 
-module.exports = router;
+export default router;

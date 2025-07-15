@@ -15,7 +15,9 @@ class RoutinePage extends Component {
         };
         this.toggleDropDown = this.toggleDropDown.bind(this)
     }
-    toggleDropDown(){
+    toggleDropDown(e){
+        console.log('toggleDropDown');
+        e.stopPropagation();
         this.setState({
             openDropDown: !this.state.openDropDown
         })
@@ -42,8 +44,8 @@ class RoutinePage extends Component {
                     <OutsideClickHandler action={this.toggleDropDown} className="drop-down">
                         {[...Array(dayAmount).keys()].map(i => {
                             return (
-                                <button key={i} onClick={() => {
-                                    this.toggleDropDown();
+                                <button key={i} onClick={(e) => {
+                                    this.toggleDropDown(e);
                                     changeDay(i)
                                 }} className={`${curDay === i ? "active" : ""}`}>
                                     {dayValues[i]}

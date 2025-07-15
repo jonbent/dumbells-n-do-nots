@@ -1,51 +1,65 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
-// const validateRegisterInput = require('../../validation/register');
-const validateLoginInput = require('../../validation/login');
-const bcrypt = require('bcryptjs');
-const User = require('../../models/User');
-const Day = require('../../models/Day');
-const Routine = require('../../models/Routine');
-const UserMeal = require('../../models/UserMeal');
-const UserWorkout = require('../../models/UserWorkout');
-const jwt = require('jsonwebtoken');
-const keys = require('../../config/keys');
-const passport = require('passport');
-const uuid = require('uuid');
-const Validator = require('validator');
-const passwordValidator = require('password-validator');
-const sampleRoutine = require('../../sampleroutine.js');
+import validateRegisterInput from '../../validation/register.js';
+import validateLoginInput from '../../validation/login.js';
+import bcrypt from 'bcryptjs';
+import User from '../../models/User.js';
+import Day from '../../models/Day.js';
+import Routine from '../../models/Routine.js';
+import UserMeal from '../../models/UserMeal.js';
+import UserWorkout from '../../models/UserWorkout.js';
+import jwt from 'jsonwebtoken';
+import {
+    awsBucketName,
+    awsBucketAccessId,
+    secretOrKey,
+    awsBucketToken,
+    awsRegion,
+UploadFileUrlLink} from '../../config/keys.js';
+import passport from 'passport';
+import {v4 as uuid} from 'uuid';
+import Validator from 'validator';
+import passwordValidator from 'password-validator';
+import sampleRoutine from '../../sampleroutine.js';
 
 
-const multer = require("multer");
-const AWS = require("aws-sdk");
+import multer from "multer";
+import AWS from "aws-sdk";
 
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
 AWS.config.update({
-    accessKeyId: keys.awsBucketAccessId,
-    secretAccessKey: keys.awsBucketToken,
-    region: keys.awsRegion
+    accessKeyId: awsBucketAccessId,
+    secretAccessKey: awsBucketToken,
+    region: awsRegion
 });
 
 const createDemoRoutine = async (req, res, user) => {
     const curDate = new Date();
     const dateRange = [];
-    curDate.setHours(0,0,0,0);
-    for (let i = 0; i < 7; i++){
+    curDate.setHours(0, 0, 0, 0);
+
+    for (let i = 0; i < 7; i++) {
         dateRange.push(new Date(curDate));
         curDate.setDate(curDate.getDate() + 1);
     }
-    const routines = await Routine.find({user: "5e601d09012e125773768324"});
+
+    // Find existing routines for this user
+    const routines = await Routine.find({ user: "5e601d09012e125773768324" });
     const routineIds = routines.map(r => r._id);
-    let dates = await Day.find({date: {$in: dateRange}, routine: {$in: routineIds}});
+
+    const dates = await Day.find({
+        date: { $in: dateRange },
+        routine: { $in: routineIds }
+    });
+
     if (dates.length !== 0) {
         return null;
     } else {
-        // const newSampleRoutine = Object.assign({}, sampleRoutine);
         const sampleRoutineKeys = Object.keys(sampleRoutine);
         const newRoutine = {};
+
         dateRange.forEach((date, idx) => {
             let month = date.getMonth() + 1;
             if (month < 10) month = `0${month}`;
@@ -54,61 +68,94 @@ const createDemoRoutine = async (req, res, user) => {
             const year = date.getFullYear();
             newRoutine[`${month}/${day}/${year}`] = sampleRoutine[sampleRoutineKeys[idx]];
         });
+
+        // Create new Routine
         const newUserRoutine = new Routine({
             user: user._id
         });
-        const newDays = [];
+
+        await newUserRoutine.save();
+
+        // Create Day documents
+        const newDaysData = dateRange.map(date => ({
+            date,
+            routine: newUserRoutine._id
+        }));
+
+        const days = await Day.insertMany(newDaysData);
+
+        newUserRoutine.days = days.map(day => day._id);
+        await newUserRoutine.save();
+
+        const weeksWorkouts = [];
+        let weeksMeals = [];
         const dayStrings = Object.keys(newRoutine);
-        return newUserRoutine
-        .save()
-        .then(routine => {
-            dateRange.forEach(date => {
-                newDays.push({date, routine: routine._id});
-            });
-            Day.insertMany(newDays).then((days) => {
-                routine.days = days.map(day => day._id);
-                routine.save();
-                const weeksWorkouts = [];
-                let weeksMeals = [];
-                dayStrings.forEach(async (dayString, idx) => {
-                    const dayMeals = [];
-                    let dayWorkout;
 
-                    Object.keys(newRoutine[dayString].meals).forEach((mealId) => {
-                        dayMeals.push({meal: mealId, quantity: newRoutine[dayString].meals[mealId], day: days[idx]._id});
+        try {
+            for (let idx = 0; idx < dayStrings.length; idx++) {
+                const dayString = dayStrings[idx];
+                const dayData = newRoutine[dayString];
+                const dayDoc = days[idx];
+
+                // Prepare meals for the day
+                const dayMeals = Object.keys(dayData.meals).map(mealId => ({
+                    meal: mealId,
+                    quantity: dayData.meals[mealId],
+                    day: dayDoc._id
+                }));
+
+                // Insert meals
+                const meals = await UserMeal.insertMany(dayMeals);
+                weeksMeals = weeksMeals.concat(meals);
+
+                // Prepare workout if exists
+                const workoutKeys = Object.keys(dayData.workout).filter(
+                    exKey => dayData.workout[exKey] === true
+                );
+
+                let workout;
+                if (workoutKeys.length !== 0) {
+                    const newWorkout = new UserWorkout({
+                        day: dayDoc._id,
+                        exercises: workoutKeys
                     });
-                    const workoutKeys = Object.keys(newRoutine[dayString].workout).filter(exKey => newRoutine[dayString].workout[exKey] === true);
-                    if ( workoutKeys.length !== 0 ) dayWorkout = {day: days[idx]._id, exercises: workoutKeys};
-                    let meals;
-                    let newWorkout;
-                    let workout;
-                    try {
-                        if ( workoutKeys.length !== 0 ){
-                            newWorkout = new UserWorkout(dayWorkout);
-                            workout = await newWorkout.save();
-                            weeksWorkouts.push(workout);
-                        }
+                    workout = await newWorkout.save();
+                    weeksWorkouts.push(workout);
+                }
 
-                         meals = await UserMeal.insertMany(dayMeals);
-                         weeksMeals = weeksMeals.concat(meals);
+                // Save meal and workout refs to the Day
+                dayDoc.meals = meals.map(meal => meal._id);
+                if (workout) {
+                    dayDoc.workout = workout._id;
+                }
+                await dayDoc.save();
+            }
 
-                    } catch(e) {
-                        console.log("ERROR!!!!!!!!!!!", e);
-                        UserWorkout.deleteMany({"_id": {$in: weeksWorkouts.map(w => w._id)}});
-                        UserMeal.deleteMany({"_id": {$in: weeksMeals.map(m => m._id)}});
-                        Day.deleteMany({"routine": routine._id});
-                        Routine.deleteOne({"_id": routine._id});
+            return newUserRoutine;
+        } catch (e) {
+            console.error("ERROR creating demo routine!", e);
 
-                    }
-                    days[idx].meals = meals.map(meal => meal._id);
-                    if ( newRoutine[dayString].workout.length !== 0 ) days[idx].workout = workout._id;
-                    days[idx].save();
+            // Cleanup all partial data
+            if (weeksWorkouts.length > 0) {
+                await UserWorkout.deleteMany({
+                    _id: { $in: weeksWorkouts.map(w => w._id) }
                 });
-            });
-        });
-    }
+            }
 
+            if (weeksMeals.length > 0) {
+                await UserMeal.deleteMany({
+                    _id: { $in: weeksMeals.map(m => m._id) }
+                });
+            }
+
+            await Day.deleteMany({ routine: newUserRoutine._id });
+            await Routine.deleteOne({ _id: newUserRoutine._id });
+
+            throw e;
+        }
+    }
 };
+
 
 router.get('/demo', async (req, res) => {
     let r = await Routine.find({user: "5e601d09012e125773768324"});
@@ -132,7 +179,7 @@ router.get('/current', passport.authenticate('jwt', { session: false }), (req, r
         date: req.user.date,
         weightGoal: req.user.weightGoal,
         goalPath: req.user.goalPath,
-        
+
     });
 });
 
@@ -173,7 +220,7 @@ router.post('/register', (req, res) => {
     //         kind: "required",
     //         path: "password2"
     //     }})
-    
+
 
 
     let validatorErrors = newUser.validateSync();
@@ -248,7 +295,7 @@ router.post('/register', (req, res) => {
 
                     jwt.sign(
                         payload,
-                        keys.secretOrKey,
+                        secretOrKey,
                         // Tell the key to expire in one hour
                         { expiresIn: 604_800 },
                         (err, token) => {
@@ -258,7 +305,7 @@ router.post('/register', (req, res) => {
                             });
                         });
                 })
-                
+
                 .catch(err => res.status(400).json(err.errors));
         })
     })
@@ -289,7 +336,7 @@ router.post('/login', (req, res) => {
                         const payload = newUser;
                         jwt.sign(
                             payload,
-                            keys.secretOrKey,
+                            secretOrKey,
                             // Tell the key to expire in one hour
                             { expiresIn: 604_800 },
                             (err, token) => {
@@ -325,62 +372,69 @@ router.get('/:username', (req, res) => {
         })
 })
 
-router.patch('/:username/update', passport.authenticate('jwt', { session: false }), upload.single("avatarUrl"), (req, res) => {
+router.patch('/:username/update', passport.authenticate('jwt', { session: false }), upload.single("avatarUrl"), async (req, res) => {
     const s3 = new AWS.S3();
-    User.findOne({ username: req.params.username }).then(user => {
-        if (!user) return res.status(400).json({ user: { message: "User not found" } })
-        const file = req.file;
-        const callback = () => {
-            user.weightCur = req.body.weightCur;
-            user.height = req.body.height;
-            user.username = req.body.username;
-            if (Validator.isEmail(req.body.email)) {
-                user.email = req.body.email;
-            }
-            user.save(function (error, newFile) {
-                if (error) return res.status(422).json(error);
-                let newUser = Object.assign({}, user.toObject());
-                delete newUser.password;
-                delete newUser.date;
-                const payload = newUser;
-                jwt.sign(
-                    payload,
-                    keys.secretOrKey,
-                    // Tell the key to expire in one hour
-                    { expiresIn: 604_800 },
-                    (err, token) => {
-                        if (err) return res.json(err)
-                        return res.json({
-                            success: true,
-                            token: 'Bearer ' + token
-                        });
-                    });
-            });
+    try {
+      const user = await User.findOne({ username: req.params.username });
+
+      if (!user) {
+        return res.status(400).json({ user: { message: "User not found" } });
+      }
+
+      const file = req.file;
+
+      if (file) {
+        console.log(UploadFileUrlLink);
+        console.log(awsBucketName);
+
+        const s3FileURL = UploadFileUrlLink;
+        const keyname = file.originalname + uuid();
+
+        const params = {
+          Bucket: awsBucketName,
+          Key: keyname,
+          Body: file.buffer,
+          ContentType: file.mimetype,
+          ACL: "public-read"
+
         };
-        if (file){
-            const s3FileURL = keys.UploadFileUrlLink;
-            const keyname = file.originalname + uuid();
-            let params = {
-                Bucket: keys.awsBucketName,
-                Key: keyname,
-                Body: file.buffer,
-                ContentType: file.mimetype,
-                ACL: 'public-read'
-            };
-            s3.upload(params, (err, data) => {
 
-                if (err) {
-                    res.status(500).json({ error: true, Message: err });
-                } else {
-                    user.avatarUrl = s3FileURL + keyname;
-                    callback();
+        const data = await s3.upload(params).promise();
 
-                }
-            })
-        } else {
-            callback();
+        user.avatarUrl = s3FileURL + keyname;
+      }
+
+      user.weightCur = req.body.weightCur;
+      user.height = req.body.height;
+      user.username = req.body.username;
+
+      if (Validator.isEmail(req.body.email)) {
+        user.email = req.body.email;
+      }
+
+      await user.save();
+
+      let newUser = Object.assign({}, user.toObject());
+      delete newUser.password;
+      delete newUser.date;
+
+      const payload = newUser;
+
+      jwt.sign(
+        payload,
+        secretOrKey,
+        { expiresIn: 604_800 },
+        (err, token) => {
+          if (err) return res.json(err);
+          return res.json({
+            success: true,
+            token: "Bearer " + token,
+          });
         }
+      );
+    } catch (err) {
+      res.status(500).json(err);
+    }
 
-    }).catch(err => res.json(err))
 })
-module.exports = router;
+export default router;

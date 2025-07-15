@@ -1,7 +1,7 @@
-const Validator = require('validator');
-const validText = require('./valid-text');
+import Validator from 'validator'
+import validText from './valid-text.js'
 
-module.exports = (data) => {
+const validateWorkout =  (data) => {
     let errors = {};
 
     data.name = validText(data.name) ? data.name : '';
@@ -24,3 +24,5 @@ module.exports = (data) => {
         isValid: Object.keys(errors).length === 0
     };
 }
+
+export default validateWorkout;

@@ -19,16 +19,33 @@ const NewRoutinesReducer = (state = {}, action) => {
             startDate = action.payload.date;
             newStartDate = new Date(startDate);
             const {days, userMeals, workouts} = action.payload.data
-            for(let i = 0; i < 7; i++){
-                let formattedDate;
-                formattedDate = DateFormat(newStartDate, 'mm/dd/yyyy');
-                const dayWorkout = {};
-                if (days[i].workout) workouts[days[i].workout].exercises.forEach(e => dayWorkout[e] = true);
-                const dayMeals = {};
-                days[i].meals.forEach(umId => dayMeals[userMeals[umId].meal] = userMeals[umId].quantity);
-                nextState[formattedDate] = {meals: dayMeals, workout: dayWorkout}
+            for (let i = 0; i < 7; i++) {
+              const dateCopy = new Date(newStartDate);
+              dateCopy.setDate(dateCopy.getDate() + i);
+              const formattedDate = DateFormat(dateCopy, 'mm/dd/yyyy');
+
+              const dayWorkout = {};
+              if (days[i].workout) {
+                workouts[days[i].workout].exercises.forEach(e => {
+                  dayWorkout[e] = true;
+                });
+              }
+
+              const dayMeals = {};
+              days[i].meals.forEach(umId => {
+                const userMeal = userMeals[umId];
+                if (userMeal) {
+                  dayMeals[userMeal.meal] = userMeal.quantity;
+                }
+              });
+
+              nextState[formattedDate] = {
+                meals: dayMeals,
+                workout: dayWorkout
+              };
             }
             return nextState;
+
         case RECEIVE_NEW_ROUTINE_STARTDATE:
             startDate =  action.payload;
             newStartDate = new Date(startDate);

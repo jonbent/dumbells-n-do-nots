@@ -3,6 +3,8 @@ import CreateMeal from "../meals/CreateMeal";
 import CreateExercise from '../exercises/CreateExercise'
 
 import DatePicker from "react-date-picker";
+import 'react-date-picker/dist/DatePicker.css';
+import 'react-calendar/dist/Calendar.css';
 import DateFormat from 'dateformat'
 
 import "../../scss/newRoutineForm.scss"

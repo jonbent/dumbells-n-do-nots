@@ -1,5 +1,4 @@
 import * as MusclesAPIUtil from '../util/MusclesApiUtil';
-import jwt_decode from 'jwt-decode';
 
 
 export const RECEIVE_MUSCLES = 'RECEIVE_MUSCLES';

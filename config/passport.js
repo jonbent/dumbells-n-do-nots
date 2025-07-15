@@ -1,14 +1,15 @@
-const JwtStrategy = require('passport-jwt').Strategy;
-const ExtractJwt = require('passport-jwt').ExtractJwt;
-const mongoose = require('mongoose');
+import passportJwt from 'passport-jwt';
+const JwtStrategy = passportJwt.Strategy;
+const ExtractJwt = passportJwt.ExtractJwt;
+import mongoose from 'mongoose'
 const User = mongoose.model('User');
-const keys = require('../config/keys');
+import {secretOrKey} from '../config/keys.js';
 
 const options = {};
 options.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-options.secretOrKey = keys.secretOrKey;
+options.secretOrKey = secretOrKey;
 
-module.exports = passport => {
+const passportConfig = passport => {
     passport.use(new JwtStrategy(options, (jwt_payload, done) => {
         User.findById(jwt_payload._id)
             .then(user => {
@@ -22,3 +23,4 @@ module.exports = passport => {
             .catch(err => console.log('passport error',err));
     }));
 };
+export default passportConfig;

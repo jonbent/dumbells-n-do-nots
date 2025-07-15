@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import Login from './Login';
 import { login, resetErrors } from '../../actions/SessionActions'
 
-const mapStateToProps = (state, { location }) => ({
+const mapStateToProps = (state) => ({
     errors: state.errors.session
 });
 

@@ -1,10 +1,10 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
-const passport = require('passport');
-const Favorite = require('../../models/Favorite');
-const validateFavorite = require('../../validation/favorite');
-router.get('/', 
-    passport.authenticate('jwt', { session: false }), 
+import passport from 'passport';
+import Favorite from '../../models/Favorite.js';
+import validateFavorite from '../../validation/favorite.js';
+router.get('/',
+    passport.authenticate('jwt', { session: false }),
     (req, res) => {
         Favorite.find({ favoritable: req.body.favoritableId, favoritableModel: req.body.favoritableType, user: req.user._id})
         .populate('meal')
@@ -28,4 +28,4 @@ router.post('/',
         })
     }
 )
-module.exports = router;
+export default router;

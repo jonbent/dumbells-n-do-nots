@@ -1,5 +1,5 @@
 import * as SessionApiUtil from '../util/SessionApiUtil';
-import jwt_decode from 'jwt-decode';
+import {jwtDecode} from 'jwt-decode';
 
 export const RECEIVE_CURRENT_USER = "RECEIVE_CURRENT_USER";
 export const RECEIVE_SESSION_ERRORS = "RECEIVE_SESSION_ERRORS";
@@ -33,7 +33,7 @@ export const signup = user => dispatch => (
         const { token } = res.data;
         localStorage.setItem('jwtToken', token);
         SessionApiUtil.setAuthToken(token);
-        const decoded = jwt_decode(token);
+        const decoded = jwtDecode(token);
         return dispatch(receiveCurrentUser(decoded))
     }, err => (
         dispatch(receiveErrors(err.response.data))
@@ -46,7 +46,7 @@ export const login = user => dispatch => (
         const { token } = res.data;
         localStorage.setItem('jwtToken', token);
         SessionApiUtil.setAuthToken(token);
-        const decoded = jwt_decode(token);
+        const decoded = jwtDecode(token);
         dispatch(receiveCurrentUser(decoded))
     })
         .catch(err => {

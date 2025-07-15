@@ -1,10 +1,10 @@
-module.exports = {
+export default {
   '03-23-2020': {
     meals: {
-      '5e43265b564590424bdbbf17': 1,
-      '5e43265b564590424bdbbf2e': 1,
-      '5e5579587cd3e524d59da319': 1,
-      '5e43265b564590424bdbbef0': 1
+      '6874a8d2936e54cbfba23c21': 1,
+      '6874a8d2936e54cbfba23c22': 1,
+      '6874a8d2936e54cbfba23c23': 1,
+      '6874a8d2936e54cbfba23c24': 1
     },
     workout: {
       '5e3a1b78d0e10344c06735e6': false,
@@ -20,9 +20,9 @@ module.exports = {
   },
   '03-24-2020': {
     meals: {
-      '5e43265b564590424bdbbe9c': 1,
-      '5e43265b564590424bdbbe74': 1,
-      '5e43265b564590424bdbbeed': 1
+      '6874a8d2936e54cbfba23c25': 1,
+      '6874a8d2936e54cbfba23c26': 1,
+      '6874a8d2936e54cbfba23c27': 1
     },
     workout: {
       '5e3a1b78d0e10344c06735e6': true,
@@ -41,9 +41,9 @@ module.exports = {
   },
   '03-25-2020': {
     meals: {
-      '5e43265b564590424bdbbf1e': 1,
-      '5e43265b564590424bdbbf91': 1,
-      '5e43265b564590424bdbc008': 1
+      '6874a8d2936e54cbfba23c28': 1,
+      '6874a8d2936e54cbfba23c29': 1,
+      '6874a8d2936e54cbfba23c2a': 1
     },
     workout: {
       '5e3a1b78d0e10344c0673731': true,
@@ -59,9 +59,9 @@ module.exports = {
   },
   '03-26-2020': {
     meals: {
-      '5e43265b564590424bdbc1bd': 1,
-      '5e43265b564590424bdbc0e0': 1,
-      '5e43265b564590424bdbc07f': 1
+      '6874a8d2936e54cbfba23c2b': 1,
+      '6874a8d2936e54cbfba23c2c': 1,
+      '6874a8d2936e54cbfba23c2d': 1
     },
     workout: {
       '5e3a1b78d0e10344c06738c5': true,
@@ -77,9 +77,9 @@ module.exports = {
   },
   '03-27-2020': {
     meals: {
-      '5e43265b564590424bdbbfc7': 1,
-      '5e43265b564590424bdbc043': 1,
-      '5e43265b564590424bdbc062': 1
+      '6874a8d2936e54cbfba23c2e': 1,
+      '6874a8d2936e54cbfba23c2f': 1,
+      '6874a8d2936e54cbfba23c30': 1
     },
     workout: {
       '5e3a1b78d0e10344c06737b7': true,
@@ -95,9 +95,9 @@ module.exports = {
   },
   '03-28-2020': {
     meals: {
-      '5e43265b564590424bdbc1a2': 1,
-      '5e43265b564590424bdbbf91': 1,
-      '5e43265b564590424bdbc034': 1
+      '6874a8d2936e54cbfba23c31': 1,
+      '6874a8d2936e54cbfba23c32': 1,
+      '6874a8d2936e54cbfba23c33': 1
     },
     workout: {
       '5e3a1b78d0e10344c0673631': true,
@@ -114,9 +114,9 @@ module.exports = {
   },
   '03-29-2020': {
     meals: {
-      '5e43265b564590424bdbc0fc': 1,
-      '5e43265b564590424bdbc0e0': 1,
-      '5e43265b564590424bdbc062': 1
+      '6874a8d2936e54cbfba23c34': 1,
+      '6874a8d2936e54cbfba23c35': 1,
+      '6874a8d2936e54cbfba23c36': 1
     },
     workout: {
       '5e3a1b78d0e10344c06736cd': true,

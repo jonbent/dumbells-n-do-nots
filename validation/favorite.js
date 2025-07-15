@@ -1,7 +1,7 @@
-const Validator = require('validator');
-const validText = require('./valid-text');
+import Validator from 'validator';
+import validText from './valid-text.js';
 
-module.exports = (data) => {
+const favoriteValidator = (data) => {
     let errors = {};
 
     data.favoritableType = validText(data.favoritableType) ? data.favoritableType : '';
@@ -21,3 +21,4 @@ module.exports = (data) => {
         isValid: Object.keys(errors).length === 0
     };
 }
+export default favoriteValidator;

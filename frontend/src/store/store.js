@@ -1,5 +1,5 @@
 import { createStore, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
+import {thunk} from 'redux-thunk';
 import logger from 'redux-logger';
 
 
@@ -14,19 +14,20 @@ const persistConfig = {
     blacklist: ['entities', 'session']
 }
 
-const persistedReducer = persistReducer(persistConfig, rootReducer)
+// const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 const middleware = [thunk];
 if (process.env.NODE_ENV === "development") middleware.push(logger);
 
 const configureStore = (preloadedState = {}) => {
     let store = createStore(
-        persistedReducer,
+        rootReducer,
         preloadedState,
         applyMiddleware(...middleware)
     )
-    let persistor = persistStore(store);
-    return {store, persistor}
+    // let persistor = persistStore(store);
+    // return {store, persistor}
+    return {store}
 };
 
 export default configureStore;

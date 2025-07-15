@@ -1,7 +1,7 @@
-const Validator = require('validator');
-const validText = require('./valid-text');
+import Validator from 'validator';
+import validText from './valid-text.js';
 
-module.exports = (data) => {
+const loginValidator = (data) => {
     let errors = {};
 
     data.email = validText(data.username) ? data.username : '';
@@ -13,10 +13,11 @@ module.exports = (data) => {
     if (Validator.isEmpty(data.password)) {
         errors.password = 'Password field is required';
     }
-    
+
 
     return {
         errors,
         isValid: Object.keys(errors).length === 0
     };
 }
+export default loginValidator

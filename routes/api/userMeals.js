@@ -1,7 +1,7 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
-const passport = require("passport");
-const UserMeal = require("../../models/UserMeal")
+import passport from "passport";
+import UserMeal from "../../models/UserMeal.js";
 
 // get a user's specific meals for a given day on a routine
 router.get("/day/:dayId", (req, res) => {

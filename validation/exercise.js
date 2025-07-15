@@ -1,7 +1,7 @@
-const Validator = require('validator');
-const validText = require('./valid-text');
+import Validator from 'validator';
+import validText from './valid-text.js';
 
-module.exports = function validateExerciseInput(data) {
+const validateExerciseInput = (data) => {
     let errors = {};
 
     data.name = validText(data.name) ? data.name : '';
@@ -22,7 +22,7 @@ module.exports = function validateExerciseInput(data) {
     // if (Validator.isEmpty(data.description)) {
     //     errors.description = 'Description is required';
     // }
-    
+
     // if (Validator.isEmpty(data.numSets)) {
     //     errors.numSets = 'Number of sets is required';
     // }
@@ -34,7 +34,7 @@ module.exports = function validateExerciseInput(data) {
     if (Validator.isEmpty(data.muscleGroup)) {
         errors.muscleGroup = 'Muscle group is required';
     }
-    
+
     // if (!Validator.isInt(data.muscleGroup)) {
     //     errors.muscleGroup = 'Please reference the muscle group id';
     // }
@@ -44,3 +44,4 @@ module.exports = function validateExerciseInput(data) {
         isValid: Object.keys(errors).length === 0
     };
 }
+export default validateExerciseInput;

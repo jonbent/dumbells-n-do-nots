@@ -6,7 +6,7 @@
         text-align: center;
         background-color: #2F4858;
         color: whitesmoke;
-        
+
         h2{
             // text-shadow: 3px 2px black;
             display: block;
@@ -32,11 +32,11 @@
     }
     .Info{
         // background-color: #C0C3C9;
-        background-image: url("/images/workout.jpg");
+        background-image: url("../../public/images/workout.jpg");
         background-repeat: no-repeat;
         background-position: top left;
         background-size: cover;
-        position: flex;
+        display: flex;
         min-width: 320px;
         padding: 3em 1em;
         padding-bottom: 160px;
@@ -98,7 +98,7 @@
         padding: 30px;
         text-align: center;
         justify-content: center;
-        background-image: url("/images/meal-background.jpeg");
+        background-image: url("../../public/images/meal-background.jpeg");
         background-repeat: no-repeat;
         background-size: cover;
     }
@@ -138,7 +138,7 @@
         padding: 30px;
         text-align: center;
         justify-content: center;
-        background-image: url("/images/gym-background.jpeg");
+        background-image: url("../../public/images/gym-background.jpeg");
         background-repeat: no-repeat;
         background-size: cover;
     }

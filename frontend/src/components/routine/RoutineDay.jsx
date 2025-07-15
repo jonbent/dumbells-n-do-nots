@@ -1,36 +1,34 @@
-import React from 'react';
-import {connect} from "react-redux";
+import React, {useMemo} from 'react';
+import {useDispatch, useSelector} from "react-redux";
 import MealItem from "../meals/MealItem";
 import DateFormat from 'dateformat'
 import { updateRoutineChecks } from '../../actions/RoutineActions'
 import "../../scss/routines/RoutineDay.scss"
-const mapStateToProps = ({entities, ui}, ownProps) => {
-    const workout = entities.workouts[ownProps.day.workout];
-    return {
-        meals: entities.routineMeals,
-        userMeals: ownProps.day.meals.map(d => entities.userMeals[d]),
-        workout,
-        exercises: workout ? workout.exercises.map(id => entities.exercises[id]) : [],
-        newRoutineData: ui.newRoutineData
-    }
-};
+import {receiveMealDetails} from "../../actions/MealActions";
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-    updateRoutineChecks: data => {
-        return dispatch(updateRoutineChecks(data))
-    },
-})
 
-const RoutineDay = ({ updateRoutineChecks, workout, editable, day, routine, userMeals, meals, exercises, modal = false, idx, editDayWorkout = null, editDayMeals = null, newRoutineData, history = false }) => {
+const RoutineDay = ({editable, day, routine, modal = false, idx, editDayWorkout = null, editDayMeals = null, history = false }) => {
+    const meals = useSelector(({entities}) => entities.routineMeals);
+    const workout = useSelector(({entities}) => entities.workouts[day.workout]);
+    const selectorExercises = useSelector(({entities}) => entities.exercises);
+    const exercises = useMemo(() => {
+        return workout ?  workout.exercises.map(id => selectorExercises[id]) : [];
+    }, [selectorExercises, workout]);
+    const selectorUserMeals = useSelector(({entities}) => entities.userMeals);
+    const userMeals = useMemo(() => {
+        return day.meals.map(d => selectorUserMeals[d])
+    }, [day, selectorUserMeals])
+    const newRoutineData = useSelector(({ui}) => ui.newRoutineData);
+    const dispatch = useDispatch();
     function check(id, value) {
         if(!id){
             let doneCheck = false
             if (workout.doneCheck === false){
                 doneCheck = true
             }
-            updateRoutineChecks({dayId: day._id, completableType: 'workout', completableId: workout._id, doneCheck})
+            dispatch(updateRoutineChecks({dayId: day._id, completableType: 'workout', completableId: workout._id, doneCheck}))
         } else {
-            updateRoutineChecks({dayId: day._id, completableType: 'meal', completableId: id, doneAmount: value})
+            dispatch(updateRoutineChecks({dayId: day._id, completableType: 'meal', completableId: id, doneAmount: value}))
         }
     }
     if (!day) return null;
@@ -55,7 +53,19 @@ const RoutineDay = ({ updateRoutineChecks, workout, editable, day, routine, user
                     return (
                         <div key={userMeal._id}>
                             {Object.keys([...new Array(userMeal.quantity)]).map((key, idx) => {
-                                return <MealItem meal={meal} key={key} selected={idx + 1 <= userMeal.doneAmount && !history ? true : false} handleMealCheck={() => !history ? check(userMeal._id, idx + 1 <= userMeal.doneAmount ? -1 : 1) : null}/>
+                                console.log(meal);
+                                return <MealItem
+                                    meal={meal}
+                                    key={`${String(meal._id)}1${idx}`}
+                                    selected={idx + 1 <= userMeal.doneAmount && !history ? true : false}
+                                    handleMealCheck={() => !history ?
+                                        check(userMeal._id, idx + 1 <= userMeal.doneAmount ? -1 : 1)
+                                        : null
+                                    }
+                                    openModal={() => (
+                                        !history ? dispatch(receiveMealDetails({"spoonacularId": meal.spoonacularId})) : null
+                                    )}
+                                />
                             })}
                         </div>
                     )
@@ -74,4 +84,4 @@ const RoutineDay = ({ updateRoutineChecks, workout, editable, day, routine, user
     );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(RoutineDay);
+export default RoutineDay;

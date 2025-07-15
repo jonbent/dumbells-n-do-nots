@@ -1,5 +1,6 @@
 import { OPEN_MODAL, CLOSE_MODAL } from '../actions/ModalActions';
 import {RECEIVE_SELECTED_ROUTINE} from "../actions/RoutineFilterActions";
+import {RECEIVE_MEAL_DETAILS} from "../actions/MealActions";
 
 export default function modalReducer(state = null, action) {
     switch (action.type) {
@@ -9,6 +10,8 @@ export default function modalReducer(state = null, action) {
             return null;
         case RECEIVE_SELECTED_ROUTINE:
             return "existingRoutine";
+        case RECEIVE_MEAL_DETAILS:
+            return "mealDetails";
         default:
             return state;
     }

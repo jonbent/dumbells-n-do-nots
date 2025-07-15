@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 const UserWorkoutSchema = new Schema({
@@ -30,4 +30,5 @@ const UserWorkoutSchema = new Schema({
     // }
 })
 
-module.exports = UserWorkout = mongoose.model("UserWorkout", UserWorkoutSchema)
+const UserWorkout = mongoose.model("UserWorkout", UserWorkoutSchema)
+export default UserWorkout;

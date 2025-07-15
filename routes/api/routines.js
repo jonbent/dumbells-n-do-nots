@@ -1,15 +1,17 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
-const Routine = require("../../models/Routine");
-const Day = require("../../models/Day");
-const UserMeal = require("../../models/UserMeal");
-const Meal = require("../../models/Meal");
-const UserWorkout = require("../../models/UserWorkout");
-const Exercise = require("../../models/Exercise");
-const SampleRoutine = require("../../models/SampleRoutine")
-const validateRoutineInput = require("../../validation/routine");
-const passport = require("passport");
-const DateFormat = require('dateformat')
+// import Routine from "../../models/Routine";
+import Routine from "../../models/Routine.js";
+import Day from "../../models/Day.js";
+import UserMeal from "../../models/UserMeal.js";
+import Meal from "../../models/Meal.js";
+import UserWorkout from "../../models/UserWorkout.js";
+import Exercise from "../../models/Exercise.js";
+import SampleRoutine from "../../models/SampleRoutine.js";
+import validateRoutineInput from "../../validation/routine.js";
+import passport from "passport";
+
+import DateFormat from 'dateformat'
 
 router.get("/test", (req, res) => res.json({ msg: "This is the users route" }));
 router.get("/startDate", passport.authenticate("jwt", { session: false }), async (req, res) => {
@@ -174,7 +176,7 @@ router.put("/days/:dayId/:completableType/:completableId", passport.authenticate
             meal.doneAmount += parseInt(req.body.doneAmount);
             meal.save();
             break;
-        default: 
+        default:
             return res.status(422).json({message: "Cannot find completeable type"});
         }
         res.redirect(303, `/api/routines/${routine._id}`);
@@ -317,4 +319,4 @@ router.get("/sample/", (req, res) => {
         .then(sampleRoutines => res.json(sampleRoutines))
 })
 
-module.exports = router;
+export default router;

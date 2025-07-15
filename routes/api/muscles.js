@@ -1,7 +1,7 @@
-const express = require("express");
+import express from "express"
 const router = express.Router();
-const passport = require('passport');
-const Muscle = require('../../models/Muscle');
+import passport from 'passport'
+import Muscle from '../../models/Muscle.js'
 
 router.get('/',
     (req, res) => {
@@ -16,4 +16,4 @@ router.get('/',
 )
 
 
-module.exports = router;
+export default router;

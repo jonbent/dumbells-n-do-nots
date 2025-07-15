@@ -1,8 +1,8 @@
-const Validator = require('validator');
-const validText = require('./valid-text');
-const Meal = require('../models/Meal')
-const Exercise = require('../models/Exercise')
-module.exports = async (data) => {
+import Validator from 'validator';
+import validText from './valid-text.js';
+import Meal from '../models/Meal.js';
+import Exercise from '../models/Exercise.js';
+const validateRoutineInput = async (data) => {
     if (!data) return {
         errors: {routine: "Must be provided"},
         isValid: false
@@ -43,3 +43,4 @@ module.exports = async (data) => {
         isValid: Object.keys(errors).length === 0
     };
 }
+export default validateRoutineInput;

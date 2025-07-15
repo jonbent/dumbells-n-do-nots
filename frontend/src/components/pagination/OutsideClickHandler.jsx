@@ -21,7 +21,7 @@ export default class OutsideClickHandler extends Component {
 
     handleOutsideClick(e, ...options) {
         if (this.ref && !this.ref.contains(e.target)) {
-            this.props.action(...options);
+            this.props.action(e, ...options);
         }
     }
 

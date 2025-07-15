@@ -1,7 +1,7 @@
-const Validator = require('validator');
-const validText = require('./valid-text');
+import Validator from 'validator';
+import validText from './valid-text.js';
 
-module.exports = function validateMealInput(data) {
+const validateMealInput = (data) => {
     let errors = {};
 
     data.title = validText(data.title) ? data.title : '';
@@ -35,7 +35,7 @@ module.exports = function validateMealInput(data) {
     if (Validator.isEmpty(data.fat)) {
         errors.fat = 'fat field is required';
     }
-    
+
     if (Validator.isEmpty(data.carbs)) {
         errors.carbs = 'carbs field is required';
     }
@@ -49,3 +49,4 @@ module.exports = function validateMealInput(data) {
         isValid: Object.keys(errors).length === 0
     };
 }
+export default validateMealInput;

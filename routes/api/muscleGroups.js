@@ -1,12 +1,12 @@
-const express = require("express");
+import express from "express"
 const router = express.Router();
-const passport = require('passport');
-const MuscleGroup = require('../../models/MuscleGroup');
+import passport from 'passport'
+import MuscleGroup from '../../models/MuscleGroup.js'
 
 router.get('/',
     (req, res) => {
         let findQuery = {};
-        if (req.body.muscleGroupIds) findQuery = { _id: { $in: req.body.muscleGroupIds } }
+        if (req.body && req.body.muscleGroupIds) findQuery = { _id: { $in: req.body.muscleGroupIds } }
         MuscleGroup.find(findQuery)
             .then(muscleGroups => res.json(muscleGroups))
             .catch(err =>
@@ -16,4 +16,4 @@ router.get('/',
 )
 
 
-module.exports = router;
+export default router;

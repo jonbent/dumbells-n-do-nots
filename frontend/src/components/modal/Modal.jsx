@@ -4,13 +4,13 @@ import { connect } from 'react-redux';
 import AddWorkoutsFormContainer from '../workouts/AddWorkoutsFormContainer';
 import AddMealsFormContainer from '../meals/AddMealsFormContainer';
 import SampleRoutinesContainer from '../sampleRoutines/SampleRoutinesContainer';
-import ExistingRoutineContainer from '../routine/ExistingRoutineContainer';
-import '../../scss/Modal.scss'
+import ExistingRoutine from '../routine/ExistingRoutine';
+import '../../scss/Modal.scss';
 
-import AddRoutineFormContainer from '../routine/NewRoutineFormContainer'
+import AddRoutineFormContainer from '../routine/NewRoutineFormContainer';
 import ExerciseSelector from '../exercises/ExerciseSelectorContainer';
-import AddUserMealsFormContainer from '../userMeals/AddUserMealsFormContainer'
-
+import AddUserMealsForm from '../userMeals/AddUserMealsForm';
+import MealDetails from '../meals/MealDetails';
 function Modal({ modal, closeModal }) {
     if (!modal) {
         return null;
@@ -33,10 +33,13 @@ function Modal({ modal, closeModal }) {
             component = <ExerciseSelector />;
             break;
         case 'existingRoutine':
-            component = <ExistingRoutineContainer closeModal={closeModal}/>;
+            component = <ExistingRoutine closeModal={closeModal}/>;
             break;
         case 'addUserMeals':
-            component = <AddUserMealsFormContainer />;
+            component = <AddUserMealsForm />;
+            break;
+        case "mealDetails":
+            component = <MealDetails closeModal={closeModal}/>;
             break;
         default:
             return null;

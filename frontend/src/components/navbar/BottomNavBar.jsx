@@ -4,7 +4,7 @@ import Plus from '../svg/Plus'
 // import HeartOutline from '../svg/HeartOutline'
 import History from '../svg/History'
 
-import {NavLink} from 'react-router-dom'
+import {NavLink, useLocation} from 'react-router-dom'
 
 export default class BottomNavBar extends React.Component{
     // constructor(props){
@@ -12,13 +12,14 @@ export default class BottomNavBar extends React.Component{
     // }
 
     render(){
-        const {user, location} = this.props;
+        const location = useLocation();
+        const {user} = this.props;
         const splitLocation = location.pathname.split('/')
         return (
             <div className="bottom-navbar-container">
                 <div className="bottom-navbar">
                     <div>
-                        <NavLink exact to={location.pathname === "/settings" ? "/" : `/settings`} className={location.pathname === "/settings" ? "active" : ``}>
+                        <NavLink to={location.pathname === "/settings" ? "/" : `/settings`} className={location.pathname === "/settings" ? "active" : ``}>
                             <Settings/>
                         </NavLink>
                     </div>

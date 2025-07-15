@@ -2,12 +2,13 @@ import {connect} from 'react-redux';
 import React from 'react';
 
 import '../../scss/Hamburger.scss';
-import {Link, withRouter, NavLink} from "react-router-dom";
+import {Link, NavLink, useLocation} from "react-router-dom";
 import {logout} from "../../actions/SessionActions";
 import {closeHamburger} from "../../actions/HamburgerActions";
 import {openModal} from "../../actions/ModalActions";
 
-const Hamburger = ({openStatus, loggedIn, user, logout, closeHamburger, location, openNewRoutineModal}) => {
+const Hamburger = ({openStatus, loggedIn, user, logout, closeHamburger, openNewRoutineModal}) => {
+    const location = useLocation();
     const splitLocation = location.pathname.split('/');
     return (
         <div className={`Hamburger ${openStatus ? "slide-in" : ""}`}>
@@ -36,7 +37,7 @@ const Hamburger = ({openStatus, loggedIn, user, logout, closeHamburger, location
                     </div>
                 </div>}
                 <div className="site-links">
-                    <NavLink exact to="/">Home</NavLink>
+                    <NavLink to="/">Home</NavLink>
                     {!!loggedIn && <NavLink to={splitLocation[3] === "history" ? "/" : `/users/${user.username}/history`}>
                         History
                     </NavLink>}
@@ -69,4 +70,4 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Hamburger));
+export default connect(mapStateToProps, mapDispatchToProps)(Hamburger);

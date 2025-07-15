@@ -23,9 +23,10 @@
       display: flex;
       justify-content: space-between;
     }
-    input:-internal-autofill-selected{
+    input:-webkit-autofill{
       background-color: rgba(0,0,0,0) !important;
       //color: -internal-light-dark-color(black, black) !important;
+      -webkit-background-clip: text;
       -webkit-text-fill-color: black;
     }
     input:focus{
@@ -68,7 +69,7 @@
     //}
 
   }
-  .submit-container{
+  .routine{
     //border-top: 1px solid lightskyblue;
     padding: 0.5rem 2rem 1rem 2rem;
     margin-top: 1rem;

@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose'
 const Schema = mongoose.Schema;
 
 const MuscleSchema = new Schema({
@@ -16,4 +16,5 @@ const MuscleSchema = new Schema({
     }
 })
 
-module.exports = Muscle = mongoose.model("Muscle", MuscleSchema)
+const Muscle = mongoose.model("Muscle", MuscleSchema)
+export default Muscle;

@@ -1,19 +1,19 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
-const uniqueValidator = require('mongoose-beautiful-unique-validation');
+import uniqueValidator from 'mongoose-beautiful-unique-validation';
 
 const UserSchema = new Schema({
     username: {
         type: String,
         required: true,
-        unique: true, 
+        unique: true,
         uniqueCaseInsensitive: true
-        
+
     },
     email: {
         type: String,
         required: true,
-        unique: true, 
+        unique: true,
         uniqueCaseInsensitive: true
     },
     password: {
@@ -54,7 +54,7 @@ const UserSchema = new Schema({
         type: String,
         required: [true, "Sex must be provided"]
     },
-    
+
     goalPath: {
         type: Number
     },
@@ -71,4 +71,5 @@ const UserSchema = new Schema({
 })
 UserSchema.plugin(uniqueValidator);
 
-module.exports = User = mongoose.model('User', UserSchema);
+const User = mongoose.model('User', UserSchema);
+export default User;

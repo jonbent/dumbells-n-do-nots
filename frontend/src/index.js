@@ -1,11 +1,11 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import './index.css';
 import Root from './components/Root';
 import * as serviceWorker from './serviceWorker';
 import axios from 'axios';
 import configureStore from './store/store'
-import jwt_decode from 'jwt-decode';
+import {jwtDecode} from 'jwt-decode';
 import { setAuthToken } from './util/SessionApiUtil'
 import { receiveNewRoutineStartDate } from './actions/NewRoutineActions';
 import { logout, login } from './actions/SessionActions';
@@ -44,10 +44,22 @@ document.addEventListener('DOMContentLoaded', () => {
         setAuthToken(localStorage.jwtToken);
 
         // Decode the token to obtain the user's information
-        const decodedUser = jwt_decode(localStorage.jwtToken);
+        const decodedUser = jwtDecode(localStorage.jwtToken);
 
         // Create a preconfigured state we can immediately add to our store
-        preloadedState = Object.assign(preloadedState, { session: { isAuthenticated: true, user: decodedUser }, entities: { users: { [decodedUser.username]: decodedUser}} });
+        preloadedState = Object.assign(preloadedState,
+        {
+            session: {
+                isAuthenticated: true,
+                user: decodedUser
+            },
+            entities: {
+                users: {
+                    [decodedUser.username]: decodedUser
+                },
+                mealDetails: {}
+            }
+        });
         store = configureStore(preloadedState);
 
         const currentTime = Date.now() / 1000;
@@ -67,8 +79,9 @@ document.addEventListener('DOMContentLoaded', () => {
          window.login = login;
          window.logout = logout;
     }
-
-    ReactDOM.render(<Root store={store.store} persistor={store.persistor}/>, document.getElementById('root'));
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    // root.render(<Root store={store.store} persistor={store.persistor}/>);
+    root.render(<Root store={store.store}/>);
 })
 
 

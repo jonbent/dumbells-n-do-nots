@@ -1,10 +1,10 @@
 import React from 'react';
 import DateFormat from 'dateformat';
 import NavBar from '../navbar/NavBar';
-import DayPickerInput from "react-day-picker/DayPickerInput";
+import {DayPicker} from "react-day-picker";
 import YearMonthForm from './year_month_form'
 import {Link} from 'react-router-dom'
-import "react-day-picker/lib/style.css";
+import 'react-day-picker/dist/style.css';
 import '../../scss/LoginForm.scss';
 import '../../scss/signup.scss';
 
@@ -93,7 +93,7 @@ class Signup extends React.Component {
     let sexErrors;
     let heightErrors
     if (errors) {
-      
+
       if (errors.username && errors.username.message) {
         usernameErrors = errors.username.message.slice(5);
       }
@@ -193,7 +193,7 @@ class Signup extends React.Component {
             <div className="signup-form-input-detail-container">
               <div className="signup-form-detail-label">D.O.B</div>
               <div className="signup-form-detail-input">
-                <DayPickerInput
+                <DayPicker
                   dayPickerProps={dayPickerProps}
                   onDayChange={e => this.handleBirthDate(e)}
                   selectedDays={this.state.birthDate}

@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 const WorkoutSchema = new Schema({
@@ -11,7 +11,7 @@ const WorkoutSchema = new Schema({
         type: String,
         required: true
     },
-    
+
     user: {
         type: Schema.Types.ObjectId,
         ref: "User"
@@ -27,4 +27,5 @@ const WorkoutSchema = new Schema({
     }
 })
 
-module.exports = Workout = mongoose.model("Workout", WorkoutSchema)
+const Workout = mongoose.model("Workout", WorkoutSchema)
+export default Workout;

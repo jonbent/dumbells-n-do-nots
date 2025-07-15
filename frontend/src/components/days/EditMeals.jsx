@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import '../../scss/days/EditDay.scss'
-import AddUserMealsForm from "../userMeals/AddUserMealsFormContainer";
+import AddUserMealsForm from "../userMeals/AddUserMealsForm";
 
 class EditMeals extends Component {
     render() {
