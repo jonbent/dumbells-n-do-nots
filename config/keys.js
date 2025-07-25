@@ -1,6 +1,11 @@
-import prodKeys from './keys_prod.js';
-import devKeys from './keys_dev.js';
-const keys = process.env.NODE_ENV === 'production' ? prodKeys : devKeys;
+let keys;
+if (process.env.NODE_ENV === 'production') {
+    import prodKeys from './keys_prod.js';
+    keys = prodKeys;
+} else {
+    import devKeys from './keys_dev.js';
+    keys = devKeys
+}
 
 export const mongoURI = keys.mongoURI;
 export const secretOrKey = keys.secretOrKey;
